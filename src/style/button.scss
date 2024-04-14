@@ -1,0 +1,37 @@
+button {
+  padding: 8px 16px;
+  border-radius: 25px;
+  outline: none;
+  border: 1px solid #191919;
+  font-size: 0.875em;
+  background-color: #191919;
+  color: white;
+  transition: 0.3s;
+  cursor: pointer;
+  font-weight: normal;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &.success {
+    background-color: rgb(26, 137, 23);
+    border: 1px solid rgb(26, 137, 23);
+  }
+
+  &.ghost {
+    background-color: transparent;
+    color: #242424;
+    border: 1px solid #242424;
+  }
+
+  &.lg {
+    padding: 8px 20px;
+    font-size: 20px;
+  }
+
+  &.sm {
+    padding: 5px 12px;
+    font-size: 13px;
+  }
+}

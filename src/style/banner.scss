@@ -1,0 +1,57 @@
+@import "./responsive.scss";
+
+#banner {
+  width: 100%;
+  height: 462px;
+  background-color: var(--primary-bg-color);
+  border-bottom: 1px solid var(--primary-color);
+  border-top: 1px solid var(--primary-color);
+  position: relative;
+
+  .banner-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 25px;
+
+    &-h2 {
+      font-size: 96px;
+      font-weight: 400;
+    }
+    &-text {
+      max-width: 450px;
+      font-size: 24px;
+      line-height: 24px;
+      font-weight: 300;
+    }
+    #start-reading-btn {
+      font-size: 20px;
+    }
+    @include responsive(phone){
+      &-h2{
+        font-size: 70px;
+        
+      }
+    }
+    @include responsive(tablet){
+      &-h2{
+        font-size: 85px;
+      }
+    }
+  }
+  .banner-right {
+    width: 40%;
+    height: inherit;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    @include responsive(phone){
+      &{
+        display: none;
+      }
+    }
+  }
+
+}

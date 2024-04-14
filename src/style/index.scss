@@ -1,0 +1,38 @@
+@import "./responsive.scss";
+@import "./button.scss";
+:root  {
+  font-family: "Roboto", sans-serif;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1230px;
+  height: 100%;
+  padding: 20px;
+
+  @include responsive(phone) {
+    width: 100%;
+  }
+}
+// ***************** flexeble ******************
+.flex {
+  display: flex;
+}
+.flex-column {
+  flex-direction: column;
+}
+.flex-center {
+  align-items: center;
+}
+.flex-center-center {
+  align-items: center;
+  justify-content: center;
+}
+.flex-center-between {
+  align-items: center;
+  justify-content: space-between;
+}

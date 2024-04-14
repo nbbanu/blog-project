@@ -1,0 +1,29 @@
+@import "./responsive.scss";
+
+#header {
+  width: 100%;
+  height: 75px;
+  background-color: var(--primary-bg-color);
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  // padding: 0 60px;
+  .medium-main-logo {
+    width: 160px;
+    height: 25px;
+  }
+  .menu {
+    @include responsive(phone) {
+      .link:not(.visible) {
+        display: none;
+      }
+    }
+    font-size: 16px;
+    gap: 20px;
+    .link,
+    .dark-btn {
+      font-size: 0.875em;
+      font-weight: 400;
+    }
+  }
+}

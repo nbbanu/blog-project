@@ -1,14 +1,12 @@
 import Banner from "../../components/common/Banner";
-import MiniBlogCard from "../../components/common/MiniBlogCard";
+import Trending from "../../components/common/Trending";
 
 const Home = () => {
-  return (
-    <div>
-      <Banner />
-      <MiniBlogCard bloggerName={"Srijanie Dey"} publishedBy={"Towards Data Science"} title={"Deep Dive into Transformers by Hand ✍︎"} releaseDate={"Apr 12, 2024"} 
-/>
-    </div>
-  );
-};
+    return( 
+    <main className="home">
+        <Banner/>
+        <Trending/>
+    </main>)
+}
 
 export default Home;

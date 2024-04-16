@@ -1,4 +1,4 @@
-button {
+.primary-button {
   padding: 8px 16px;
   border-radius: 25px;
   outline: none;
@@ -9,14 +9,16 @@ button {
   transition: 0.3s;
   cursor: pointer;
   font-weight: normal;
+}
+button{
 
   &:hover {
     opacity: 0.8;
   }
 
   &.success {
-    background-color: rgb(26, 137, 23);
-    border: 1px solid rgb(26, 137, 23);
+    background-color: var(--succes-color);
+    border: 1px solid var(--succes-color);
   }
 
   &.ghost {
@@ -24,7 +26,11 @@ button {
     color: #242424;
     border: 1px solid #242424;
   }
-
+  &.border-none{
+    border: none;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
   &.lg {
     padding: 8px 20px;
     font-size: 20px;

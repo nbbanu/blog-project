@@ -16,7 +16,7 @@ const Trending = () => {
         </div>
         <div className="mini-blog-cards">
           <MiniBlogCard
-            bloggerName={"Srijanie Dey"}
+            bloggerName={"Srijanie Deydjaslkdjal"}
             publishedBy={"Towards Data Science"}
             title={"Deep Dive into Transformers by Hand ✍︎"}
             releaseDate={"Apr 12, 2024"}

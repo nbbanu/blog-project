@@ -1,0 +1,28 @@
+.login-form {
+  width: 100%;
+  .label {
+    margin-bottom: 4px;
+  }
+  .form-input {
+    padding: 3px;
+    margin-bottom: 10px;
+    border: none;
+    border-bottom: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    outline: none;
+  }
+  .form-login-buttons {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    gap: 10px;
+
+    button {
+      position: relative;
+      i {
+        font-size: 18px;
+        position: absolute;
+        left: 8px;
+      }
+    }
+  }
+}

@@ -1,10 +1,13 @@
 import { useState } from "react";
 import AuthModal from "../AuthModal";
 import Button from "../Button";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [show, setShowModal] = useState(false);
   const [createModalShow, setCreateModalShow] = useState(false);
+
+
 
   document.addEventListener("scroll", () => {
     const header = document.querySelector(".header");
@@ -36,8 +39,8 @@ const Header = () => {
               style={{ width: "160px", height: "24px" }}
             />
           </a>
-          <nav className="menu flex flex-center">
-            <a href="#" className="link primary-text">
+          <nav id="menu" className="menu flex flex-center">
+            <a href="#" className="link primary-text" >
               Our Story
             </a>
             <a href="#" className="link primary-text">

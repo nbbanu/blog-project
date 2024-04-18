@@ -48,10 +48,24 @@
     cursor: pointer;
 }
 
+.avatar{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+
 .dot{
     width: 1px;
     height: 1px;
     border: 1px solid ;
     border-radius: 50%;
     margin: 0 5px;
+}
+
+.light-line{
+    border: .5px solid #F2F2F2;
+    width: 100%;
+    margin: 30px 0;
+ 
 }

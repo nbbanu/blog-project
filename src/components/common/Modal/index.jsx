@@ -1,6 +1,6 @@
-import { useState } from "react";
 import AuthenticationButton from "../AuthenticationButton";
 import Button from "../Button";
+import LoginForm from "../LoginForm";
 
 const Modal = ({
   closeModal,
@@ -15,7 +15,6 @@ const Modal = ({
   function handleClick() {
     setCreateModalShow(!createModalShow);
   }
-  console.log(createModalShow);
 
   return (
     <div className={`modal flex flex-column flex-center-center`}>
@@ -26,7 +25,12 @@ const Modal = ({
         <>
           <h2 className="modal-header">Tekrar Hoşgeldiniz.</h2>
           <div className="modal-sign-up flex flex-column flex-center-center">
+            <LoginForm/>           
             <div className="modal-sign-up-buttons flex flex-column">
+              {/* <AuthenticationButton
+                className={"success fs-16"}
+                title={"Giriş Yap"}
+              /> */}
               <AuthenticationButton
                 icon={"fa-brands fa-google"}
                 title={"Sign in with Google"}
@@ -35,7 +39,7 @@ const Modal = ({
                 icon={"fa-brands fa-facebook"}
                 title={"Sign in with Facebook"}
               />
-              <AuthenticationButton
+              {/* <AuthenticationButton
                 icon={"fa-brands fa-apple"}
                 title={"Sign in with Apple"}
               />
@@ -43,10 +47,7 @@ const Modal = ({
                 icon={"fa-brands fa-twitter"}
                 title={"Sign in with Twitter"}
               />
-              <AuthenticationButton
-                icon={"fa-regular fa-envelope"}
-                title={"Sign in with email"}
-              />
+               */}
             </div>
             <div>
               <span className="primary-text">Hesabın Yok Mu?</span>
@@ -70,15 +71,15 @@ const Modal = ({
           <div className="modal-sign-up flex flex-column flex-center-center">
             <div className="modal-sign-up-buttons flex flex-column">
               <AuthenticationButton
-                icon={<i className="fa-brands fa-google"></i>}
+                icon={"fa-brands fa-google"}
                 title={"Sign up with Google"}
               />
               <AuthenticationButton
-                icon={<i className="fa-brands fa-facebook"></i>}
+                icon={"fa-brands fa-facebook"}
                 title={"Sign up with Facebook"}
               />
               <AuthenticationButton
-                icon={<i className="fa-regular fa-envelope"></i>}
+                icon={"fa-regular fa-envelope"}
                 title={"Sign up with email"}
               />
             </div>

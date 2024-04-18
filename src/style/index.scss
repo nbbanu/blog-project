@@ -1,6 +1,10 @@
 @import "./responsive.scss";
 @import "../../src/components/common/Button/button.scss";
 @import "../../src/components/common/AuthenticationButton/authenticationBtn.scss";
+@import "../../src/components/common/BlogCard/blogCard.scss";
+@import "../../src/components/common/Tooltip/tooltip.scss";
+@import "../../src/components/common/LoginForm/login.scss";
+
 :root  {
   font-family: "Roboto", sans-serif;
 }

@@ -50,7 +50,7 @@ const Header = () => {
               Write
             </a>
             <Button
-              className={"primary-text visible ghost border-none"}
+              className={"primary-text link ghost border-none"}
               title={"Giriş Yap"}
               handleClick={handleClick}
             />

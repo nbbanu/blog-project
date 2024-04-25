@@ -12,7 +12,7 @@
 
   .menu {
     @include responsive(phone) {
-      .link:not(.visible) {
+      .link {
         display: none;
       }
     }

@@ -3,11 +3,11 @@ import Button from "../Button";
 import LoginForm from "../LoginForm";
 
 const Modal = ({
-  closeModal,
   setShowModal,
   createModalShow,
   setCreateModalShow,
 }) => {
+
   function closeModal() {
     setShowModal(false);
   }
@@ -17,7 +17,7 @@ const Modal = ({
   }
 
   return (
-    <div className={`modal flex flex-column flex-center-center`}>
+    <div className={`modal flex flex-column flex-center-center`} >
       <div className="close light-text" onClick={closeModal}>
         X
       </div>
@@ -25,7 +25,7 @@ const Modal = ({
         <>
           <h2 className="modal-header">Tekrar Hoşgeldiniz.</h2>
           <div className="modal-sign-up flex flex-column flex-center-center">
-            <LoginForm/>           
+            <LoginForm />
             <div className="modal-sign-up-buttons flex flex-column">
               {/* <AuthenticationButton
                 className={"success fs-16"}
@@ -58,10 +58,14 @@ const Modal = ({
               />
             </div>
           </div>
-          <p className="fs-13 light-text text-center" >
-            Parolamı unuttum? 
-            <a href="#" className="link light-text underline" style={{marginLeft:"3px"}}>
-             Get help.
+          <p className="fs-13 light-text text-center">
+            Parolamı unuttum?
+            <a
+              href="#"
+              className="link light-text underline"
+              style={{ marginLeft: "3px" }}
+            >
+              Get help.
             </a>
           </p>
         </>

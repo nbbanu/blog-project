@@ -10,7 +10,7 @@ const blogCard = ({bloggerName}) => {
           />
           {/* <img src={profileImg} alt="" /> */}
         </div>
-        <span className="blogger-name fs-13 primary-text">deneme</span>
+        <span className="blogger-name fs-13 primary-text">{bloggerName}</span>
       </div>
     </div>
   );

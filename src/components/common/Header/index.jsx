@@ -1,13 +1,14 @@
 import { useState } from "react";
 import AuthModal from "../AuthModal";
 import Button from "../Button";
+import { useAuth } from "../../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [show, setShowModal] = useState(false);
   const [createModalShow, setCreateModalShow] = useState(false);
 
-
+  const { token } = useAuth();
 
   document.addEventListener("scroll", () => {
     const header = document.querySelector(".header");
@@ -25,22 +26,43 @@ const Header = () => {
     setShowModal(!show);
     setCreateModalShow(createModalShow);
   }
- 
+
+  if (token) {
+    return (
+      <section
+        id="header"
+        className="header"
+        style={token && { backgroundColor: "#fff" }}
+      >
+        <h1>kdfjasldkfjasdlkfj</h1>
+      </section>
+    );
+  }
+
   return (
     <>
-      <AuthModal show={show} setShowModal={setShowModal} createModalShow={createModalShow} setCreateModalShow={setCreateModalShow}/>
-      <section id="header" className="header">
+      <AuthModal
+        show={show}
+        setShowModal={setShowModal}
+        createModalShow={createModalShow}
+        setCreateModalShow={setCreateModalShow}
+      />
+      <section
+        id="header"
+        className="header"
+        style={token && { backgroundColor: "#fff" }}
+      >
         <div className="container flex flex-center-between">
           <a href="/" className="medium-main-logo link">
             <img
-              src="medium-logo.svg"
+              src={token ? "medium-icon.svg" : "medium-logo.svg"}
               className="img-cover"
               alt="medium-logo"
-              style={{ width: "160px", height: "24px" }}
+              style={token ? { width: 44 } : { width: 160, height: 24 }}
             />
           </a>
           <nav id="menu" className="menu flex flex-center">
-            <a href="#" className="link primary-text" >
+            <a href="#" className="link primary-text">
               Our Story
             </a>
             <a href="#" className="link primary-text">
@@ -55,7 +77,7 @@ const Header = () => {
               handleClick={handleClick}
             />
             <Button
-              title="Hemen Başla"
+              title={token ? "Çıkış Yap" : "Giriş Yap"}
               handleClick={handleClick}
             />
           </nav>

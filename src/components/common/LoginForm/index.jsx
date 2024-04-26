@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
+// erişmek istediğimiz componentten, oluşturmuş olduğumuz Context’i çağırmamız gerekmektedir.
+import { useAuth } from "../../../contexts/AuthContext";
 import AuthenticationButton from "../AuthenticationButton";
-
+import Swal from "sweetalert2";
 import { signIn } from "../../../service";
 import Loader from "../Loader";
+import { useNavigate } from "react-router-dom";
 
-const LoginForm = () => {
+const LoginForm = ({ closeModal }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
@@ -13,6 +16,7 @@ const LoginForm = () => {
     email: "",
     password: "",
   });
+  // const navigate = useNavigate();
 
   useEffect(() => {
     if (formData.email || formData.password) {
@@ -20,10 +24,12 @@ const LoginForm = () => {
     }
   }, [formData]);
 
+  const { isLoggedIn, onLoginSuccess } = useAuth();
+
   const validateForm = () => {
     let emailRegex = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
-    let passwordRegex =
-      /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{6,16}$/;
+    let passwordRegex = /^(?=.*[0-9]).{5,16}$/;
+    // /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{6,16}$/;
 
     if (formData.email === "") {
       setMailErrorMesage("Bu alan zorunludur");
@@ -59,11 +65,19 @@ const LoginForm = () => {
 
     if (!isValid) return;
     setLoading(true);
-    
+
     signIn(formData)
-    
       .then((res) => {
-        console.log("burası olumlu", res);
+        Swal.fire({
+          title: "Giriş Başarılı",
+          color: "#242424",
+          icon: "success",
+          iconColor: "#ffc016",
+        });
+
+        onLoginSuccess(res?.data?.accessToken);
+        closeModal();
+        // navigate()
       })
       .catch((err) => {
         setError(err.message);
@@ -71,7 +85,6 @@ const LoginForm = () => {
       .finally(() => {
         setLoading(false);
       });
-    
   };
 
   const handleChange = (e) => {

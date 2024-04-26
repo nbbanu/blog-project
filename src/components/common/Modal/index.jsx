@@ -25,7 +25,7 @@ const Modal = ({
         <>
           <h2 className="modal-header">Tekrar Hoşgeldiniz.</h2>
           <div className="modal-sign-up flex flex-column flex-center-center">
-            <LoginForm />
+            <LoginForm closeModal={closeModal}/>
             <div className="modal-sign-up-buttons flex flex-column">
               {/* <AuthenticationButton
                 className={"success fs-16"}

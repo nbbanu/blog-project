@@ -1,0 +1,60 @@
+.horizantal-scrobble-bar {
+  background-color: #fff;
+  height: 55px;
+  position: sticky;
+  top: 0px;
+  border-bottom: 1px solid var(--light-border-color);
+  .scrobble-area {
+    overflow-y: hidden;
+    overflow-x: scroll;
+    white-space: nowrap;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // height: 55px;
+
+    button {
+      color: var(--secondary-color);
+    }
+    a.active {
+        border-bottom: 1px solid ;
+    }
+  }
+  .right-arrow {
+    position: absolute;
+    right: 0;
+    z-index: 2;
+  }
+  i:hover,
+  button:hover {
+    color: var(--primary-color);
+  }
+ 
+  .plus-icon {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .plus-icon:hover {
+    background-color: var(--light-border-color);
+    border-radius: 50%;
+  }
+  ::-webkit-scrollbar {
+    height: 0px;
+  }
+}
+
+
+.horizantal-scrobble-bar::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  width: 80px;
+  height: 55px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.75) 25%, rgba(255, 255, 255, 0.9) 50%, rgb(255, 255, 255) 75%);
+}

@@ -61,7 +61,6 @@ const MiniBlogCard = ({
           </span>
           <span className="dot light-text"></span>
           <span className="mini-card-reading-time fs-13 light-text">
-            {" "}
             {readingTime}
           </span>
         </div>

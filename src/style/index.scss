@@ -5,6 +5,11 @@
 @import "../../src/components/common/Tooltip/tooltip.scss";
 @import "../../src/components/common/LoginForm/login.scss";
 @import "../../src/components/common/Loader/loader.scss";
+@import "../../src/components/common/HorizantalScrobbleBar/horizantal-scrobble-bar";
+@import "../../src/components/common/Header/header.scss";
+@import "../../src/components/common/Header/loggedin-header.scss";
+@import "../../src/components/common/StaffPicksCard/staffPickCard.scss";
+@import "../../src/pages/Home/loggedin-home.scss";
 
 :root  {
   font-family: "Roboto", sans-serif;
@@ -18,7 +23,7 @@
   margin: 0 auto;
   max-width: 1230px;
   height: 100%;
-  padding: 20px;
+  padding: 40px;
 
   @include responsive(phone) {
     width: 100%;

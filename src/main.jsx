@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./style/index.scss";
 import "./style/global.scss";
-import "./components/common/Header/header.scss";
 import "./components/common/Banner/banner.scss";
 import "./components/common/Trending/trending.scss";
 import "./components/common/MiniBlogCard/miniBlogCard.scss";

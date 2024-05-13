@@ -16,7 +16,6 @@ const LoginForm = ({ closeModal }) => {
     email: "",
     password: "",
   });
-  // const navigate = useNavigate();
 
   useEffect(() => {
     if (formData.email || formData.password) {
@@ -24,7 +23,7 @@ const LoginForm = ({ closeModal }) => {
     }
   }, [formData]);
 
-  const { isLoggedIn, onLoginSuccess } = useAuth();
+  const { onLoginSuccess } = useAuth();
 
   const validateForm = () => {
     let emailRegex = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;

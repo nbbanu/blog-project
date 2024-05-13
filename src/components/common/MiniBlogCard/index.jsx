@@ -42,6 +42,7 @@ const MiniBlogCard = ({
           >
             {bloggerName}
             <Tooltip
+            profileImg={"https://miro.medium.com/v2/resize:fill:40:40/1*i5p9qg4BGA4i2NXsghlnxQ.png"}
               loading={loading}
               showTooltip={showTooltip}
               bloggerName={bloggerName}

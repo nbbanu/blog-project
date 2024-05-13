@@ -3,11 +3,13 @@ import "react-loading-skeleton/dist/skeleton.css";
 import Button from "../Button";
 
 const Tooltip = ({
+  profileImg,
   loading,
   showTooltip,
   bloggerName,
   bloggerInformation,
   followersCount,
+  children
 }) => {
   return (
     <div
@@ -15,7 +17,7 @@ const Tooltip = ({
         showTooltip ? "open" : ""
       }`}
     >
-      <div className={`flex flex-column tooltip  `}>
+      <div className="flex flex-column tooltip">
         {loading ? (
           <div>
             <div className="flex flex-center" style={{ marginBottom: 15 }}>
@@ -34,7 +36,7 @@ const Tooltip = ({
             <div className="tooltip-header flex flex-center">
               <div className="tooltip-profile-img">
                 <img
-                  src="https://miro.medium.com/v2/resize:fill:40:40/1*i5p9qg4BGA4i2NXsghlnxQ.png"
+                  src={profileImg}
                   alt="avatar"
                   className="avatar"
                   style={{ width: "35px", height: "35px" }}

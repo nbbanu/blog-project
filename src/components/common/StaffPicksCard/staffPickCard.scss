@@ -1,8 +1,11 @@
 .staff-pick-card{
-
     gap: 10px;
     .blogger-name{
         margin-right: 4px;
         margin-left: 10px;
+        cursor: pointer;
+    }
+    .publishedBy, .staff-pick-title{
+        cursor: pointer;
     }
 }

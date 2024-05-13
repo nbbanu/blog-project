@@ -28,7 +28,7 @@ const blogCard = ({
       <div className="blog-card-title flex">
         <div>
           <h2 className="blog-card-title-h2 fs-20 primary-text">{title}</h2>
-          <p className="blog-card-info-text fs-16 primary-text">{infoText}</p>
+          <p className="blog-card-info-text fs-16 primary-text line-clamp">{infoText}</p>
         </div>
       </div>
 

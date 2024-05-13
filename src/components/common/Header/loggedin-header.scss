@@ -2,6 +2,10 @@
 
 .loggedin-header {
   height: 57px;
+  .container{
+    padding: 20px;
+    max-width: 100%;
+  }
   &-left {
     gap: 20px;
 
@@ -42,6 +46,9 @@
         margin-left: 8px;
       }
       
+    }
+    .profile{
+      position: relative;
     }
     .write-area:hover > span , .write-area:hover > i{
         color: var(--primary-color);

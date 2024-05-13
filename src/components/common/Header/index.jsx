@@ -3,8 +3,9 @@ import AuthModal from "../AuthModal";
 import Button from "../Button";
 import { useAuth } from "../../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Popup from "../Popup";
 
-const Header = () => {
+const Header = ({ openPopup }) => {
   const [show, setShowModal] = useState(false);
   const [createModalShow, setCreateModalShow] = useState(false);
 
@@ -23,48 +24,67 @@ const Header = () => {
       button.classList.remove("success");
     }
   });
+
   const handleClick = () => {
     setShowModal(!show);
     setCreateModalShow(createModalShow);
-  }
+  };
   const goToWritePage = () => {
-    navigate("/new-story")
-  }
+    navigate("/new-story");
+  };
 
   if (token) {
     return (
       <header
         id="loggedin-header"
         className="loggedin-header light-line"
-        style={{backgroundColor: "#fff", margin:0}}
+        style={{ backgroundColor: "#fff", margin: 0 }}
       >
         <div className="container flex flex-center-between">
           <div className="loggedin-header-left flex flex-center">
-          <a href="/" className="medium-main-logo link">
-            <img
-              src="medium-icon.svg"
-              className="img-cover"
-              alt="medium-logo"
-              style={{ width: 45, height: 25}}
-            />
-          </a>
-          <div className="search-area flex flec-center">
-            <div className="search-area-icon">
-            <i className="fa-solid fa-magnifying-glass light-text"></i>
+            <a href="/" className="medium-main-logo link">
+              <img
+                src="medium-icon.svg"
+                className="img-cover"
+                alt="medium-logo"
+                style={{ width: 45, height: 25 }}
+              />
+            </a>
+            <div className="search-area flex flec-center">
+              <div className="search-area-icon">
+                <i className="fa-solid fa-magnifying-glass light-text"></i>
+              </div>
+              <input
+                type="search"
+                className="search-area-input text-primary fs-14"
+                placeholder="Search"
+              />
             </div>
-            <input type="search" className="search-area-input text-primary fs-14" placeholder="Search"/>
-          </div>
           </div>
           <div className="loggedin-header-right flex flex-center">
-            <a className="write-area flex flex-center link" onClick={goToWritePage}>
-            <i className="fa-regular fa-pen-to-square light-text fs-20"></i>
-            <span className="light-text fs-14" >Write</span>
+            <a
+              className="write-area flex flex-center link"
+              onClick={goToWritePage}
+            >
+              <i className="fa-regular fa-pen-to-square light-text fs-20"></i>
+              <span className="light-text fs-14">Write</span>
             </a>
-     
-          <i className="fa-regular fa-bell light-text fs-22"></i>
-          <a href="#" className="profile link">
-            <img src="https://miro.medium.com/v2/resize:fill:40:40/1*i5p9qg4BGA4i2NXsghlnxQ.png" alt="profile-img" style={{width:32,height:32}} className="avatar loggedin-profile-img"/>
-          </a>
+
+            <i className="fa-regular fa-bell light-text fs-22"></i>
+
+            <Popup
+              clickItem={
+                <a href="#" className="profile link">
+                  <img
+                    src="https://miro.medium.com/v2/resize:fill:40:40/1*i5p9qg4BGA4i2NXsghlnxQ.png"
+                    alt="profile-img"
+                    style={{ width: 32, height: 32 }}
+                    className="avatar loggedin-profile-img"
+                    onClick={openPopup}
+                  />
+                </a>
+              }
+            />
           </div>
         </div>
       </header>
@@ -82,7 +102,7 @@ const Header = () => {
       <header
         id="header"
         className="header"
-        style={token && { backgroundColor: "#fff" }}
+        style={token ? { backgroundColor: "#fff" } : {}}
       >
         <div className="container flex flex-center-between">
           <a href="/" className="medium-main-logo link">

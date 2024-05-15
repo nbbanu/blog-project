@@ -1,7 +1,18 @@
+import Quill from 'quill';
+
 const WritePage = () => {
-    return(
-        <div>Burası write sayfası</div>
-    )
+    // const toolbarOptions = ['bold', 'italic', 'underline', 'strike'];
+
+    // const quill = new Quill('#editor',{
+    //     modules: {
+    //         toolbar: toolbarOptions
+    //       }
+    // })
+   return(
+    <div id="editor" className='container'>
+        
+    </div>
+   )
 }
 
 export default WritePage;

@@ -1,12 +1,10 @@
 import { useState } from "react";
 import Button from "../Button";
 import { useAuth } from "../../../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
 
 const Popup = ({ clickItem }) => {
   const [showPopup, setShowPopup] = useState(false);
-  const { setIsLoggedIn, setToken } = useAuth();
-  const navigate = useNavigate();
+  const { setToken } = useAuth();
 
   const openPopup = () => {
     setShowPopup(!showPopup);
@@ -15,7 +13,6 @@ const Popup = ({ clickItem }) => {
   const logOut = () => {
     localStorage.removeItem("token");
     setToken("");
-    
   }
 
   return (

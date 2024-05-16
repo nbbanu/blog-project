@@ -1,0 +1,29 @@
+.editor {
+  form {
+    .form-inputs{
+      gap: 20px;
+    }
+    max-width: 70%;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    input {
+      width: 100%;
+      border-radius: 2px;
+      outline: none;
+      border: 1px solid #ccc;
+      width: 100%;
+      padding:7px 5px;
+      font-size: 16px;
+      margin-top: 5px;
+    }
+    button {
+      align-self: flex-end;
+    }
+    .quill-editor {
+      margin-top: 5px;
+      height: 160px;
+    }
+  }
+}

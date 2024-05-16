@@ -2,22 +2,17 @@ import AuthenticationButton from "../AuthenticationButton";
 import Button from "../Button";
 import LoginForm from "../LoginForm";
 
-const Modal = ({
-  setShowModal,
-  createModalShow,
-  setCreateModalShow,
-}) => {
-
-  function closeModal() {
+const Modal = ({ setShowModal, createModalShow, setCreateModalShow }) => {
+  const closeModal = () => {
     setShowModal(false);
-  }
+  };
 
-  function handleClick() {
+  const handleClick = () => {
     setCreateModalShow(!createModalShow);
-  }
+  };
 
   return (
-    <div className={`modal flex flex-column flex-center-center`} >
+    <div className={`modal flex flex-column flex-center-center`}>
       <div className="close light-text" onClick={closeModal}>
         X
       </div>
@@ -25,7 +20,7 @@ const Modal = ({
         <>
           <h2 className="modal-header">Tekrar Hoşgeldiniz.</h2>
           <div className="modal-sign-up flex flex-column flex-center-center">
-            <LoginForm closeModal={closeModal}/>
+            <LoginForm closeModal={closeModal} />
             <div className="modal-sign-up-buttons flex flex-column">
               {/* <AuthenticationButton
                 className={"success fs-16"}

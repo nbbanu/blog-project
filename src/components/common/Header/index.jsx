@@ -5,7 +5,7 @@ import { useAuth } from "../../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Popup from "../Popup";
 
-const Header = ({ openPopup }) => {
+const Header = ({openPopup}) => {
   const [show, setShowModal] = useState(false);
   const [createModalShow, setCreateModalShow] = useState(false);
 
@@ -123,6 +123,16 @@ const Header = ({ openPopup }) => {
             <a href="#" className="link primary-text">
               Write
             </a>
+            {/* <AuthModal clickItem={<>
+              <Button
+              className={"primary-text link ghost border-none"}
+              title={"Giriş Yap"}
+              handleClick={handleClick}
+            />
+            <Button
+              title={token ? "Çıkış Yap" : "Giriş Yap"}
+              handleClick={handleClick}
+            /></>}/> */}
             <Button
               className={"primary-text link ghost border-none"}
               title={"Giriş Yap"}

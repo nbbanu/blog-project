@@ -1,13 +1,11 @@
 import { useState } from "react";
 import AuthModal from "../AuthModal";
 import Button from "../Button";
-import { useAuth } from "../../../contexts/AuthContext";
 
 const Banner = () => {
   const [show, setShowModal] = useState(false);
   const [createModalShow, setCreateModalShow] = useState(false);
 
-  const {token} = useAuth();
 
   function handleClick() {
     setShowModal(!show);

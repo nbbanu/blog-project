@@ -1,29 +1,77 @@
 .editor {
   form {
-    .form-inputs{
-      gap: 20px;
-    }
     max-width: 70%;
-    height: 450px;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    input {
-      width: 100%;
-      border-radius: 2px;
-      outline: none;
-      border: 1px solid #ccc;
-      width: 100%;
-      padding:7px 5px;
-      font-size: 16px;
-      margin-top: 5px;
+    align-items: flex-start;
+    .form-inputs {
+      gap: 20px;
+      input {
+        width: 100%;
+        border-radius: 2px;
+        outline: none;
+        border: 1px solid #ccc;
+        width: 100%;
+        padding: 7px 5px;
+        font-size: 16px;
+        margin-top: 5px;
+      }
+      .blog-cover-photo-box {
+        gap: 50px;
+        align-items: flex-start;
+
+        .blog-cover-photo {
+          background-color: "#fafafa";
+          font-weight: 400;
+          color: rgba(0, 0, 0, 0.54);
+          text-align: center;
+          padding: 0 15px;
+        }
+      
+        .blog-cover-photo-input{
+          border: none;
+          padding: 0;
+          color: transparent;
+        }
+     
+        .blog-cover-photo-input::-webkit-file-upload-button{
+          width: 0.1px;
+          height: 0.1px;
+          opacity: 0;
+          overflow: hidden;
+          position: absolute;
+          z-index: -1;
+        }
+       
+        .blog-cover-photo-input::before {
+          content: "Kapak fotoğrafı seçin";
+          display: flex;
+          -webkit-user-select: none;
+          border: 1px solid #ccc;
+          border-radius: 3px;
+          padding: 9px 5px;
+          outline: none;
+          white-space: nowrap;
+          color: var(--primary-color);
+          font-size: 14px;
+          cursor: pointer;
+        }
+        .img-cover{
+          border-radius: 3px;
+          object-fit: fill;
+        }
+      }
     }
-    button {
-      align-self: flex-end;
-    }
+
     .quill-editor {
       margin-top: 5px;
-      height: 160px;
+      height: auto;
+      margin-bottom: 20px;
     }
+  }
+  img {
+    width: 100% !important;
   }
 }

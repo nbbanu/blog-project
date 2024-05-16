@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { generateSlug } from "../../utils/generateSlug";
@@ -9,21 +9,10 @@ const WritePage = ({ openBlogViewModal }) => {
   const [title, setTitle] = useState("");
   const [slug, setSlug] = useState("");
   const [value, setValue] = useState("");
-  //const [description, setDescription] = useState("");
+  const [url, setUrl] = useState("");
 
-  const toolbarOptions = [
-    ["bold", "italic", "underline", "strike"],
-    ["link", "image"],
-    [{ header: 1 }, { header: 2 }, { header: 3 }],
-    [{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
-    [{ script: "sub" }, { script: "super" }],
-    ["blockquote", "code-block"],
-    [{ indent: "-1" }, { indent: "+1" }],
-    [{ direction: "rtl" }],
-  ];
-  const modules = {
-    toolbar: toolbarOptions,
-  };
+  const quill = useRef();
+
   const handleTitle = (e) => {
     const newTitle = e.target.value;
     setTitle(newTitle);
@@ -35,10 +24,60 @@ const WritePage = ({ openBlogViewModal }) => {
     const newBlog = {
       title,
       slug,
-      //   description,
+      url,
       value,
     };
   };
+
+  const imageHandler = useCallback(() => {
+    // Create an input element of type 'file'
+    const input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
+    input.click();
+
+    // When a file is selected
+    input.onchange = () => {
+      const file = input.files[0];
+      const reader = new FileReader();
+
+      // Read the selected file as a data URL
+      reader.onload = () => {
+        const imageUrl = reader.result;
+        const quillEditor = quill.current.getEditor();
+
+        // Get the current selection range and insert the image at that index
+        const range = quillEditor.getSelection(true);
+        quillEditor.insertEmbed(range.index, "image", imageUrl, "user");
+      };
+
+      reader.readAsDataURL(file);
+    };
+  }, []);
+
+  const toolbarOptions = [
+    ["bold", "italic", "underline", "strike"],
+    ["link", "image"],
+    [{ header: 1 }, { header: 2 }, { header: 3 }],
+    [{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
+    [{ script: "sub" }, { script: "super" }],
+    ["blockquote", "code-block"],
+    [{ indent: "-1" }, { indent: "+1" }],
+    [{ direction: "rtl" }],
+  ];
+
+  const modules = {
+    toolbar: {
+      container: toolbarOptions,
+      handlers: {
+        image: imageHandler,
+      },
+    },
+  };
+  function getImg(e) {
+    const file = e.target.files[0];
+    setUrl(window.URL.createObjectURL(file));
+  }
 
   return (
     <div className="editor container flex flex-center-center">
@@ -76,22 +115,35 @@ const WritePage = ({ openBlogViewModal }) => {
               />
             </div>
           </div>
-          <>
-            {/* Description */}
-            {/* <div className="">
-            <label htmlFor="description" className="">
-              Blog Description
-            </label>
-            <textarea
-              className=""
-              id="description"
-              rows="4"
-              onChange={(e) => setDescription(e.target.value)}
-              value={description}
-              placeholder="Write your thoughts here..."
-            ></textarea>
-          </div> */}
-          </>
+
+          {/* Blog Kapak Fotoğrafı */}
+          <div className="blog-cover-photo-box flex flex-center-between">
+            <div>
+              <label htmlFor="blogCoverPhoto" className="blog-cover-photo-text">
+                Blog Kapak Fotoğrafı
+              </label>
+              <input
+                type="file"
+                className="blog-cover-photo-input"
+                id="blog-cover-photo-input"
+                onChange={getImg}
+                accept="image/png, image/jpeg"
+              />
+            </div>
+            <div
+              className="flex flex-center-center"
+              style={{ width: 400, height: 200, backgroundColor: "#fafafa" }}
+            >
+              {url ? (
+                <img src={url} alt="blog-cover-photo" className="img-cover" />
+              ) : (
+                <div className="fs-14 blog-cover-photo">
+                  Hikayenizi okuyuculara daha çekici kılmak için yüksek kaliteli
+                  bir resim ekleyin.
+                </div>
+              )}
+            </div>
+          </div>
 
           {/* İçerik */}
           <div>
@@ -104,16 +156,19 @@ const WritePage = ({ openBlogViewModal }) => {
               theme="snow"
               value={value}
               onChange={setValue}
-              placeholder="Hikayeni Anlat"
+              placeholder="Bloğunu Yazmaya Başla..."
+              ref={(el) => (quill.current = el)}
             />
           </div>
         </div>
         <BlogViewModal
+          newBlog={{ title, value, url }}
           clickItem={
             <Button
               title="Yayınla"
               className={"success md"}
               handleClick={openBlogViewModal}
+              disabled={title && value ? false : true}
             />
           }
         />

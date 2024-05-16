@@ -45,3 +45,7 @@ button{
     font-weight: 400;
   }
 }
+button:disabled{
+  background-color: rgba(26, 137, 23, .25);
+  border: 1px solid transparent;
+}

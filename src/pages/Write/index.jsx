@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { generateSlug } from "../../utils/generateSlug";
@@ -11,7 +11,12 @@ const WritePage = ({ openBlogViewModal }) => {
   const [value, setValue] = useState("");
   const [url, setUrl] = useState("");
 
+  useEffect(() => {
+    inputRef.current.focus();
+  },[]);
+
   const quill = useRef();
+  const inputRef = useRef(null);
 
   const handleTitle = (e) => {
     const newTitle = e.target.value;
@@ -90,12 +95,13 @@ const WritePage = ({ openBlogViewModal }) => {
             </label>
             <div>
               <input
-                className=""
+                className="blog-title-input"
                 onChange={handleTitle}
                 type="text"
                 value={title}
                 name="title"
                 id="title"
+                ref={inputRef}
               />
             </div>
           </div>

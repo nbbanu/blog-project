@@ -1,6 +1,5 @@
 .popup-container {
   position: relative;
-  background-color: red;
   .popup {
     position: absolute;
     height: auto;
@@ -10,34 +9,31 @@
     background-color: #fff;
     z-index: 3;
     right: -8px;
-    top: 40px;
-
-    .links{
+    top: 20px;
+    .links {
       gap: 20px;
       padding: 16px 24px;
 
-      span{
+      span {
         margin-left: 15px;
-        
       }
-      a:hover{
+      a:hover {
         color: var(--primary-color);
       }
     }
-    .light-line{
+    .light-line {
       margin: 0;
     }
-    .sign-out-box{
+    .sign-out-box {
       margin: 16px 24px;
       cursor: pointer;
-      button{
+      button {
         padding: 0;
         color: var(--secondary-color);
         margin-bottom: 10px;
       }
-
     }
-    .sign-out-box:hover button{
+    .sign-out-box:hover button {
       color: var(--primary-color) !important;
     }
   }
@@ -45,9 +41,6 @@
 
 .popup-out {
   position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+  inset: 0;
   z-index: 2;
 }

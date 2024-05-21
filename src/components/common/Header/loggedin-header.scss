@@ -33,28 +33,24 @@
     }
   }
   &-right {
-    gap: 33px;
+    
 
     i {
       cursor: pointer;
     }
-    .write-area {
+    .write-area,  .fa-bell {
       padding: 3px;
-
+      margin-right: 33px;
       span {
         font-weight: 400;
-        margin-left: 8px;
+       margin-left: 8px;
       }
-      
     }
     .profile{
       position: relative;
     }
     .write-area:hover > span , .write-area:hover > i{
         color: var(--primary-color);
-    }
-    .fa-bell {
-      padding: 3px;
     }
     .fa-bell:hover{
         color: var(--primary-color);

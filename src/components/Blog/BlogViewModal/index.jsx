@@ -1,4 +1,6 @@
 import { useState } from "react";
+import CustomSelect from "../../common/MultipleSelect";
+import Button from "../../common/Button";
 
 const BlogViewModal = ({ clickItem, newBlog }) => {
   const [showBlogModal, setShowBlogModal] = useState(false);
@@ -69,6 +71,22 @@ const BlogViewModal = ({ clickItem, newBlog }) => {
                   Okuyucuların bloğunuzun neyle ilgili olduğunu bilmesi için
                   konuları (en fazla 5 adet) ekleyin veya değiştirin
                 </span>
+                <CustomSelect />
+                <div className="learn-more fs-14">
+                  <span
+                    style={{
+                      textDecorationLine: "underline",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Yayınladığınızda
+                  </span>{" "}
+                  yazınıza ne olacağı hakkında daha fazla bilgi edinin.
+                </div>
+                <div className="publish-area">
+                  <Button title={"Publish now"} className={"success"}/>
+                  <Button title={"Sonrası için planla"} className={"ghost border-none schedule-btn"}/>
+                </div>
               </div>
             </div>
           </div>

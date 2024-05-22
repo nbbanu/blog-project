@@ -1,9 +1,14 @@
 import { useState } from "react";
 import CustomSelect from "../../common/MultipleSelect";
 import Button from "../../common/Button";
+import { useCreateBlog } from "../../../contexts/CreateBlogContext";
+import { createBlog } from "../../../service";
+import { useAuth } from "../../../contexts/AuthContext";
+import Swal from "sweetalert2";
 
 const BlogViewModal = ({ clickItem, newBlog }) => {
   const [showBlogModal, setShowBlogModal] = useState(false);
+  const { blogItems } = useCreateBlog();
 
   const openBlogViewModal = () => {
     setShowBlogModal(!showBlogModal);
@@ -12,6 +17,34 @@ const BlogViewModal = ({ clickItem, newBlog }) => {
     setShowBlogModal(false);
   };
 
+  const createBlogItems = async () => {
+    const header = {
+      "Content-Type": "multipart/form-data",
+    };
+
+    const formData = new FormData();
+
+    formData.append("title", blogItems.title);
+    formData.append("text", blogItems.text);
+    formData.append("description", blogItems.description);
+    formData.append("slug", blogItems.slug);
+    formData.append("files", blogItems.files);
+
+    blogItems.topicIds.forEach((topicId) => {
+      formData.append("topics[]", topicId);
+    });
+
+    createBlog(formData, header)
+      .then((res) => {
+        Swal.fire({
+          title: "Bloğunuz Başarıyla Yayınlandı",
+          color: "#242424",
+          icon: "success",
+          iconColor: "#ffc016",
+        });
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <div>
       <div className="clickable-place" onClick={openBlogViewModal}>
@@ -52,9 +85,7 @@ const BlogViewModal = ({ clickItem, newBlog }) => {
                   className="blog-preview-subtitle line-clamp"
                   placeholder="Ön izleme alt başlığı giriniz..."
                 >
-                  <div
-                    dangerouslySetInnerHTML={{ __html: newBlog.value }}
-                  ></div>
+                  <div dangerouslySetInnerHTML={{ __html: newBlog.text }}></div>
                 </span>
                 <div className="note fs-14">
                   <strong>Not:</strong> Buradaki değişiklikler, hikayenin
@@ -84,8 +115,15 @@ const BlogViewModal = ({ clickItem, newBlog }) => {
                   yazınıza ne olacağı hakkında daha fazla bilgi edinin.
                 </div>
                 <div className="publish-area">
-                  <Button title={"Publish now"} className={"success"}/>
-                  <Button title={"Sonrası için planla"} className={"ghost border-none schedule-btn"}/>
+                  <Button
+                    title={"Publish now"}
+                    className={"success"}
+                    handleClick={createBlogItems}
+                  />
+                  <Button
+                    title={"Sonrası için planla"}
+                    className={"ghost border-none schedule-btn"}
+                  />
                 </div>
               </div>
             </div>

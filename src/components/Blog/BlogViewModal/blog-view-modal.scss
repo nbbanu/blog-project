@@ -21,6 +21,13 @@
       display: grid;
       grid-template-columns: 520px 520px;
       padding: 100px 5px;
+      @include responsive(tablet){
+        &{
+            grid-template-columns: repeat(1, 1fr);
+            gap: 40px;
+            padding: 20px 5px;
+        }
+    }
       &-left {
         padding: 0 40px;
         gap: 10px;

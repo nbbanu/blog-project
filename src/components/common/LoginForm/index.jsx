@@ -5,7 +5,6 @@ import AuthenticationButton from "../AuthenticationButton";
 import Swal from "sweetalert2";
 import { signIn } from "../../../service";
 import Loader from "../Loader";
-import { useNavigate } from "react-router-dom";
 
 const LoginForm = ({ closeModal }) => {
   const [loading, setLoading] = useState(false);

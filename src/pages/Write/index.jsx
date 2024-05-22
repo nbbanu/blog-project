@@ -4,12 +4,12 @@ import "react-quill/dist/quill.snow.css";
 import { generateSlug } from "../../utils/generateSlug";
 import Button from "../../components/common/Button";
 import BlogViewModal from "../../components/Blog/BlogViewModal";
+import { useCreateBlog } from "../../contexts/CreateBlogContext";
 
 const WritePage = ({ openBlogViewModal }) => {
-  const [title, setTitle] = useState("");
-  const [slug, setSlug] = useState("");
-  const [value, setValue] = useState("");
   const [url, setUrl] = useState("");
+
+  const {title,setTitle,slug,setSlug,text,setText,setFiles} = useCreateBlog();
 
   useEffect(() => {
     inputRef.current.focus();
@@ -30,7 +30,7 @@ const WritePage = ({ openBlogViewModal }) => {
       title,
       slug,
       url,
-      value,
+      text,
     };
   };
 
@@ -81,6 +81,7 @@ const WritePage = ({ openBlogViewModal }) => {
   };
   function getImg(e) {
     const file = e.target.files[0];
+    setFiles(file);
     setUrl(window.URL.createObjectURL(file));
   }
 
@@ -110,9 +111,8 @@ const WritePage = ({ openBlogViewModal }) => {
             <label htmlFor="slug" className="light-text fs-18">
               Blog Slug
             </label>
-            <div className="">
+            <div>
               <input
-                className=""
                 onChange={(e) => setSlug(e.target.value)}
                 type="text"
                 value={slug}
@@ -138,7 +138,7 @@ const WritePage = ({ openBlogViewModal }) => {
             </div>
             <div
               className="flex flex-center-center"
-              style={{ width: 400, height: 200, backgroundColor: "#fafafa" }}
+              style={{ maxWidth: 400, height: 200, backgroundColor: "#fafafa" }}
             >
               {url ? (
                 <img src={url} alt="blog-cover-photo" className="img-cover" />
@@ -160,21 +160,21 @@ const WritePage = ({ openBlogViewModal }) => {
               className="quill-editor"
               modules={modules}
               theme="snow"
-              value={value}
-              onChange={setValue}
+              value={text}
+              onChange={setText}
               placeholder="Bloğunu Yazmaya Başla..."
               ref={(el) => (quill.current = el)}
             />
           </div>
         </div>
         <BlogViewModal
-          newBlog={{ title, value, url }}
+          newBlog={{ title, text, url }}
           clickItem={
             <Button
               title="Yayınla"
               className={"success md"}
               handleClick={openBlogViewModal}
-              disabled={title && value ? false : true}
+              disabled={title && text ? false : true}
             />
           }
         />

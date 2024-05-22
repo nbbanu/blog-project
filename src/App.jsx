@@ -6,6 +6,7 @@ import About from "./pages/About";
 import AuthProvider from "./contexts/AuthContext";
 import LangProvider from "./contexts/LangContext";
 import WritePage from "./pages/Write";
+import CreateBlogProvider from "./contexts/CreateBlogContext";
 
 function App() {
   return (
@@ -13,12 +14,14 @@ function App() {
       {/* Provider component’imizin diğer componentler tarafında erişilebilir olmasını sağlayabilmek için component ağacımızın en üstüne yerleştirmemiz gerekir. */}
       <LangProvider>
         <AuthProvider>
-          <Header />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="about" element={<About />} />
-            <Route path="new-story" element={<WritePage />} />
-          </Routes>
+          <CreateBlogProvider>
+            <Header />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="about" element={<About />} />
+              <Route path="new-story" element={<WritePage />} />
+            </Routes>
+          </CreateBlogProvider>
         </AuthProvider>
       </LangProvider>
     </div>

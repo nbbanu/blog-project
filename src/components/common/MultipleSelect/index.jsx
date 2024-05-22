@@ -1,40 +1,41 @@
 import { useState } from "react";
-
-const datas = [
-  { id: 1, name: "Türkiye" },
-  { id: 2, name: "Afghanistan" },
-  { id: 3, name: "American" },
-  { id: 4, name: "Ameriasdfasdfasdfasdfcan" },
-  { id: 5, name: "Test" },
-  { id: 6, name: "zxcvzxcv" },
-];
+import { getAllTopics } from "../../../service";
+import { useAuth } from "../../../contexts/AuthContext";
+import { useCreateBlog } from "../../../contexts/CreateBlogContext";
 
 const CustomSelect = () => {
-  const [topics, setTopics] = useState([]);
   const [values, setValues] = useState([]);
+  const [topics, setTopics] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
 
-  const openPopup = () => {
+  const { token } = useAuth();
+  const { topicIds, setTopicIds } = useCreateBlog();
+
+  const openPopup = async () => {
     setShowPopup(!showPopup);
+    const topics = await getAllTopics(token);
+    setTopics(topics);
   };
 
-  const handleClick = (data) => {
-    setValues((values) => [...values, data]);
+  const handleClick = (topic) => {
+    setValues((values) => [...values, topic]);
+    setTopicIds([...values, topic].map((value) => value.id));
   };
 
   const removeItem = (id) => {
     setValues((values) => values.filter((item) => item.id !== id));
+    setTopicIds(values.filter((item) => item.id !== id).map(value => value.id));
   };
 
   return (
     <div className="custom-select-container">
       <div className="search-box flex flex-center">
-        {values?.length > 0 &&(
+        {values?.length > 0 && (
           <span className="fs-13 primary-text">
             <ul className="topic-list flex flex-center">
-              {values.map((value, id) => (
-                <li key={id} className="topic-link link">
-                  {value.name}
+              {values.map((value) => (
+                <li key={value.id} className="topic-link link">
+                  {value.title}
                   <button
                     className="remove-topic"
                     onClick={() => {
@@ -64,25 +65,30 @@ const CustomSelect = () => {
           }}
         />
       )}
-      {showPopup ? (
+      {showPopup && values.length < 5 ? (
         <div className="topics-popup-container">
           <div className="topics-popup">
             <ul className="links flex flex-column">
-              {values.length < 5 ? (
-                <>
-                  {datas.map((data, index) => (
-                    <li
-                      key={index}
-                      className="link fs-13 primary-text"
-                      onClick={() => handleClick(data)}
-                    >
-                      {data.name}
-                    </li>
-                  ))}
-                </>
-              ) : (
-                <></>
-              )}
+              <>
+                {topics?.map((topic) => (
+                  <li
+                    key={topic.id}
+                    className="link fs-13 primary-text flex flex-center-between"
+                    onClick={() => {
+                      if (values.find((x) => x.id === topic.id)) {
+                        removeItem(topic.id);
+                      } else {
+                        handleClick(topic);
+                      }
+                    }}
+                  >
+                    <span> {topic.title}</span>{" "}
+                    {values.find((x) => x.id === topic.id) && (
+                      <i className="fa-solid fa-check"></i>
+                    )}
+                  </li>
+                ))}
+              </>
             </ul>
           </div>
         </div>

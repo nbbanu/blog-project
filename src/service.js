@@ -9,17 +9,18 @@ export const axiosInstance = axios.create({
   headers: {
     "X-Custom-Header": "foobar",
     "Content-type": "application/json; charset=UTF-8",
+    Authorization: "Bearer " + localStorage.getItem("token"),
   },
 });
 
-const post = async (url, body) => {
+const post = async (url, body, headers = {}) => {
   //   return axiosInstance
   //     .post(url, body)
   //     .then((response) => console.log(response))
   //     .catch((error) => error?.response?.data);
 
   try {
-    const res = await axiosInstance.post(url,body);
+    const res = await axiosInstance.post(url, body, { headers });
     return res?.data;
   } catch (error) {
     throw error.response.data;
@@ -30,3 +31,33 @@ export const signIn = async (body) => {
   return await post("user/sign-in", body);
 };
 
+export const createBlog = async (body, headers) => {
+  return await post("blog/create", body, headers);
+};
+
+const get = async (url, token) => {
+  const request_url = base_api + url;
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: "Bearer " + token,
+    },
+  };
+  const res = await fetch(request_url, options);
+  const data = await res.json();
+
+  return data;
+};
+
+export const getAllTopics = async (token) => {
+  const url = "topics";
+  const data = await get(url, token);
+  return data?.data;
+};
+
+// export const getAllBlogs = async (topicId) => {
+//   const url = `blog/get-all/${topicId}`;
+//   const data  = await get(url,topicId);
+//   return data?.data;
+// }

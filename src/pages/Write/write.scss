@@ -6,14 +6,24 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
+    @include responsive(phone) {
+      & {
+        max-width: 100%;
+      }
+    }
     .form-inputs {
       gap: 20px;
+      @include responsive(phone) {
+        & {
+          max-width: 100%;
+        }
+      }
+
       input {
         width: 100%;
         border-radius: 2px;
         outline: none;
         border: 1px solid #ccc;
-        width: 100%;
         padding: 7px 5px;
         font-size: 16px;
         margin-top: 5px;
@@ -22,6 +32,13 @@
         gap: 50px;
         align-items: flex-start;
 
+        @include responsive(phone) {
+          & {
+            flex-direction: column;
+            gap: 20px;
+          }
+        }
+
         .blog-cover-photo {
           background-color: "#fafafa";
           font-weight: 400;
@@ -29,14 +46,14 @@
           text-align: center;
           padding: 0 15px;
         }
-      
-        .blog-cover-photo-input{
+
+        .blog-cover-photo-input {
           border: none;
           padding: 0;
           color: transparent;
         }
-     
-        .blog-cover-photo-input::-webkit-file-upload-button{
+
+        .blog-cover-photo-input::-webkit-file-upload-button {
           width: 0.1px;
           height: 0.1px;
           opacity: 0;
@@ -44,7 +61,7 @@
           position: absolute;
           z-index: -1;
         }
-       
+
         .blog-cover-photo-input::before {
           content: "Kapak fotoğrafı seçin";
           display: flex;
@@ -58,7 +75,7 @@
           font-size: 14px;
           cursor: pointer;
         }
-        .img-cover{
+        .img-cover {
           border-radius: 3px;
           object-fit: fill;
         }

@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 const AuthContext = createContext();
 
@@ -10,8 +10,6 @@ const AuthProvider = (props) => {
   const [user, setUser] = useState(false);
   const [token, setToken] = useState(localStorage.getItem("token"));
 
-  // useEffect(() => {
-  // },[]);
 
   const onLoginSuccess = (token, user) => {
     localStorage.setItem("token", token);

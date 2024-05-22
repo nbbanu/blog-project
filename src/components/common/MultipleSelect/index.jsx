@@ -7,14 +7,15 @@ const CustomSelect = () => {
   const [values, setValues] = useState([]);
   const [topics, setTopics] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { token } = useAuth();
-  const { topicIds, setTopicIds } = useCreateBlog();
+  const { setTopicIds } = useCreateBlog();
 
   const openPopup = async () => {
-    setShowPopup(!showPopup);
     const topics = await getAllTopics(token);
     setTopics(topics);
+    setShowPopup(!showPopup);
   };
 
   const handleClick = (topic) => {
@@ -24,7 +25,9 @@ const CustomSelect = () => {
 
   const removeItem = (id) => {
     setValues((values) => values.filter((item) => item.id !== id));
-    setTopicIds(values.filter((item) => item.id !== id).map(value => value.id));
+    setTopicIds(
+      values.filter((item) => item.id !== id).map((value) => value.id)
+    );
   };
 
   return (
@@ -33,7 +36,7 @@ const CustomSelect = () => {
         {values?.length > 0 && (
           <span className="fs-13 primary-text">
             <ul className="topic-list flex flex-center">
-              {values.map((value) => (
+              {values?.map((value) => (
                 <li key={value.id} className="topic-link link">
                   {value.title}
                   <button

@@ -3,7 +3,6 @@ import CustomSelect from "../../common/MultipleSelect";
 import Button from "../../common/Button";
 import { useCreateBlog } from "../../../contexts/CreateBlogContext";
 import { createBlog } from "../../../service";
-import { useAuth } from "../../../contexts/AuthContext";
 import Swal from "sweetalert2";
 
 const BlogViewModal = ({ clickItem, newBlog }) => {

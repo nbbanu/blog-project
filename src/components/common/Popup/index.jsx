@@ -1,10 +1,15 @@
 import { useState } from "react";
 import Button from "../Button";
 import { useAuth } from "../../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
-const Popup = ({ clickItem, type }) => {
+const Popup = ({ clickItem }) => {
   const [showPopup, setShowPopup] = useState(false);
   const { setToken } = useAuth();
+  const navigate = useNavigate();
+
+  const { email } = useAuth();
+
 
   const openPopup = () => {
     setShowPopup(!showPopup);
@@ -15,6 +20,11 @@ const Popup = ({ clickItem, type }) => {
     setToken("");
   };
 
+  const goProfile = () => {
+    const userEmail = "@" + email.split("@")[0];
+    navigate(`${userEmail}`);
+  };
+  
   return (
     <>
       <div className="clickable-place" onClick={openPopup}>
@@ -33,17 +43,21 @@ const Popup = ({ clickItem, type }) => {
           <div className="popup flex flex-column">
             <>
               <div className="links flex flex-column">
-                <a href="#" className="link flex flex-center light-text">
+                <a
+                  href="#"
+                  className="link flex flex-center light-text"
+                  onClick={goProfile}
+                >
                   <i className="fa-regular fa-user fs-20 "></i>
-                  <span className=" fs-14">Profile</span>
+                  <span className=" fs-14">Profil</span>
                 </a>
                 <a href="#" className="link flex flex-center  light-text">
                   <i className="fa-regular fa-bookmark fs-20"></i>
-                  <span className="fs-14">Library</span>
+                  <span className="fs-14">Kütüphane</span>
                 </a>
                 <a href="#" className="link flex flex-center light-text">
                   <i className="fa-solid fa-align-left fs-20 "></i>
-                  <span className=" fs-14">Stories</span>
+                  <span className=" fs-14">Hikayeler</span>
                 </a>
                 <a href="#" className="link flex flex-center light-text">
                   <i className="fa-solid fa-signal fs-18 "></i>

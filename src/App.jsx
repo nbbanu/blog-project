@@ -7,8 +7,11 @@ import AuthProvider from "./contexts/AuthContext";
 import LangProvider from "./contexts/LangContext";
 import WritePage from "./pages/Write";
 import CreateBlogProvider from "./contexts/CreateBlogContext";
+import ProfilePage from "./pages/Profile";
+
 
 function App() {
+
   return (
     <div>
       {/* Provider component’imizin diğer componentler tarafında erişilebilir olmasını sağlayabilmek için component ağacımızın en üstüne yerleştirmemiz gerekir. */}
@@ -20,6 +23,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="about" element={<About />} />
               <Route path="new-story" element={<WritePage />} />
+              <Route path="/:userName" element={<ProfilePage/>} />
             </Routes>
           </CreateBlogProvider>
         </AuthProvider>

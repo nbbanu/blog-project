@@ -56,6 +56,12 @@ export const getAllTopics = async (token) => {
   return data?.data;
 };
 
+export const getAllBlogs = async () => {
+  const url = "blog/get-all";
+  const data = await get(url);
+  return data?.data;
+}
+
 // export const getAllBlogs = async (topicId) => {
 //   const url = `blog/get-all/${topicId}`;
 //   const data  = await get(url,topicId);

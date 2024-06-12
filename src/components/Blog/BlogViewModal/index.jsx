@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 
 const BlogViewModal = ({ clickItem, newBlog }) => {
   const [showBlogModal, setShowBlogModal] = useState(false);
-  const { blogItems } = useCreateBlog();
+  const { blogItems,topicIds } = useCreateBlog();
 
   const openBlogViewModal = () => {
     setShowBlogModal(!showBlogModal);
@@ -42,7 +42,7 @@ const BlogViewModal = ({ clickItem, newBlog }) => {
           iconColor: "#ffc016",
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err,"hata"));
   };
   return (
     <div>
@@ -115,9 +115,10 @@ const BlogViewModal = ({ clickItem, newBlog }) => {
                 </div>
                 <div className="publish-area">
                   <Button
-                    title={"Publish now"}
+                    title={"Şimdi Yayınla"}
                     className={"success"}
                     handleClick={createBlogItems}
+                    disabled={topicIds.length>0 ? false : true}
                   />
                   <Button
                     title={"Sonrası için planla"}

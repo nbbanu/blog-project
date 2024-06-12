@@ -2,6 +2,7 @@ import { useState } from "react";
 import { getAllTopics } from "../../../service";
 import { useAuth } from "../../../contexts/AuthContext";
 import { useCreateBlog } from "../../../contexts/CreateBlogContext";
+import Loader from "../Loader";
 
 const CustomSelect = () => {
   const [values, setValues] = useState([]);
@@ -58,6 +59,7 @@ const CustomSelect = () => {
           type="text"
           placeholder="Bir konu ekleyin..."
           className="search-input"
+          
         />
       </div>
       {showPopup && (
@@ -69,32 +71,35 @@ const CustomSelect = () => {
         />
       )}
       {showPopup && values.length < 5 ? (
-        <div className="topics-popup-container">
-          <div className="topics-popup">
-            <ul className="links flex flex-column">
-              <>
-                {topics?.map((topic) => (
-                  <li
-                    key={topic.id}
-                    className="link fs-13 primary-text flex flex-center-between"
-                    onClick={() => {
-                      if (values.find((x) => x.id === topic.id)) {
-                        removeItem(topic.id);
-                      } else {
-                        handleClick(topic);
-                      }
-                    }}
-                  >
-                    <span> {topic.title}</span>{" "}
-                    {values.find((x) => x.id === topic.id) && (
-                      <i className="fa-solid fa-check"></i>
-                    )}
-                  </li>
-                ))}
-              </>
-            </ul>
+        <>
+          {loading ? <Loader /> : ""}
+          <div className="topics-popup-container">
+            <div className="topics-popup">
+              <ul className="links flex flex-column">
+                <>
+                  {topics?.map((topic) => (
+                    <li
+                      key={topic.id}
+                      className="link fs-13 primary-text flex flex-center-between"
+                      onClick={() => {
+                        if (values.find((x) => x.id === topic.id)) {
+                          removeItem(topic.id);
+                        } else {
+                          handleClick(topic);
+                        }
+                      }}
+                    >
+                      <span> {topic.title}</span>{" "}
+                      {values.find((x) => x.id === topic.id) && (
+                        <i className="fa-solid fa-check"></i>
+                      )}
+                    </li>
+                  ))}
+                </>
+              </ul>
+            </div>
           </div>
-        </div>
+        </>
       ) : (
         ""
       )}

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import AuthenticationButton from "../AuthenticationButton";
 import Button from "../Button";
 import LoginForm from "../LoginForm";
@@ -55,13 +56,12 @@ const Modal = ({ setShowModal, createModalShow, setCreateModalShow }) => {
           </div>
           <p className="fs-13 light-text text-center">
             Parolamı unuttum?
-            <a
-              href="#"
+            <Link
               className="link light-text underline"
               style={{ marginLeft: "3px" }}
             >
               Get help.
-            </a>
+            </Link>
           </p>
         </>
       ) : (
@@ -95,14 +95,14 @@ const Modal = ({ setShowModal, createModalShow, setCreateModalShow }) => {
       )}
 
       <p className="policy fs-13 light-text text-center">
-        Click “Sign up” to agree to Medium’s{" "}
-        <a href="#" className="link light-text underline">
+        Click “Sign up” to agree to Medium’s
+        <Link className="link light-text underline">
           Terms of Service
-        </a>{" "}
-        and acknowledge that Medium’s{" "}
-        <a href="" className="link light-text underline">
+        </Link>
+        and acknowledge that Medium’s
+        <Link className="link light-text underline">
           Privacy Policy
-        </a>{" "}
+        </Link>
         applies to you.
       </p>
     </div>

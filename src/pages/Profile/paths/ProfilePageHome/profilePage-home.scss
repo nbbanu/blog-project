@@ -1,0 +1,21 @@
+.profilePage-home{
+    display: inline-flex;
+    flex-direction: column;
+    .gray-link{
+        display: none;
+    }
+    .blog-card-info-text{
+        color: var(--secondary-color);
+    }
+    .blog-card{
+        justify-content: space-between;
+        align-items: center;
+    }
+    .blog-card-bottom{
+        justify-content: flex-start;
+    }
+    .blog-card-release-date{
+        margin-left: 10px;
+        font-size: 13px;
+    }
+}

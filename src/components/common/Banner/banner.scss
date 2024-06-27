@@ -7,6 +7,11 @@
   border-bottom: 1px solid var(--primary-color);
   position: relative;
 
+  @include responsive(phone) {
+    .container {
+      padding: 40px 0 0 10px !important;
+    }
+  }
   .banner-left {
     display: flex;
     flex-direction: column;
@@ -27,14 +32,13 @@
     #start-reading-btn {
       font-size: 20px;
     }
-    @include responsive(phone){
-      &-h2{
-        font-size: 70px;
-        
+    @include responsive(phone) {
+      &-h2 {
+        font-size: 50px;
       }
     }
-    @include responsive(tablet){
-      &-h2{
+    @include responsive(tablet) {
+      &-h2 {
         font-size: 85px;
       }
     }
@@ -46,11 +50,10 @@
     right: 0;
     top: 0;
 
-    @include responsive(phone){
-      &{
+    @include responsive(phone) {
+      & {
         display: none;
       }
     }
   }
-
 }

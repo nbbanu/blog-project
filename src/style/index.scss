@@ -3,7 +3,7 @@
 @import "../../src/components/common/AuthenticationButton/authenticationBtn.scss";
 @import "../../src/components/common/BlogCard/blogCard.scss";
 @import "../../src/components/common/Tooltip/tooltip.scss";
-@import "../../src/components/common/Popup/popup.scss";
+@import "../../src/components/common/UserPopup/user-popup.scss";
 @import "../../src/components/common/LoginForm/login.scss";
 @import "../../src/components/common/Loader/loader.scss";
 @import "../../src/components/common/HorizantalScrobbleBar/horizantal-scrobble-bar";
@@ -15,8 +15,13 @@
 @import "../../src/components/common/MultipleSelect/multiple-select.scss";
 @import "../../src/components/Blog/BlogViewModal/blog-view-modal.scss";
 @import "../../src/pages/Home/loggedin-home.scss";
+@import "../../src/pages/Home/home.scss";
 @import "../../src/pages/Profile/profile-page.scss";
+@import "../../src/pages/Profile/paths/ProfilePageHome/profilePage-home.scss";
+@import "../../src/pages/Profile/paths/ProfilePageAbout/profilePage-about.scss";
+@import "../../src/pages/Profile/paths/Lists/lists.scss";
 @import "../../src/pages/Write/write.scss";
+@import "../../src/pages/Topics/topics.scss";
 
 :root {
   font-family: "Roboto", sans-serif;

@@ -9,7 +9,9 @@
   top: 0;
   border-bottom: 1px solid var(--primary-color);
   z-index: 5;
-
+.container{
+  padding: 40px 10px !important;
+}
   .menu {
     @include responsive(phone) {
       .link {

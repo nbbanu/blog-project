@@ -61,7 +61,9 @@
 .light-text{
     color: var(--secondary-color);
 }
-
+.success-text{
+    color: var(--succes-color);
+}
 .text-center{
     text-align: center;
 }
@@ -90,7 +92,6 @@
     cursor: pointer;
 }
 
-
 .dot{
     width: 1px;
     height: 1px;
@@ -100,7 +101,6 @@
 }
 .vertical-line{
     border: 1px solid var(--light-border-color);
-
     margin: 0 40px;
 }
 .light-line{

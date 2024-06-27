@@ -1,5 +1,8 @@
 .blog-card {
-gap: 50px;
+  display: grid;
+  grid-template-columns: 75% 20%;
+  gap: 50px;
+  &-left {
     &-header {
       margin-bottom: 10px;
       .blogger-name {
@@ -7,28 +10,29 @@ gap: 50px;
         margin-left: 8px;
       }
     }
-    &-info-text {
-      font-weight: 400;
-      margin-bottom: 30px;
-      margin-top: 10px;
-      line-height: 24px;
+  }
+
+  &-info-text {
+    font-weight: 400;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    line-height: 24px;
+  }
+  &-bottom {
+    &-left {
+      gap: 10px;
     }
-    &-bottom {
-      &-left {
-        gap: 10px;
+    &-right {
+      gap: 15px;
+      i {
+        cursor: pointer;
       }
-      &-right {
-        gap: 15px;
-        i{
-          cursor: pointer;
-        }
-        .minus {
-          border: 1px solid var(--secondary-color);
-          border-radius: 50%;
-          padding: 4px;
-          font-size: 10px;
-        }
+      .minus {
+        border: 1px solid var(--secondary-color);
+        border-radius: 50%;
+        padding: 4px;
+        font-size: 10px;
       }
     }
   }
-
+}

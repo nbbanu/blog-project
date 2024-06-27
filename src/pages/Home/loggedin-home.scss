@@ -1,58 +1,105 @@
 .loggedin-home {
-.container{
-  padding-top: 0;
-  position: relative;
-}
+  .container {
+    padding-top: 0;
+    position: relative;
+    @include responsive(phone) {
+      & {
+        padding: 0 10px;
+      }
+    }
+  }
   display: flex;
-  
+
   &-left {
     margin-top: 24px;
     width: 60%;
-    .blog-card{
+    @include responsive(phone) {
+      & {
+        width: 100%;
+      }
+    }
+    .blog-card {
       margin-top: 50px;
+      justify-content: space-between;
+      @include responsive(phone) {
+        & {
+          display: flex;
+          gap: 10px;
+          width: 100%;
+        }
+        img {
+          width: 80px;
+          height: 50px;
+        }
+        .blog-card-title-h2 {
+          font-size: 14px;
+        }
+        .blog-card-info-text {
+          margin-bottom: 15px;
+        }
+        .blog-card-info-text,
+        .blog-card-release-date {
+          font-size: 12px;
+        }
+        .gray-link {
+          display: none;
+        }
+      }
     }
   }
-  &-right{
+
+  &-right {
     margin-top: 24px;
     max-width: 330px;
 
-    &-title{
+    &-title {
       font-weight: 500;
       margin-bottom: 5px;
     }
+
+    @include responsive(phone) {
+      & {
+        display: none;
+      }
+    }
   }
-  .staff-picks-cards{
+  .staff-picks-cards {
     gap: 20px;
     margin-top: 15px;
   }
-  .sticky{
+  .sticky {
     position: sticky;
     top: 50px;
   }
-  .recommended-topics{
-    .loggedin-home-right-title{
+  .recommended-topics {
+    .loggedin-home-right-title {
       margin-bottom: 15px;
     }
-    .gray-link{
+    .gray-link {
       padding: 8px 16px;
       font-size: 13px;
     }
-    &-links{
+    &-links {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
     }
   }
-  .recommended-authors{
+  .recommended-authors {
     gap: 16px;
   }
-  .reading-list{
-    .loggedin-home-right-title{
+  .reading-list {
+    .loggedin-home-right-title {
       margin-bottom: 15px;
     }
-    &-text{
+    &-text {
       font-weight: 400;
       line-height: 20px;
+    }
+  }
+  @include responsive(phone) {
+    .vertical-line {
+      display: none;
     }
   }
 }

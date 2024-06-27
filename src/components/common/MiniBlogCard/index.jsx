@@ -8,22 +8,23 @@ const MiniBlogCard = ({
   title,
   releaseDate,
   readingTime,
+  cardIndex,
+  miniCardImg
 }) => {
   const [showTooltip, setShowTooltip] = useState(false);
   const [loading, setLoading] = useState(true);
 
   return (
-    <div className="mini-card flex ">
-      <span className="mini-card-number">01</span>
+    <div className="mini-card flex">
+      <span className="mini-card-number">{cardIndex}</span>
       <div className="mini-card-right">
         <div className="mini-card-header flex flex-center">
           <div className="mini-card-img avatar">
             <img
-              src="https://miro.medium.com/v2/resize:fill:40:40/1*i5p9qg4BGA4i2NXsghlnxQ.png"
+              src={profileImg}
               alt="avatar"
               className="avatar"
             />
-            {/* <img src={profileImg} alt="" /> */}
           </div>
           <span
             className="blogger-name fs-13 primary-text"
@@ -51,7 +52,7 @@ const MiniBlogCard = ({
             />
           </span>
 
-          <span className="publishedBy fs-13 primary-text">{publishedBy}</span>
+          <span className="publishedby fs-13 primary-text">{publishedBy}</span>
         </div>
         <div className="mini-card-title">
           <h2 className="mini-card-title-h2 fs-16 primary-text">{title}</h2>

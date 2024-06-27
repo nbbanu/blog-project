@@ -4,10 +4,12 @@ import Button from "../../common/Button";
 import { useCreateBlog } from "../../../contexts/CreateBlogContext";
 import { createBlog } from "../../../service";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const BlogViewModal = ({ clickItem, newBlog }) => {
   const [showBlogModal, setShowBlogModal] = useState(false);
   const { blogItems,topicIds } = useCreateBlog();
+  const navigate = useNavigate();
 
   const openBlogViewModal = () => {
     setShowBlogModal(!showBlogModal);
@@ -41,6 +43,7 @@ const BlogViewModal = ({ clickItem, newBlog }) => {
           icon: "success",
           iconColor: "#ffc016",
         });
+        navigate("/:userName");
       })
       .catch((err) => console.log(err,"hata"));
   };

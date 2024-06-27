@@ -1,12 +1,21 @@
 @import "../../../style/responsive.scss";
 
 .trending{
+    margin-top: 30px;
+    margin-left: 10px;
+
+    @include responsive(phone){
+        .container{
+            padding: 0 0 0 10px !important;
+        }
+    }
     &-header{
         margin-bottom: 16px;
         &-h2{
             margin-left: 15px;
         }
     }
+  
     .mini-blog-cards{
         display: grid;
         grid-template-columns: repeat(3, 1fr);

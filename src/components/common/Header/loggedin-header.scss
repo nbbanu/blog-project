@@ -2,62 +2,57 @@
 
 .loggedin-header {
   height: 57px;
-  .container{
+  .container {
     padding: 20px;
     max-width: 100%;
   }
   &-left {
     gap: 20px;
-
-    .search-area {
-      width: 240px;
-      border-radius: 20px;
-      background-color: #f9f9f9;
-      @include responsive(phone) {
-        & {
-          display: none;
-        }
-      }
-      &-input {
-        border: none;
-        outline: none;
-        background-color: transparent;
-        padding: 10px 20px 10px 0;
-        width: 100%;
-      }
-      &-icon {
-        margin: 10px;
-      }
-      .search-area-input::placeholder {
-        color: var(--primary-color);
-      }
-      //   .search-area-input:focus + .search-area-icon{
-      //     color: red;
-      //   }
-    }
   }
   &-right {
-    
-
     i {
       cursor: pointer;
     }
-    .write-area,  .fa-bell {
+    .write-area,
+    .fa-bell {
       padding: 3px;
       margin-right: 33px;
       span {
         font-weight: 400;
-       margin-left: 8px;
+        margin-left: 8px;
       }
     }
-    .profile{
+    @include responsive(phone) {
+      .write-area {
+        display: none;
+      }
+    }
+    Ï .profile {
       position: relative;
     }
-    .write-area:hover > span , .write-area:hover > i{
-        color: var(--primary-color);
+    .write-area:hover > span,
+    .write-area:hover > i {
+      color: var(--primary-color);
     }
-    .fa-bell:hover{
-        color: var(--primary-color);
+    .fa-bell:hover {
+      color: var(--primary-color);
+    }
+  }
+  @include responsive(phone) {
+    .search-area {
+      display: none;
+    }
+  }
+  @include responsive(phone) {
+    .resp-search-icon {
+      display: flex !important;
+      padding: 3px;
+      margin-right: 33px;
+    }
+  }
+  @include responsive(phone) {
+    .resp-search-link {
+      display: flex !important;
     }
   }
 }

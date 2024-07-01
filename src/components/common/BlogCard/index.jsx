@@ -14,7 +14,7 @@ const blogCard = ({
 }) => {
   return (
     <div>
-      <div className="blog-card ">
+      <div className="blog-card">
         <div className="blog-card-left">
           <div className="blog-card-left-header flex flex-center">
             <img
@@ -55,8 +55,8 @@ const blogCard = ({
             </div>
           </div>
         </div>
-        <div style={{ width: 112, height: 112 }}>
-          <img src={blogImage} alt="blog-image" className="img-cover" />
+        <div className="blog-image-box" style={{ width: 112, height: 112 }}>
+          <img src={blogImage} alt="blog-image" className="img-cover " />
         </div>
       </div>
       <div className="light-line"></div>

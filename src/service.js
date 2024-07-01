@@ -50,18 +50,27 @@ const get = async (url, token) => {
   return data;
 };
 
+export const getAllBlogs = async () => {
+  const url = "blog/get-all";
+  const data = await get(url);
+  return data?.data;
+};
+
+export const getAllCategories = async () => {
+  const url = "category";
+  const data = await get(url);
+  return data?.data;
+};
+export const getAllSubcategories = async () => {
+  const url = "subcategory";
+  const data = await get(url);
+  return data?.data;
+};
 export const getAllTopics = async (token) => {
   const url = "topics";
   const data = await get(url, token);
   return data?.data;
 };
-
-export const getAllBlogs = async () => {
-  const url = "blog/get-all";
-  const data = await get(url);
-  return data?.data;
-}
-
 
 // export const getAllBlogsById = async (topicId) => {
 //   const url = `blog/get-all/${topicId}`;

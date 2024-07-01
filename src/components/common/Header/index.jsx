@@ -4,6 +4,7 @@ import Button from "../Button";
 import { useAuth } from "../../../contexts/AuthContext";
 import { Link } from "react-router-dom";
 import UserPopup from "../UserPopup";
+import SearchInput from "../SearchInput";
 
 const Header = () => {
   const [show, setShowModal] = useState(false);
@@ -46,31 +47,22 @@ const Header = () => {
                 style={{ width: 45, height: 25 }}
               />
             </Link>
-            <div className="search-area flex flec-center">
-              <div className="search-area-icon">
-                <i className="fa-solid fa-magnifying-glass light-text"></i>
-              </div>
-              <input
-                type="search"
-                className="search-area-input text-primary fs-14"
-                placeholder="Search"
-              />
-            </div>
+            <SearchInput title={"Ara"} />
           </div>
           <div className="loggedin-header-right flex flex-center">
-            <Link
-              to="new-story"
-              className="write-area flex flex-center link"
-            >
+            <Link to="new-story" className="write-area flex flex-center link">
               <i className="fa-regular fa-pen-to-square light-text fs-20"></i>
               <span className="light-text fs-14">Write</span>
             </Link>
-
+            <Link className="link resp-search-link" to="search" style={{ display: "none" }}>
+              <i
+                className="fa-solid fa-magnifying-glass light-text fs-18 resp-search-icon"></i>
+            </Link>
             <i className="fa-regular fa-bell light-text fs-22"></i>
 
             <UserPopup
               clickItem={
-                <Link to="" className="profile link">
+                <Link className="profile link">
                   <img
                     src="https://miro.medium.com/v2/resize:fill:40:40/1*i5p9qg4BGA4i2NXsghlnxQ.png"
                     alt="profile-img"
@@ -109,15 +101,9 @@ const Header = () => {
             />
           </Link>
           <nav id="menu" className="menu flex flex-center">
-            <Link className="link primary-text">
-              Our Story
-            </Link>
-            <Link  className="link primary-text">
-              Membership
-            </Link>
-            <Link className="link primary-text">
-              Write
-            </Link>
+            <Link className="link primary-text">Our Story</Link>
+            <Link className="link primary-text">Membership</Link>
+            <Link className="link primary-text">Write</Link>
             {/* <AuthModal clickItem={<>
               <Button
               className={"primary-text link ghost border-none"}

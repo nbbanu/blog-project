@@ -1,7 +1,44 @@
-.topics{
-    &-header{
-        font-size: 42px;
-        line-height: 52px;
-        margin-top: 50px;
+.topics {
+  &-header {
+    font-size: 42px;
+    line-height: 52px;
+    margin-top: 50px;
+  }
+  .search-area{
+    margin: 0 auto;
+    margin-top: 30px;
+    width: 680px;
+    padding: 10px;
+    border-radius: 30px;
+  }
+  .search-area-input::placeholder {
+    color: var(--secondary-color);
+  }
+  .topics-lists {
+    .category-link {
+      font-weight: 500;
     }
+    .subcategory-list {
+      padding-left: 24px;
+      .subcategory-link {
+        margin-top: 32px;
+        font-weight: 500;
+        display: block;
+        .topic-list {
+          padding-left: 16px;
+
+          .topic-link:not(.more-link) {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            font-weight: 400;
+            display: block;
+          }
+          .more-link {
+            border-bottom: 1px solid var(--primary-color);
+            display: inline;
+          }
+        }
+      }
+    }
+  }
 }

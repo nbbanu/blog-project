@@ -14,8 +14,10 @@
 @import "../../src/components/common/Footer/footer.scss";
 @import "../../src/components/common/MultipleSelect/multiple-select.scss";
 @import "../../src/components/Blog/BlogViewModal/blog-view-modal.scss";
+@import "../../src/components/common/SearchInput/search-input.scss";
 @import "../../src/pages/Home/loggedin-home.scss";
 @import "../../src/pages/Home/home.scss";
+@import "../../src/pages/Search/search.scss";
 @import "../../src/pages/Profile/profile-page.scss";
 @import "../../src/pages/Profile/paths/ProfilePageHome/profilePage-home.scss";
 @import "../../src/pages/Profile/paths/ProfilePageAbout/profilePage-about.scss";
@@ -57,5 +59,8 @@
 }
 .flex-center-between {
   align-items: center;
+  justify-content: space-between;
+}
+.flex-between{
   justify-content: space-between;
 }

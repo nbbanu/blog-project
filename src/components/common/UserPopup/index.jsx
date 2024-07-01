@@ -15,6 +15,7 @@ const UserPopup = ({ clickItem }) => {
 
   const logOut = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("email");
     setToken("");
   };
 
@@ -38,7 +39,7 @@ const UserPopup = ({ clickItem }) => {
             <>
               <div className="links flex flex-column">
                 <Link
-                  to={`/${userEmail}`}
+                  to={`/${userEmail}/main`}
                   className="link flex flex-center light-text"
                  >
                   <i className="fa-regular fa-user fs-20 "></i>

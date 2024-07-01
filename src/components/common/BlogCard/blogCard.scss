@@ -1,7 +1,6 @@
 .blog-card {
-  display: grid;
-  grid-template-columns: 75% 20%;
-  gap: 50px;
+  display: flex;
+
   &-left {
     &-header {
       margin-bottom: 10px;

@@ -43,7 +43,7 @@ const BlogViewModal = ({ clickItem, newBlog }) => {
           icon: "success",
           iconColor: "#ffc016",
         });
-        navigate("/:userName");
+        navigate("/:userName/main");
       })
       .catch((err) => console.log(err,"hata"));
   };

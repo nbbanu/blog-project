@@ -4,8 +4,9 @@ import Button from "../../components/common/Button";
 const ProfilePage = () => {
   return (
     <div className="container profile-page">
-      <div className="profile-page-left">
+      <div className="profile-page-left flex flex-column">
         <div className="profile-page-left-top flex">
+          <img src="https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0" alt="avatar" className="avatar resp-profile-img" style={{width:48,height:48, display:"none"}}/>
           <span className="profile-page-left-top-userName">Banubkrli</span>
           <div className="profile-page-left-top-options">
             <i

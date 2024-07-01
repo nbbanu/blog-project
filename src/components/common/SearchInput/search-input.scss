@@ -1,0 +1,26 @@
+.search-area {
+    width: 240px;
+    border-radius: 20px;
+    background-color: #f9f9f9;
+    @include responsive(phone) {
+      & {
+        display: none;
+      }
+    }
+    &-input {
+      border: none;
+      outline: none;
+      background-color: transparent;
+      padding: 10px 20px 10px 0;
+      width: 100%;
+    }
+    &-icon {
+      margin: 10px;
+    }
+    .search-area-input::placeholder {
+      color: var(--primary-color);
+    }
+    //   .search-area-input:focus + .search-area-icon{
+    //     color: red;
+    //   }
+  }

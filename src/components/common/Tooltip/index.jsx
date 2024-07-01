@@ -9,7 +9,6 @@ const Tooltip = ({
   bloggerName,
   bloggerInformation,
   followersCount,
-  children
 }) => {
   return (
     <div
@@ -39,7 +38,7 @@ const Tooltip = ({
                   src={profileImg}
                   alt="avatar"
                   className="avatar"
-                  style={{ width: "35px", height: "35px" }}
+                  style={{ width: 35, height: 35 }}
                 />
               </div>
               <div className="tooltip-name">

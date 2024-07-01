@@ -11,6 +11,7 @@ import Lists from "./pages/Profile/paths/Lists";
 import ProfilePageAbout from "./pages/Profile/paths/ProfilePageAbout";
 import ProfilePageHome from "./pages/Profile/paths/ProfilePageHome";
 import Topics from "./pages/Topics";
+import Search from "./pages/Search";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
                 <Route path="about" element={<ProfilePageAbout/>}/>
               </Route>
               <Route path="explore-topics" element={<Topics/>}/>
+              <Route path="search" element={<Search/>}/>
             </Routes>
           </CreateBlogProvider>
         </AuthProvider>

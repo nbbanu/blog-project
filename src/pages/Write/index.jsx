@@ -5,15 +5,19 @@ import { generateSlug } from "../../utils/generateSlug";
 import Button from "../../components/common/Button";
 import BlogViewModal from "../../components/Blog/BlogViewModal";
 import { useCreateBlog } from "../../contexts/CreateBlogContext";
+import { useAuth } from "../../contexts/AuthContext";
+import Home from "../Home";
 
 const WritePage = ({ openBlogViewModal }) => {
   const [url, setUrl] = useState("");
+  const { token } = useAuth();
 
-  const {title,setTitle,slug,setSlug,text,setText,setFiles} = useCreateBlog();
+  const { title, setTitle, slug, setSlug, text, setText, setFiles } =
+    useCreateBlog();
 
   useEffect(() => {
     inputRef.current.focus();
-  },[]);
+  }, []);
 
   const quill = useRef();
   const inputRef = useRef(null);
@@ -138,7 +142,11 @@ const WritePage = ({ openBlogViewModal }) => {
             </div>
             <div
               className="flex flex-center-center"
-              style={{ maxWidth: 400, height: 200, backgroundColor: "#fafafa" }}
+              style={{
+                maxWidth: 400,
+                height: 200,
+                backgroundColor: "#fafafa",
+              }}
             >
               {url ? (
                 <img src={url} alt="blog-cover-photo" className="img-cover" />

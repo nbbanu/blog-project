@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const BlogViewModal = ({ clickItem, newBlog }) => {
   const [showBlogModal, setShowBlogModal] = useState(false);
-  const { blogItems,topicIds } = useCreateBlog();
+  const { blogItems, topicIds, setText,setTitle, setSlug, setFiles } = useCreateBlog();
   const navigate = useNavigate();
 
   const openBlogViewModal = () => {
@@ -22,7 +22,6 @@ const BlogViewModal = ({ clickItem, newBlog }) => {
     const header = {
       "Content-Type": "multipart/form-data",
     };
-
     const formData = new FormData();
 
     formData.append("title", blogItems.title);
@@ -43,9 +42,31 @@ const BlogViewModal = ({ clickItem, newBlog }) => {
           icon: "success",
           iconColor: "#ffc016",
         });
+        setText("");
+        setTitle("");
+        setSlug("")
+        setFiles([]);
         navigate("/:userName/main");
       })
-      .catch((err) => console.log(err,"hata"));
+      .catch((err) => {
+        if (err.statusCode == 401) {
+          Swal.fire({
+            title: "Lütfen Tekrar Giriş Yapınız",
+            color: "#242424",
+            icon: "error",
+            iconColor: "#ffc016",
+          });
+          localStorage.removeItem("token");
+          navigate("/");
+        } else if (err.statusCode == 400) {
+          Swal.fire({
+            title: "Oluşturmak istediğiniz blog sistemde zaten mevcut!",
+            color: "#242424",
+            icon: "error",
+            iconColor: "#ffc016",
+          });
+        }
+      });
   };
   return (
     <div>
@@ -121,7 +142,7 @@ const BlogViewModal = ({ clickItem, newBlog }) => {
                     title={"Şimdi Yayınla"}
                     className={"success"}
                     handleClick={createBlogItems}
-                    disabled={topicIds.length>0 ? false : true}
+                    disabled={topicIds.length > 0 ? false : true}
                   />
                   <Button
                     title={"Sonrası için planla"}

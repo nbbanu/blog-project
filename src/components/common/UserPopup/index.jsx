@@ -100,7 +100,7 @@ const UserPopup = ({ clickItem }) => {
               <div className="light-line"></div>
               <div className="sign-out-box" onClick={logOut}>
                 <Button title={"Sign out"} className={"ghost border-none"} />
-                <p className="light-text fs-14">test@gmail.com</p>
+                <p className="light-text fs-14">{email}</p>
               </div>
             </>
           </div>

@@ -16,7 +16,7 @@ const WritePage = ({ openBlogViewModal }) => {
     useCreateBlog();
 
   useEffect(() => {
-    inputRef.current.focus();
+    token && inputRef.current.focus();
   }, []);
 
   const quill = useRef();
@@ -88,7 +88,7 @@ const WritePage = ({ openBlogViewModal }) => {
     setFiles(file);
     setUrl(window.URL.createObjectURL(file));
   }
-
+if(token){
   return (
     <div className="editor container flex flex-center-center">
       <form onSubmit={handleSubmit}>
@@ -189,6 +189,11 @@ const WritePage = ({ openBlogViewModal }) => {
       </form>
     </div>
   );
+}
+return (
+  <Home/>
+)
+ 
 };
 
 export default WritePage;

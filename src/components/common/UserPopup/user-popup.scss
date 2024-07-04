@@ -27,13 +27,12 @@
     .sign-out-box {
       margin: 16px 24px;
       cursor: pointer;
-      button {
-        padding: 0;
-        color: var(--secondary-color);
+      .logout-link {
+        display: inline-flex;
         margin-bottom: 10px;
       }
     }
-    .sign-out-box:hover button {
+    .sign-out-box:hover .logout-link {
       color: var(--primary-color) !important;
     }
   }

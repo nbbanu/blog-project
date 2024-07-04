@@ -3,6 +3,7 @@
     display: grid;
     grid-template-columns: 65% 30%;
     gap: 50px;
+
     @include responsive(phone) {
       & {
         padding: 0 !important;
@@ -12,6 +13,32 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
+
+      .mini-card{
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        &-number{
+          display: none;
+        }
+        @include responsive(phone) {
+          & {
+            padding: 10px;
+          }
+        }
+        @include responsive(phone) {
+          .mini-blogcard-img {
+            width: 100px !important;
+            height: 70px !important;
+          }
+        }
+      }
+    }
+    &-right{
+      position: sticky;
+      position: -webkit-sticky;
+      height: 600px;
+      top: 50px;
     }
     .recommended-topics {
       @include responsive(phone) {

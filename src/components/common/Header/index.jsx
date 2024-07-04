@@ -41,7 +41,7 @@ const Header = () => {
           <div className="loggedin-header-left flex flex-center">
             <Link to="/" className="medium-main-logo link">
               <img
-                src="medium-icon.svg"
+                src="/medium-icon.svg"
                 className="img-cover"
                 alt="medium-logo"
                 style={{ width: 45, height: 25 }}
@@ -94,7 +94,7 @@ const Header = () => {
         <div className="container flex flex-center-between">
           <Link to="/" className="medium-main-logo link">
             <img
-              src="medium-logo.svg"
+              src={"/medium-logo.svg"}
               className="img-cover"
               alt="medium-logo"
               style={token ? { width: 44 } : { width: 160, height: 24 }}

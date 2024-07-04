@@ -17,7 +17,7 @@ const Trending = () => {
       <div className="container">
         <div className="trending-header flex flex-center">
           <img
-            src="trend-graph.png"
+            src="/trend-graph.png"
             alt="trend-graphics"
             style={{ width: "20px", height: "20px", objectFit: "cover" }}
           />

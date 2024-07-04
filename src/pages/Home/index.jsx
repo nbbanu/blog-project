@@ -10,16 +10,18 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useEffect, useState } from "react";
 import { getAllBlogs } from "../../service";
 import MiniBlogCard from "../../components/common/MiniBlogCard";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const Home = () => {
   useEffect(() => {
     loadAllBlogsToUI();
   }, []);
 
-  const [showAllBlogs, setShowAllBlogs] = useState([]);
+  const [blogs, setBlogs] = useState([]);
   const loadAllBlogsToUI = async () => {
     const data = await getAllBlogs();
-    setShowAllBlogs(data);
+    setBlogs(data);
   };
   const { token } = useAuth();
   if (token) {
@@ -28,23 +30,78 @@ const Home = () => {
         <div className="container flex">
           <div className="loggedin-home-left">
             <HorizantalScrobbleBar />
-            {showAllBlogs.map((blog) => (
-              <BlogCard
-                key={blog.id}
-                bloggerName={blog.user.name}
-                title={blog.title}
-                infoText={blog.description}
-                releaseDate={blog.created_at.slice(0, 10)}
-                profileImg="https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
-                blogImage={blog.image}
-                categoryLink={"Micro Frontends"}
-                dot={<span className="dot light-text"></span>}
-                readingTime={"4 min read"}
-                minusIcon={
-                  <i className="fa-solid fa-minus minus light-text flex flex-center-center"></i>
-                }
-              />
-            ))}
+            {blogs.length === 0
+              ? [1, 2, 3, 4, 5].map((item) => (
+                  <div
+                    key={item}
+                    className="flex flex-between"
+                    style={{ marginBottom: 25, marginTop: 50 }}
+                  >
+                    <div style={{ width: "100%" }}>
+                      <div
+                        className="flex flex-center"
+                        style={{ marginBottom: 15 }}
+                      >
+                        <Skeleton circle width={24} height={24} />
+                        <Skeleton width={100} style={{ marginLeft: 7 }} />
+                        <Skeleton width={100} style={{ marginLeft: 7 }} />
+                      </div>
+                      <div>
+                        <Skeleton width={200} style={{ marginBottom: 10 }} />
+                        <Skeleton width={300} />
+                        <Skeleton width={300} />
+                      </div>
+                      <div
+                        className="bottom flex"
+                        style={{ marginTop: 15, alignItems: "flex-end" }}
+                      >
+                        <Skeleton width={80} height={25} borderRadius={25} />
+                        <Skeleton width={70} style={{ marginLeft: 15 }} />
+                      </div>
+                    </div>
+                    <div className="right" style={{ alignSelf: "flex-end" }}>
+                      <div
+                        className="flex"
+                        style={{ marginRight: 15, alignItems: "flex-end" }}
+                      >
+                        <Skeleton
+                          width={25}
+                          height={25}
+                          style={{ marginRight: 10 }}
+                        />
+                        <Skeleton
+                          width={25}
+                          height={25}
+                          style={{ marginRight: 10 }}
+                          borderRadius={"50%"}
+                        />
+                        <Skeleton
+                          width={25}
+                          height={25}
+                          style={{ marginRight: 25 }}
+                        />
+                        <Skeleton width={120} height={120} />
+                      </div>
+                    </div>
+                  </div>
+                ))
+              : blogs.map((blog) => (
+                  <BlogCard
+                    key={blog.id}
+                    bloggerName={blog.user.name}
+                    title={blog.title}
+                    infoText={blog.description}
+                    releaseDate={blog.created_at.slice(0, 10)}
+                    profileImg="https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+                    blogImage={blog.image}
+                    categoryLink={"Micro Frontends"}
+                    dot={<span className="dot light-text"></span>}
+                    readingTime={"4 min read"}
+                    minusIcon={
+                      <i className="fa-solid fa-minus minus light-text flex flex-center-center"></i>
+                    }
+                  />
+                ))}
           </div>
           <div className="vertical-line"></div>
           <div className="loggedin-home-right">
@@ -84,7 +141,9 @@ const Home = () => {
                     Artificial Intelligence
                   </Link>
                 </div>
-                <Link to="explore-topics" className="green-text link">Daha Fazla Konu Görün</Link>
+                <Link to="explore-topics" className="green-text link">
+                  Daha Fazla Konu Görün
+                </Link>
               </div>
               <div className="recommended-authors flex flex-column">
                 <h2 className="loggedin-home-right-title primary-text fs-16">
@@ -147,19 +206,27 @@ const Home = () => {
       <div className="light-line"></div>
       <div className="home-bottom container">
         <div className="home-bottom-left">
-          {showAllBlogs.map((blog) => (
+          {blogs.map((blog) => (
             <MiniBlogCard
               key={blog.id}
               bloggerName={blog.user.name}
               title={blog.title}
-              infoText={blog.description}
+              description={blog.description}
               releaseDate={blog.created_at.slice(0, 10)}
               profileImg="https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
-              blogImage={blog.image}
+              miniCardImg={
+                <img
+                  src={blog.image}
+                  alt=""
+                  className="mini-blogcard-img"
+                  style={{ width: 200, height: 134 }}
+                />
+              }
               readingTime={"4 min read"}
             />
           ))}
         </div>
+      
         <div className="home-bottom-right">
           <div className="recommended-topics">
             <h2 className="home-bottom-right-title primary-text fs-16">
@@ -173,9 +240,13 @@ const Home = () => {
               <Link className="link gray-link">UX</Link>
               <Link className="link gray-link">Artificial Intelligence</Link>
             </div>
-            <Link to="explore-topics" className="green-text link">Daha Fazla Konu Görün</Link>
+            <Link to="explore-topics" className="green-text link">
+              Daha Fazla Konu Görün
+            </Link>
           </div>
         </div>
+      
+      
       </div>
     </main>
   );

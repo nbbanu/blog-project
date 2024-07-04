@@ -1,7 +1,7 @@
 const ProfilePageAbout = () => {
     return (
-        <div>
-            about
+        <div className="about">
+            <h1>about</h1>
         </div>
     )
 }

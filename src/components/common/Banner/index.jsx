@@ -25,7 +25,7 @@ const Banner = () => {
           <Button handleClick={handleClick} title="Okumaya Başla !" size="lg" />
         </div>
         <div className="banner-right display-none">
-          <img src="banner-right.png" className="img-cover" alt="" />
+          <img src="/banner-right.png" className="img-cover" alt="" />
         </div>
       </div>
     </section>

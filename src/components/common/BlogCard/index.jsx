@@ -14,7 +14,7 @@ const blogCard = ({
 }) => {
   return (
     <div>
-      <div className="blog-card">
+      <div className="blog-card flex flex-center">
         <div className="blog-card-left">
           <div className="blog-card-left-header flex flex-center">
             <img

@@ -1,7 +1,7 @@
 .horizantal-scrobble-bar {
   background-color: #fff;
   height: 55px;
-  position: fixed;
+  position: sticky;
   top: 0px;
   border-bottom: 1px solid var(--light-border-color);
   .scrobble-area {

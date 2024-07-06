@@ -3,7 +3,7 @@
     display: grid;
     grid-template-columns: 65% 30%;
     gap: 50px;
-
+    position: relative;
     @include responsive(phone) {
       & {
         padding: 0 !important;
@@ -36,9 +36,8 @@
     }
     &-right{
       position: sticky;
-      position: -webkit-sticky;
-      height: 600px;
       top: 50px;
+      height: 600px;
     }
     .recommended-topics {
       @include responsive(phone) {

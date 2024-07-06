@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const UserPopup = ({ clickItem }) => {
   const [showPopup, setShowPopup] = useState(false);
   const { setToken, email } = useAuth();
-  const userEmail = "@" + email.split("@")[0];
+  const userEmail = "@" + email?.split("@")[0];
 
   const openPopup = () => {
     setShowPopup(!showPopup);

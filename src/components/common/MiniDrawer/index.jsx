@@ -1,5 +1,5 @@
 import * as React from "react";
-import { styled, useTheme } from "@mui/material/styles";
+import {styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
@@ -14,10 +14,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import CategoryIcon from "@mui/icons-material/CategoryOutlined";
-import HomeIcon from "@mui/icons-material/Home";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -149,13 +146,12 @@ export default function MiniDrawer() {
         </DrawerHeader>
         <Divider />
         <List>
-          {menuItems.map((item) => (
-            <Link to={item.path} className="link">
+          {menuItems.map((item, index) => (
+            <Link to={item.path} className="link" key={index}>
               <ListItem
                 className="list-item"
                 disablePadding
                 sx={{ display: "block", color: "white" }}
-                onClick={() => console.log(item)}
               >
                 <ListItemButton
                   sx={{

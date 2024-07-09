@@ -1,8 +1,9 @@
+import CustomizedTable from "./TopicsTable";
+
 const CategoriesPage = () => {
   return (
-    <div className="container">
-      burası kategoriler
-      <div></div>
+    <div className="categories">
+      <CustomizedTable/>
     </div>
   );
 };

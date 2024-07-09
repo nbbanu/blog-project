@@ -56,7 +56,7 @@ const blogCard = ({
           </div>
         </div>
         <div className="blog-image-box" style={{ width: 112, height: 112 }}>
-          <img src={blogImage} alt="blog-image" className="img-cover " />
+          <img src={blogImage} alt="blog-image" className="img-cover" />
         </div>
       </div>
       <div className="light-line"></div>

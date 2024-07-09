@@ -13,6 +13,8 @@ import ProfilePageHome from "./pages/Profile/paths/ProfilePageHome";
 import Topics from "./pages/Topics";
 import Search from "./pages/Search";
 import Admin from "./pages/Admin";
+import CategoriesPage from "./pages/Admin/CategoriesPage";
+import HomePage from "./pages/Admin/HomePage";
 
 
 function App() {
@@ -34,7 +36,10 @@ function App() {
               </Route>
               <Route path="explore-topics" element={<Topics/>}/>
               <Route path="search" element={<Search/>}/>
-              <Route path="admin" element={<Admin/>}/>
+              <Route path="admin" element={<Admin/>}>
+                <Route path="" element={<HomePage/>}/>
+                <Route path="categories" element={<CategoriesPage/>}/>
+              </Route>
             </Routes>
             
           </CreateBlogProvider>

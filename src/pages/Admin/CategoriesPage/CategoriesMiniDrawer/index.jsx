@@ -15,7 +15,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { useState } from "react";
 
 const drawerWidth = 240;
@@ -27,7 +27,7 @@ const openedMixin = (theme) => ({
     duration: theme.transitions.duration.enteringScreen,
   }),
   overflowX: "hidden",
-  backgroundColor: "#ffc016",
+  backgroundColor: "#242424",
   borderRight: "none",
 });
 
@@ -37,7 +37,7 @@ const closedMixin = (theme) => ({
     duration: theme.transitions.duration.leavingScreen,
   }),
   overflowX: "hidden",
-  backgroundColor: "#ffc016",
+  backgroundColor: "#242424",
   width: `calc(${theme.spacing(7)} + 1px)`,
   [theme.breakpoints.up("sm")]: {
     width: `calc(${theme.spacing(8)} + 1px)`,
@@ -119,7 +119,7 @@ export default function MiniDrawer() {
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
-        <Toolbar sx={{ backgroundColor: "#ffc016" }}>
+        <Toolbar sx={{ backgroundColor: "#191919" }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -130,13 +130,13 @@ export default function MiniDrawer() {
               ...(open && { display: "none" }),
             }}
           >
-            <MenuIcon />
+            <MenuIcon/>
           </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
-        <DrawerHeader sx={{ backgroundColor: "#ffc016" }}>
-          <IconButton onClick={handleDrawerClose}>
+        <DrawerHeader sx={{ backgroundColor: "#191919" }}>
+          <IconButton onClick={handleDrawerClose} sx={{color:"white"}}>
             {theme.direction === "rtl" ? (
               <ChevronRightIcon />
             ) : (

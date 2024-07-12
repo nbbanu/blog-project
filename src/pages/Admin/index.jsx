@@ -1,4 +1,4 @@
-import MiniDrawer from "../../components/common/MiniDrawer";
+import MiniDrawer from "./CategoriesPage/CategoriesMiniDrawer";
 
 const Admin = () => {
   return (

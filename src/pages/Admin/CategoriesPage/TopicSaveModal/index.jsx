@@ -5,18 +5,35 @@ import { styled, css } from "@mui/system";
 import { Modal as BaseModal } from "@mui/base/Modal";
 import { EditNoteOutlined } from "@mui/icons-material";
 import BasicFormControl from "../TopicSaveForm";
-import { IconButton } from "@mui/material";
+import { Fab, IconButton } from "@mui/material";
+import { useState } from "react";
+import AddIcon from "@mui/icons-material/Add";
 
-export default function ModalUnstyled() {
+export default function ModalUnstyled({ item }) {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  const [selectedItem, setSelectedItem] = useState([]);
+
+  const handleOpen = (id) => {
+    setOpen(true);
+    if (item?.id == id) {
+      setSelectedItem(item);
+    }
+  };
+
   const handleClose = () => setOpen(false);
 
   return (
     <div>
-      <IconButton>
-        <EditNoteOutlined onClick={handleOpen} />
-      </IconButton>
+      {item ? (
+        <IconButton onClick={() => handleOpen(item?.id)}>
+          <EditNoteOutlined />
+        </IconButton>
+      ) : (
+        <Fab color="success" aria-label="add" onClick={() => handleOpen()}>
+          <AddIcon />
+        </Fab>
+      )}
+
       <Modal
         aria-labelledby="unstyled-modal-title"
         aria-describedby="unstyled-modal-description"
@@ -28,7 +45,7 @@ export default function ModalUnstyled() {
           {/* <h2 id="unstyled-modal-title" className="modal-title">
             Düzenle
           </h2> */}
-          <BasicFormControl />
+          <BasicFormControl selectedItem={selectedItem} />
         </ModalContent>
       </Modal>
     </div>
@@ -80,6 +97,7 @@ const Modal = styled(BaseModal)`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 30px;
 `;
 
 const StyledBackdrop = styled(Backdrop)`

@@ -112,33 +112,33 @@ const Topics = () => {
               </div>
             ))}
           </div>
-        ) : (
-          allCategories.map((category, catIndex) => (
-            <div className="topics-lists">
-              <ul className="category-list" key={catIndex}>
-                <Link className="link category-link primary-text fs-24">
-                  {category.title}
-                  {allSubcategories.map((subcategory, subIndex) => (
-                    <ul className="subcategory-list" key={subIndex}>
-                      <Link className="link subcategory-link primary-text fs-16">
-                        {subcategory.title}
-                        {allTopics.map((topic, index) => (
-                          <ul className="topic-list" key={index}>
-                            <Link className="link topic-link light-text fs-16">
-                              {topic.title}
-                            </Link>
-                            {/* <Link className="link topic-link more-link light-text fs-16">
-                      More
-                    </Link> */}
-                          </ul>
-                        ))}
-                      </Link>
-                    </ul>
-                  ))}
-                </Link>
-              </ul>
-            </div>
-          ))
+        ) : ( ""
+          // allCategories.map((category, catIndex) => (
+          //   <div className="topics-lists">
+          //     <ul className="category-list" key={catIndex}>
+          //       <Link className="link category-link primary-text fs-24">
+          //         {category.title}
+          //         {allSubcategories.map((subcategory, subIndex) => (
+          //           <ul className="subcategory-list" key={subIndex}>
+          //             <Link className="link subcategory-link primary-text fs-16">
+          //               {subcategory.title}
+          //               {allTopics.map((topic, index) => (
+          //                 <ul className="topic-list" key={index}>
+          //                   <Link className="link topic-link light-text fs-16">
+          //                     {topic.title}
+          //                   </Link>
+          //                   {/* <Link className="link topic-link more-link light-text fs-16">
+          //             More
+          //           </Link> */}
+          //                 </ul>
+          //               ))}
+          //             </Link>
+          //           </ul>
+          //         ))}
+          //       </Link>
+          //     </ul>
+          //   </div>
+          // ))
         )}
       </div>
     );

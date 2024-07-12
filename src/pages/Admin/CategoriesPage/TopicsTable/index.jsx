@@ -9,7 +9,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { getAllTopics } from "../../../../service";
 import ModalUnstyled from "../TopicSaveModal";
-import { LinearProgress } from "@mui/material";
+import { IconButton, LinearProgress } from "@mui/material";
+import { DeleteOutline } from "@mui/icons-material";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -50,9 +51,9 @@ export default function CustomizedTables() {
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow sx={{ width: "100%" }}>
-            <StyledTableCell sx={{}}>Başlık</StyledTableCell>
-            <StyledTableCell sx={{}}>Ana Kategori</StyledTableCell>
-            <StyledTableCell sx={{}}>Üst Kategori</StyledTableCell>
+            <StyledTableCell >Başlık</StyledTableCell>
+            <StyledTableCell >Ana Kategori</StyledTableCell>
+            <StyledTableCell >Üst Kategori</StyledTableCell>
             <StyledTableCell></StyledTableCell>
           </TableRow>
         </TableHead>
@@ -64,7 +65,6 @@ export default function CustomizedTables() {
             </TableCell>
           </TableRow>
         )}
-
         <TableBody>
           {topics.map((row, index) => (
             <StyledTableRow key={index}>
@@ -75,8 +75,13 @@ export default function CustomizedTables() {
               <StyledTableCell align="left">
                 {row?.subcategory?.title || ""}
               </StyledTableCell>
-              <StyledTableCell align="left">
-                <ModalUnstyled />
+              <StyledTableCell
+                align="left"
+                sx={{ display: "flex", alignItems: "center", gap: 3 }}>
+                <ModalUnstyled item={row}/>
+                <IconButton>
+                  <DeleteOutline />
+                </IconButton>
               </StyledTableCell>
             </StyledTableRow>
           ))}

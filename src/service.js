@@ -61,11 +61,23 @@ export const getAllCategories = async () => {
   const data = await get(url);
   return data?.data;
 };
+export const getAllCategoryTopics = async () => {
+  const url = "category/topics";
+  const data = await get(url);
+  return data?.data;
+};
+
 export const getAllSubcategories = async () => {
   const url = "subcategory";
   const data = await get(url);
   return data?.data;
 };
+export const getSubcategoryById = async (categoryId) => {
+  const url = `subcategory/${categoryId}`;
+  const data = await get(url,categoryId);
+  return data?.data;
+};
+
 export const getAllTopics = async (token) => {
   const url = "topics";
   const data = await get(url, token);

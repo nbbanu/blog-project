@@ -1,87 +1,133 @@
 import * as React from "react";
 import { FormControl } from "@mui/base/FormControl";
-import { Autocomplete, Button, Divider, TextField } from "@mui/material";
+import {
+  Autocomplete,
+  Button,
+  Divider,
+  FormLabel,
+  TextField,
+} from "@mui/material";
 import { useState } from "react";
-import { getAllCategories, getSubcategoryById } from "../../../../service";
+import {
+  createTopic,
+  getAllCategories,
+  getSubcategoryById,
+} from "../../../../service";
 import Skeleton from "@mui/material/Skeleton";
 import Box from "@mui/material/Box";
+import Swal from "sweetalert2";
 
-export default function BasicFormControl({ selectedItem }) {
-  React.useEffect(() => {
-    loadAllCategories();
-    loadAllSubcategories();
-  }, []);
-
+export default function BasicFormControl({ selectedItem, setOpen }) {
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
+  const [categoryValue, setCategoryValue] = useState(null);
+  const [subcategoryValue, setSubcategoryValue] = useState(null);
+  const [title, setTitle] = useState("");
+  const [error, setError] = useState("");
+
+  React.useEffect(() => {
+    loadAllCategories();
+  }, []);
 
   const loadAllCategories = async () => {
     const data = await getAllCategories();
     setCategories(data);
   };
 
-  const loadAllSubcategories = async () => {
-    let id = selectedItem?.category?.id;
-    const data = await getSubcategoryById(id);
+  const loadSubcategoriesById = async (_id) => {
+    const data = await getSubcategoryById(_id);
     setSubcategories(data);
   };
 
-  return (
-    <FormControl>
-      {categories?.length > 0 ? (
-        <>
-          <TextField
-            id="outlined-basic"
-            label="Başlık"
-            variant="outlined"
-            sx={{ width: 400, marginTop: 3 }}
-            value={selectedItem?.title}
-          />
-          <Autocomplete
-            id="combo-box-demo"
-            freeSolo
-            options={categories}
-            getOptionLabel={(option) => option?.title}
-            value={categories?.[0] || null}
-            // onChange={}
-            sx={{ width: 400, marginTop: 3 }}
-            renderInput={(params) => (
-              <TextField {...params} label="Ana Kategori" />
-            )}
-          />
-          {subcategories?.length > 0 && (
-            <Autocomplete
-              freeSolo
-              // disablePortal
-              id="combo-box-demo"
-              options={subcategories}
-              getOptionLabel={(option) => option?.title}
-              value={subcategories?.[0] || null}
-              sx={{ width: 400, marginTop: 3 }}
-              renderInput={(params) => (
-                <TextField {...params} label="Üst Kategori" />
-              )}
-            />
-          )}
+  React.useState(() => {
+    if (selectedItem) {
+      setTitle(selectedItem?.title);
+      setCategoryValue(selectedItem?.category);
+      setSubcategoryValue(selectedItem?.subcategory);
+      loadSubcategoriesById(selectedItem?.category?.id);
+    }
+  }, []);
 
-          <Divider style={{ marginTop: 50 }}>
-            <Button color="success" variant="contained">
-              KAYDET
-            </Button>
-          </Divider>
-        </>
-      ) : (
-        <Box sx={{ width: 400, marginTop: 1 }}>
-          <Skeleton sx={{ marginBottom: 1, height: 80 }} animation="wave" />
-          <Skeleton sx={{ marginBottom: 1, height: 80 }} animation="wave" />
-          <Skeleton sx={{ marginBottom: 1, height: 80 }} animation="wave" />
-          <Skeleton
-            sx={{ marginBottom: 1, height: 70, width: 150, margin: "0 auto" }}
-            animation="wave"
-          />
-        </Box>
-      )}
-    </FormControl>
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = {
+      title: title,
+      subcategoryId: subcategoryValue?.id || null,
+      categoryId: categoryValue?.id || null,
+    };
+    
+    if (!selectedItem) {
+      createTopic(formData)
+        .then((res) => {
+          Swal.fire({
+            title: "Başlık Başarıyla Eklendi",
+            color: "#242424",
+            icon: "success",
+            iconColor: "#ffc016",
+          });
+          setOpen(false);
+        })
+        .catch((err) => setError(err.message));
+    }else{
+      
+    }
+  };
+
+  return categories?.length > 0 ? (
+    <form onSubmit={handleSubmit}>
+      <TextField
+        id="outlined-basic"
+        variant="outlined"
+        label="Başlık"
+        sx={{ width: 400, marginTop: 3 }}
+        required
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <Autocomplete
+        id="combo-box-demo"
+        freeSolo
+        options={categories}
+        getOptionLabel={(option) => option?.title}
+        value={categoryValue}
+        onChange={(_, newCategoryValue) => {
+          setSubcategoryValue("");
+          setCategoryValue(newCategoryValue);
+          loadSubcategoriesById(newCategoryValue?.id);
+        }}
+        sx={{ width: 400, marginTop: 3 }}
+        renderInput={(params) => <TextField {...params} label="Ana Kategori" />}
+      />
+      <Autocomplete
+        freeSolo
+        id="combo-box-demo"
+        options={subcategories}
+        getOptionLabel={(option) => (option?.title ? option?.title : "")}
+        value={subcategoryValue}
+        onChange={(_, newSubcategoryValue) =>
+          setSubcategoryValue(newSubcategoryValue)
+        }
+        sx={{ width: 400, marginTop: 3 }}
+        renderInput={(params) => <TextField {...params} label="Üst Kategori" />}
+      />
+
+      <Divider style={{ marginTop: 50 }}>
+        <Button type="submit" color="success" variant="contained">
+          KAYDET
+        </Button>
+      </Divider>
+    </form>
+  ) : (
+    <Box sx={{ width: 400, marginTop: 1 }}>
+      <Skeleton sx={{ marginBottom: 1, height: 80 }} animation="wave" />
+      <Skeleton sx={{ marginBottom: 1, height: 80 }} animation="wave" />
+      <Skeleton sx={{ marginBottom: 1, height: 80 }} animation="wave" />
+      <Skeleton
+        sx={{ marginBottom: 1, height: 70, width: 150, margin: "0 auto" }}
+        animation="wave"
+      />
+    </Box>
   );
 }
 

@@ -45,7 +45,7 @@ export default function ModalUnstyled({ item }) {
           {/* <h2 id="unstyled-modal-title" className="modal-title">
             Düzenle
           </h2> */}
-          <BasicFormControl selectedItem={selectedItem} />
+          <BasicFormControl selectedItem={selectedItem} setOpen={setOpen}/>
         </ModalContent>
       </Modal>
     </div>

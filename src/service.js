@@ -98,3 +98,29 @@ export const getAllTopics = async (token) => {
 
 
 // *************** PUT ***************
+const put = async (url, body) => {
+  try {
+    const res = await axiosInstance.put(url, body);
+    return res?.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+export const updateTopics = async (data) => {
+  return await put("topics", data);
+} 
+
+
+// *************** DELETE ***************
+const deleteRequest = async (url,id) => {
+  try{
+    const res = axiosInstance.delete(url,id);
+    return res?.data;
+  }catch(error){
+    throw error.response.data;
+  }
+}
+
+export const deleteTopic = async(id) =>{
+  return await deleteRequest(`topics/${id}`);
+}

@@ -1,17 +1,12 @@
 import * as React from "react";
-import { FormControl } from "@mui/base/FormControl";
-import {
-  Autocomplete,
-  Button,
-  Divider,
-  FormLabel,
-  TextField,
-} from "@mui/material";
+import { Autocomplete, Button, Divider, TextField } from "@mui/material";
 import { useState } from "react";
 import {
   createTopic,
   getAllCategories,
+  getAllTopics,
   getSubcategoryById,
+  updateTopics,
 } from "../../../../service";
 import Skeleton from "@mui/material/Skeleton";
 import Box from "@mui/material/Box";
@@ -50,27 +45,42 @@ export default function BasicFormControl({ selectedItem, setOpen }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const formData = {
       title: title,
       subcategoryId: subcategoryValue?.id || null,
       categoryId: categoryValue?.id || null,
     };
-    
+    const newData = {
+      id: selectedItem?.id,
+      title: title,
+      subcategoryId: subcategoryValue?.id || null,
+      categoryId: categoryValue?.id || null,
+    };
+
     if (!selectedItem) {
       createTopic(formData)
         .then((res) => {
+          setOpen(false);
           Swal.fire({
-            title: "Başlık Başarıyla Eklendi",
+            title: "Konu Başarıyla Eklendi",
             color: "#242424",
             icon: "success",
             iconColor: "#ffc016",
           });
-          setOpen(false);
         })
-        .catch((err) => setError(err.message));
-    }else{
-      
+        .catch((err) => setError(err.statusCode));
+    } else {
+      updateTopics(newData)
+        .then((res) => {
+          setOpen(false);
+          Swal.fire({
+            title: "Konu Başarıyla Değiştirildi",
+            color: "#242424",
+            icon: "success",
+            iconColor: "#ffc016",
+          });
+        })
+        .catch((err) => setError(err.statusCode));
     }
   };
 
@@ -83,6 +93,8 @@ export default function BasicFormControl({ selectedItem, setOpen }) {
         sx={{ width: 400, marginTop: 3 }}
         required
         value={title}
+        helperText={error == 400 && "Başlık ile Kategori aynı olamaz!"}
+        // FormHelperTextProps={}
         onChange={(e) => setTitle(e.target.value)}
       />
       <Autocomplete
@@ -111,7 +123,6 @@ export default function BasicFormControl({ selectedItem, setOpen }) {
         sx={{ width: 400, marginTop: 3 }}
         renderInput={(params) => <TextField {...params} label="Üst Kategori" />}
       />
-
       <Divider style={{ marginTop: 50 }}>
         <Button type="submit" color="success" variant="contained">
           KAYDET

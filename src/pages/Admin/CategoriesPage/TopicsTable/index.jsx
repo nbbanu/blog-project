@@ -7,7 +7,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { getAllTopics } from "../../../../service";
+import { deleteTopic, getAllTopics } from "../../../../service";
 import ModalUnstyled from "../TopicSaveModal";
 import { IconButton, LinearProgress } from "@mui/material";
 import { DeleteOutline } from "@mui/icons-material";
@@ -38,6 +38,7 @@ export default function CustomizedTables() {
   }, []);
   const [topics, setTopics] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState("");
 
   const loadAllTopicsToUI = async () => {
     setLoading(true);
@@ -45,6 +46,25 @@ export default function CustomizedTables() {
     setTopics(data);
     setLoading(false);
   };
+
+  const deleteSelectedTopic = (row) => {
+    const id = row.id;
+    // const newTopicList = topics.filter((topic) => topic.id !== id);
+    // setTopics(newTopicList);
+
+    deleteTopic(id)
+    .then((res) => {
+      Swal.fire({
+        title: "Konu Başarıyla Silindi",
+        color: "#242424",
+        icon: "success",
+        iconColor: "#ffc016",
+      });
+    })
+    .catch((err) => setError(err.message));
+
+    loadAllTopicsToUI()
+  }
 
   return (
     <TableContainer component={Paper}>
@@ -79,7 +99,7 @@ export default function CustomizedTables() {
                 align="left"
                 sx={{ display: "flex", alignItems: "center", gap: 3 }}>
                 <ModalUnstyled item={row}/>
-                <IconButton>
+                <IconButton onClick={() => deleteSelectedTopic(row)}>
                   <DeleteOutline />
                 </IconButton>
               </StyledTableCell>

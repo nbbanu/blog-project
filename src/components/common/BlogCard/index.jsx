@@ -11,7 +11,8 @@ const blogCard = ({
   minusIcon,
   dot,
   blogImage,
-}) => {
+  openBlogDetail,
+  openBloggerProfile}) => {
   return (
     <div>
       <div className="blog-card flex flex-center">
@@ -23,16 +24,16 @@ const blogCard = ({
               alt="avatar"
               style={{ width: 24, height: 24 }}
             />
-            <span className="blogger-name fs-14 primary-text">
+            <span className="blogger-name fs-14 primary-text" onClick={openBloggerProfile}>
               {bloggerName}
             </span>
             {dot}
 
-            <span className="blog-card-release-date fs-14 light-text">
+            <span className="blog-card-left-header-release-date fs-14 light-text">
               {releaseDate}
             </span>
           </div>
-          <div className="blog-card-title flex">
+          <div className="blog-card-left-title flex" onClick={openBlogDetail}>
             <div>
               <h2 className="blog-card-title-h2 fs-20 primary-text">{title}</h2>
               <p className="blog-card-info-text fs-16 primary-text line-clamp">
@@ -55,7 +56,7 @@ const blogCard = ({
             </div>
           </div>
         </div>
-        <div className="blog-image-box" style={{ width: 112, height: 112 }}>
+        <div className="blog-image-box" style={{ width: 112, height: 112 }} onClick={openBlogDetail}>
           <img src={blogImage} alt="blog-image" className="img-cover" />
         </div>
       </div>

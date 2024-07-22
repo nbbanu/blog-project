@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   getAllCategories,
+  getAllCategoryTopics,
   getAllSubcategories,
   getAllTopics,
 } from "../../service";
@@ -14,25 +15,13 @@ import "react-loading-skeleton/dist/skeleton.css";
 const Topics = () => {
   const { token } = useAuth();
   useEffect(() => {
-    loadAllCategoriesToUI();
-    loadAllSubcategoriesToUI();
     loadAllTopicsToUI();
   }, []);
 
-  const [allCategories, setAllCategories] = useState([]);
-  const [allSubcategories, setAllSubategories] = useState([]);
   const [allTopics, setAllTopics] = useState([]);
 
-  const loadAllCategoriesToUI = async () => {
-    const data = await getAllCategories();
-    setAllCategories(data);
-  };
-  const loadAllSubcategoriesToUI = async () => {
-    const data = await getAllSubcategories();
-    setAllSubategories(data);
-  };
   const loadAllTopicsToUI = async () => {
-    const data = await getAllTopics();
+    const data = await getAllCategoryTopics();
     setAllTopics(data);
   };
   if (token) {
@@ -43,9 +32,18 @@ const Topics = () => {
         </h2>
         <SearchInput title={"Tüm Konuları Ara"} />
         <div className="light-line"></div>
-        {allCategories.length === 0 ? (
-          <div className="flex flex-between" style={{ width: "100%" }}>
-            {[1, 2, 3].map((item) => (
+        {allTopics.length === 0 ? (
+          <div
+            className=""
+            style={{
+              width: "100%",
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              columnGap: 50,
+              rowGap: 50,
+            }}
+          >
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => (
               <div key={item} style={{ width: "100%" }}>
                 <ul>
                   <Link className="link">
@@ -112,33 +110,35 @@ const Topics = () => {
               </div>
             ))}
           </div>
-        ) : ( ""
-          // allCategories.map((category, catIndex) => (
-          //   <div className="topics-lists">
-          //     <ul className="category-list" key={catIndex}>
-          //       <Link className="link category-link primary-text fs-24">
-          //         {category.title}
-          //         {allSubcategories.map((subcategory, subIndex) => (
-          //           <ul className="subcategory-list" key={subIndex}>
-          //             <Link className="link subcategory-link primary-text fs-16">
-          //               {subcategory.title}
-          //               {allTopics.map((topic, index) => (
-          //                 <ul className="topic-list" key={index}>
-          //                   <Link className="link topic-link light-text fs-16">
-          //                     {topic.title}
-          //                   </Link>
-          //                   {/* <Link className="link topic-link more-link light-text fs-16">
-          //             More
-          //           </Link> */}
-          //                 </ul>
-          //               ))}
-          //             </Link>
-          //           </ul>
-          //         ))}
-          //       </Link>
-          //     </ul>
-          //   </div>
-          // ))
+        ) : (
+          <div className="all-topics">
+            {allTopics.map((category, id) => (
+              <div className="topics-list">
+                <ul className="category-list">
+                  <Link className="link category-link primary-text fs-24">
+                    {category?.title}
+                    <ul className="subcategory-list">
+                      {category?.subcategories?.map((subcategory) => (
+                        <Link className="link subcategory-link primary-text fs-16">
+                          {subcategory.title}
+                          <ul className="topic-list">
+                            {subcategory.topics?.map((topic) => (
+                              <Link className="link topic-link light-text fs-16">
+                                {topic.title}
+                              </Link>
+                            ))}
+                            {/* <Link className="link topic-link more-link light-text fs-16">
+                              More
+                            </Link> */}
+                          </ul>
+                        </Link>
+                      ))}
+                    </ul>
+                  </Link>
+                </ul>
+              </div>
+            ))}
+          </div>
         )}
       </div>
     );

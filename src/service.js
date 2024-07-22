@@ -61,6 +61,12 @@ export const getAllBlogs = async () => {
   return data?.data;
 };
 
+export const getAllBlogsById = async (topicId) => {
+  const url = `blog/${topicId}`;
+  const data  = await get(url,topicId);
+  return data?.data;
+}
+
 export const getAllCategories = async () => {
   const url = "category";
   const data = await get(url);
@@ -88,14 +94,6 @@ export const getAllTopics = async (token) => {
   const data = await get(url, token);
   return data?.data;
 };
-
-// export const getAllBlogsById = async (topicId) => {
-//   const url = `blog/get-all/${topicId}`;
-//   const data  = await get(url,topicId);
-//   return data?.data;
-// }
-
-
 
 // *************** PUT ***************
 const put = async (url, body) => {

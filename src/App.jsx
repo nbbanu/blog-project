@@ -15,6 +15,7 @@ import Search from "./pages/Search";
 import Admin from "./pages/Admin";
 import CategoriesPage from "./pages/Admin/CategoriesPage";
 import HomePage from "./pages/Admin/HomePage";
+import BlogDetailPage from "./pages/BlogDetail";
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
                 <Route path="" element={<HomePage/>}/>
                 <Route path="categories" element={<CategoriesPage/>}/>
               </Route>
+              <Route path="detail/:blogTitle/:id" element={<BlogDetailPage/>}/>
             </Routes>
             
           </CreateBlogProvider>

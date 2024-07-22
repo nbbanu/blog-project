@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Banner from "../../components/common/Banner";
 import BlogCard from "../../components/common/BlogCard";
 import FollowPersonCard from "../../components/common/FollowPersonCard";
@@ -23,7 +23,19 @@ const Home = () => {
     const data = await getAllBlogs();
     setBlogs(data);
   };
+
+  const { email } = useAuth();
+  const userEmail = "@" + email?.split("@")[0];
   const { token } = useAuth();
+  const navigate = useNavigate();
+
+  const openBlogDetail = (blogTitle, blogId) => {
+    navigate(`detail/${blogTitle}/${blogId}`);
+  };
+
+  const openBloggerProfile = () => {
+    navigate(`/${userEmail}/main`);
+  };
   if (token) {
     return (
       <div className=" loggedin-home">
@@ -86,21 +98,23 @@ const Home = () => {
                   </div>
                 ))
               : blogs.map((blog) => (
-                  <BlogCard
-                    key={blog.id}
-                    bloggerName={blog.user.name}
-                    title={blog.title}
-                    infoText={blog.description}
-                    releaseDate={blog.created_at.slice(0, 10)}
-                    profileImg="https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
-                    blogImage={blog.image}
-                    categoryLink={"Micro Frontends"}
-                    dot={<span className="dot light-text"></span>}
-                    readingTime={"4 min read"}
-                    minusIcon={
-                      <i className="fa-solid fa-minus minus light-text flex flex-center-center"></i>
-                    }
-                  />
+                    <BlogCard
+                      key={blog.id}
+                      bloggerName={blog.user.name}
+                      title={blog.title}
+                      infoText={blog.description}
+                      releaseDate={blog.created_at.slice(0, 10)}
+                      profileImg="https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+                      blogImage={blog.image}
+                      categoryLink={"Micro Frontends"}
+                      dot={<span className="dot light-text"></span>}
+                      readingTime={"4 min read"}
+                      minusIcon={
+                        <i className="fa-solid fa-minus minus light-text flex flex-center-center"></i>
+                      }
+                      openBlogDetail={() => openBlogDetail(blog.title, blog.id)}
+                      openBloggerProfile={openBloggerProfile}
+                    />
                 ))}
           </div>
           <div className="vertical-line"></div>
@@ -226,7 +240,7 @@ const Home = () => {
             />
           ))}
         </div>
-      
+
         <div className="home-bottom-right">
           <div className="recommended-topics">
             <h2 className="home-bottom-right-title primary-text fs-16">
@@ -245,8 +259,6 @@ const Home = () => {
             </Link>
           </div>
         </div>
-      
-      
       </div>
     </main>
   );

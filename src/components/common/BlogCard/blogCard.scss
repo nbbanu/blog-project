@@ -7,8 +7,16 @@
       .blogger-name {
         font-weight: 400;
         margin-left: 8px;
+        cursor: pointer ;
+      }
+      &-release-date{
+        cursor: pointer;
       }
     }
+    &-title{
+      cursor: pointer;
+    }
+
   }
 
   &-info-text {
@@ -16,6 +24,7 @@
     margin-bottom: 30px;
     margin-top: 10px;
     line-height: 24px;
+    cursor: pointer;
   }
   &-bottom {
     &-left {

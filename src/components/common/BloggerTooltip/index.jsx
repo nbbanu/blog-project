@@ -2,7 +2,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import Button from "../Button";
 
-const Tooltip = ({
+const BloggerTooltip = ({
   profileImg,
   loading,
   showTooltip,
@@ -63,4 +63,4 @@ const Tooltip = ({
   );
 };
 
-export default Tooltip;
+export default BloggerTooltip;

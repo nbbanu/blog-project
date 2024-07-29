@@ -1,9 +1,11 @@
-import { Box, Button, Modal, Typography } from "@mui/material";
+import { Box, Button as MuiButton, Modal, Typography } from "@mui/material";
 import BasicTooltip from "../../../components/common/BasicTooltip";
 import { useState } from "react";
 import FollowPersonCard from "../../../components/common/FollowPersonCard";
+import Button from "../../../components/common/Button";
 
-const ClapButton = ({ title ,userName}) => {
+
+const ClapButton = ({ title, userName }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -19,6 +21,9 @@ const ClapButton = ({ title ,userName}) => {
     height: "100%",
     display: "flex",
     alignItems: "center",
+
+    justifyContent:"center",
+    overflow: "scroll",
   };
   const innerModalStyle = {
     width: "50%",
@@ -28,6 +33,7 @@ const ClapButton = ({ title ,userName}) => {
     backgorundColor: "rgba(255, 255, 255, 0.95)",
     display: "flex",
     flexDirection: "column",
+    alignItems:"center",
   };
 
   return (
@@ -48,21 +54,179 @@ const ClapButton = ({ title ,userName}) => {
       >
         <Box sx={authModalStyle}>
           <Box sx={innerModalStyle}>
-            <Button
+            <MuiButton
               sx={{ alignSelf: "flex-end", color: "rgba(0, 0, 0, 0.8)" }}
               onClick={handleClose}
             >
               X
-            </Button>
+            </MuiButton>
             <Typography
               id="modal-modal-title"
               variant="h6"
               component="h2"
               className="primary-text text-center"
+              sx={{ marginBottom: 5 }}
             >
               {`${title} için 165 alkış`}
             </Typography>
-            <FollowPersonCard bloggerName={userName} bloggerInfo={"Words on self-love, self-worth, finding magic in everyday moments and trusting you are wildly deserving."} profieImg={"https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"}/>
+            <div className="follow-person-cards flex flex-column"
+              style={{ gap: 30, marginBottom: 40}}
+            >
+              <FollowPersonCard
+                bloggerName={userName}
+                bloggerInfo={
+                  "Words on self-love, self-worth, finding magic in everyday moments and trusting you are wildly deserving."
+                }
+                profieImg={
+                  "https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+                }
+              />
+              <FollowPersonCard
+                bloggerName={userName}
+                bloggerInfo={
+                  "Words on self-love, self-worth, finding magic in everyday moments and trusting you are wildly deserving."
+                }
+                profieImg={
+                  "https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+                }
+              />
+              <FollowPersonCard
+                bloggerName={userName}
+                bloggerInfo={
+                  "Words on self-love, self-worth, finding magic in everyday moments and trusting you are wildly deserving."
+                }
+                profieImg={
+                  "https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+                }
+              />
+              <FollowPersonCard
+                bloggerName={userName}
+                bloggerInfo={
+                  "Words on self-love, self-worth, finding magic in everyday moments and trusting you are wildly deserving."
+                }
+                profieImg={
+                  "https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+                }
+              />
+              <FollowPersonCard
+                bloggerName={userName}
+                bloggerInfo={
+                  "Words on self-love, self-worth, finding magic in everyday moments and trusting you are wildly deserving."
+                }
+                profieImg={
+                  "https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+                }
+              />
+              <FollowPersonCard
+                bloggerName={userName}
+                bloggerInfo={
+                  "Words on self-love, self-worth, finding magic in everyday moments and trusting you are wildly deserving."
+                }
+                profieImg={
+                  "https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+                }
+              />
+              <FollowPersonCard
+                bloggerName={userName}
+                bloggerInfo={
+                  "Words on self-love, self-worth, finding magic in everyday moments and trusting you are wildly deserving."
+                }
+                profieImg={
+                  "https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+                }
+              />
+              <FollowPersonCard
+                bloggerName={userName}
+                bloggerInfo={
+                  "Words on self-love, self-worth, finding magic in everyday moments and trusting you are wildly deserving."
+                }
+                profieImg={
+                  "https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+                }
+              />
+              <FollowPersonCard
+                bloggerName={userName}
+                bloggerInfo={
+                  "Words on self-love, self-worth, finding magic in everyday moments and trusting you are wildly deserving."
+                }
+                profieImg={
+                  "https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+                }
+              />
+              <FollowPersonCard
+                bloggerName={userName}
+                bloggerInfo={
+                  "Words on self-love, self-worth, finding magic in everyday moments and trusting you are wildly deserving."
+                }
+                profieImg={
+                  "https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+                }
+              />
+              <FollowPersonCard
+                bloggerName={userName}
+                bloggerInfo={
+                  "Words on self-love, self-worth, finding magic in everyday moments and trusting you are wildly deserving."
+                }
+                profieImg={
+                  "https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+                }
+              />
+              <FollowPersonCard
+                bloggerName={userName}
+                bloggerInfo={
+                  "Words on self-love, self-worth, finding magic in everyday moments and trusting you are wildly deserving."
+                }
+                profieImg={
+                  "https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+                }
+              />
+              <FollowPersonCard
+                bloggerName={userName}
+                bloggerInfo={
+                  "Words on self-love, self-worth, finding magic in everyday moments and trusting you are wildly deserving."
+                }
+                profieImg={
+                  "https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+                }
+              />
+              <FollowPersonCard
+                bloggerName={userName}
+                bloggerInfo={
+                  "Words on self-love, self-worth, finding magic in everyday moments and trusting you are wildly deserving."
+                }
+                profieImg={
+                  "https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+                }
+              />
+              <FollowPersonCard
+                bloggerName={userName}
+                bloggerInfo={
+                  "Words on self-love, self-worth, finding magic in everyday moments and trusting you are wildly deserving."
+                }
+                profieImg={
+                  "https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+                }
+              />
+              <FollowPersonCard
+                bloggerName={userName}
+                bloggerInfo={
+                  "Words on self-love, self-worth, finding magic in everyday moments and trusting you are wildly deserving."
+                }
+                profieImg={
+                  "https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+                }
+              />
+              <FollowPersonCard
+                bloggerName={userName}
+                bloggerInfo={
+                  "Words on self-love, self-worth, finding magic in everyday moments and trusting you are wildly deserving."
+                }
+                profieImg={
+                  "https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+                }
+              />
+            </div>
+            <Button title="Show more claps" className={"ghost"} size={"sm"}/>
           </Box>
         </Box>
       </Modal>

@@ -1,13 +1,16 @@
-.follow-person-card{ 
-    .blogger-name{
-        cursor: pointer;
+.follow-person-card {
+    align-items: flex-start;
+  &-info {
+    margin-right: 15px;
+    .blogger-info {
+      line-height: 20px;
     }
-    .blogger-info{
-        margin: 0px 15px 0px 42px;
-        line-height: 20px;
+    .blogger-name {
+      cursor: pointer;
     }
-    .line-clamp{
-        -webkit-line-clamp: 2;
-    }
+  }
 
+  .line-clamp {
+    -webkit-line-clamp: 2;
+  }
 }

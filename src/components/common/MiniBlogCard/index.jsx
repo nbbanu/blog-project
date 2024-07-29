@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Tooltip from "../BloggerTooltip";
+import BloggerTooltip from "../BloggerTooltip";
 
 const MiniBlogCard = ({
   profileImg,
@@ -39,7 +39,7 @@ const MiniBlogCard = ({
               }}
             >
               {bloggerName}
-              <Tooltip
+              <BloggerTooltip
                 profileImg={
                   "https://miro.medium.com/v2/resize:fill:40:40/1*i5p9qg4BGA4i2NXsghlnxQ.png"
                 }

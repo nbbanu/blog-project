@@ -61,7 +61,7 @@ export const getAllBlogs = async () => {
   return data?.data;
 };
 
-export const getAllBlogsById = async (topicId) => {
+export const getBlogById = async (topicId) => {
   const url = `blog/${topicId}`;
   const data  = await get(url,topicId);
   return data?.data;

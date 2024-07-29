@@ -1,0 +1,73 @@
+import { Box, Button, Modal, Typography } from "@mui/material";
+import BasicTooltip from "../../../components/common/BasicTooltip";
+import { useState } from "react";
+import FollowPersonCard from "../../../components/common/FollowPersonCard";
+
+const ClapButton = ({ title ,userName}) => {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const authModalStyle = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    bgcolor: "rgba(255, 255, 255, 0.95)",
+    width: "100%",
+    zIndex: 999,
+    height: "100%",
+    display: "flex",
+    alignItems: "center",
+  };
+  const innerModalStyle = {
+    width: "50%",
+    height: "100%",
+    margin: "auto",
+    py: 19,
+    backgorundColor: "rgba(255, 255, 255, 0.95)",
+    display: "flex",
+    flexDirection: "column",
+  };
+
+  return (
+    <div className="clap-box flex flex-center">
+      <BasicTooltip title="Clap">
+        <i className="fa-solid fa-hands-clapping light-text"></i>
+      </BasicTooltip>
+      <BasicTooltip title="View Clap">
+        <span className="light-text fs-13" onClick={handleOpen}>
+          165
+        </span>
+      </BasicTooltip>
+
+      <Modal
+        open={open}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={authModalStyle}>
+          <Box sx={innerModalStyle}>
+            <Button
+              sx={{ alignSelf: "flex-end", color: "rgba(0, 0, 0, 0.8)" }}
+              onClick={handleClose}
+            >
+              X
+            </Button>
+            <Typography
+              id="modal-modal-title"
+              variant="h6"
+              component="h2"
+              className="primary-text text-center"
+            >
+              {`${title} için 165 alkış`}
+            </Typography>
+            <FollowPersonCard bloggerName={userName} bloggerInfo={"Words on self-love, self-worth, finding magic in everyday moments and trusting you are wildly deserving."} profieImg={"https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"}/>
+          </Box>
+        </Box>
+      </Modal>
+    </div>
+  );
+};
+
+export default ClapButton;

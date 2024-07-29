@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Tooltip from "../Tooltip";
+import Tooltip from "../BloggerTooltip";
 
 const MiniBlogCard = ({
   profileImg,

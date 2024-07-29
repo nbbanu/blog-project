@@ -2,8 +2,8 @@ import Button from "../Button";
 
 const FollowPersonCard = ({ profieImg, bloggerName, bloggerInfo }) => {
   return (
-    <div className="follow-person-card ">
-      <div className="flex flex-center">
+    <div className="follow-person-card">
+      <div className="follow-person-card-left flex flex-center">
         <img
           src={profieImg}
           alt="avatar"

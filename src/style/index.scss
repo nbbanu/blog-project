@@ -2,7 +2,8 @@
 @import "../../src/components/common/Button/button.scss";
 @import "../../src/components/common/AuthenticationButton/authenticationBtn.scss";
 @import "../../src/components/common/BlogCard/blogCard.scss";
-@import "../../src/components/common/Tooltip/tooltip.scss";
+@import "../../src/components/common/BloggerTooltip/tooltip.scss";
+@import "../../src/components/common/BasicTooltip/basic-tooltip.scss";
 @import "../../src/components/common/UserPopup/user-popup.scss";
 @import "../../src/components/common/LoginForm/login.scss";
 @import "../../src/components/common/Loader/loader.scss";
@@ -29,6 +30,8 @@
 @import "../../src/pages/Admin/CategoriesPage/CategoriesMiniDrawer/mini-drawer.scss";
 @import "../../src/pages/Admin/CategoriesPage/TopicsTable/table.scss";
 @import "../../src/pages/BlogDetail/blog-detail.scss";
+@import "../../src/pages/BlogDetail/ClapButton/clap-button.scss";
+@import "../../src/pages/BlogDetail/CommentButton/comment-button.scss";
 
 
 :root {

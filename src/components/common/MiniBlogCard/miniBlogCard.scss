@@ -14,6 +14,7 @@
     }
 
     .blogger-name {
+      cursor: pointer;
       font-weight: 500;
     }
     .mini-card-img {
@@ -23,11 +24,15 @@
     .mini-card-title {
       margin: 5px 0 10px 0;
     }
-    .mini-card-description{
+    .mini-card-description {
       margin-bottom: 15px;
-
     }
+  }
 
-    
+  .blogger-tooltip {
+    position: relative;
+  }
+  .blogger-tooltip:hover .tooltip-container {
+    display: flex;
   }
 }

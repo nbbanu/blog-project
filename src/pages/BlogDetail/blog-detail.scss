@@ -3,34 +3,49 @@
   max-width: 680px;
   .blog-detail-top {
     margin-top: 70px;
-    .blog-detail-header {
-      &-h1 {
-        margin-bottom: 32px;
-      }
-      &-blogger-info {
-        margin-bottom: 32px;
-        .avatar {
+    .blog-detail-title {
+      margin-bottom: 32px;
+    }
+    .blogger-info {
+      margin-bottom: 32px;
+      .blogger-image {
+        position: relative;
+        .bloger-profile-img {
           margin-right: 15px;
         }
-        button {
-          color: var(--succes-color);
-        }
-        .blog-detail-header-blogger {
-          &-top {
-            margin-bottom: 5px;
+      }
+      .blogger-image:hover .tooltip-container {
+        display: flex;
+      }
+
+      .ghost {
+        color: var(--succes-color);
+      }
+      .blogger-top {
+        margin-bottom: 5px;
+
+        .blogger-name {
+          position: relative;
+          .blogger-top-name {
+            cursor: pointer;
           }
+        }
+        .blogger-name:hover .tooltip-container {
+          display: flex;
         }
       }
     }
-    &-options {
+
+    .blog-detail-header {
       .light-line {
         margin: 15px 0;
       }
-      .blog-detail-top-option-lists {
+      &-lists {
         i:hover {
           color: var(--primary-color);
         }
-        &-left {
+
+        .header-lists-left {
           padding-left: 0;
           gap: 30px;
 
@@ -38,7 +53,7 @@
             font-size: 20px;
           }
         }
-        &-right {
+        .header-lists-right {
           gap: 30px;
           i {
             font-size: 20px;

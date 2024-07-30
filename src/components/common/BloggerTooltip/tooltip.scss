@@ -1,34 +1,27 @@
 .tooltip-container {
-  position: relative;
   display: none;
-
-  .tooltip {
-    position: absolute;
-    width: 300px;
-    height: auto;
-    padding: 16px;
-    box-shadow: 2px 2px 10px 4px #ddd;
-    background-color: #fff;
-    border-radius: 4px;
-    left: 0;
-    margin-left: 5px;
-    z-index: 5;
-    &-header {
-      margin-bottom: 10px;
-      .tooltip-name {
-        margin-left: 8px;
-      }
-    }
-
-    .light-line {
-      margin: 15px 0;
-    }
-    &-info p {
-      line-height: 20px;
+  flex-direction: column;
+  position: absolute;
+  width: 300px;
+  height: auto;
+  padding: 16px;
+  box-shadow: 2px 2px 10px 4px #ddd;
+  background-color: #fff;
+  border-radius: 4px;
+  left: 0;
+  top: 100%;
+  z-index: 5;
+  .tooltip-header {
+    margin-bottom: 10px;
+    .tooltip-profile-img{
+      margin-right: 15px;
     }
   }
-}
 
-.tooltip-container.open {
-  display: flex;
+  .light-line {
+    margin: 15px 0;
+  }
+  .tooltip-info p {
+    line-height: 20px;
+  }
 }

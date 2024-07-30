@@ -3,6 +3,7 @@ import BlogCard from "../../../../components/common/BlogCard";
 import { getAllBlogs } from "../../../../service";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import dayjs from "dayjs";
 
 const ProfilePageHome = () => {
   const [blogs, setBlogs] = useState([]);
@@ -73,7 +74,7 @@ const ProfilePageHome = () => {
               bloggerName={blog.user.name}
               title={blog.title}
               infoText={blog.description}
-              releaseDate={blog.created_at.slice(0, 10)}
+              releaseDate={dayjs(blog.created_at).format('MMM DD, YYYY')}
               profileImg="https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
               blogImage={blog.image}
             />

@@ -12,6 +12,7 @@ import { getAllBlogs } from "../../service";
 import MiniBlogCard from "../../components/common/MiniBlogCard";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import dayjs from "dayjs";
 
 const Home = () => {
   useEffect(() => {
@@ -103,7 +104,7 @@ const Home = () => {
                       bloggerName={blog.user.name}
                       title={blog.title}
                       infoText={blog.description}
-                      releaseDate={blog.created_at.slice(0, 10)}
+                      releaseDate={dayjs(blog.created_at).format('MMM DD, YYYY')}
                       profileImg="https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
                       blogImage={blog.image}
                       categoryLink={"Micro Frontends"}
@@ -226,7 +227,7 @@ const Home = () => {
               bloggerName={blog.user.name}
               title={blog.title}
               description={blog.description}
-              releaseDate={blog.created_at.slice(0, 10)}
+              releaseDate={dayjs(blog.created_at).format('MMM DD, YYYY')}
               profileImg="https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
               miniCardImg={
                 <img

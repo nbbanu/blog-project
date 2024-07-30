@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import MiniBlogCard from "../MiniBlogCard";
 import { getAllBlogs } from "../../../service";
+import dayjs from "dayjs";
 
 const Trending = () => {
   useEffect(() => {
@@ -34,7 +35,7 @@ const Trending = () => {
               bloggerName={blog.user.name}
               readingTime={"8 min read"}
               title={blog.title}
-              releaseDate={blog.created_at.slice(0, 10)}
+              releaseDate={dayjs(blog.created_at).format('MMM DD, YYYY')}
               publishedBy={"Towards Data Science"}
               />
             ))

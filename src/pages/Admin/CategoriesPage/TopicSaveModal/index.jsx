@@ -92,7 +92,7 @@ const grey = {
 
 const Modal = styled(BaseModal)`
   position: fixed;
-  z-index: 1300;
+  z-index: 10;
   inset: 0;
   display: flex;
   align-items: center;

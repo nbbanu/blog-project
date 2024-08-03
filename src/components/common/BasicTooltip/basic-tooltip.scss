@@ -1,12 +1,14 @@
 .hover-element {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 .basic-tooltip-container {
   position: absolute;
   display: none;
   .basic-tooltip-content {
     position: absolute;
-    transform: translateY(calc(-100% - 5px));
+    transform: translateY(calc(-100% - 13px));
     padding: 5px 7px;
     background-color: var(--primary-color);
     color: rgb(209, 209, 209);

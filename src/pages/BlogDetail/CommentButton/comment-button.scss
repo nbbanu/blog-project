@@ -1,0 +1,11 @@
+.comment-button {
+  .fa-comment:hover {
+    color: var(--primary-text);
+  }
+}
+.comment-button:hover .comment-count {
+  color: var(--primary-text) !important;
+}
+.comment-button:hover .fa-comment {
+  color: var(--primary-text) !important;
+}

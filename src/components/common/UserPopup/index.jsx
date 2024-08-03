@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useAuth } from "../../../contexts/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const UserPopup = ({ clickItem }) => {
   const [showPopup, setShowPopup] = useState(false);
   const { setToken, email } = useAuth();
   const userEmail = "@" + email?.split("@")[0];
+  const navigate = useNavigate();
 
   const openPopup = () => {
     setShowPopup(!showPopup);
@@ -15,6 +16,7 @@ const UserPopup = ({ clickItem }) => {
     localStorage.removeItem("token");
     localStorage.removeItem("email");
     setToken("");
+    navigate("/");
   };
 
   return (

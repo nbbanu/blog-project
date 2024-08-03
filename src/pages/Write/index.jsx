@@ -6,7 +6,7 @@ import Button from "../../components/common/Button";
 import BlogViewModal from "../../components/Blog/BlogViewModal";
 import { useCreateBlog } from "../../contexts/CreateBlogContext";
 import { useAuth } from "../../contexts/AuthContext";
-import Home from "../Home";
+
 
 const WritePage = ({ openBlogViewModal }) => {
   const [url, setUrl] = useState("");
@@ -88,7 +88,7 @@ const WritePage = ({ openBlogViewModal }) => {
     setFiles(file);
     setUrl(window.URL.createObjectURL(file));
   }
-if(token){
+
   return (
     <div className="editor container flex flex-center-center">
       <form onSubmit={handleSubmit}>
@@ -189,11 +189,6 @@ if(token){
       </form>
     </div>
   );
-}
-return (
-  <Home/>
-)
- 
 };
 
 export default WritePage;

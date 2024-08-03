@@ -8,18 +8,17 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import BloggerTooltip from "../../components/common/BloggerTooltip";
 import dayjs from "dayjs";
+import CommentButton from "./CommentButton";
 
 const BlogDetailPage = () => {
   const [blog, setBlog] = useState("");
   const topicId = useParams();
   const [loading, setLoading] = useState(false);
-// format('MMM ,DD YYYY');
- 
 
   useEffect(() => {
     loadBlogByID(topicId.id);
   }, []);
-  
+
   const loadBlogByID = async (topicId) => {
     setLoading(true);
     const data = await getBlogById(topicId);
@@ -158,7 +157,7 @@ const BlogDetailPage = () => {
                       ></i>
 
                       <span className="blog-release-date light-text fs-14">
-                        {dayjs(blog?.created_at).format('MMM DD, YYYY')}
+                        {dayjs(blog?.created_at).format("MMM DD, YYYY")}
                       </span>
                     </div>
                   </div>
@@ -170,16 +169,13 @@ const BlogDetailPage = () => {
                   <ul className="flex flex-center header-lists-left">
                     <li className="link">
                       <ClapButton
+                        clapCount="165"
                         title={blog?.title}
                         userName={blog?.user?.name}
                       />
                     </li>
-                    <li className="link flex flex-center">
-                      <i
-                        className="fa-regular fa-comment light-text"
-                        style={{ marginRight: 5 }}
-                      ></i>
-                      <span className="light-text fs-13">18</span>
+                    <li className="link">
+                      <CommentButton commentCount={"18"} />
                     </li>
                   </ul>
                   <ul className="flex flex-center header-lists-right">

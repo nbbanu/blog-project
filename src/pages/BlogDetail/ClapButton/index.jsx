@@ -5,7 +5,7 @@ import FollowPersonCard from "../../../components/common/FollowPersonCard";
 import Button from "../../../components/common/Button";
 
 
-const ClapButton = ({ title, userName }) => {
+const ClapButton = ({ title, userName,clapCount }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -17,7 +17,7 @@ const ClapButton = ({ title, userName }) => {
     transform: "translate(-50%, -50%)",
     bgcolor: "rgba(255, 255, 255, 0.95)",
     width: "100%",
-    zIndex: 999,
+    zIndex: 99,
     height: "100%",
     display: "flex",
     alignItems: "center",
@@ -43,7 +43,7 @@ const ClapButton = ({ title, userName }) => {
       </BasicTooltip>
       <BasicTooltip title="View Clap">
         <span className="light-text fs-13" onClick={handleOpen}>
-          165
+          {clapCount}
         </span>
       </BasicTooltip>
 

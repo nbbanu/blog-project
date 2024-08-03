@@ -5,7 +5,6 @@ import { useAuth } from "../../contexts/AuthContext";
 
 const ProfilePage = () => {
   const { token } = useAuth();
-  if (token) {
     return (
       <div className="container">
         <div className=" profile-page">
@@ -60,7 +59,7 @@ const ProfilePage = () => {
       </div>
     );
   }
-  return <Home />;
-};
+
+
 
 export default ProfilePage;

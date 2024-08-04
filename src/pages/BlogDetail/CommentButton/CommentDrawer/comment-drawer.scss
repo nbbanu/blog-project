@@ -8,16 +8,5 @@
     width: 430px;
     background-color: #fff;
     padding: 30px 20px;
-    .comment-button {
-        .fa-comment:hover {
-          color: var(--primary-text);
-        }
-      }
-      .comment-button:hover .comment-count {
-        color: var(--primary-text) ;
-      }
-      .comment-button:hover .fa-comment {
-        color: var(--primary-text);
-      }
   }
 

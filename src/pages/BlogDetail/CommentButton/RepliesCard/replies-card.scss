@@ -1,0 +1,9 @@
+.replies-card{
+    margin-top: 15px;
+    padding-left: 10px;
+}
+.replies-card::before{
+    content: "";
+    border-left: 3px solid var(--secondary-color);
+    
+}

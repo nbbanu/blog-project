@@ -1,34 +1,29 @@
-// const CommentDrawer = ({open,toggleDrawer}) => {
-//   return (
-//     <>
-//     {open && (
-//        <div className="comment-drawer">
-//      burası drawer
-//        </div>
-//     )}
-//     </>
-
-//   );
-// };
-
-// export default CommentDrawer;
-
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import BasicTooltip from "../../../../components/common/BasicTooltip";
-import { Button, Input, Typography } from "@mui/material";
+import { Input, Typography } from "@mui/material";
+import Button from "../../../../components/common/Button";
+import CommentCard from "../CommentCard";
 
-export default function CommentDrawer({ commentCount }) {
+export default function CommentDrawer({ commentCount, userName }) {
   const [state, setState] = React.useState({
     // top: false,
     // left: false,
     // bottom: false,
     right: false,
   });
+  const [respondText, setRespondText] = React.useState("");
 
   const toggleDrawer = (anchor, open) => () => {
     setState({ ...state, [anchor]: open });
+  };
+
+  const handleChange = (e) => {
+    setRespondText(e.target.value);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
   };
 
   const drawerContent = {
@@ -43,13 +38,12 @@ export default function CommentDrawer({ commentCount }) {
     fontWeight: 500,
   };
   const multilineInput = {
-    marginTop:4,
     width: "100%",
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: 400,
-    padding: "8px 12px",
     backgroundColor: "white",
-    boxShadow: "0px 2px 4px rgba(0,0,0, 0.5)",
+    marginBottom: 3,
+    paddingTop: 3,
   };
   const context = (anchor) => (
     <Box sx={drawerContent} role="presentation">
@@ -76,15 +70,48 @@ export default function CommentDrawer({ commentCount }) {
           X
         </Typography>
       </Box>
-      <Box>
-        <Input
-          sx={multilineInput}
-          aria-label="Demo input"
-          multiline
-          placeholder="Düşüncelerin neler?"
-          minRows={5}
-        />
+      <Box
+        sx={{
+          boxShadow: "0px 1px 4px rgba(0,0,0, 0.2)",
+          marginTop: 3,
+          padding: "14px",
+        }}
+      >
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <img
+            src="https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+            alt="avatar"
+            className="avatar"
+            style={{ width: 35, height: 35, marginRight: 10 }}
+          />
+          <Typography className="primary-text" sx={{ fontSize: 14 }}>
+            {userName}
+          </Typography>
+        </Box>
+        <form className="flex flex-column" id="comment-form">
+          <Input
+            sx={multilineInput}
+            aria-label="Demo input"
+            multiline
+            disableUnderline
+            placeholder="Düşüncelerin neler?"
+            minRows={3}
+            variant="standard"
+            onChange={handleChange}
+          />
+          <Box sx={{ alignSelf: "flex-end" }}>
+            <Button title={"Cancel"} className="ghost border-none" />
+            <Button
+              handleClick={handleSubmit}
+              title={"Respond"}
+              className="success"
+              disabled={respondText ? false : true}
+            />
+          </Box>
+        </form>
       </Box>
+      <div className="light-line"></div>
+      <CommentCard userName={userName}/>
     </Box>
   );
 

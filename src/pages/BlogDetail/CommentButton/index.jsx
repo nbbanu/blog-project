@@ -1,8 +1,8 @@
 import CommentDrawer from "./CommentDrawer";
-const CommentButton = ({ commentCount }) => {
+const CommentButton = ({ commentCount, userName}) => {
   return (
     <div className="comment-button">
-      <CommentDrawer commentCount={commentCount} />
+      <CommentDrawer commentCount={commentCount} userName={userName}/>
     </div>
   );
 };

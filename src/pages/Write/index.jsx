@@ -7,7 +7,6 @@ import BlogViewModal from "../../components/Blog/BlogViewModal";
 import { useCreateBlog } from "../../contexts/CreateBlogContext";
 import { useAuth } from "../../contexts/AuthContext";
 
-
 const WritePage = ({ openBlogViewModal }) => {
   const [url, setUrl] = useState("");
   const { token } = useAuth();

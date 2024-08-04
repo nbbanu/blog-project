@@ -175,7 +175,7 @@ const BlogDetailPage = () => {
                       />
                     </li>
                     <li className="link">
-                      <CommentButton commentCount={"18"} />
+                      <CommentButton commentCount={"18"} userName={blog?.user?.name}/>
                     </li>
                   </ul>
                   <ul className="flex flex-center header-lists-right">

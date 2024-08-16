@@ -29,7 +29,7 @@ const blogCard = ({
             </span>
             {dot}
 
-            <span className="blog-card-left-header-release-date fs-14 light-text">
+            <span className="blog-card-release-date fs-14 light-text">
               {releaseDate}
             </span>
           </div>

@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import Button from "../../../../components/common/Button";
 import BloggerTooltip from "../../../../components/common/BloggerTooltip";
-import RepliesCard from "../RepliesCard";
+import RepliesCard from "../RepliesButton";
 import ReplyCard from "../ReplyCard";
+import RepliesButton from "../RepliesButton";
 
 const contentStyle = {
   overflow: "hidden",
@@ -11,16 +12,22 @@ const contentStyle = {
   WebkitBoxOrient: "vertical",
 };
 
-const CommentCard = ({ userName }) => {
+const CommentCard = ({
+  userName,
+  commentDate,
+  commentCardContent,
+  replyCount,
+  clapCount,
+}) => {
   const [show, setShow] = useState(false);
   const [showReadMoreButton, setShowReadMoreButton] = useState(false);
-  const [showCards, setShowCards] = useState(false);
+  const [showRepliesButton, setShowRepliesButton] = useState(true);
 
-  const ref = useRef(null);
+  const ref = useRef("");
 
   useEffect(() => {
     setShowReadMoreButton(
-      ref.current.scrollHeight !== ref.current.clientHeight
+      ref?.current.scrollHeight !== ref?.current.clientHeight
     );
   }, []);
 
@@ -47,9 +54,7 @@ const CommentCard = ({ userName }) => {
               />
             </div>
 
-            <div className="comment-date light-text fs-14">
-              about 1 month ago
-            </div>
+            <div className="comment-date light-text fs-14">{commentDate}</div>
           </div>
         </div>
         <div className="comment-card-option">
@@ -62,15 +67,7 @@ const CommentCard = ({ userName }) => {
           style={show ? null : contentStyle}
           className="comment-card-content fs-14 primary-text"
         >
-          The alternative to async/await is callback hell. So happy we moved
-          beyond that. I totally disagree 🤣 Sometimes we want to rise above the
-          chaos of "anything happening anytime" to deterministic, synchronous
-          code. Sometimes we actually can't tell, or don't care, what order
-          independent events happen in. But unless we actually really understand
-          the reality, we're just "poking and hoping", and that's where
-          programmer laziness trumps user frustration. A screwdriver is a great
-          tool, unless what you actually need is a hammer 😉 The *actual* worst
-          thing to happen to programming is lazy or arrogant coders 😊
+          {commentCardContent}
         </div>
         {showReadMoreButton && (
           <Button
@@ -84,20 +81,15 @@ const CommentCard = ({ userName }) => {
         <div className="flex">
           <div className="clap">
             <i className="fa-solid fa-hands-clapping primary-text fs-15"></i>
-            <span className="clap-count-text primary-text fs-14">307</span>
+            <span className="clap-count-text primary-text fs-14">
+              {clapCount}
+            </span>
           </div>
-          <div>
-            <div className="replies" onClick={() => setShowCards(!showCards)}>
-              <i className="fa-regular fa-comment primary-text fs-15"></i>
-              <span className="reply-text primary-text fs-14">
-                {showCards ? "Hide Replies" : "4 Replies"}
-              </span>
-            </div>
-          </div>
+
+          {showRepliesButton && <RepliesButton />}
         </div>
         <ReplyCard />
       </div>
-      {showCards && <RepliesCard/>}
     </div>
   );
 };

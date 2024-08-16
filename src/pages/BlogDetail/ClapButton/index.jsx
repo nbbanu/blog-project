@@ -34,6 +34,7 @@ const ClapButton = ({ title, userName,clapCount }) => {
     display: "flex",
     flexDirection: "column",
     alignItems:"center",
+    padding:"0 20px"
   };
 
   return (
@@ -53,7 +54,7 @@ const ClapButton = ({ title, userName,clapCount }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={authModalStyle}>
-          <Box sx={innerModalStyle}>
+          <Box sx={innerModalStyle} minWidth={"100%"}>
             <MuiButton
               sx={{ alignSelf: "flex-end", color: "rgba(0, 0, 0, 0.8)" }}
               onClick={handleClose}

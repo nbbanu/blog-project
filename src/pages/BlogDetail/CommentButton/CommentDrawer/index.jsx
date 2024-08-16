@@ -5,6 +5,8 @@ import BasicTooltip from "../../../../components/common/BasicTooltip";
 import { Input, Typography } from "@mui/material";
 import Button from "../../../../components/common/Button";
 import CommentCard from "../CommentCard";
+import RepliesCard from "../RepliesButton";
+import CommentForm from "../CommentForm";
 
 export default function CommentDrawer({ commentCount, userName }) {
   const [state, setState] = React.useState({
@@ -13,22 +15,16 @@ export default function CommentDrawer({ commentCount, userName }) {
     // bottom: false,
     right: false,
   });
-  const [respondText, setRespondText] = React.useState("");
 
   const toggleDrawer = (anchor, open) => () => {
     setState({ ...state, [anchor]: open });
   };
 
-  const handleChange = (e) => {
-    setRespondText(e.target.value);
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+
 
   const drawerContent = {
-    minWidth: 250,
-    width: 420,
+    minWidth: 300,
+    maxWidth: 450,
     heigth: "100%",
     padding: 3,
   };
@@ -37,14 +33,7 @@ export default function CommentDrawer({ commentCount, userName }) {
     color: "#242424",
     fontWeight: 500,
   };
-  const multilineInput = {
-    width: "100%",
-    fontSize: 14,
-    fontWeight: 400,
-    backgroundColor: "white",
-    marginBottom: 3,
-    paddingTop: 3,
-  };
+
   const context = (anchor) => (
     <Box sx={drawerContent} role="presentation">
       <Box
@@ -88,30 +77,17 @@ export default function CommentDrawer({ commentCount, userName }) {
             {userName}
           </Typography>
         </Box>
-        <form className="flex flex-column" id="comment-form">
-          <Input
-            sx={multilineInput}
-            aria-label="Demo input"
-            multiline
-            disableUnderline
-            placeholder="Düşüncelerin neler?"
-            minRows={3}
-            variant="standard"
-            onChange={handleChange}
-          />
-          <Box sx={{ alignSelf: "flex-end" }}>
-            <Button title={"Cancel"} className="ghost border-none" />
-            <Button
-              handleClick={handleSubmit}
-              title={"Respond"}
-              className="success"
-              disabled={respondText ? false : true}
-            />
-          </Box>
-        </form>
+        <CommentForm placeholder={"Düşüncelerin neler?"}/>
       </Box>
       <div className="light-line"></div>
-      <CommentCard userName={userName}/>
+      <CommentCard
+        userName={userName}
+        commentDate={"about 1 month ago"}
+        commentCardContent="Your point is the comparison of threaded parallelism vs. event-based pseudo-parallelism.
+        If you are stuck with a single thread and want to not wait for I/O wait, then you can switch to something else. That's what the JS Event Loop does."
+        replyCount={"4"}
+        clapCount={"205"}
+      />
     </Box>
   );
 

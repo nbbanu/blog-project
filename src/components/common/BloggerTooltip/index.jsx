@@ -48,7 +48,7 @@ const BloggerTooltip = ({
               <span className="light-text fs-13">{followersCount}</span>
               <span className="light-text fs-13">{" Followers"} </span>
             </div>
-            <Button className={"success xs"} title={"Follow"} />
+            <Button className={"success xs blogger-tooltip-btn"} title={"Follow"} />
           </div>
         </>
       )}

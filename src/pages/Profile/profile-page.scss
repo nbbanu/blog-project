@@ -82,10 +82,13 @@
         margin-top: 15px;
         margin-bottom: 25px;
     }
-    button{
+    .edit-btn{
         display: inline-flex;
         color: var(--succes-color);
         padding-left: 0 !important;
+    }
+    .edit-btn:hover {
+      color: var(--primary-color) ;
     }
     @include responsive(phone) {
       &{
@@ -102,13 +105,25 @@
       }
     }
   }
-
+.modal{
+  width: 582px;
 }
+}
+
 .container {
   padding-top: 0 !important;
   @include responsive(phone) {
     &{
      padding: 0px !important;
+    }
+  }
+  .modal{
+    position: relative;
+    .close{
+      align-items: flex-start;
+      position: absolute;
+      top: 30px;
+      right: 30px;
     }
   }
 }
@@ -119,4 +134,5 @@
      padding: 20px !important;
     }
   }
+
 }

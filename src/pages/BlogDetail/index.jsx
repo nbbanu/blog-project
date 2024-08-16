@@ -9,6 +9,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import BloggerTooltip from "../../components/common/BloggerTooltip";
 import dayjs from "dayjs";
 import CommentButton from "./CommentButton";
+import BasicTooltip from "../../components/common/BasicTooltip";
 
 const BlogDetailPage = () => {
   const [blog, setBlog] = useState("");
@@ -175,21 +176,32 @@ const BlogDetailPage = () => {
                       />
                     </li>
                     <li className="link">
-                      <CommentButton commentCount={"18"} userName={blog?.user?.name}/>
+                      <CommentButton
+                        commentCount={"18"}
+                        userName={blog?.user?.name}
+                      />
                     </li>
                   </ul>
                   <ul className="flex flex-center header-lists-right">
                     <li className="link">
-                      <i className="fa-regular fa-bookmark light-text"></i>
+                      <BasicTooltip title={"Save"}>
+                        <i className="fa-regular fa-bookmark light-text"></i>
+                      </BasicTooltip>
                     </li>
                     <li className="link">
-                      <i className="fa-regular fa-circle-play light-text"></i>
+                      <BasicTooltip title={"Listen"}>
+                        <i className="fa-regular fa-circle-play light-text"></i>
+                      </BasicTooltip>
                     </li>
                     <li className="link">
-                      <i className="fa-solid fa-arrow-up-from-bracket light-text"></i>
+                      <BasicTooltip title={"Share"}>
+                        <i className="fa-solid fa-arrow-up-from-bracket light-text"></i>
+                      </BasicTooltip>
                     </li>
                     <li className="link">
-                      <i className="fa-solid fa-ellipsis light-text"></i>
+                      <BasicTooltip title={"More"}>
+                        <i className="fa-solid fa-ellipsis light-text"></i>
+                      </BasicTooltip>
                     </li>
                   </ul>
                 </div>

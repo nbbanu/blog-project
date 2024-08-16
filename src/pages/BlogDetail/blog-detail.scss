@@ -1,11 +1,23 @@
 .blog-detail-container {
   margin: 0 auto;
   max-width: 680px;
+
+  @include responsive(phone) {
+    &{
+      padding:0 40px;
+    }
+  }
   .blog-detail-top {
     margin-top: 70px;
     .blog-detail-title {
       margin-bottom: 32px;
+      @include responsive(phone) {
+        &{
+          font-size: 24px;
+        }
+      }
     }
+  
     .blogger-info {
       margin-bottom: 32px;
       .blogger-image {
@@ -26,9 +38,11 @@
 
         .blogger-name {
           position: relative;
+      
           .blogger-top-name {
             cursor: pointer;
           }
+         
         }
         .blogger-name:hover .tooltip-container {
           display: flex;
@@ -48,13 +62,23 @@
         .header-lists-left {
           padding-left: 0;
           gap: 30px;
-
+          @include responsive(phone) {
+            &{
+              gap: 15px;
+            }
+          }
           i {
             font-size: 20px;
           }
+        
         }
         .header-lists-right {
           gap: 30px;
+          @include responsive(phone) {
+            &{
+              gap: 15px;
+            }
+          }
           i {
             font-size: 20px;
           }
@@ -75,5 +99,10 @@
       white-space: pre-wrap;
       font-weight: 300;
     }
+  }
+  .blogger-tooltip-btn{
+
+      background-color: var(--primary-color);
+      border: none;
   }
 }

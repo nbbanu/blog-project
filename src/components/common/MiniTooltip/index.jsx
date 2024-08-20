@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const BasicTooltip = ({ title, children }) => {
+const MiniTooltip = ({ title, children }) => {
   const [show, setShow] = useState(false);
   return (
     <div
@@ -8,12 +8,12 @@ const BasicTooltip = ({ title, children }) => {
       onMouseLeave={() => setShow(false)}
       className="hover-element"
     >
-      <div className={`basic-tooltip-container ${show ? "open" : ""}`}>
-        <span className="basic-tooltip-content">{title}</span>
+      <div className={`mini-tooltip-container ${show ? "open" : ""}`}>
+        <span className="mini-tooltip-content">{title}</span>
       </div>
       {children}
     </div>
   );
 };
 
-export default BasicTooltip;
+export default MiniTooltip;

@@ -4,8 +4,12 @@ import { useRef, useState } from "react";
 
 const EditProfileModal = ({ setShowModal }) => {
   const [userName, setUserName] = useState("");
-  const [bio, setBio] = useState("");
+  const [shortBio, setShortBio] = useState("");
   const [avatar, setAvatar] = useState(null);
+  const [userNameError, setUserNameError] = useState("");
+  const [shortBioError, setShortBioError] = useState("");
+  const [userNameCharacterCount, setUserNameCharacterCount] = useState(0);
+  const [shortBioCharacterCount, setShortBioCharacterCount] = useState(0);
 
   const inputRef = useRef(null);
 
@@ -25,7 +29,43 @@ const EditProfileModal = ({ setShowModal }) => {
       "https://miro.medium.com/v2/resize:fill:80:80/1*dmbNkD5D-u45r44go_cf0g.png"
     );
   };
+  const handleUserNameChange = (e) => {
+    setUserName(e.target.value);
+    setUserNameCharacterCount(e.target.value.length);
 
+    if (e.target.value.length > 50) {
+      setUserNameError("İsim en fazla 50 karakterden oluşabilir.");
+    } else if (e.target.value.length == 0) {
+      setUserNameError("Lütfen bir isim giriniz.");
+    } else {
+      setUserNameError("");
+    }
+  };
+  const handleShortBİoChange = (e) => {
+    setShortBio(e.target.value);
+    setShortBioCharacterCount(e.target.value.length);
+    if (e.target.value.length > 160) {
+      setShortBioError("Bio en fazla 160 karakter içerebilir.");
+    } else {
+      setShortBioError("");
+    }
+  };
+  const cancelEditForm = (e) => {
+    e.preventDefault();
+    setUserName("");
+    setShortBio("");
+    setUserNameCharacterCount(0);
+    setShortBioCharacterCount(0);
+    setShowModal(false);
+  };
+  const saveEditForm = (e) => {
+    const formData = {
+      avatar,
+      userName,
+      shortBio
+    }
+    cancelEditForm(e);
+  }
   return (
     <div className="edit-profile-modal">
       <h2 className="modal-title primary-text fs-20">Profil Bilgileri</h2>
@@ -46,7 +86,7 @@ const EditProfileModal = ({ setShowModal }) => {
             </div>
             <div className="edit-profile-photo-right">
               <div className="edit-buttons flex">
-                <div >
+                <div>
                   <input
                     className="file-input"
                     type="file"
@@ -79,29 +119,63 @@ const EditProfileModal = ({ setShowModal }) => {
         <div className="form-inputs">
           <div className="flex flex-column">
             <label className="fs-14 primary-text">İsim*</label>
-            <input
-              value={"BanuBkrli"}
-              type="text"
-              className="name-input primary-text fs-14"
-              required
-              name="name"
-            />
-            <div className="character-length">
-              <span className="entered-character fs-13 primary-text">9</span>
-              <span className="total-character fs-13 light-text">/50</span>
+            <div className="flex flex-center" style={{ position: "relative" }}>
+              <input
+                value={userName}
+                type="text"
+                className="name-input primary-text fs-14"
+                required
+                name="name"
+                onChange={handleUserNameChange}
+                style={{ borderColor: userNameError ? "#C94A4A" : "" }}
+              />
+              <i
+                className="fa-solid fa-exclamation flex flex-center-center fs-14"
+                style={{ display: userNameError ? "flex" : "none" }}
+              ></i>
+            </div>
+            <div className="character-length flex">
+              <div className="error-area fs-13">{userNameError}</div>
+              <div>
+                <span
+                  className="entered-character fs-13 primary-text"
+                  style={{ color: userName.length > 50 ? "#C94A4A" : "" }}
+                >
+                  {userNameCharacterCount}
+                </span>
+                <span className="total-character fs-13 light-text">/50</span>
+              </div>
             </div>
           </div>
           <div className="flex flex-column">
             <label className="fs-14 primary-text">Kısa Biyografi</label>
-            <textarea
-              type="text"
-              className="bio-input primary-text fs-14"
-              rows={3}
-              name="short-bio"
-            ></textarea>
-            <div className="character-length">
-              <span className="entered-character fs-13 primary-text">9</span>
-              <span className="total-character fs-13 light-text">/160</span>
+            <div className="flex flex-center" style={{ position: "relative" }}>
+              <textarea
+                type="text"
+                className="bio-input primary-text fs-14"
+                rows={3}
+                name="short-bio"
+                onChange={handleShortBİoChange}
+                value={shortBio}
+                style={{ borderColor: shortBioError ? "#C94A4A" : "" }}
+              ></textarea>
+              <i
+                className="fa-solid fa-exclamation flex flex-center-center fs-14"
+                style={{ display: shortBioError ? "flex" : "none" }}
+              ></i>
+            </div>
+
+            <div className="character-length flex">
+              <div className="error-area"></div>
+              <div>
+                <span
+                  className="entered-character fs-13 primary-text"
+                  style={{ color: shortBioError ? "#C94A4A" : "" }}
+                >
+                  {shortBioCharacterCount}
+                </span>
+                <span className="total-character fs-13 light-text">/160</span>
+              </div>
             </div>
           </div>
         </div>
@@ -114,16 +188,24 @@ const EditProfileModal = ({ setShowModal }) => {
             </Link>
           </div>
           <span className="about-page-text fs-13 light-text">
-            Personalize with images and more to paint more of a vivid portrait
-            of yourself than your ‘Short bio.’
+          Kısa biyografinizden daha canlı bir portre çizmek için görseller ve daha fazlasıyla kişiselleştirin.
           </span>
           <div className="buttons flex">
             <Button
               className={"ghost cancel-btn"}
-              title={"Cancel"}
-              handleClick={() => setShowModal(false)}
+              title={"İptal Et"}
+              handleClick={cancelEditForm}
             />
-            <Button className={"success"} title={"Save"} disabled={true} />
+            <Button
+              className={"success"}
+              title={"Save"}
+              disabled={
+                userName.length > 0 && userNameCharacterCount < 50
+                  ? false
+                  : true
+              }
+              handleClick={saveEditForm}
+            />
           </div>
         </div>
       </form>

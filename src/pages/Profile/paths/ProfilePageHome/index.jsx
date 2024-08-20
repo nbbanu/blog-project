@@ -4,6 +4,8 @@ import { getAllBlogs } from "../../../../service";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../../contexts/AuthContext";
 
 const ProfilePageHome = () => {
   const [blogs, setBlogs] = useState([]);
@@ -11,6 +13,8 @@ const ProfilePageHome = () => {
   useEffect(() => {
     loadAllBlogsToUI();
   }, []);
+
+  const navigate = useNavigate();
 
   const loadAllBlogsToUI = async () => {
     const data = await getAllBlogs();
@@ -21,6 +25,10 @@ const ProfilePageHome = () => {
     );
     setBlogs(newBlogDates);
   };
+  const openBlogDetail = (blogTitle, blogId) => {
+    navigate(`/detail/${blogTitle}/${blogId}`);
+  };
+
 
   return (
     <div className="profilePage-home">
@@ -74,9 +82,10 @@ const ProfilePageHome = () => {
               bloggerName={blog.user.name}
               title={blog.title}
               infoText={blog.description}
-              releaseDate={dayjs(blog.created_at).format('MMM DD, YYYY')}
+              releaseDate={dayjs(blog.created_at).format("MMM DD, YYYY")}
               profileImg="https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
               blogImage={blog.image}
+              openBlogDetail={() => openBlogDetail(blog.title, blog.id)}
             />
           ))}
     </div>

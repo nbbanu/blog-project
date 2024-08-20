@@ -66,6 +66,17 @@
         outline: none;
         border: none;
         font-weight: 400;
+        width: 100%;
+      }
+      .fa-exclamation{
+        position: absolute;
+        right: 10px;
+
+        color:#C94A4A;
+        border-radius:50%; 
+        border:1px solid #C94A4A;
+        width:20px;
+        height:20px;
       }
       textarea {
         resize: none;
@@ -75,8 +86,13 @@
         border: 1px solid var(--primary-color);
       }
       .character-length {
-        align-self: flex-end;
+        .error-area {
+          color: #c94a4a;
+          font-weight: 400;
+        }
+        justify-content: space-between;
         margin-top: 10px;
+        width: 100%;
         span {
           font-weight: 400;
         }

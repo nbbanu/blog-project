@@ -1,7 +1,7 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
-import BasicTooltip from "../../../../components/common/BasicTooltip";
+import MiniTooltip from "../../../../components/common/MiniTooltip";
 import { Input, Typography } from "@mui/material";
 import Button from "../../../../components/common/Button";
 import CommentCard from "../CommentCard";
@@ -96,7 +96,7 @@ export default function CommentDrawer({ commentCount, userName }) {
       {["right"].map((anchor) => (
         <React.Fragment key={anchor}>
           <Typography onClick={toggleDrawer(anchor, true)}>
-            <BasicTooltip title="Respond">
+            <MiniTooltip title="Respond">
               <i
                 className="fa-regular fa-comment light-text"
                 style={{ marginRight: 5 }}
@@ -104,7 +104,7 @@ export default function CommentDrawer({ commentCount, userName }) {
               <span className="light-text fs-13 comment-count">
                 {commentCount}
               </span>
-            </BasicTooltip>
+            </MiniTooltip>
           </Typography>
           <Drawer
             anchor={anchor}

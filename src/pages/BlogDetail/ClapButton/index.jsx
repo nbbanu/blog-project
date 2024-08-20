@@ -1,5 +1,5 @@
 import { Box, Button as MuiButton, Modal, Typography } from "@mui/material";
-import BasicTooltip from "../../../components/common/BasicTooltip";
+import MiniTooltip from "../../../components/common/MiniTooltip";
 import { useState } from "react";
 import FollowPersonCard from "../../../components/common/FollowPersonCard";
 import Button from "../../../components/common/Button";
@@ -39,14 +39,14 @@ const ClapButton = ({ title, userName,clapCount }) => {
 
   return (
     <div className="clap-box flex flex-center">
-      <BasicTooltip title="Clap">
+      <MiniTooltip title="Clap">
         <i className="fa-solid fa-hands-clapping light-text"></i>
-      </BasicTooltip>
-      <BasicTooltip title="View Clap">
+      </MiniTooltip>
+      <MiniTooltip title="View Clap">
         <span className="light-text fs-13" onClick={handleOpen}>
           {clapCount}
         </span>
-      </BasicTooltip>
+      </MiniTooltip>
 
       <Modal
         open={open}

@@ -40,71 +40,74 @@ const Home = () => {
   if (token) {
     return (
       <div className=" loggedin-home">
-        <div className="container flex">
-          <div className="loggedin-home-left">
-            <HorizantalScrobbleBar />
-            {blogs.length === 0
-              ? [1, 2, 3, 4, 5].map((item) => (
-                  <div
-                    key={item}
-                    className="flex flex-between"
-                    style={{ marginBottom: 25, marginTop: 50 }}
-                  >
-                    <div style={{ width: "100%" }}>
-                      <div
-                        className="flex flex-center"
-                        style={{ marginBottom: 15 }}
-                      >
-                        <Skeleton circle width={24} height={24} />
-                        <Skeleton width={100} style={{ marginLeft: 7 }} />
-                        <Skeleton width={100} style={{ marginLeft: 7 }} />
+        <div className="container">
+          <div className="flex loggedin-home-container">
+            <div className="loggedin-home-left">
+              <HorizantalScrobbleBar />
+              {blogs.length === 0
+                ? [1, 2, 3, 4, 5].map((item) => (
+                    <div
+                      key={item}
+                      className="flex flex-between"
+                      style={{ marginBottom: 25, marginTop: 50 }}
+                    >
+                      <div style={{ width: "100%" }}>
+                        <div
+                          className="flex flex-center"
+                          style={{ marginBottom: 15 }}
+                        >
+                          <Skeleton circle width={24} height={24} />
+                          <Skeleton width={100} style={{ marginLeft: 7 }} />
+                          <Skeleton width={100} style={{ marginLeft: 7 }} />
+                        </div>
+                        <div>
+                          <Skeleton width={200} style={{ marginBottom: 10 }} />
+                          <Skeleton width={300} />
+                          <Skeleton width={300} />
+                        </div>
+                        <div
+                          className="bottom flex"
+                          style={{ marginTop: 15, alignItems: "flex-end" }}
+                        >
+                          <Skeleton width={80} height={25} borderRadius={25} />
+                          <Skeleton width={70} style={{ marginLeft: 15 }} />
+                        </div>
                       </div>
-                      <div>
-                        <Skeleton width={200} style={{ marginBottom: 10 }} />
-                        <Skeleton width={300} />
-                        <Skeleton width={300} />
-                      </div>
-                      <div
-                        className="bottom flex"
-                        style={{ marginTop: 15, alignItems: "flex-end" }}
-                      >
-                        <Skeleton width={80} height={25} borderRadius={25} />
-                        <Skeleton width={70} style={{ marginLeft: 15 }} />
+                      <div className="right" style={{ alignSelf: "flex-end" }}>
+                        <div
+                          className="flex"
+                          style={{ marginRight: 15, alignItems: "flex-end" }}
+                        >
+                          <Skeleton
+                            width={25}
+                            height={25}
+                            style={{ marginRight: 10 }}
+                          />
+                          <Skeleton
+                            width={25}
+                            height={25}
+                            style={{ marginRight: 10 }}
+                            borderRadius={"50%"}
+                          />
+                          <Skeleton
+                            width={25}
+                            height={25}
+                            style={{ marginRight: 25 }}
+                          />
+                          <Skeleton width={120} height={120} />
+                        </div>
                       </div>
                     </div>
-                    <div className="right" style={{ alignSelf: "flex-end" }}>
-                      <div
-                        className="flex"
-                        style={{ marginRight: 15, alignItems: "flex-end" }}
-                      >
-                        <Skeleton
-                          width={25}
-                          height={25}
-                          style={{ marginRight: 10 }}
-                        />
-                        <Skeleton
-                          width={25}
-                          height={25}
-                          style={{ marginRight: 10 }}
-                          borderRadius={"50%"}
-                        />
-                        <Skeleton
-                          width={25}
-                          height={25}
-                          style={{ marginRight: 25 }}
-                        />
-                        <Skeleton width={120} height={120} />
-                      </div>
-                    </div>
-                  </div>
-                ))
-              : blogs.map((blog) => (
+                  ))
+                : blogs.map((blog) => (
                     <BlogCard
                       key={blog.id}
                       bloggerName={blog.user.name}
                       title={blog.title}
                       infoText={blog.description}
-                      releaseDate={dayjs(blog.created_at).format('MMM DD, YYYY')}
+                      releaseDate={dayjs(blog.created_at).format(
+                        "MMM DD, YYYY"
+                      )}
                       profileImg="https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
                       blogImage={blog.image}
                       categoryLink={"Micro Frontends"}
@@ -116,98 +119,101 @@ const Home = () => {
                       openBlogDetail={() => openBlogDetail(blog.title, blog.id)}
                       openBloggerProfile={openBloggerProfile}
                     />
-                ))}
-          </div>
-          <div className="vertical-line"></div>
-          <div className="loggedin-home-right">
-            <div>
-              <h2 className="loggedin-home-right-title primary-text fs-16">
-                Personel Seçimleri
-              </h2>
-              <div className="staff-picks-cards flex flex-column">
-                {Array.from({ length: 3 }).map((index) => (
-                  <StaffPicksCard
-                    key={index}
-                    profileImg={
-                      "https://miro.medium.com/v2/resize:fill:40:40/1*i5p9qg4BGA4i2NXsghlnxQ.png"
-                    }
-                    bloggerName={"Renan Olovics"}
-                    publishedBy={"Middle-Pause"}
-                    title={
-                      "My 25-Year Career in Web Design Through the Eyes of the Wayback Machine"
-                    }
-                  />
-                ))}
-              </div>
-              <Link className="green-text link">Tüm Listeyi Görün</Link>
+                  ))}
             </div>
-            <div className="sticky">
-              <div className="recommended-topics">
+            <div className="vertical-line"></div>
+            <div className="loggedin-home-right">
+              <div>
                 <h2 className="loggedin-home-right-title primary-text fs-16">
-                  Önerilen Konular
+                  Personel Seçimleri
                 </h2>
-                <div className="recommended-topics-links">
-                  <Link className="link gray-link">React</Link>
-                  <Link className="link gray-link">Education</Link>
-                  <Link className="link gray-link">Culture</Link>
-                  <Link className="link gray-link">Blockhain</Link>
-                  <Link className="link gray-link">UX</Link>
-                  <Link className="link gray-link">
-                    Artificial Intelligence
+                <div className="staff-picks-cards flex flex-column">
+                  {Array.from({ length: 3 }).map((index) => (
+                    <StaffPicksCard
+                      key={index}
+                      profileImg={
+                        "https://miro.medium.com/v2/resize:fill:40:40/1*i5p9qg4BGA4i2NXsghlnxQ.png"
+                      }
+                      bloggerName={"Renan Olovics"}
+                      publishedBy={"Middle-Pause"}
+                      title={
+                        "My 25-Year Career in Web Design Through the Eyes of the Wayback Machine"
+                      }
+                    />
+                  ))}
+                </div>
+                <Link className="green-text link">Tüm Listeyi Görün</Link>
+              </div>
+              <div className="sticky">
+                <div className="recommended-topics">
+                  <h2 className="loggedin-home-right-title primary-text fs-16">
+                    Önerilen Konular
+                  </h2>
+                  <div className="recommended-topics-links">
+                    <Link className="link gray-link">React</Link>
+                    <Link className="link gray-link">Education</Link>
+                    <Link className="link gray-link">Culture</Link>
+                    <Link className="link gray-link">Blockhain</Link>
+                    <Link className="link gray-link">UX</Link>
+                    <Link className="link gray-link">
+                      Artificial Intelligence
+                    </Link>
+                  </div>
+                  <Link to="explore-topics" className="green-text link">
+                    Daha Fazla Konu Görün
                   </Link>
                 </div>
-                <Link to="explore-topics" className="green-text link">
-                  Daha Fazla Konu Görün
-                </Link>
+                <div className="recommended-authors flex flex-column">
+                  <h2 className="loggedin-home-right-title primary-text fs-16">
+                    Kimi Takip Etmeli
+                  </h2>
+                  <FollowPersonCard
+                    profieImg={
+                      "https://miro.medium.com/v2/resize:fill:40:40/1*i5p9qg4BGA4i2NXsghlnxQ.png"
+                    }
+                    bloggerName={"Will Locket"}
+                    bloggerInfo={
+                      "Independent journalist covering global politics, climate change and technology. Get articles early at www.planetearthandbeyond.co"
+                    }
+                  />
+                  <FollowPersonCard
+                    profieImg={
+                      "https://miro.medium.com/v2/resize:fill:40:40/1*i5p9qg4BGA4i2NXsghlnxQ.png"
+                    }
+                    bloggerName={"Will Locket"}
+                    bloggerInfo={
+                      "Independent journalist covering global politics, climate change and technology. Get articles early at www.planetearthandbeyond.co"
+                    }
+                  />
+                  <FollowPersonCard
+                    profieImg={
+                      "https://miro.medium.com/v2/resize:fill:40:40/1*i5p9qg4BGA4i2NXsghlnxQ.png"
+                    }
+                    bloggerName={"Will Locket"}
+                    bloggerInfo={
+                      "Independent journalist covering global politics, climate change and technology. Get articles early at www.planetearthandbeyond.co"
+                    }
+                  />
+                  <Link className="green-text link">
+                    Daha Fazla Öneri Görün
+                  </Link>
+                </div>
+                <div className="reading-list">
+                  <h2 className="loggedin-home-right-title primary-text fs-16">
+                    Okuma Listesi
+                  </h2>
+                  <p className="reading-list-text fs-14 light-text">
+                    Click the
+                    <i
+                      className="fa-regular fa-bookmark light-text fs-20"
+                      style={{ marginRight: 10, marginLeft: 10 }}
+                    ></i>
+                    on any story to easily add it to your reading list or a
+                    custom list that you can share.
+                  </p>
+                </div>
+                <Footer />
               </div>
-              <div className="recommended-authors flex flex-column">
-                <h2 className="loggedin-home-right-title primary-text fs-16">
-                  Kimi Takip Etmeli
-                </h2>
-                <FollowPersonCard
-                  profieImg={
-                    "https://miro.medium.com/v2/resize:fill:40:40/1*i5p9qg4BGA4i2NXsghlnxQ.png"
-                  }
-                  bloggerName={"Will Locket"}
-                  bloggerInfo={
-                    "Independent journalist covering global politics, climate change and technology. Get articles early at www.planetearthandbeyond.co"
-                  }
-                />
-                <FollowPersonCard
-                  profieImg={
-                    "https://miro.medium.com/v2/resize:fill:40:40/1*i5p9qg4BGA4i2NXsghlnxQ.png"
-                  }
-                  bloggerName={"Will Locket"}
-                  bloggerInfo={
-                    "Independent journalist covering global politics, climate change and technology. Get articles early at www.planetearthandbeyond.co"
-                  }
-                />
-                <FollowPersonCard
-                  profieImg={
-                    "https://miro.medium.com/v2/resize:fill:40:40/1*i5p9qg4BGA4i2NXsghlnxQ.png"
-                  }
-                  bloggerName={"Will Locket"}
-                  bloggerInfo={
-                    "Independent journalist covering global politics, climate change and technology. Get articles early at www.planetearthandbeyond.co"
-                  }
-                />
-                <Link className="green-text link">Daha Fazla Öneri Görün</Link>
-              </div>
-              <div className="reading-list">
-                <h2 className="loggedin-home-right-title primary-text fs-16">
-                  Okuma Listesi
-                </h2>
-                <p className="reading-list-text fs-14 light-text">
-                  Click the
-                  <i
-                    className="fa-regular fa-bookmark light-text fs-20"
-                    style={{ marginRight: 10, marginLeft: 10 }}
-                  ></i>
-                  on any story to easily add it to your reading list or a custom
-                  list that you can share.
-                </p>
-              </div>
-              <Footer />
             </div>
           </div>
         </div>
@@ -227,7 +233,7 @@ const Home = () => {
               bloggerName={blog.user.name}
               title={blog.title}
               description={blog.description}
-              releaseDate={dayjs(blog.created_at).format('MMM DD, YYYY')}
+              releaseDate={dayjs(blog.created_at).format("MMM DD, YYYY")}
               profileImg="https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
               miniCardImg={
                 <img

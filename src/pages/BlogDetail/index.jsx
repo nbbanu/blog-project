@@ -9,7 +9,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import BloggerTooltip from "../../components/common/BloggerTooltip";
 import dayjs from "dayjs";
 import CommentButton from "./CommentButton";
-import BasicTooltip from "../../components/common/BasicTooltip";
+import MiniTooltip from "../../components/common/MiniTooltip";
 
 const BlogDetailPage = () => {
   const [blog, setBlog] = useState("");
@@ -184,24 +184,24 @@ const BlogDetailPage = () => {
                   </ul>
                   <ul className="flex flex-center header-lists-right">
                     <li className="link">
-                      <BasicTooltip title={"Save"}>
+                      <MiniTooltip title={"Save"}>
                         <i className="fa-regular fa-bookmark light-text"></i>
-                      </BasicTooltip>
+                      </MiniTooltip>
                     </li>
                     <li className="link">
-                      <BasicTooltip title={"Listen"}>
+                      <MiniTooltip title={"Listen"}>
                         <i className="fa-regular fa-circle-play light-text"></i>
-                      </BasicTooltip>
+                      </MiniTooltip>
                     </li>
                     <li className="link">
-                      <BasicTooltip title={"Share"}>
+                      <MiniTooltip title={"Share"}>
                         <i className="fa-solid fa-arrow-up-from-bracket light-text"></i>
-                      </BasicTooltip>
+                      </MiniTooltip>
                     </li>
                     <li className="link">
-                      <BasicTooltip title={"More"}>
+                      <MiniTooltip title={"More"}>
                         <i className="fa-solid fa-ellipsis light-text"></i>
-                      </BasicTooltip>
+                      </MiniTooltip>
                     </li>
                   </ul>
                 </div>

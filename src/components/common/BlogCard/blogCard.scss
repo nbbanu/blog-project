@@ -35,6 +35,7 @@
       gap: 15px;
       i {
         cursor: pointer;
+        
       }
       .minus {
         border: 1px solid var(--secondary-color);
@@ -43,5 +44,9 @@
         font-size: 10px;
       }
     }
+  }
+  .mini-tooltip-content{
+    transform: translateY(calc(-100% - 10px)) !important;
+    left: -10px !important;
   }
 }

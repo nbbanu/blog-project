@@ -1,7 +1,9 @@
 .loggedin-home {
   .container {
-    padding-top: 0;
     position: relative;
+
+  }
+  .loggedin-home-container{
     @include responsive(phone) {
       & {
         padding: 0 10px;

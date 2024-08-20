@@ -1,4 +1,7 @@
 import { Link } from "react-router-dom";
+import MiniTooltip from "../MiniTooltip";
+import { useState } from "react";
+import BasicPopup from "../BasicPopup";
 
 const blogCard = ({
   bloggerName,
@@ -12,7 +15,8 @@ const blogCard = ({
   dot,
   blogImage,
   openBlogDetail,
-  openBloggerProfile}) => {
+  openBloggerProfile,
+}) => {
   return (
     <div>
       <div className="blog-card flex flex-center">
@@ -24,7 +28,10 @@ const blogCard = ({
               alt="avatar"
               style={{ width: 24, height: 24 }}
             />
-            <span className="blogger-name fs-14 primary-text" onClick={openBloggerProfile}>
+            <span
+              className="blogger-name fs-14 primary-text"
+              onClick={openBloggerProfile}
+            >
               {bloggerName}
             </span>
             {dot}
@@ -50,13 +57,29 @@ const blogCard = ({
               </span>
             </div>
             <div className="blog-card-bottom-right flex flex-center">
-              <i className="fa-regular fa-bookmark light-text fs-20"></i>
+              <BasicPopup
+                clickItem={
+                  <MiniTooltip title={"Save"}>
+                    <i className="fa-regular fa-bookmark light-text fs-20"></i>
+                  </MiniTooltip>
+                }
+                children={
+                  <div>
+                    <select name="reading-list" id="reading-list"></select>
+                  </div>
+                }
+              />
+
               {minusIcon}
               <i className="fa-solid fa-ellipsis light-text fs-20"></i>
             </div>
           </div>
         </div>
-        <div className="blog-image-box" style={{ width: 112, height: 112 }} onClick={openBlogDetail}>
+        <div
+          className="blog-image-box"
+          style={{ width: 112, height: 112 }}
+          onClick={openBlogDetail}
+        >
           <img src={blogImage} alt="blog-image" className="img-cover" />
         </div>
       </div>

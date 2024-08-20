@@ -14,21 +14,21 @@ const ProfilePage = () => {
       <AuthModal
         show={show}
         setShowModal={setShowModal}
-        children={
-      <EditProfileModal setShowModal={setShowModal}/>
-        }
+        children={<EditProfileModal setShowModal={setShowModal} />}
       />
       <div className=" profile-page">
         <div className="profile-page-left flex flex-column">
           <div className="profile-page-left-top flex">
-            <img
-              src="/https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
-              alt="avatar"
-              className="avatar resp-profile-img"
-              style={{ width: 48, height: 48, display: "none" }}
-            />
-            <span className="profile-page-left-top-userName">Banubkrli</span>
-            <div className="profile-page-left-top-options">
+            <div className="flex flex-center">
+              <img
+                src="https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+                alt="avatar"
+                className="avatar resp-profile-img"
+                style={{ width: 48, height: 48, display: "none" }}
+              />
+              <span className="left-userName">Banubkrli</span>
+            </div>
+            <div className="profile-page-options">
               <i
                 className="fa-solid fa-ellipsis"
                 style={{ color: "rgba(0,0,0,0.8)" }}

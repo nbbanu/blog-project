@@ -1,0 +1,120 @@
+.mini-tooltip-content {
+  transform: translateY(calc(-100% - 10px)) !important;
+  left: -10px !important;
+}
+.bookmark-modal-content,
+.create-list-modal {
+  .checkboxes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .custom-checkbox {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  /* Checkbox input'unu gizleme */
+  .custom-checkbox input {
+    opacity: 0;
+    position: absolute;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  /* Checkmark stilini ayarlama */
+  .checkmark {
+    position: relative;
+    display: inline-block;
+    width: 17px;
+    height: 18px;
+    background-color: #fff;
+    border-radius: 2px;
+    margin-right: 10px;
+    border: 1px solid rgb(229, 229, 229);
+  }
+
+  /* Checkmark içindeki işaretin görünümünü ayarlama */
+  .custom-checkbox input:checked + .checkmark {
+    background-color: var(--succes-color);
+  }
+
+  /* Checkmark'ta işaret göstermek */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+
+  /* İşaret görünür hale geldiğinde */
+  .custom-checkbox input:checked + .checkmark:after {
+    display: block;
+    right: 4px;
+    bottom: 5px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(37deg);
+  }
+
+  .light-line {
+    margin: 20px 0 !important;
+  }
+  .create-list-btn {
+    color: var(--succes-color);
+    padding: 0;
+    font-size: 16px;
+  }
+}
+.create-list-modal {
+  width: 100%;
+  padding: 44px 56px;
+
+  .modal-title {
+    margin-bottom: 60px;
+  }
+  .create-list-form {
+    width: 100%;
+    .modal-inputs {
+      width: 100%;
+
+      .list-name-input {
+        width: 100%;
+        padding: 10px 12px;
+        background-color: var(--light-border-color);
+        border-radius: 4px;
+        outline: none;
+        border: none;
+        font-weight: 400;
+      }
+      input:focus {
+        border: 1px solid var(--primary-color);
+      }
+      .character-length {
+        .error-area {
+          color: #c94a4a;
+          font-weight: 400;
+        }
+        justify-content: space-between;
+        margin-top: 10px;
+        width: 100%;
+        span {
+          font-weight: 400;
+        }
+      }
+      .add-desc-btn {
+        margin-bottom: 20px;
+        color: var(--succes-color);
+        padding: 0;
+        font-size: 16px;
+      }
+    }
+  }
+
+  .buttons {
+    gap: 10px;
+  }
+}

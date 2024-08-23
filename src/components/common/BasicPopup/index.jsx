@@ -33,13 +33,7 @@ const BasicPopup = ({ clickItem, children }) => {
       )}
       <div className="popup-container">
         {showPopup ? (
-  
-            <div
-              className="popup flex flex-column"
-              onClick={() => setShowPopup(false)}
-            >
-              {children}
-            </div>
+          <div className="popup flex flex-column">{children}</div>
         ) : (
           ""
         )}

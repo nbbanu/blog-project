@@ -9,8 +9,6 @@ const AuthModal = ({
   closeModal,
 }) => {
 
-
-
   return (
     <div className={`auth-modal flex flex-center-center ${show && "open"}`}>
       <Modal

@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import MiniTooltip from "../MiniTooltip";
 import { useState } from "react";
 import BasicPopup from "../BasicPopup";
+import  Button  from "../Button";
+import SaveButton from "../../../pages/BlogDetail/SaveButton";
 
 const blogCard = ({
   bloggerName,
@@ -17,6 +19,7 @@ const blogCard = ({
   openBlogDetail,
   openBloggerProfile,
 }) => {
+
   return (
     <div>
       <div className="blog-card flex flex-center">
@@ -57,19 +60,7 @@ const blogCard = ({
               </span>
             </div>
             <div className="blog-card-bottom-right flex flex-center">
-              <BasicPopup
-                clickItem={
-                  <MiniTooltip title={"Save"}>
-                    <i className="fa-regular fa-bookmark light-text fs-20"></i>
-                  </MiniTooltip>
-                }
-                children={
-                  <div>
-                    <select name="reading-list" id="reading-list"></select>
-                  </div>
-                }
-              />
-
+              <SaveButton/>
               {minusIcon}
               <i className="fa-solid fa-ellipsis light-text fs-20"></i>
             </div>

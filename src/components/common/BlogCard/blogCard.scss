@@ -7,16 +7,14 @@
       .blogger-name {
         font-weight: 400;
         margin-left: 8px;
-        cursor: pointer ;
+        cursor: pointer;
       }
-  
     }
-    &-title{
+    &-title {
       cursor: pointer;
     }
-
   }
-  &-release-date{
+  &-release-date {
     cursor: pointer;
   }
 
@@ -35,7 +33,6 @@
       gap: 15px;
       i {
         cursor: pointer;
-        
       }
       .minus {
         border: 1px solid var(--secondary-color);
@@ -45,8 +42,5 @@
       }
     }
   }
-  .mini-tooltip-content{
-    transform: translateY(calc(-100% - 10px)) !important;
-    left: -10px !important;
-  }
+ 
 }

@@ -8,8 +8,12 @@ const SaveButton = () => {
   const [show, setShowModal] = useState(false);
   const [showDescInput, setShowDescInput] = useState(false);
   const [listName, setListName] = useState("");
+  const [description, setDescription] = useState("");
   const [listNameCharacterCount, setListNameCharacterCount] = useState(0);
+  const [descriptionCharacterCount, setDescriptionCharacterCount] = useState(0);
   const [listNameError, setListNameError] = useState("");
+  const [descriptionError, setDescriptionError] = useState("");
+  const [isPrivate, setIsPrivate] = useState(false);
 
   const openCreateListModal = () => {
     setShowModal(!show);
@@ -17,7 +21,6 @@ const SaveButton = () => {
   const handleListNameChange = (e) => {
     setListName(e.target.value);
     setListNameCharacterCount(e.target.value.length);
-    console.log(listName);
 
     if (e.target.value.length > 60) {
       setListNameError("İsim en fazla 60 karakterden oluşabilir.");
@@ -25,9 +28,37 @@ const SaveButton = () => {
       setListNameError("");
     }
   };
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
+    setDescriptionCharacterCount(e.target.value.length);
+    console.log(description);
+
+    if (e.target.value.length > 280) {
+      setDescriptionError("İsim en fazla 280 karakterden oluşabilir.");
+    } else {
+      setDescriptionError("");
+    }
+  };
   const showDescriptionInput = (e) => {
     e.preventDefault();
     setShowDescInput(!showDescInput);
+  };
+
+  const createReadingList = (e) => {
+    e.preventDefault();
+    const readingListFormData = {
+      listName,
+      description,
+      isPrivate,
+    };
+  };
+  const cancelReadingListForm = (e) => {
+    e.preventDefault();
+    setListName("");
+    setDescription("");
+    setListNameCharacterCount(0);
+    setDescriptionCharacterCount(0);
+    setShowModal(false);
   };
 
   return (
@@ -42,7 +73,7 @@ const SaveButton = () => {
             </h2>
             <form className="create-list-form">
               <div className="modal-inputs">
-                <div style={{ marginBottom: "20px" }}>
+                <div>
                   <input
                     value={listName}
                     type="text"
@@ -68,7 +99,10 @@ const SaveButton = () => {
                   </div>
                 </div>
                 <>
-                  <div style={{display: showDescInput ? "none" : "flex"}}>
+                  <div
+                    style={{ display: showDescInput ? "none" : "flex" }}
+                    className="add-desc-area"
+                  >
                     <Button
                       title="Bir açıklama ekle"
                       className={"border-none ghost add-desc-btn"}
@@ -76,7 +110,39 @@ const SaveButton = () => {
                     />
                   </div>
 
-                  {showDescInput && <div>açıklama ekle</div>}
+                  {showDescInput && (
+                    <div style={{ marginTop: "20px", marginBottom: "20px" }}>
+                      <input
+                        value={description}
+                        type="text"
+                        name="list-name"
+                        placeholder="Bir açıklama ekle"
+                        className="list-name-input"
+                        onChange={handleDescriptionChange}
+                        style={{
+                          borderColor: descriptionError ? "#C94A4A" : "",
+                        }}
+                      />
+                      <div className="character-length flex">
+                        <div className="error-area fs-13">
+                          {descriptionError}
+                        </div>
+                        <div>
+                          <span
+                            className="entered-character fs-13 primary-text"
+                            style={{
+                              color: description.length > 280 ? "#C94A4A" : "",
+                            }}
+                          >
+                            {descriptionCharacterCount}
+                          </span>
+                          <span className="total-character fs-13 light-text">
+                            /280
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </>
               </div>
               <div>
@@ -87,10 +153,16 @@ const SaveButton = () => {
                 </label>
               </div>
               <div className="flex flex-center buttons">
-                <Button title="Cancel" className={"ghost"}></Button>
+                <Button
+                  title="Cancel"
+                  className={"ghost"}
+                  handleClick={cancelReadingListForm}
+                ></Button>
                 <Button
                   title="Create"
                   className={"success create-btn"}
+                  disabled={listName.length > 0 ? false : true}
+                  handleClick={createReadingList}
                 ></Button>
               </div>
             </form>

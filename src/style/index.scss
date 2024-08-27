@@ -25,6 +25,7 @@
 @import "../../src/pages/Profile/paths/ProfilePageHome/profilePage-home.scss";
 @import "../../src/pages/Profile/paths/ProfilePageAbout/profilePAge-about.scss";
 @import "../../src/pages/Profile/paths/Lists/lists.scss";
+@import "../../src/pages/Profile/paths/Lists/ListCard/list-card.scss";
 @import "../../src/pages/Write/write.scss";
 @import "../../src/pages/Topics/topics.scss";
 @import "../../src/pages/Admin/admin.scss";
@@ -39,6 +40,7 @@
 @import "../../src/pages/BlogDetail/CommentButton/RepliesButton/replies-button.scss";
 @import "../../src/pages/BlogDetail/CommentButton/ReplyCard/reply-card.scss";
 @import "../../src/pages/Profile/EditProfileModal/edit-profile-modal.scss";
+@import "../pages/Profile/paths/ReadingListPage/reading-list-page.scss";
 
 :root {
   font-family: "Roboto", sans-serif;

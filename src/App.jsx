@@ -16,11 +16,9 @@ import Admin from "./pages/Admin";
 import CategoriesPage from "./pages/Admin/CategoriesPage";
 import HomePage from "./pages/Admin/HomePage";
 import BlogDetailPage from "./pages/BlogDetail";
-
-
+import ReadingListPage from "./pages/Profile/paths/ReadingListPage";
 
 function App() {
-
   return (
     <div>
       {/* Provider component’imizin diğer componentler tarafında erişilebilir olmasını sağlayabilmek için component ağacımızın en üstüne yerleştirmemiz gerekir. */}
@@ -31,20 +29,23 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="new-story" element={<WritePage />} />
-              <Route path="/:userName" element={<ProfilePage/>}>                
-                <Route path="main" element={<ProfilePageHome/>}/>
-                <Route path="lists" element={<Lists/>}/>
-                <Route path="about" element={<ProfilePageAbout/>}/>
+              <Route path="/:userName" element={<ProfilePage />}>
+                <Route path="main" element={<ProfilePageHome />} />
+                <Route path="lists" element={<Lists />} />
+                <Route path="reading-list" element={<ReadingListPage />} />
+                <Route path="about" element={<ProfilePageAbout />} />
               </Route>
-              <Route path="explore-topics" element={<Topics/>}/>
-              <Route path="search" element={<Search/>}/>
-              <Route path="admin" element={<Admin/>}>
-                <Route path="" element={<HomePage/>}/>
-                <Route path="categories" element={<CategoriesPage/>}/>
+              <Route path="explore-topics" element={<Topics />} />
+              <Route path="search" element={<Search />} />
+              <Route path="admin" element={<Admin />}>
+                <Route path="" element={<HomePage />} />
+                <Route path="categories" element={<CategoriesPage />} />
               </Route>
-              <Route path="detail/:blogTitle/:id" element={<BlogDetailPage/>}/>
+              <Route
+                path="detail/:blogTitle/:id"
+                element={<BlogDetailPage />}
+              />
             </Routes>
-            
           </CreateBlogProvider>
         </AuthProvider>
       </LangProvider>

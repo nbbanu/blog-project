@@ -32,10 +32,10 @@ const UserPopup = ({ clickItem }) => {
           }}
         />
       )}
-      <div className="popup-container">
+      <div className="user-popup-container">
         {showPopup ? (
           <div
-            className="popup flex flex-column"
+            className="user-popup flex flex-column"
             onClick={() => setShowPopup(false)}
           >
             <>

@@ -1,0 +1,44 @@
+.list-card {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  max-height: 144px !important;
+  &-left {
+    cursor: pointer;
+    padding: 24px;
+    border: 1px solid var(--light-border-color);
+    border-radius: 3px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: #f9f9f9;
+    .profile-img {
+      margin-right: 5px;
+    }
+    .list-card-header {
+        margin-bottom: 15px;      
+    }
+    .list-title {
+        font-weight: 700;
+        margin-bottom: 15px;  
+      }
+    .stories {
+      gap: 3px;
+      .story-text {
+        margin-right: 5px;
+      }
+    }
+  }
+  &-right {
+    display: grid;
+    grid-template-columns: 3fr 2fr 1fr;
+    height: 144px;
+    border-radius: 3px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    background-color: #f9f9f9;
+    border: 1px solid var(--light-border-color);
+  }
+  .list-image:not(:last-child){
+    border-right: 3px solid var(--light-border-color);
+  }
+}

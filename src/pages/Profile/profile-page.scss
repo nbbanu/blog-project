@@ -112,7 +112,7 @@
 }
 
 .container {
-  padding-top: 0 !important;
+
   @include responsive(phone) {
     & {
       padding: 0px !important;
@@ -129,7 +129,7 @@
   }
 }
 .loggedin-header {
-  padding-top: 20px !important;
+
   @include responsive(phone) {
     & {
       padding: 20px !important;

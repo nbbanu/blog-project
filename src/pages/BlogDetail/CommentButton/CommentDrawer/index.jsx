@@ -98,7 +98,7 @@ export default function CommentDrawer({ commentCount, userName }) {
           <Typography onClick={toggleDrawer(anchor, true)}>
             <MiniTooltip title="Respond">
               <i
-                className="fa-regular fa-comment light-text"
+                className="fa-regular fa-comment light-text comment-icon"
                 style={{ marginRight: 5 }}
               ></i>
               <span className="light-text fs-13 comment-count">

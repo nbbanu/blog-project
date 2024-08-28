@@ -16,7 +16,7 @@ import Admin from "./pages/Admin";
 import CategoriesPage from "./pages/Admin/CategoriesPage";
 import HomePage from "./pages/Admin/HomePage";
 import BlogDetailPage from "./pages/BlogDetail";
-import ReadingListPage from "./pages/Profile/paths/ReadingListPage";
+import ReadingListPage from "./pages/Profile/ReadingListPage";
 
 function App() {
   return (
@@ -32,9 +32,9 @@ function App() {
               <Route path="/:userName" element={<ProfilePage />}>
                 <Route path="main" element={<ProfilePageHome />} />
                 <Route path="lists" element={<Lists />} />
-                <Route path="reading-list" element={<ReadingListPage />} />
                 <Route path="about" element={<ProfilePageAbout />} />
               </Route>
+              <Route path="/:userName/reading-list" element={<ReadingListPage />} />
               <Route path="explore-topics" element={<Topics />} />
               <Route path="search" element={<Search />} />
               <Route path="admin" element={<Admin />}>

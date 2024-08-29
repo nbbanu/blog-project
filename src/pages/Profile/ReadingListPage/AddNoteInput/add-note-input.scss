@@ -1,0 +1,42 @@
+.input-container {
+  width: 100%;
+  display: inline-flex;
+  border-left: 3px solid var(--light-border-color);
+
+  .add-note-input::before{
+    content: "sdajldakj";
+    position: absolute;
+    width: 50px !important;
+    height: 50px !important;
+  }
+  .add-note-input {
+    position: relative;
+    width: 523px;
+    min-width: 240px;
+    resize: none;
+    margin:0 18px;
+    padding: 10px 12px;
+    font-style: italic;
+    font-weight: 400;
+    outline: none;
+    border: none;
+    background-color: var(--light-border-color);
+    border-radius: 4px;
+  }
+  .add-note-input:focus{
+    border: 1px solid var(--primary-color);
+  }
+  .buttons {
+    display: none;
+    .done-btn{
+        color: var(--succes-color);
+    }
+    @include responsive(phone) {
+        & {
+          flex-direction: column;
+          align-items: flex-end;
+        }
+      }
+  }
+}
+

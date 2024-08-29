@@ -4,6 +4,7 @@ import EditProfileModal from "../EditProfileModal";
 import AuthModal from "../../../components/common/AuthModal";
 import ClapButton from "../../BlogDetail/ClapButton";
 import CommentButton from "../../BlogDetail/CommentButton";
+import AddNoteInput from "./AddNoteInput";
 
 const ReadingListPage = () => {
   const [show, setShowModal] = useState(false);
@@ -54,9 +55,11 @@ const ReadingListPage = () => {
               <ClapButton/>
               <CommentButton/>
               </div>
-          
               <div className="light-line"></div>
             </div>
+          </div>
+          <div>
+            <AddNoteInput/>
           </div>
         </div>
         <div className="reading-list-page-right">

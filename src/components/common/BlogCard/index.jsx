@@ -1,8 +1,4 @@
 import { Link } from "react-router-dom";
-import MiniTooltip from "../MiniTooltip";
-import { useState } from "react";
-import BasicPopup from "../BasicPopup";
-import  Button  from "../Button";
 import SaveButton from "../../../pages/BlogDetail/SaveButton";
 
 const blogCard = ({

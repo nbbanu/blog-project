@@ -187,7 +187,7 @@ const SaveButton = () => {
                       Okuma Listesi
                     </label>
                   </div>
-                  <i className="fa-solid fa-lock primary-text fs-12"></i>
+                  <i className="fa-solid fa-lock primary-text fs-12" style={{marginLeft:7}}></i>
                 </div>
 
                 <div>

@@ -38,13 +38,17 @@
       margin-top: 15px;
       margin-bottom: 25px;
     }
-    .edit-btn {
+    .edit-btn, .view-all-btn {
       display: inline-flex;
       color: var(--succes-color);
       padding-left: 0 !important;
     }
     .edit-btn:hover {
       color: var(--primary-color);
+    }
+    .view-all-btn{
+      color: var(--secondary-color);
+      margin-top: 30px;
     }
     @include responsive(phone) {
       & {

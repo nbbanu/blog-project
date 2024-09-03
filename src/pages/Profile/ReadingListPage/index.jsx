@@ -5,15 +5,20 @@ import AuthModal from "../../../components/common/AuthModal";
 import ClapButton from "../../BlogDetail/ClapButton";
 import CommentButton from "../../BlogDetail/CommentButton";
 import AddNoteInput from "./AddNoteInput";
+import BlogCard from "../../../components/common/BlogCard"
+import { Link, useNavigate } from "react-router-dom";
 
 const ReadingListPage = () => {
   const [show, setShowModal] = useState(false);
+  const navigate = useNavigate();
+
   const openEditProfileModal = () => {
     setShowModal(!show);
   };
+
   return (
     <div className="container">
-         <AuthModal
+      <AuthModal
         show={show}
         setShowModal={setShowModal}
         children={<EditProfileModal setShowModal={setShowModal} />}
@@ -51,16 +56,36 @@ const ReadingListPage = () => {
             <h2 className="reading-list-h2 primary-text fs-32">Reading List</h2>
             <div>
               <div className="light-line"></div>
-              <div className="flex flex-center " style={{gap:25}}>
-              <ClapButton/>
-              <CommentButton/>
+              <div className="flex flex-center " style={{ gap: 25 }}>
+                <ClapButton />
+                <CommentButton />
               </div>
               <div className="light-line"></div>
             </div>
           </div>
-          <div>
-            <AddNoteInput/>
+          <div className="reading-list-blogs">
+            <div className="reading-list-blog">
+              <AddNoteInput />
+              <BlogCard bloggerName={"nbbanu"}
+                releaseDate={"26 Mart"}
+                profileImg={"https://miro.medium.com/v2/resize:fill:48:48/0*PVc8ycK2VwtFt7R0"}
+                title={"🤖 The AI Software Engineer Revolution: Is This the End for Programmers?"}
+                infoText={"Just a century ago, fields and factories were the primary workplaces. The rise of automation shifted the landscape, and now, artificial intelligence is poised to disrupt yet another sector: software engineering. The whispers about AI replacing programmers are getting louder, and tools like Devin are fueling the fire."}
+                blogImage={"https://miro.medium.com/v2/resize:fit:828/format:webp/1*J47lbtGFXdHst9eFjr7jpQ.png"}
+              />
+            </div>
+            <div className="reading-list-blog">
+              <AddNoteInput />
+              <BlogCard bloggerName={"nbbanu"}
+                releaseDate={"26 Mart"}
+                profileImg={"https://miro.medium.com/v2/resize:fill:48:48/0*PVc8ycK2VwtFt7R0"}
+                title={"🤖 The AI Software Engineer Revolution: Is This the End for Programmers?"}
+                infoText={"Just a century ago, fields and factories were the primary workplaces. The rise of automation shifted the landscape, and now, artificial intelligence is poised to disrupt yet another sector: software engineering. The whispers about AI replacing programmers are getting louder, and tools like Devin are fueling the fire."}
+                blogImage={"https://miro.medium.com/v2/resize:fit:828/format:webp/1*J47lbtGFXdHst9eFjr7jpQ.png"}
+              />
+            </div>
           </div>
+
         </div>
         <div className="reading-list-page-right">
           <img
@@ -78,6 +103,10 @@ const ReadingListPage = () => {
             className="ghost border-none sm edit-btn"
             handleClick={openEditProfileModal}
           />
+          {/* <Link className="link" to={"/lists"}> */}
+            <Button title={"Tüm Listeleri Gör"} className={"view-all-btn ghost sm border-none"} handleClick={() => navigate(-1)} />
+          {/* </Link> */}
+
         </div>
       </div>
     </div>

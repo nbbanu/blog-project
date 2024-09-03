@@ -67,6 +67,7 @@ const ProfilePage = () => {
             className="ghost border-none sm edit-btn"
             handleClick={openEditProfileModal}
           />
+
         </div>
 
         <Outlet />

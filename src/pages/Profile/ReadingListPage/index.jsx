@@ -7,13 +7,24 @@ import CommentButton from "../../BlogDetail/CommentButton";
 import AddNoteInput from "./AddNoteInput";
 import BlogCard from "../../../components/common/BlogCard"
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../../contexts/AuthContext";
 
 const ReadingListPage = () => {
   const [show, setShowModal] = useState(false);
+  const { email } = useAuth();
+  const userEmail = "@" + email?.split("@")[0];
   const navigate = useNavigate();
 
   const openEditProfileModal = () => {
     setShowModal(!show);
+  };
+
+  const openBloggerProfile = () => {
+    navigate(`/${userEmail}/main`);
+  };
+
+  const openBlogDetail = (blogTitle, blogId) => {
+    navigate(`detail/${blogTitle}/${blogId}`);
   };
 
   return (
@@ -72,6 +83,8 @@ const ReadingListPage = () => {
                 title={"🤖 The AI Software Engineer Revolution: Is This the End for Programmers?"}
                 infoText={"Just a century ago, fields and factories were the primary workplaces. The rise of automation shifted the landscape, and now, artificial intelligence is poised to disrupt yet another sector: software engineering. The whispers about AI replacing programmers are getting louder, and tools like Devin are fueling the fire."}
                 blogImage={"https://miro.medium.com/v2/resize:fit:828/format:webp/1*J47lbtGFXdHst9eFjr7jpQ.png"}
+                openBloggerProfile = {openBloggerProfile}
+                // openBlogDetail={() => openBlogDetail(blog.title, blog.id)}
               />
             </div>
             <div className="reading-list-blog">
@@ -82,6 +95,8 @@ const ReadingListPage = () => {
                 title={"🤖 The AI Software Engineer Revolution: Is This the End for Programmers?"}
                 infoText={"Just a century ago, fields and factories were the primary workplaces. The rise of automation shifted the landscape, and now, artificial intelligence is poised to disrupt yet another sector: software engineering. The whispers about AI replacing programmers are getting louder, and tools like Devin are fueling the fire."}
                 blogImage={"https://miro.medium.com/v2/resize:fit:828/format:webp/1*J47lbtGFXdHst9eFjr7jpQ.png"}
+                openBloggerProfile = {openBloggerProfile}
+                openBlogDetail={() => openBlogDetail(blog.title, blog.id)}
               />
             </div>
           </div>

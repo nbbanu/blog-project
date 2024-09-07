@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import SaveButton from "../../../pages/BlogDetail/SaveButton";
+import BloggerTooltip from "../BloggerTooltip";
 
 const blogCard = ({
   bloggerName,
@@ -21,18 +22,27 @@ const blogCard = ({
       <div className="blog-card flex flex-center">
         <div className="blog-card-left">
           <div className="blog-card-left-header flex flex-center">
-            <img
-              className="avatar img-cover"
-              src={profileImg}
-              alt="avatar"
-              style={{ width: 24, height: 24 }}
-            />
-            <span
-              className="blogger-name fs-14 primary-text"
-              onClick={openBloggerProfile}
-            >
-              {bloggerName}
-            </span>
+            <div className="blogger-profile flex flex-center">
+              <BloggerTooltip
+                bloggerName={"Banubkrli"}
+                bloggerInformation="Professional domestic abuse advocate by day; a writer by night and a street photographer in my free time. A counsellor in the make."
+                followersCount={"1.2K"}
+                profileImg="https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+              />
+              <img
+                className="avatar img-cover"
+                src={profileImg}
+                alt="avatar"
+                style={{ width: 24, height: 24 }}
+              />
+
+              <span
+                className="blogger-name fs-14 primary-text"
+                onClick={openBloggerProfile}
+              >
+                {bloggerName}
+              </span>
+            </div>
             {dot}
 
             <span className="blog-card-release-date fs-14 light-text">
@@ -56,7 +66,7 @@ const blogCard = ({
               </span>
             </div>
             <div className="blog-card-bottom-right flex flex-center">
-              <SaveButton/>
+              <SaveButton />
               {minusIcon}
               <i className="fa-solid fa-ellipsis light-text fs-20"></i>
             </div>

@@ -4,10 +4,17 @@
     width: 100%;
     &-header {
       margin-bottom: 10px;
+      .blogger-profile{
+        position: relative;
+      }
       .blogger-name {
         font-weight: 400;
         margin-left: 8px;
+        margin-right: 8px;
         cursor: pointer;
+      }
+      .blogger-profile:hover .tooltip-container {
+        display: flex;
       }
     }
     &-title {

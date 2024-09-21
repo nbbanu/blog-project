@@ -200,9 +200,8 @@ const EditProfileModal = ({ setShowModal }) => {
               className={"success"}
               title={"Save"}
               disabled={
-                userName.length > 0 && userNameCharacterCount < 50
-                  ? false
-                  : true
+                !userName.length > 0 && !userNameCharacterCount < 50
+              
               }
               handleClick={saveEditForm}
             />

@@ -142,7 +142,7 @@ const BlogViewModal = ({ clickItem, newBlog }) => {
                     title={"Şimdi Yayınla"}
                     className={"success"}
                     handleClick={createBlogItems}
-                    disabled={topicIds.length > 0 ? false : true}
+                    disabled={!topicIds.length > 0}
                   />
                   <Button
                     title={"Sonrası için planla"}

@@ -33,12 +33,12 @@ const CommentForm = ({placeholder}) => {
         onChange={handleChange}
       />
       <Box sx={{ alignSelf: "flex-end" }}>
-        <Button title={"Cancel"} className="ghost border-none" />
+        <Button title={"İptal Et"} className="ghost border-none" />
         <Button
           handleClick={handleSubmit}
-          title={"Respond"}
+          title={"Yanıtla"}
           className="success"
-          disabled={respondText ? false : true}
+          disabled={!respondText}
         />
       </Box>
     </form>

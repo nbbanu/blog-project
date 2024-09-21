@@ -161,7 +161,7 @@ const SaveButton = () => {
                 <Button
                   title="Create"
                   className={"success create-btn"}
-                  disabled={listName.length > 0 ? false : true}
+                  disabled={!listName.length > 0}
                   handleClick={createReadingList}
                 ></Button>
               </div>

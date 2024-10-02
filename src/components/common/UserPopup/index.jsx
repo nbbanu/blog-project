@@ -47,7 +47,7 @@ const UserPopup = ({ clickItem }) => {
                   <i className="fa-regular fa-user fs-20 "></i>
                   <span className=" fs-14">Profil</span>
                 </Link>
-                <Link className="link flex flex-center  light-text">
+                <Link to={`/${userEmail}/lists`} className="link flex flex-center  light-text">
                   <i className="fa-regular fa-bookmark fs-20"></i>
                   <span className="fs-14">Kütüphane</span>
                 </Link>

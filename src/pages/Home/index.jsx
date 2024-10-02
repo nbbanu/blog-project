@@ -128,17 +128,17 @@ const Home = () => {
                   Personel Seçimleri
                 </h2>
                 <div className="staff-picks-cards flex flex-column">
-                  {Array.from({ length: 3 }).map((index) => (
+                  {blogs.slice(0, 3).map((blog) => (
                     <StaffPicksCard
-                      key={index}
+                      key={blog.id}
                       profileImg={
                         "https://miro.medium.com/v2/resize:fill:40:40/1*i5p9qg4BGA4i2NXsghlnxQ.png"
                       }
-                      bloggerName={"Renan Olovics"}
+                      bloggerName={blog.user.name}
                       publishedBy={"Middle-Pause"}
-                      title={
-                        "My 25-Year Career in Web Design Through the Eyes of the Wayback Machine"
-                      }
+                      title={blog.title}
+                      openBlogDetail={() => openBlogDetail(blog.title, blog.id)}
+                      openBloggerProfile={openBloggerProfile}
                     />
                   ))}
                 </div>
@@ -198,18 +198,44 @@ const Home = () => {
                     Daha Fazla Öneri Görün
                   </Link>
                 </div>
+                <div className="recently-saved">
+                  <h2 className="loggedin-home-right-title primary-text fs-16">
+                    Son Kaydedilenler
+                  </h2>
+                  <div className="staff-picks-cards flex flex-column">
+                    {blogs.slice(0, 4).map((blog) => (
+                      <StaffPicksCard
+                        key={blog.id}
+                        profileImg={
+                          "https://miro.medium.com/v2/resize:fill:40:40/1*i5p9qg4BGA4i2NXsghlnxQ.png"
+                        }
+                        bloggerName={blog.user.name}
+                        publishedBy={"Middle-Pause"}
+                        title={blog.title}
+                        openBlogDetail={() =>
+                          openBlogDetail(blog.title, blog.id)
+                        }
+                        openBloggerProfile={openBloggerProfile}
+                      />
+                    ))}
+                  </div>
+
+                  <Link to={`/${userEmail}/lists`} className="green-text link">
+                    Daha Fazla Kaydedilenler Görün
+                  </Link>
+                </div>
                 <div className="reading-list">
                   <h2 className="loggedin-home-right-title primary-text fs-16">
                     Okuma Listesi
                   </h2>
                   <p className="reading-list-text fs-14 light-text">
-                    Click the
+                    Herhangi bir hikayenin üzerine
                     <i
                       className="fa-regular fa-bookmark light-text fs-20"
                       style={{ marginRight: 10, marginLeft: 10 }}
                     ></i>
-                    on any story to easily add it to your reading list or a
-                    custom list that you can share.
+                    tıklayarak onu kolayca okuma listenize ekleyebilir veya
+                    paylaşabileceğiniz özel bir liste oluşturabilirsiniz.
                   </p>
                 </div>
                 <Footer />

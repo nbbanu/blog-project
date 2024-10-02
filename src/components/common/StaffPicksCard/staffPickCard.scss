@@ -1,11 +1,21 @@
-.staff-pick-card{
-    gap: 10px;
-    .blogger-name{
-        margin-right: 4px;
-        margin-left: 10px;
-        cursor: pointer;
-    }
-    .publishedBy, .staff-pick-title{
-        cursor: pointer;
-    }
+.staff-pick-card {
+  gap: 10px;
+  .blogger-profile {
+    position: relative;
+  }
+  .blogger-profile:hover .tooltip-container {
+    display: flex;
+  }
+  .tooltip-container{
+    left: -50%;
+  }
+  .blogger-name {
+    margin-right: 4px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  .publishedBy,
+  .staff-pick-title {
+    cursor: pointer;
+  }
 }

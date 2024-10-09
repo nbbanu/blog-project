@@ -7,8 +7,9 @@ import UserPopup from "../UserPopup";
 import SearchInput from "../SearchInput";
 import AuthenticationButton from "../AuthenticationButton";
 import LoginForm from "../LoginForm";
+import SignUpForm from "../SignUpForm";
 
-const Header = ({closeModal}) => {
+const Header = () => {
   const [show, setShowModal] = useState(false);
   const [createModalShow, setCreateModalShow] = useState(false);
 
@@ -20,10 +21,10 @@ const Header = ({closeModal}) => {
 
     if (window.scrollY > 462) {
       header?.classList.add("white-header");
-      button.classList.add("success");
+      // button.classList.add("success");
     } else {
       header?.classList.remove("white-header");
-      button.classList.remove("success");
+      // button.classList.remove("success");
     }
   });
 
@@ -99,20 +100,20 @@ const Header = ({closeModal}) => {
               <>
                 <h2 className="modal-header">Tekrar Hoşgeldiniz.</h2>
                 <div className="modal-sign-up flex flex-column flex-center-center">
-                  <LoginForm onClick={closeModal} />
+                  <LoginForm setShowModal={setShowModal} />
                   <div className="modal-sign-up-buttons flex flex-column">
                     {/* <AuthenticationButton
                   className={"success fs-16"}
                   title={"Giriş Yap"}
                 /> */}
-                    <AuthenticationButton
+                    {/* <AuthenticationButton
                       icon={"fa-brands fa-google"}
                       title={"Sign in with Google"}
                     />
                     <AuthenticationButton
                       icon={"fa-brands fa-facebook"}
                       title={"Sign in with Facebook"}
-                    />
+                    /> */}
                     {/* <AuthenticationButton
                   icon={"fa-brands fa-apple"}
                   title={"Sign in with Apple"}
@@ -128,7 +129,7 @@ const Header = ({closeModal}) => {
                     <Button
                       className="modal-button fs-16"
                       title={"Oluştur"}
-                      handleClick={handleClick}
+                      handleClick={modalClick}
                     />
                   </div>
                 </div>
@@ -147,18 +148,7 @@ const Header = ({closeModal}) => {
                 <h2 className="modal-header">Medium'a Katılın.</h2>
                 <div className="modal-sign-up flex flex-column flex-center-center">
                   <div className="modal-sign-up-buttons flex flex-column">
-                    <AuthenticationButton
-                      icon={"fa-brands fa-google"}
-                      title={"Sign up with Google"}
-                    />
-                    <AuthenticationButton
-                      icon={"fa-brands fa-facebook"}
-                      title={"Sign up with Facebook"}
-                    />
-                    <AuthenticationButton
-                      icon={"fa-regular fa-envelope"}
-                      title={"Sign up with email"}
-                    />
+                    <SignUpForm/>
                   </div>
                   <div>
                     <span className="primary-text">

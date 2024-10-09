@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  getAllCategories,
   getAllCategoryTopics,
-  getAllSubcategories,
   getAllTopics,
 } from "../../service";
 import SearchInput from "../../components/common/SearchInput";

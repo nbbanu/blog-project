@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
-import Button from "../Button";
+import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
 
 const HorizantalScrobbleBar = () => {
   const slider = document.querySelector(".scrobble-area");
   const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [linkActive, setLinkActive] = useState(false);
 
   const sliderLeft = () => {
     slider.scrollLeft = slider.scrollLeft - 200;
@@ -14,15 +14,33 @@ const HorizantalScrobbleBar = () => {
   };
   const sliderRight = () => {
     slider.scrollLeft = slider.scrollLeft + 200;
-
     setShowLeftArrow(true);
   };
 
-  return (
-    <div >
+  const tags = [
+    "Senin İçin",
+    "Takip Edilenler",
+    "Kişisel Gelişim",
+    "Psikoloji",
+    "Sosyal Medya",
+    "Web Geliştirme",
+    "Kodlama",
+    "Yazılım Mühendisliği",
+    "JavaScript",
+    "Tasarım",
+    "Bilim",
+    "Sağlık",
+    "Teknoloji",
+    "Programlama",
+  ];
 
+  return (
+    <div>
       <div className="horizantal-scrobble-bar flex flex-center">
-      <div className="gradient-left" style={{display: showLeftArrow ? "flex" : "none"}}></div>
+        <div
+          className="gradient-left"
+          style={{ display: showLeftArrow ? "flex" : "none" }}
+        ></div>
         <div className="scrobble-area flex flex-center">
           {showLeftArrow ? (
             <i
@@ -30,58 +48,44 @@ const HorizantalScrobbleBar = () => {
               onClick={sliderLeft}
             ></i>
           ) : (
-        
-              <i className="fa-solid fa-plus light-text plus-icon flex flex-center-center"></i>
-   
+            <i className="fa-solid fa-plus light-text plus-icon flex flex-center-center"></i>
           )}
-          <Link className="link">
-            <Button className={"ghost border-none"} title={"For You"} />
-          </Link>
-          <Link className="link">
-            <Button className={"ghost border-none"} title={"Following"} />
-          </Link>
-          <Link className="link">
-            <Button
-              className={"ghost border-none"}
-              title={"Self Improvement"}
-            />
-          </Link>
-          <Link className="link">
-            <Button className={"ghost border-none"} title={"Psychology"} />
-          </Link>
-          <Link className="link">
-            <Button className={"ghost border-none"} title={"Social Media"} />
-          </Link>
-          <Link className="link">
-            <Button className={"ghost border-none"} title={"Web Development"} />
-          </Link>
-          <Link className="link">
-            <Button className={"ghost border-none"} title={"Coding"} />
-          </Link>
-          <Link className="link">
-            <Button
-              className={"ghost border-none"}
-              title={"Software Engineering"}
-            />
-          </Link>
-          <Link className="link">
-            <Button className={"ghost border-none"} title={"JavaScript"} />
-          </Link>
-          <Link className="link">
-            <Button className={"ghost border-none"} title={"Design"} />
-          </Link>
-          <Link className="link">
-            <Button className={"ghost border-none"} title={"Science"} />
-          </Link>
-          <Link className="link">
-            <Button className={"ghost border-none"} title={"Health"} />
-          </Link>
-          <Link className="link">
-            <Button className={"ghost border-none"} title={"Technology"} />
-          </Link>
-          <Link className="link">
-            <Button className={"ghost border-none"} title={"Programming"} />
-          </Link>
+          <ul className=" flex flex-center">
+            {tags.map((tag) => (
+              <li className="link">
+                <a className="link light-text fs-14">{tag}</a>
+              </li>
+            ))}
+          </ul>
+          {/* <NavLink className="link fs-14 light-text">
+           Following
+          </NavLink>
+          <NavLink className="link">
+          
+          </NavLink>
+          <NavLink className="link">
+          </NavLink>
+          <NavLink className="link">
+          </NavLink>
+          <NavLink className="link">
+          </NavLink>
+          <NavLink className="link">
+          </NavLink>
+          <NavLink className="link">
+          
+          </NavLink>
+          <NavLink className="link">
+          </NavLink>
+          <NavLink className="link">
+          </NavLink>
+          <NavLink className="link">
+          </NavLink>
+          <NavLink className="link">
+          </NavLink>
+          <NavLink className="link">
+          </NavLink>
+          <NavLink className="link">
+          </NavLink> */}
         </div>
         <i
           className="fa-solid fa-chevron-right right-arrow light-text"

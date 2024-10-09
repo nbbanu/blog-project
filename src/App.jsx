@@ -17,6 +17,7 @@ import CategoriesPage from "./pages/Admin/CategoriesPage";
 import HomePage from "./pages/Admin/HomePage";
 import BlogDetailPage from "./pages/BlogDetail";
 import ReadingListPage from "./pages/Profile/ReadingListPage";
+import Test from "./pages/Home/Test";
 
 function App() {
   return (
@@ -27,14 +28,19 @@ function App() {
           <CreateBlogProvider>
             <Header />
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<Home />}>
+                <Route path="test" element={<Test/>} />
+              </Route>
               <Route path="new-story" element={<WritePage />} />
               <Route path="/:userName" element={<ProfilePage />}>
                 <Route path="main" element={<ProfilePageHome />} />
                 <Route path="lists" element={<Lists />} />
                 <Route path="about" element={<ProfilePageAbout />} />
               </Route>
-              <Route path="/:userName/reading-list" element={<ReadingListPage />} />
+              <Route
+                path="/:userName/reading-list"
+                element={<ReadingListPage />}
+              />
               <Route path="explore-topics" element={<Topics />} />
               <Route path="search" element={<Search />} />
               <Route path="admin" element={<Admin />}>

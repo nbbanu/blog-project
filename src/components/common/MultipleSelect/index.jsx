@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getAllTopics } from "../../../service";
 import { useAuth } from "../../../contexts/AuthContext";
 import { useCreateBlog } from "../../../contexts/CreateBlogContext";
@@ -13,10 +13,14 @@ const CustomSelect = () => {
   const { token } = useAuth();
   const { setTopicIds } = useCreateBlog();
 
-  const openPopup = async () => {
+  useEffect(() => {
+    loadAllTopicsToPopup();
+  },[])
+
+  const loadAllTopicsToPopup = async () => {
     const topics = await getAllTopics(token);
     setTopics(topics);
-    setShowPopup(!showPopup);
+
   };
 
   const handleClick = (topic) => {
@@ -55,7 +59,7 @@ const CustomSelect = () => {
         )}
 
         <input
-          onClick={openPopup}
+          onClick={() => setShowPopup(!showPopup)}
           type="text"
           placeholder="Bir konu ekleyin..."
           className="search-input"

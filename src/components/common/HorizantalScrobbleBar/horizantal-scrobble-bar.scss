@@ -13,20 +13,31 @@
     margin: 0 20px;
   }
 
-  button {
-    color: var(--secondary-color);
+  ul {
+    gap: 30px;
   }
 
+  a.active {
+    color: var(--primary-color);
+    position: relative;
+    background: "red"
+  }
+  a.active::before {
+    content: "";
+    border-bottom: 1px solid var(--primary-color);
+    width: 100%;
+    position: absolute;
+    bottom: -21px;
+  }
   .right-arrow {
     position: absolute;
-    right: 10px;
+    right: 20px;
     z-index: 2;
   }
   .left-arrow {
     position: absolute;
-    left: 10px;
+    left: 20px;
     z-index: 7;
-
   }
   i:hover,
   button:hover {
@@ -46,9 +57,9 @@
   ::-webkit-scrollbar {
     height: 0px;
   }
-  .link:nth-child(2) {
-    margin-left: 14px;
-  }
+  // .link:nth-child(2) {
+  //   margin-left: 14px;
+  // }
 }
 
 .horizantal-scrobble-bar::after {
@@ -64,7 +75,6 @@
     rgba(255, 255, 255, 0.9) 50%,
     rgb(255, 255, 255) 75%
   );
-
 }
 // .horizantal-scrobble-bar::before {
 //   display: none;

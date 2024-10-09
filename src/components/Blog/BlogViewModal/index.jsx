@@ -14,7 +14,7 @@ const BlogViewModal = ({ clickItem, newBlog }) => {
   const openBlogViewModal = () => {
     setShowBlogModal(!showBlogModal);
   };
-  const closeModal = () => {
+  const closeBlogModal = () => {
     setShowBlogModal(false);
   };
 
@@ -76,7 +76,7 @@ const BlogViewModal = ({ clickItem, newBlog }) => {
       {showBlogModal && (
         <div className="blog-view-modal-container flex flex-center-center">
           <div className="blog-view-modal">
-            <div className="close light-text fs-18" onClick={closeModal}>
+            <div className="close light-text fs-18" onClick={closeBlogModal}>
               X
             </div>
             <div className="blog-view-modal-bottom">

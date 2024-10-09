@@ -1,0 +1,25 @@
+.sign-up-form {
+  width: 300px;
+  gap: 10px;
+  align-items: center;
+  .form-inputs {
+    width: 100%;
+    gap: 10px;
+    .form-input {
+      padding: 3px;
+      margin-bottom: 6px;
+      border: none;
+      border-bottom: 1px solid var(--primary-color);
+      color: var(--primary-color);
+      outline: none;
+      font-size: 16px;
+    }
+    .form-input::placeholder{
+        color: var(--secondary-color);
+        text-align: end;
+    }
+    .error-text{
+        color: red;
+    }
+  }
+}

@@ -38,7 +38,9 @@ export const createBlog = async (body, headers) => {
 export const createTopic = async(body) => {
   return await post("/topics",body);
 };
-
+export const signUp = async(body) => {
+  return await post("user/sign-up", body)
+}
 // *************** GET ***************
 const get = async (url, token) => {
   const request_url = base_api + url;
@@ -94,6 +96,7 @@ export const getAllTopics = async (token) => {
   const data = await get(url, token);
   return data?.data;
 };
+
 
 // *************** PUT ***************
 const put = async (url, body) => {

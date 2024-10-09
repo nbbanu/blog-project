@@ -181,7 +181,8 @@ const WritePage = ({ openBlogViewModal }) => {
               title="Yayınla"
               className={"success md"}
               handleClick={openBlogViewModal}
-              disabled={!title && !text && !url}
+              // disabled={!title && !text && !url}
+              disabled={title && text && url ? false : true}
             />
           }
         />

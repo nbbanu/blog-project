@@ -1,12 +1,13 @@
 .authentication-button{
-    width: 300px;
+    width: 300px !important;
     padding:10px 8px;
     border-radius: 25px;
     outline: none;
     font-size: 16px;
     font-weight: 400;
+    position: relative;
 }
-.authentication-button.success{
+.authentication-button .success{
     padding:10px 8px;
     border-radius: 25px;
     background-color: var(--succes-color);

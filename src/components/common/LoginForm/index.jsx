@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import { signIn } from "../../../service";
 import Loader from "../Loader";
 
-const LoginForm = ({ closeModal }) => {
+const LoginForm = ({ setShowModal }) => {
   const {setEmail} = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -76,7 +76,7 @@ const LoginForm = ({ closeModal }) => {
 
         onLoginSuccess(res?.data?.accessToken);
         localStorage.setItem("email", formData.email);
-        closeModal();
+        setShowModal(false);
       })
       .catch((err) => {
         setError(err.message);
@@ -137,17 +137,17 @@ const LoginForm = ({ closeModal }) => {
         {error}
       </p>
 
-      <div className="form-login-buttons flex flex-column">
+      <div className="form-login-buttons flex flex-center-center flex-column">
         {loading ? <Loader /> : ""}
-        <AuthenticationButton className={"success fs-16"} title={"Giriş Yap"} />
-        {/* <AuthenticationButton
+        <AuthenticationButton className={"authentication-button fs-16 success"} title={"Giriş Yap"} />
+        <AuthenticationButton
           icon={"fa-brands fa-google"}
           title={"Sign in with Google"}
         />
         <AuthenticationButton
           icon={"fa-brands fa-facebook"}
           title={"Sign in with Facebook"}
-        /> */}
+        />
       </div>
     </form>
   );

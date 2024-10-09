@@ -13,6 +13,7 @@ import MiniBlogCard from "../../components/common/MiniBlogCard";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import dayjs from "dayjs";
+import Test from "./Test";
 
 const Home = () => {
   useEffect(() => {

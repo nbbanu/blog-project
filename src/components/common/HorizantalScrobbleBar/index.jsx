@@ -37,55 +37,26 @@ const HorizantalScrobbleBar = () => {
   return (
     <div>
       <div className="horizantal-scrobble-bar flex flex-center">
-        <div
+        {/* <div
           className="gradient-left"
           style={{ display: showLeftArrow ? "flex" : "none" }}
-        ></div>
+        ></div> */}
+        {showLeftArrow ? (
+          <i
+            className="fa-solid fa-chevron-left left-arrow light-text"
+            onClick={sliderLeft}
+          ></i>
+        ) : (
+          <i className="fa-solid fa-plus light-text plus-icon flex flex-center-center"></i>
+        )}
         <div className="scrobble-area flex flex-center">
-          {showLeftArrow ? (
-            <i
-              className="fa-solid fa-chevron-left left-arrow light-text"
-              onClick={sliderLeft}
-            ></i>
-          ) : (
-            <i className="fa-solid fa-plus light-text plus-icon flex flex-center-center"></i>
-          )}
-          <ul className=" flex flex-center">
+          <ul className="tag-list flex flex-center">
             {tags.map((tag) => (
               <li className="link">
                 <a className="link light-text fs-14">{tag}</a>
               </li>
             ))}
           </ul>
-          {/* <NavLink className="link fs-14 light-text">
-           Following
-          </NavLink>
-          <NavLink className="link">
-          
-          </NavLink>
-          <NavLink className="link">
-          </NavLink>
-          <NavLink className="link">
-          </NavLink>
-          <NavLink className="link">
-          </NavLink>
-          <NavLink className="link">
-          </NavLink>
-          <NavLink className="link">
-          
-          </NavLink>
-          <NavLink className="link">
-          </NavLink>
-          <NavLink className="link">
-          </NavLink>
-          <NavLink className="link">
-          </NavLink>
-          <NavLink className="link">
-          </NavLink>
-          <NavLink className="link">
-          </NavLink>
-          <NavLink className="link">
-          </NavLink> */}
         </div>
         <i
           className="fa-solid fa-chevron-right right-arrow light-text"

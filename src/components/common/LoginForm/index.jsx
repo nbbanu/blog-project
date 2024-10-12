@@ -7,7 +7,7 @@ import { signIn } from "../../../service";
 import Loader from "../Loader";
 
 const LoginForm = ({ setShowModal }) => {
-  const {setEmail} = useAuth();
+  const {setEmail,onLoginSuccess} = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
@@ -22,8 +22,6 @@ const LoginForm = ({ setShowModal }) => {
       validateForm();
     }
   }, [formData]);
-
-  const { onLoginSuccess } = useAuth();
 
   const validateForm = () => {
     let emailRegex = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;

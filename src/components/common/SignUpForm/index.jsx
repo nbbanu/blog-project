@@ -5,11 +5,16 @@ import * as yup from "yup";
 import { useEffect, useState } from "react";
 import { signUp } from "../../../service";
 import Swal from "sweetalert2";
+import { useAuth } from "../../../contexts/AuthContext";
 
 const SignUpForm = () => {
-  const [values, setValues] = useState([]);
-
+  // const [values, setValues] = useState([]);
+  // useEffect(() => {
+  
+  // }, [])
+  const { onLoginSuccess } = useAuth();
   let passwordRegex = /^(?=.*[0-9]).{5,16}$/;
+  
   const schema = yup
     .object({
       name: yup
@@ -54,7 +59,6 @@ const SignUpForm = () => {
   });
 
   const onSubmit = (data) => {
-
     signUp(data)
     .then((res) => {
       Swal.fire({
@@ -63,6 +67,8 @@ const SignUpForm = () => {
         icon: "success",
         iconColor: "#ffc016",
       });
+      // onLoginSuccess(res?.data?.accessToken);
+      localStorage.setItem("email", data.email);
     }
     ).catch((err) => {
       console.error(err);

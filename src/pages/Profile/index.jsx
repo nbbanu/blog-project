@@ -1,14 +1,17 @@
 import { Outlet, NavLink } from "react-router-dom";
 import Button from "../../components/common/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AuthModal from "../../components/common/AuthModal";
 import EditProfileModal from "../../pages/Profile/EditProfileModal";
+import { getUserDetailById } from "../../service";
 
 const ProfilePage = () => {
   const [show, setShowModal] = useState(false);
   const openEditProfileModal = () => {
     setShowModal(!show);
   };
+
+
   return (
     <div className="container">
       <AuthModal

@@ -1,25 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AuthModal from "../../../components/common/AuthModal";
 import BasicPopup from "../../../components/common/BasicPopup";
 import Button from "../../../components/common/Button";
 import MiniTooltip from "../../../components/common/MiniTooltip";
+import Swal from "sweetalert2";
+import { createReadingList, getMyLists } from "../../../service";
 
 const SaveButton = () => {
   const [show, setShowModal] = useState(false);
   const [showDescInput, setShowDescInput] = useState(false);
-  const [listName, setListName] = useState("");
+  const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [isPrivate, setIsPrivate] = useState(false);
   const [listNameCharacterCount, setListNameCharacterCount] = useState(0);
   const [descriptionCharacterCount, setDescriptionCharacterCount] = useState(0);
   const [listNameError, setListNameError] = useState("");
   const [descriptionError, setDescriptionError] = useState("");
-  const [isPrivate, setIsPrivate] = useState(false);
+  const [myLists, setMyLists] = useState([]);
+
+  useEffect(() => {
+    loadMyLists();
+  }, []);
+  const loadMyLists = async () => {
+    const data = await getMyLists();
+    setMyLists(data);
+  };
+
 
   const openCreateListModal = () => {
     setShowModal(!show);
   };
   const handleListNameChange = (e) => {
-    setListName(e.target.value);
+    setTitle(e.target.value);
     setListNameCharacterCount(e.target.value.length);
 
     if (e.target.value.length > 60) {
@@ -31,31 +43,54 @@ const SaveButton = () => {
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
     setDescriptionCharacterCount(e.target.value.length);
-    console.log(description);
-
     if (e.target.value.length > 280) {
       setDescriptionError("İsim en fazla 280 karakterden oluşabilir.");
     } else {
       setDescriptionError("");
     }
   };
+  const handleChecked = (e) => {
+    // setIsPrivate(e.target.checked);
+    setIsPrivate(!isPrivate);
+  };
   const showDescriptionInput = (e) => {
     e.preventDefault();
     setShowDescInput(!showDescInput);
   };
 
-  const createReadingList = (e) => {
+  const createList = (e) => {
     e.preventDefault();
     const readingListFormData = {
-      listName,
+      title,
       description,
       isPrivate,
     };
+
+    createReadingList(readingListFormData)
+      .then((res) => {
+        Swal.fire({
+          title: "Okuma Listesi Oluşturuldu",
+          color: "#242424",
+          icon: "success",
+          iconColor: "#ffc016",
+        });
+        setShowModal(false);
+        console.log(readingListFormData);
+      })
+      .catch((err) => {
+        console.error(err.message);
+      })
+      .finally(() => {
+        setTitle("");
+        setDescription("");
+        // setIsPrivate(false);
+      });
   };
   const cancelReadingListForm = (e) => {
     e.preventDefault();
-    setListName("");
+    setTitle("");
     setDescription("");
+    setIsPrivate(false);
     setListNameCharacterCount(0);
     setDescriptionCharacterCount(0);
     setShowModal(false);
@@ -75,7 +110,7 @@ const SaveButton = () => {
               <div className="modal-inputs">
                 <div>
                   <input
-                    value={listName}
+                    value={title}
                     type="text"
                     name="list-name"
                     placeholder="Listene bir isim ver"
@@ -88,7 +123,7 @@ const SaveButton = () => {
                     <div>
                       <span
                         className="entered-character fs-13 primary-text"
-                        style={{ color: listName.length > 60 ? "#C94A4A" : "" }}
+                        style={{ color: title.length > 60 ? "#C94A4A" : "" }}
                       >
                         {listNameCharacterCount}
                       </span>
@@ -147,22 +182,22 @@ const SaveButton = () => {
               </div>
               <div>
                 <label className="custom-checkbox">
-                  <input type="checkbox" />
+                  <input type="checkbox" onClick={handleChecked} />
                   <span className="checkmark primary-text"></span>
                   Sadece ben görmek istiyorum
                 </label>
               </div>
               <div className="flex flex-center buttons">
                 <Button
-                  title="Cancel"
+                  title="İptal Et"
                   className={"ghost"}
                   handleClick={cancelReadingListForm}
                 ></Button>
                 <Button
-                  title="Create"
+                  title="Oluştur"
                   className={"success create-btn"}
-                  disabled={!listName.length > 0}
-                  handleClick={createReadingList}
+                  disabled={!title.length > 0}
+                  handleClick={createList}
                 ></Button>
               </div>
             </form>
@@ -187,7 +222,10 @@ const SaveButton = () => {
                       Okuma Listesi
                     </label>
                   </div>
-                  <i className="fa-solid fa-lock primary-text fs-12" style={{marginLeft:7}}></i>
+                  <i
+                    className="fa-solid fa-lock primary-text fs-12"
+                    style={{ marginLeft: 7 }}
+                  ></i>
                 </div>
 
                 <div>

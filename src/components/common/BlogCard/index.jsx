@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import SaveButton from "../../../pages/BlogDetail/SaveButton";
 import BloggerTooltip from "../BloggerTooltip";
 
+
 const blogCard = ({
   bloggerName,
   releaseDate,
@@ -16,6 +17,7 @@ const blogCard = ({
   openBlogDetail,
   openBloggerProfile,
 }) => {
+
 
   return (
     <div>

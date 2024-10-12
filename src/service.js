@@ -35,12 +35,15 @@ export const createBlog = async (body, headers) => {
   return await post("blog/create", body, headers);
 };
 
-export const createTopic = async(body) => {
-  return await post("/topics",body);
+export const createTopic = async (body) => {
+  return await post("/topics", body);
 };
-export const signUp = async(body) => {
-  return await post("user/sign-up", body)
-}
+export const signUp = async (body) => {
+  return await post("user/sign-up", body);
+};
+export const createReadingList = async (body) => {
+  return await post("list", body);
+};
 // *************** GET ***************
 const get = async (url, token) => {
   const request_url = base_api + url;
@@ -65,9 +68,9 @@ export const getAllBlogs = async () => {
 
 export const getBlogById = async (topicId) => {
   const url = `blog/${topicId}`;
-  const data  = await get(url,topicId);
+  const data = await get(url, topicId);
   return data?.data;
-}
+};
 
 export const getAllCategories = async () => {
   const url = "category";
@@ -87,7 +90,7 @@ export const getAllSubcategories = async () => {
 };
 export const getSubcategoryById = async (categoryId) => {
   const url = `subcategory/${categoryId}`;
-  const data = await get(url,categoryId);
+  const data = await get(url, categoryId);
   return data?.data;
 };
 
@@ -97,7 +100,16 @@ export const getAllTopics = async (token) => {
   return data?.data;
 };
 
-
+export const getUserDetailById = async (userId) => {
+  const url = `user/detail/${userId}`;
+  const data = await get(url, userId);
+  return data?.data;
+};
+export const getMyLists = async () => {
+  const url = "list/my-lists";
+  const data = await get(url);
+  return data?.data;
+}
 // *************** PUT ***************
 const put = async (url, body) => {
   try {
@@ -109,19 +121,18 @@ const put = async (url, body) => {
 };
 export const updateTopics = async (data) => {
   return await put("topics", data);
-} 
-
+};
 
 // *************** DELETE ***************
-const deleteRequest = async (url,id) => {
-  try{
-    const res = axiosInstance.delete(url,id);
+const deleteRequest = async (url, id) => {
+  try {
+    const res = axiosInstance.delete(url, id);
     return res?.data;
-  }catch(error){
+  } catch (error) {
     throw error.response.data;
   }
-}
+};
 
-export const deleteTopic = async(id) =>{
+export const deleteTopic = async (id) => {
   return await deleteRequest(`topics/${id}`);
-}
+};

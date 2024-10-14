@@ -3,7 +3,7 @@ import Button from "../../components/common/Button";
 import { useEffect, useState } from "react";
 import AuthModal from "../../components/common/AuthModal";
 import EditProfileModal from "../../pages/Profile/EditProfileModal";
-import { getUserDetailById } from "../../service";
+import { getMyLists} from "../../service";
 
 const ProfilePage = () => {
   const [show, setShowModal] = useState(false);
@@ -11,7 +11,15 @@ const ProfilePage = () => {
     setShowModal(!show);
   };
 
+  const [myLists, setMyLists] = useState([]);
 
+  useEffect(() => {
+    loadMyLists();
+  }, []);
+  const loadMyLists = async () => {
+    const data = await getMyLists();
+    setMyLists(data);
+  };
   return (
     <div className="container">
       <AuthModal

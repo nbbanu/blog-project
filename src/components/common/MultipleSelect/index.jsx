@@ -74,7 +74,7 @@ const CustomSelect = () => {
           }}
         />
       )}
-      {showPopup && values.length < 5 ? (
+      {showPopup && values?.length < 5 ? (
         <>
           {loading ? <Loader /> : ""}
           <div className="topics-popup-container">

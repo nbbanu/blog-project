@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AuthModal from "../../../components/common/AuthModal";
 import BasicPopup from "../../../components/common/BasicPopup";
 import Button from "../../../components/common/Button";
 import MiniTooltip from "../../../components/common/MiniTooltip";
 import Swal from "sweetalert2";
-import { createReadingList, getMyLists } from "../../../service";
+import { createReadingList } from "../../../service";
 
 const SaveButton = () => {
   const [show, setShowModal] = useState(false);
@@ -16,15 +16,7 @@ const SaveButton = () => {
   const [descriptionCharacterCount, setDescriptionCharacterCount] = useState(0);
   const [listNameError, setListNameError] = useState("");
   const [descriptionError, setDescriptionError] = useState("");
-  const [myLists, setMyLists] = useState([]);
 
-  useEffect(() => {
-    loadMyLists();
-  }, []);
-  const loadMyLists = async () => {
-    const data = await getMyLists();
-    setMyLists(data);
-  };
 
 
   const openCreateListModal = () => {

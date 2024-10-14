@@ -29,7 +29,6 @@ function App() {
             <Header />
             <Routes>
               <Route path="/" element={<Home />}>
-                <Route path="test" element={<Test/>} />
               </Route>
               <Route path="new-story" element={<WritePage />} />
               <Route path="/:userName" element={<ProfilePage />}>

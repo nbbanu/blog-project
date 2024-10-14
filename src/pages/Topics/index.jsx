@@ -28,7 +28,7 @@ const Topics = () => {
       <h2 className="topics-header primary-text text-center">Explore Topics</h2>
       <SearchInput title={"Tüm Konuları Ara"} />
       <div className="light-line"></div>
-      {allTopics.length === 0 ? (
+      {allTopics?.length === 0 ? (
         <div
           className=""
           style={{
@@ -108,7 +108,7 @@ const Topics = () => {
         </div>
       ) : (
         <div className="all-topics">
-          {allTopics.map((category, id) => (
+          {allTopics?.map((category, id) => (
             <div className="topics-list">
               <ul className="category-list">
                 <Link className="link category-link primary-text fs-24">

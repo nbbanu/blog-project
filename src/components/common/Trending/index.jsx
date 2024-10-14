@@ -11,7 +11,7 @@ const Trending = () => {
   const [showAllBlogs, setShowAllBlogs] = useState([]);
   const loadAllBlogsToUI = async () => {
     const data = await getAllBlogs();
-    setShowAllBlogs(data.splice(0,6));
+    setShowAllBlogs(data?.splice(0,6));
   };
   return (
     <section id="trending" className="trending">
@@ -28,7 +28,7 @@ const Trending = () => {
         </div>
         <div className="mini-blog-cards">
           {
-            showAllBlogs.map((blog,index) => (
+            showAllBlogs?.map((blog,index) => (
               <MiniBlogCard 
               cardIndex={index+1}
               profileImg={"https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"}

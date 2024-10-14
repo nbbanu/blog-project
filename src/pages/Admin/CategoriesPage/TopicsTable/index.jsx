@@ -86,7 +86,7 @@ export default function CustomizedTables() {
           </TableRow>
         )}
         <TableBody>
-          {topics.map((row, index) => (
+          {topics?.map((row, index) => (
             <StyledTableRow key={index}>
               <StyledTableCell>{row.title}</StyledTableCell>
               <StyledTableCell align="left">

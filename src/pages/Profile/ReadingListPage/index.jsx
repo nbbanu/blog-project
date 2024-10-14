@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../../components/common/Button";
 import EditProfileModal from "../EditProfileModal";
 import AuthModal from "../../../components/common/AuthModal";
@@ -14,6 +14,8 @@ const ReadingListPage = () => {
   const { email } = useAuth();
   const userEmail = "@" + email?.split("@")[0];
   const navigate = useNavigate();
+
+  
 
   const openEditProfileModal = () => {
     setShowModal(!show);

@@ -45,7 +45,7 @@ const Home = () => {
           <div className="flex loggedin-home-container">
             <div className="loggedin-home-left">
               <HorizantalScrobbleBar />
-              {blogs.length === 0
+              {blogs?.length === 0
                 ? [1, 2, 3, 4, 5].map((item) => (
                     <div
                       key={item}
@@ -100,7 +100,7 @@ const Home = () => {
                       </div>
                     </div>
                   ))
-                : blogs.map((blog) => (
+                : blogs?.map((blog) => (
                     <BlogCard
                       key={blog.id}
                       bloggerName={blog.user.name}
@@ -129,7 +129,7 @@ const Home = () => {
                   Personel Seçimleri
                 </h2>
                 <div className="staff-picks-cards flex flex-column">
-                  {blogs.slice(0, 3).map((blog) => (
+                  {blogs?.slice(0, 3).map((blog) => (
                     <StaffPicksCard
                       key={blog.id}
                       profileImg={
@@ -204,7 +204,7 @@ const Home = () => {
                     Son Kaydedilenler
                   </h2>
                   <div className="staff-picks-cards flex flex-column">
-                    {blogs.slice(0, 4).map((blog) => (
+                    {blogs?.slice(0, 4).map((blog) => (
                       <StaffPicksCard
                         key={blog.id}
                         profileImg={
@@ -254,7 +254,7 @@ const Home = () => {
       <div className="light-line"></div>
       <div className="home-bottom container">
         <div className="home-bottom-left">
-          {blogs.map((blog) => (
+          {blogs?.map((blog) => (
             <MiniBlogCard
               key={blog.id}
               bloggerName={blog.user.name}

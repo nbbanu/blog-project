@@ -51,7 +51,7 @@ const get = async (url, token) => {
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization: "Bearer " + token,
+      Authorization: "Bearer " + localStorage.getItem("token"),
     },
   };
   const res = await fetch(request_url, options);
@@ -61,7 +61,7 @@ const get = async (url, token) => {
 };
 
 export const getAllBlogs = async () => {
-  const url = "blog/get-all";
+  const url = "blog/get-all/user";
   const data = await get(url);
   return data?.data;
 };

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../../../../../contexts/AuthContext";
 
-const ListCard = ({ userName, profilImg, listTitle, stories }) => {
+const ListCard = ({ username, profilImg, listTitle, stories, isPrivate,list, children }) => {
   const { email } = useAuth();
   const userEmail = "@" + email?.split("@")[0];
   return (
@@ -10,26 +10,24 @@ const ListCard = ({ userName, profilImg, listTitle, stories }) => {
         <Link to="/lists/main" className="link">
           <div className="list-card-header flex flex-center">
             <img src={profilImg} className="avatar profile-img" alt="avatar" />
-            <div className="user-name fs-14 primary-text">{userName}</div>
+            <div className="user-name fs-14 primary-text">{username}</div>
           </div>
         </Link>
         <div>
-          <Link className="link" to={`/${userEmail}/reading-list`}>
+          <Link className="link" to={`/${userEmail}/${listTitle}/${list.id}`}>
             <div className="list-title fs-20 primary-text">{listTitle}</div>
             <div className="flex flex-center-between">
               <div className="stories flex flex-center">
                 <span className="fs-13 light-text">{stories}</span>
                 <span className="fs-13 light-text story-text">stories</span>
-                <span>
-                  <i className="fa-solid fa-lock fs-12 light-text"></i>
-                </span>
+              {isPrivate}
               </div>
               <i className="fa-solid fa-ellipsis light-text"></i>
             </div>
           </Link>
         </div>
       </div>
-      <Link className="link" to={"reading-list"}>
+      <Link className="link" to={`/${userEmail}/${listTitle}/${list.id}`}>
         <div className="list-card-right flex">
           <div className="list-image">
             <img

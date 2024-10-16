@@ -20,11 +20,14 @@ const Lists = () => {
        profilImg={
          "https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
        }
-       userName={list.user.name}
+       list={list}
+       username={list.user.username}
        listTitle={list.title}
        stories={list.blogCount}
-      //  id={list.id}
-
+       listId={list.id}
+       isPrivate={list.isPrivate == true ?  <span>
+        <i className="fa-solid fa-lock fs-12 light-text"></i>
+      </span> : ""}
      />
      ))}
     </div>

@@ -6,27 +6,41 @@ import ClapButton from "../../BlogDetail/ClapButton";
 import CommentButton from "../../BlogDetail/CommentButton";
 import AddNoteInput from "./AddNoteInput";
 import BlogCard from "../../../components/common/BlogCard";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../../contexts/AuthContext";
+import { getMyListById } from "../../../service";
+import dayjs from "dayjs";
 
 const ReadingListPage = () => {
   const [show, setShowModal] = useState(false);
+  const [selectedList, setSelectedList] = useState([]);
+  const [listBlog, setListBlog] = useState([]);
+  // dangerouslySetInnerHTML={{ __html: blog?.text }}
+
   const { email } = useAuth();
   const userEmail = "@" + email?.split("@")[0];
   const navigate = useNavigate();
+  const listParams = useParams();
 
-  
+  useEffect(() => {
+    loadReadingListBlogById();
+  }, []);
+
+  const loadReadingListBlogById = async (listId) => {
+    const data = await getMyListById(listParams.listId);
+    setSelectedList(data);
+    setListBlog(data.blogs);
+  };
 
   const openEditProfileModal = () => {
     setShowModal(!show);
   };
-
   const openBloggerProfile = () => {
     navigate(`/${userEmail}/main`);
   };
 
   const openBlogDetail = (blogTitle, blogId) => {
-    navigate(`detail/${blogTitle}/${blogId}`);
+    navigate(`/detail/${blogTitle}/${blogId}`);
   };
 
   return (
@@ -56,17 +70,23 @@ const ReadingListPage = () => {
                   ></i>
                 </div>
                 <div className="story flex flex-center">
-                  <span className="fs-13 light-text">5</span>
+                  <span className="fs-13 light-text">{listBlog?.length}</span>
                   <span className="fs-13 light-text story-text">stories</span>
-                  <span>
-                    <i className="fa-solid fa-lock fs-12 light-text"></i>
-                  </span>
+                  {selectedList.isPrivate == true ? (
+                    <span>
+                      <i className="fa-solid fa-lock fs-12 light-text"></i>
+                    </span>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
             </div>
           </div>
           <div className="list-page-header">
-            <h2 className="reading-list-h2 primary-text fs-32">Reading List</h2>
+            <h2 className="reading-list-h2 primary-text fs-32">
+              {selectedList.title}
+            </h2>
             <div>
               <div className="light-line"></div>
               <div className="flex flex-center " style={{ gap: 25 }}>
@@ -77,48 +97,30 @@ const ReadingListPage = () => {
             </div>
           </div>
           <div className="reading-list-blogs">
-            <div className="reading-list-blog">
-              <AddNoteInput />
-              <BlogCard
-                bloggerName={"nbbanu"}
-                releaseDate={"26 Mart"}
-                profileImg={
-                  "https://miro.medium.com/v2/resize:fill:48:48/0*PVc8ycK2VwtFt7R0"
-                }
-                title={
-                  "🤖 The AI Software Engineer Revolution: Is This the End for Programmers?"
-                }
-                infoText={
-                  "Just a century ago, fields and factories were the primary workplaces. The rise of automation shifted the landscape, and now, artificial intelligence is poised to disrupt yet another sector: software engineering. The whispers about AI replacing programmers are getting louder, and tools like Devin are fueling the fire."
-                }
-                blogImage={
-                  "https://miro.medium.com/v2/resize:fit:828/format:webp/1*J47lbtGFXdHst9eFjr7jpQ.png"
-                }
-                openBloggerProfile={openBloggerProfile}
-                // openBlogDetail={() => openBlogDetail(blog.title, blog.id)}
-              />
-            </div>
-            <div className="reading-list-blog">
-              <AddNoteInput />
-              <BlogCard
-                bloggerName={"nbbanu"}
-                releaseDate={"26 Mart"}
-                profileImg={
-                  "https://miro.medium.com/v2/resize:fill:48:48/0*PVc8ycK2VwtFt7R0"
-                }
-                title={
-                  "🤖 The AI Software Engineer Revolution: Is This the End for Programmers?"
-                }
-                infoText={
-                  "Just a century ago, fields and factories were the primary workplaces. The rise of automation shifted the landscape, and now, artificial intelligence is poised to disrupt yet another sector: software engineering. The whispers about AI replacing programmers are getting louder, and tools like Devin are fueling the fire."
-                }
-                blogImage={
-                  "https://miro.medium.com/v2/resize:fit:828/format:webp/1*J47lbtGFXdHst9eFjr7jpQ.png"
-                }
-                openBloggerProfile={openBloggerProfile}
-                openBlogDetail={() => openBlogDetail(blog.title, blog.id)}
-              />
-            </div>
+            {listBlog?.map((blog) => (
+              <div className="reading-list-blog">
+                <AddNoteInput />
+                <BlogCard
+                  bloggerName={"nbbanu"}
+                  releaseDate={dayjs(blog?.created_at).format("MMM DD, YYYY")}
+                  profileImg={
+                    "https://miro.medium.com/v2/resize:fill:48:48/0*PVc8ycK2VwtFt7R0"
+                  }
+                  title={blog.title}
+                  infoText={
+                    blog.text && (
+                      <div
+                        className="light-text fs-16"
+                        dangerouslySetInnerHTML={{ __html: blog?.text }}
+                      ></div>
+                    )
+                  }
+                  blogImage={blog.image}
+                  openBloggerProfile={openBloggerProfile}
+                  openBlogDetail={() => openBlogDetail(blog.title, blog.id)}
+                />
+              </div>
+            ))}
           </div>
         </div>
         <div className="reading-list-page-right">

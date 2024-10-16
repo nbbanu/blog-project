@@ -37,7 +37,7 @@ function App() {
                 <Route path="about" element={<ProfilePageAbout />} />
               </Route>
               <Route
-                path="/:userName/reading-list"
+                path="/:userName/:listname/:listId"
                 element={<ReadingListPage />}
               />
               <Route path="explore-topics" element={<Topics />} />

@@ -17,8 +17,7 @@ const ProfilePageHome = () => {
 
   const loadAllBlogsToUI = async () => {
     const data = await getAllBlogs();
-
-    let newBlogDates = data.sort(
+    let newBlogDates = data?.sort(
       (a, b) =>
         new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
     );
@@ -27,7 +26,6 @@ const ProfilePageHome = () => {
   const openBlogDetail = (blogTitle, blogId) => {
     navigate(`/detail/${blogTitle}/${blogId}`);
   };
-
 
   return (
     <div className="profilePage-home">

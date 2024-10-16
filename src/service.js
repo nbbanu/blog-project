@@ -56,7 +56,7 @@ const get = async (url, token) => {
   };
   const res = await fetch(request_url, options);
   const data = await res.json();
-
+  
   return data;
 };
 
@@ -108,6 +108,12 @@ export const getUserDetailById = async (userId) => {
 export const getMyLists = async () => {
   const url = "list/my-lists";
   const data = await get(url);
+  return data?.data;
+}
+
+export const getMyListById = async(listId) => {
+  const url = `list/blogs/${listId}`;
+  const data = await get(url, listId);
   return data?.data;
 }
 // *************** PUT ***************

@@ -44,6 +44,9 @@ export const signUp = async (body) => {
 export const createReadingList = async (body) => {
   return await post("list", body);
 };
+export const addOrrRemoveBlogToList = async (body) => {
+  return await post("list/add-remove-blog", body);
+};
 // *************** GET ***************
 const get = async (url, token) => {
   const request_url = base_api + url;
@@ -56,7 +59,7 @@ const get = async (url, token) => {
   };
   const res = await fetch(request_url, options);
   const data = await res.json();
-  
+
   return data;
 };
 
@@ -109,13 +112,13 @@ export const getMyLists = async () => {
   const url = "list/my-lists";
   const data = await get(url);
   return data?.data;
-}
+};
 
-export const getMyListById = async(listId) => {
+export const getMyListById = async (listId) => {
   const url = `list/blogs/${listId}`;
   const data = await get(url, listId);
   return data?.data;
-}
+};
 // *************** PUT ***************
 const put = async (url, body) => {
   try {

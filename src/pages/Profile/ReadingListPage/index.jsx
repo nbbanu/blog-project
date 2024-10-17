@@ -13,9 +13,8 @@ import dayjs from "dayjs";
 
 const ReadingListPage = () => {
   const [show, setShowModal] = useState(false);
-  const [selectedList, setSelectedList] = useState([]);
+  const [listed, setListed] = useState([]);
   const [listBlog, setListBlog] = useState([]);
-  // dangerouslySetInnerHTML={{ __html: blog?.text }}
 
   const { email } = useAuth();
   const userEmail = "@" + email?.split("@")[0];
@@ -28,7 +27,7 @@ const ReadingListPage = () => {
 
   const loadReadingListBlogById = async (listId) => {
     const data = await getMyListById(listParams.listId);
-    setSelectedList(data);
+    setListed(data);
     setListBlog(data.blogs);
   };
 
@@ -72,7 +71,7 @@ const ReadingListPage = () => {
                 <div className="story flex flex-center">
                   <span className="fs-13 light-text">{listBlog?.length}</span>
                   <span className="fs-13 light-text story-text">stories</span>
-                  {selectedList.isPrivate == true ? (
+                  {listed.isPrivate == true ? (
                     <span>
                       <i className="fa-solid fa-lock fs-12 light-text"></i>
                     </span>
@@ -85,7 +84,7 @@ const ReadingListPage = () => {
           </div>
           <div className="list-page-header">
             <h2 className="reading-list-h2 primary-text fs-32">
-              {selectedList.title}
+              {listed.title}
             </h2>
             <div>
               <div className="light-line"></div>

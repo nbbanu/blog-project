@@ -16,6 +16,8 @@ const blogCard = ({
   blogImage,
   openBlogDetail,
   openBloggerProfile,
+  listed,
+
 }) => {
 
 
@@ -68,9 +70,9 @@ const blogCard = ({
               </span>
             </div>
             <div className="blog-card-bottom-right flex flex-center">
-              <SaveButton />
+              <SaveButton listed={listed}/>
               {minusIcon}
-              <i className="fa-solid fa-ellipsis light-text fs-20"></i>
+              <i className="fa-soli d fa-ellipsis light-text fs-20"></i>
             </div>
           </div>
         </div>

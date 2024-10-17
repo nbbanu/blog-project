@@ -8,28 +8,36 @@ import StaffPicksCard from "../../components/common/StaffPicksCard";
 import Trending from "../../components/common/Trending";
 import { useAuth } from "../../contexts/AuthContext";
 import { useEffect, useState } from "react";
-import { getAllBlogs } from "../../service";
+import { getAllBlogs, getMyLists } from "../../service";
 import MiniBlogCard from "../../components/common/MiniBlogCard";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import dayjs from "dayjs";
-import Test from "./Test";
 
 const Home = () => {
   useEffect(() => {
     loadAllBlogsToUI();
+    loadMyLists();
   }, []);
 
+  const [myLists, setMyLists] = useState([]);
+
   const [blogs, setBlogs] = useState([]);
-  const loadAllBlogsToUI = async () => {
-    const data = await getAllBlogs();
-    setBlogs(data);
-  };
+
 
   const { email } = useAuth();
   const userEmail = "@" + email?.split("@")[0];
   const { token } = useAuth();
   const navigate = useNavigate();
+
+  const loadMyLists = async () => {
+    const data = await getMyLists();
+    setMyLists(data);
+  };
+  const loadAllBlogsToUI = async () => {
+    const data = await getAllBlogs();
+    setBlogs(data);
+  };
 
   const openBlogDetail = (blogTitle, blogId) => {
     navigate(`detail/${blogTitle}/${blogId}`);
@@ -38,6 +46,7 @@ const Home = () => {
   const openBloggerProfile = () => {
     navigate(`/${userEmail}/main`);
   };
+
   if (token) {
     return (
       <div className=" loggedin-home">
@@ -119,6 +128,8 @@ const Home = () => {
                       }
                       openBlogDetail={() => openBlogDetail(blog.title, blog.id)}
                       openBloggerProfile={openBloggerProfile}
+                      listed={myLists}
+                
                     />
                   ))}
             </div>
@@ -204,7 +215,7 @@ const Home = () => {
                     Son Kaydedilenler
                   </h2>
                   <div className="staff-picks-cards flex flex-column">
-                    {blogs?.slice(0, 4).map((blog) => (
+                    {blogs?.map((blog) => (
                       <StaffPicksCard
                         key={blog.id}
                         profileImg={

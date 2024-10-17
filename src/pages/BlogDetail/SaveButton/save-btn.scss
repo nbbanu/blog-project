@@ -5,9 +5,15 @@
 .bookmark-modal-content,
 .create-list-modal {
   .checkboxes {
+    width: 220px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    .list-to-save {
+      .fa-lock {
+        margin-left: 20px;
+      }
+    }
   }
   .custom-checkbox {
     display: inline-flex;

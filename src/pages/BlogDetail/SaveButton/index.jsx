@@ -6,7 +6,7 @@ import MiniTooltip from "../../../components/common/MiniTooltip";
 import Swal from "sweetalert2";
 import { createReadingList } from "../../../service";
 
-const SaveButton = () => {
+const SaveButton = ({ listed}) => {
   const [show, setShowModal] = useState(false);
   const [showDescInput, setShowDescInput] = useState(false);
   const [title, setTitle] = useState("");
@@ -16,8 +16,6 @@ const SaveButton = () => {
   const [descriptionCharacterCount, setDescriptionCharacterCount] = useState(0);
   const [listNameError, setListNameError] = useState("");
   const [descriptionError, setDescriptionError] = useState("");
-
-
 
   const openCreateListModal = () => {
     setShowModal(!show);
@@ -87,7 +85,6 @@ const SaveButton = () => {
     setDescriptionCharacterCount(0);
     setShowModal(false);
   };
-
   return (
     <div>
       <AuthModal
@@ -174,7 +171,7 @@ const SaveButton = () => {
               </div>
               <div>
                 <label className="custom-checkbox">
-                  <input type="checkbox" onClick={handleChecked} />
+                  <input type="checkbox"/>
                   <span className="checkmark primary-text"></span>
                   Sadece ben görmek istiyorum
                 </label>
@@ -206,27 +203,25 @@ const SaveButton = () => {
           children={
             <div className="bookmark-modal-content">
               <div className="checkboxes">
-                <div className="flex flex-center-between">
-                  <div>
-                    <label className="custom-checkbox">
-                      <input type="checkbox" />
-                      <span className="checkmark primary-text"></span>
-                      Okuma Listesi
-                    </label>
+                {listed.map((list) => (
+                  <div className="list-to-save flex flex-center-between">
+                    <div>
+                      <label className="custom-checkbox" >
+                        <input type="checkbox" />
+                        <span className="checkmark primary-text"></span>
+                        {list.title}
+                      </label>
+                    </div>
+                    {list.isPrivate == true ? (
+                      <i
+                        className="fa-solid fa-lock primary-text fs-12"
+                        style={{ marginLeft: 7 }}
+                      ></i>
+                    ) : (
+                      ""
+                    )}
                   </div>
-                  <i
-                    className="fa-solid fa-lock primary-text fs-12"
-                    style={{ marginLeft: 7 }}
-                  ></i>
-                </div>
-
-                <div>
-                  <label className="custom-checkbox">
-                    <input type="checkbox" />
-                    <span className="checkmark primary-text"></span>
-                    HTML
-                  </label>
-                </div>
+                ))}
               </div>
               <div className="light-line"></div>
               <div>

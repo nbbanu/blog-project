@@ -1,6 +1,6 @@
 import { Outlet, NavLink } from "react-router-dom";
 import Button from "../../components/common/Button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AuthModal from "../../components/common/AuthModal";
 import EditProfileModal from "../../pages/Profile/EditProfileModal";
 

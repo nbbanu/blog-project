@@ -15,12 +15,12 @@
       margin-right: 5px;
     }
     .list-card-header {
-        margin-bottom: 15px;      
+      margin-bottom: 15px;
     }
     .list-title {
-        font-weight: 700;
-        margin-bottom: 15px;  
-      }
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
     .stories {
       gap: 3px;
       .story-text {
@@ -35,10 +35,18 @@
     border-radius: 3px;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    background-color: #f9f9f9;
+    background-color: #f2f2f2;
     border: 1px solid var(--light-border-color);
-  }
-  .list-image:not(:last-child){
-    border-right: 3px solid var(--light-border-color);
+    .list-image:not(:last-child) {
+      border-right: 3px solid #f9f9f9;
+    }
+    .list-image {
+      height: 142px;
+    }
+    .list-image:last-child,
+    .list-image img:last-child {
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
   }
 }

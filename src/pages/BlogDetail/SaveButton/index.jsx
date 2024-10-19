@@ -171,7 +171,7 @@ const SaveButton = ({ listed}) => {
               </div>
               <div>
                 <label className="custom-checkbox">
-                  <input type="checkbox"/>
+                  <input type="checkbox" onChange={handleChecked}/>
                   <span className="checkmark primary-text"></span>
                   Sadece ben görmek istiyorum
                 </label>
@@ -197,13 +197,13 @@ const SaveButton = ({ listed}) => {
         <BasicPopup
           clickItem={
             <MiniTooltip title={"Save"}>
-              <i className="fa-regular fa-bookmark light-text fs-20"></i>
+              <i className="fa-solid fa-bookmark light-text fs-20"></i>
             </MiniTooltip>
           }
           children={
             <div className="bookmark-modal-content">
               <div className="checkboxes">
-                {listed.map((list) => (
+                {listed?.map((list) => (
                   <div className="list-to-save flex flex-center-between">
                     <div>
                       <label className="custom-checkbox" >

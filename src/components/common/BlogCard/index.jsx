@@ -72,7 +72,7 @@ const blogCard = ({
             <div className="blog-card-bottom-right flex flex-center">
               <SaveButton listed={listed}/>
               {minusIcon}
-              <i className="fa-soli d fa-ellipsis light-text fs-20"></i>
+              <i className="fa-solid fa-ellipsis light-text fs-20"></i>
             </div>
           </div>
         </div>

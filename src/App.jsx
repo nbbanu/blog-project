@@ -17,7 +17,6 @@ import CategoriesPage from "./pages/Admin/CategoriesPage";
 import HomePage from "./pages/Admin/HomePage";
 import BlogDetailPage from "./pages/BlogDetail";
 import ReadingListPage from "./pages/Profile/ReadingListPage";
-import Test from "./pages/Home/Test";
 
 function App() {
   return (

@@ -1,9 +1,19 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../../../../../contexts/AuthContext";
+import { useState } from "react";
 
-const ListCard = ({ username, profilImg, listTitle, stories, isPrivate,list, children }) => {
+const ListCard = ({
+  username,
+  profilImg,
+  listTitle,
+  stories,
+  isPrivate,
+  list,
+  children,
+}) => {
   const { email } = useAuth();
   const userEmail = "@" + email?.split("@")[0];
+
   return (
     <div className="list-card">
       <div className="list-card-left">
@@ -20,7 +30,7 @@ const ListCard = ({ username, profilImg, listTitle, stories, isPrivate,list, chi
               <div className="stories flex flex-center">
                 <span className="fs-13 light-text">{stories}</span>
                 <span className="fs-13 light-text story-text">stories</span>
-              {isPrivate}
+                {isPrivate}
               </div>
               <i className="fa-solid fa-ellipsis light-text"></i>
             </div>
@@ -28,27 +38,39 @@ const ListCard = ({ username, profilImg, listTitle, stories, isPrivate,list, chi
         </div>
       </div>
       <Link className="link" to={`/${userEmail}/${listTitle}/${list.id}`}>
-        <div className="list-card-right flex">
+        <div className="list-card-right">
           <div className="list-image">
-            <img
-              src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*J47lbtGFXdHst9eFjr7jpQ.png"
-              alt="blog-img"
-              className="img-cover"
-            />
+            {list?.blogs[0]?.image ? (
+              <img
+                src={list?.blogs[0]?.image}
+                alt="blog-img"
+                className="img-cover"
+              />
+            ) : (
+              <div className="empty-image"></div>
+            )}
           </div>
           <div className="list-image">
-            <img
-              src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*oHB9739I_N0nC24Bn99ebA.jpeg"
-              alt="blog-img"
-              className="img-cover"
-            />
+            {list?.blogs[1]?.image ? (
+              <img
+                src={list?.blogs[1]?.image}
+                alt="blog-img"
+                className="img-cover"
+              />
+            ) : (
+              <div className="empty-image"></div>
+            )}
           </div>
           <div className="list-image">
-            <img
-              src="https://miro.medium.com/v2/resize:fit:720/format:webp/0*AwznUxbbzdEfDW9D"
-              alt="blog-img"
-              className="img-cover"
-            />
+            {list?.blogs[2]?.image ? (
+              <img
+                src={list?.blogs[2]?.image}
+                alt="blog-img"
+                className="img-cover"
+              />
+            ) : (
+              <div className="empty-image"></div>
+            )}
           </div>
         </div>
       </Link>

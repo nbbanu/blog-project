@@ -16,8 +16,7 @@ const blogCard = ({
   blogImage,
   openBlogDetail,
   openBloggerProfile,
-  listed,
-
+  blogId
 }) => {
 
 
@@ -70,7 +69,7 @@ const blogCard = ({
               </span>
             </div>
             <div className="blog-card-bottom-right flex flex-center">
-              <SaveButton listed={listed}/>
+              <SaveButton blogId = {blogId}/>
               {minusIcon}
               <i className="fa-solid fa-ellipsis light-text fs-20"></i>
             </div>

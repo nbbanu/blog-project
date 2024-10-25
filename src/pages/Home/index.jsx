@@ -128,8 +128,7 @@ const Home = () => {
                       }
                       openBlogDetail={() => openBlogDetail(blog.title, blog.id)}
                       openBloggerProfile={openBloggerProfile}
-                      listed={myLists}
-                
+                      blogId = {blog.id}
                     />
                   ))}
             </div>

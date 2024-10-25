@@ -4,7 +4,6 @@ import ListCard from "./ListCard";
 
 const Lists = () => {
   const [myLists, setMyLists] = useState([]);
-  const [listImages, setListImages] = useState([]);
 
   useEffect(() => {
     loadMyLists();

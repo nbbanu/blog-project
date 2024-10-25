@@ -114,6 +114,11 @@ export const getMyLists = async () => {
   return data?.data;
 };
 
+export const getListDetailByBlogId = async (blogId) => {
+  const url = `blog/list-detail/${blogId}`;
+  const data = await get(url, blogId);
+  return data?.data;
+};
 export const getMyListById = async (listId) => {
   const url = `list/blogs/${listId}`;
   const data = await get(url, listId);

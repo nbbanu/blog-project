@@ -25,7 +25,7 @@ const ReadingListPage = () => {
     loadReadingListBlogById();
   }, []);
 
-  const loadReadingListBlogById = async (listId) => {
+  const loadReadingListBlogById = async () => {
     const data = await getMyListById(listParams.listId);
     setListed(data);
     setListBlog(data.blogs);

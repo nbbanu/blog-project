@@ -83,6 +83,7 @@ const ProfilePageHome = () => {
               profileImg="https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
               blogImage={blog.image}
               openBlogDetail={() => openBlogDetail(blog.title, blog.id)}
+              blogId = {blog.id}
             />
           ))}
     </div>

@@ -4,9 +4,10 @@ import BasicPopup from "../../../components/common/BasicPopup";
 import Button from "../../../components/common/Button";
 import MiniTooltip from "../../../components/common/MiniTooltip";
 import Swal from "sweetalert2";
-import { createReadingList } from "../../../service";
+import { createReadingList, getListDetailByBlogId } from "../../../service";
+import Loader from "../../../components/common/Loader";
 
-const SaveButton = ({ listed}) => {
+const SaveButton = ({ blogId }) => {
   const [show, setShowModal] = useState(false);
   const [showDescInput, setShowDescInput] = useState(false);
   const [title, setTitle] = useState("");
@@ -16,6 +17,10 @@ const SaveButton = ({ listed}) => {
   const [descriptionCharacterCount, setDescriptionCharacterCount] = useState(0);
   const [listNameError, setListNameError] = useState("");
   const [descriptionError, setDescriptionError] = useState("");
+  const [blogDetailInList, setBlogDetailInList] = useState([]);
+  const [checked, setChecked] = useState(false);
+  const [isBlogOnList, setIsBlogOnList] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const openCreateListModal = () => {
     setShowModal(!show);
@@ -39,7 +44,7 @@ const SaveButton = ({ listed}) => {
       setDescriptionError("");
     }
   };
-  const handleChecked = (e) => {
+  const handlePrivateChecked = () => {
     // setIsPrivate(e.target.checked);
     setIsPrivate(!isPrivate);
   };
@@ -84,6 +89,19 @@ const SaveButton = ({ listed}) => {
     setListNameCharacterCount(0);
     setDescriptionCharacterCount(0);
     setShowModal(false);
+  };
+
+  const handleSaveClick = async () => {
+    const data = await getListDetailByBlogId(blogId);
+    setBlogDetailInList(data.lists);
+    setLoading(false);
+  };
+
+  const checkHandler = (isAdded) => {
+    setChecked(!checked);
+    if (isAdded) {
+      setIsBlogOnList(true);
+    }
   };
   return (
     <div>
@@ -171,7 +189,7 @@ const SaveButton = ({ listed}) => {
               </div>
               <div>
                 <label className="custom-checkbox">
-                  <input type="checkbox" onChange={handleChecked}/>
+                  <input type="checkbox" onChange={handlePrivateChecked} />
                   <span className="checkmark primary-text"></span>
                   Sadece ben görmek istiyorum
                 </label>
@@ -197,17 +215,27 @@ const SaveButton = ({ listed}) => {
         <BasicPopup
           clickItem={
             <MiniTooltip title={"Save"}>
-              <i className="fa-solid fa-bookmark light-text fs-20"></i>
+              <i
+                className={`${
+                  isBlogOnList ? "fa-solid" : "fa-regular"
+                } fa-bookmark light-text fs-20`}
+                onClick={handleSaveClick}
+              ></i>
             </MiniTooltip>
           }
           children={
             <div className="bookmark-modal-content">
+              {loading ? <Loader /> : ""}
               <div className="checkboxes">
-                {listed?.map((list) => (
+                {blogDetailInList?.map((list) => (
                   <div className="list-to-save flex flex-center-between">
                     <div>
-                      <label className="custom-checkbox" >
-                        <input type="checkbox" />
+                      <label className="custom-checkbox">
+                        <input
+                          type="checkbox"
+                          defaultChecked={list.isAdded ? true : false}
+                          onClick={() => checkHandler(list.isAdded)}
+                        />
                         <span className="checkmark primary-text"></span>
                         {list.title}
                       </label>

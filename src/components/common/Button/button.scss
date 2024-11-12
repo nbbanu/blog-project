@@ -18,6 +18,7 @@ button{
   &.success {
     background-color: var(--succes-color);
     border: 1px solid var(--succes-color);
+    color: #fff;
   }
 
   &.ghost {

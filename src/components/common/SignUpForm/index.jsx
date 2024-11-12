@@ -5,29 +5,37 @@ import * as yup from "yup";
 import { useEffect, useState } from "react";
 import { signUp } from "../../../service";
 import Swal from "sweetalert2";
-import { useAuth } from "../../../contexts/AuthContext";
 
-const SignUpForm = () => {
-  // const [values, setValues] = useState([]);
-  // useEffect(() => {
-  
-  // }, [])
-  const { onLoginSuccess } = useAuth();
+const SignUpForm = ({ show }) => {
   let passwordRegex = /^(?=.*[0-9]).{5,16}$/;
-  
+
+  useEffect(() => {
+    show &&
+      reset({
+        name: "nbbansdf",
+        username: "nbbanu",
+        email: "nbbanu@hotmail.com",
+        password: "1234Duru.",
+        repeatPassword: "1234Duru.",
+      });
+  }, [show]);
   const schema = yup
     .object({
       name: yup
         .string()
         .trim()
         .required("Bu alan zorunludur.")
-        .max(20,"İsim 20 karakterden uzun olamaz."),
+        .max(20, "İsim 20 karakterden uzun olamaz."),
       username: yup
         .string()
         .trim()
         .required("Bu alan zorunludur.")
-        .max(16,"Kullanıcı adı 16 karakterden uzun olamaz."),
-      email: yup.string().email().trim().required("Geçerli bir email adresi giriniz."),
+        .max(20, "Kullanıcı adı 20 karakterden uzun olamaz."),
+      email: yup
+        .string()
+        .email()
+        .trim()
+        .required("Geçerli bir email adresi giriniz."),
       password: yup
         .string()
         .trim()
@@ -46,6 +54,8 @@ const SignUpForm = () => {
   const {
     register,
     handleSubmit,
+    reset,
+    setError,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -60,27 +70,19 @@ const SignUpForm = () => {
 
   const onSubmit = (data) => {
     signUp(data)
-    .then((res) => {
-      Swal.fire({
-        title: "Kayıt Başarılı",
-        color: "#242424",
-        icon: "success",
-        iconColor: "#ffc016",
-      });
-      // onLoginSuccess(res?.data?.accessToken);
-      localStorage.setItem("email", data.email);
-    }
-    ).catch((err) => {
-      console.error(err);
-      if(err.statusCode == 400){
+      .then((res) => {
         Swal.fire({
-          title: "Bu Email Zaten Mevcut",
+          title: "Kayıt Başarılı! Lütfen Tekrar Giriş Yapınız!",
           color: "#242424",
-          icon: "error",
+          icon: "success",
           iconColor: "#ffc016",
         });
-      }
-    })
+      })
+      .catch((err) => {
+        err.errors?.forEach((error) => {
+          setError(error.property, { type: "custom", message: error.message });
+        });
+      });
   };
 
   return (
@@ -97,7 +99,6 @@ const SignUpForm = () => {
               className="form-input primary-text"
               placeholder="*"
               {...register("name")}
-              
             />
             <p className="error-text fs-13">{errors?.name?.message}</p>
           </div>
@@ -117,7 +118,6 @@ const SignUpForm = () => {
               className="form-input"
               placeholder="*"
               {...register("email")}
-              
             />
             <p className="error-text fs-13">{errors?.email?.message}</p>
           </div>

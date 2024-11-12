@@ -9,6 +9,7 @@ export const axiosInstance = axios.create({
   headers: {
     "X-Custom-Header": "foobar",
     "Content-type": "application/json; charset=UTF-8",
+    "Accept-Language": "tr",
     Authorization: "Bearer " + localStorage.getItem("token"),
   },
 });

@@ -19,7 +19,6 @@ const SaveButton = ({ blogId }) => {
   const [descriptionError, setDescriptionError] = useState("");
   const [blogDetailInList, setBlogDetailInList] = useState([]);
   const [checked, setChecked] = useState(false);
-  const [isBlogOnList, setIsBlogOnList] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const openCreateListModal = () => {
@@ -97,11 +96,8 @@ const SaveButton = ({ blogId }) => {
     setLoading(false);
   };
 
-  const checkHandler = (isAdded) => {
+  const checkHandler = () => {
     setChecked(!checked);
-    if (isAdded) {
-      setIsBlogOnList(true);
-    }
   };
   return (
     <div>
@@ -216,9 +212,8 @@ const SaveButton = ({ blogId }) => {
           clickItem={
             <MiniTooltip title={"Save"}>
               <i
-                className={`${
-                  isBlogOnList ? "fa-solid" : "fa-regular"
-                } fa-bookmark light-text fs-20`}
+                className=
+                "fa-regular fa-bookmark light-text fs-20"
                 onClick={handleSaveClick}
               ></i>
             </MiniTooltip>
@@ -234,7 +229,7 @@ const SaveButton = ({ blogId }) => {
                         <input
                           type="checkbox"
                           defaultChecked={list.isAdded ? true : false}
-                          onClick={() => checkHandler(list.isAdded)}
+                          onClick={checkHandler}
                         />
                         <span className="checkmark primary-text"></span>
                         {list.title}

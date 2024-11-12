@@ -133,7 +133,7 @@ const Header = () => {
                     />
                   </div>
                 </div>
-                <p className="fs-13 light-text text-center">
+                {/* <p className="fs-13 light-text text-center">
                   Parolamı unuttum?
                   <Link
                     className="link light-text underline"
@@ -141,14 +141,14 @@ const Header = () => {
                   >
                     Get help.
                   </Link>
-                </p>
+                </p> */}
               </>
             ) : (
               <>
                 <h2 className="modal-header">Medium'a Katılın.</h2>
                 <div className="modal-sign-up flex flex-column flex-center-center">
                   <div className="modal-sign-up-buttons flex flex-column">
-                    <SignUpForm/>
+                    <SignUpForm show={show}/>
                   </div>
                   <div>
                     <span className="primary-text">
@@ -164,7 +164,7 @@ const Header = () => {
               </>
             )}
 
-            <p className="policy fs-13 light-text text-center">
+            {/* <p className="policy fs-13 light-text text-center">
               Click “Sign up” to agree to Medium’s
               <Link className="link light-text underline">
                 Terms of Service
@@ -172,7 +172,7 @@ const Header = () => {
               and acknowledge that Medium’s
               <Link className="link light-text underline">Privacy Policy</Link>
               applies to you.
-            </p>
+            </p> */}
           </>
         }
       />

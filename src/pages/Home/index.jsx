@@ -15,20 +15,17 @@ import "react-loading-skeleton/dist/skeleton.css";
 import dayjs from "dayjs";
 
 const Home = () => {
-  useEffect(() => {
-    loadAllBlogsToUI();
-    loadMyLists();
-  }, []);
-
   const [myLists, setMyLists] = useState([]);
-
   const [blogs, setBlogs] = useState([]);
-
-
   const { email } = useAuth();
   const userEmail = "@" + email?.split("@")[0];
   const { token } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    loadAllBlogsToUI();
+    loadMyLists();
+  }, [token]);
 
   const loadMyLists = async () => {
     const data = await getMyLists();

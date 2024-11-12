@@ -1,23 +1,25 @@
 .profilePage-home {
   display: inline-flex;
   flex-direction: column;
-  .gray-link {
-    display: none;
-  }
+
   .blog-card-info-text {
     color: var(--secondary-color);
   }
   .blog-card {
     justify-content: space-between;
     align-items: center;
+    .gray-link {
+      display: none;
+    }
+    &-bottom {
+      justify-content: flex-start;
+    }
+    &-release-date {
+      margin-left: 10px;
+      font-size: 13px;
+    }
   }
-  .blog-card-bottom {
-    justify-content: flex-start;
-  }
-  .blog-card-release-date {
-    margin-left: 10px;
-    font-size: 13px;
-  }
+
   @include responsive(phone) {
     .blog-card {
       // gap: 40px;
@@ -25,10 +27,10 @@
       border-bottom: 1px solid var(--light-border-color);
       padding-bottom: 20px;
       max-width: 350px;
-      h2{
+      h2 {
         font-size: 18px;
       }
-      &-info-text{
+      &-info-text {
         font-size: 15px;
       }
     }

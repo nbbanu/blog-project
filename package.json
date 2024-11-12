@@ -16,7 +16,7 @@
     "@hookform/resolvers": "^3.9.0",
     "@mui/icons-material": "^5.15.21",
     "@mui/material": "^5.15.21",
-    "axios": "^1.6.8",
+    "axios": "^1.7.7",
     "dayjs": "^1.11.12",
     "html-react-parser": "^5.1.10",
     "jwt-decode": "^4.0.0",

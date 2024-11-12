@@ -1,18 +1,37 @@
 import axios from "axios";
 import { getEnvVar } from "./utils/utils";
+import Swal from "sweetalert2";
 
 const base_api = getEnvVar("BASE_URL");
 
 export const axiosInstance = axios.create({
   baseURL: base_api,
   timeout: 5000,
-  headers: {
-    "X-Custom-Header": "foobar",
-    "Content-type": "application/json; charset=UTF-8",
-    "Accept-Language": "tr",
-    Authorization: "Bearer " + localStorage.getItem("token"),
-  },
 });
+
+axiosInstance.interceptors.request.use((config) => {
+  config.headers["Content-Type"] = "application/json; charset=UTF-8";
+  config.headers["Accept-Language"] = "tr";
+  config.headers["Authorization"] = "Bearer " + localStorage.getItem("token");
+
+  return config;
+});
+
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.status === 401) {
+      localStorage.removeItem("token");
+      Swal.fire({
+        title: "Oturum süreniz sona erdi",
+        text: "Lütfen tekrar giriş yapınız.",
+      }).then(() => {
+        window.location.reload();
+      });
+    }
+    return Promise.reject(error);
+  }
+);
 
 const post = async (url, body, headers = {}) => {
   //   return axiosInstance

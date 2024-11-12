@@ -4,6 +4,7 @@ import BloggerTooltip from "../BloggerTooltip";
 
 
 const blogCard = ({
+  user,
   bloggerName,
   releaseDate,
   profileImg,
@@ -27,10 +28,10 @@ const blogCard = ({
           <div className="blog-card-left-header flex flex-center">
             <div className="blogger-profile flex flex-center">
               <BloggerTooltip
-                bloggerName={"Banubkrli"}
-                bloggerInformation="Professional domestic abuse advocate by day; a writer by night and a street photographer in my free time. A counsellor in the make."
+                bloggerName={user?.name}
+                bloggerInformation={user?.bio}
                 followersCount={"1.2K"}
-                profileImg="https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+                profileImg={user?.profileImage}
               />
               <img
                 className="avatar img-cover"

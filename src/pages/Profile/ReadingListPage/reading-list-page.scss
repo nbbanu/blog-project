@@ -17,15 +17,28 @@
       gap: 5px;
     }
   }
-  .list-page-header{
-    padding:24px 0;
-    .reading-list-h2{
+  .list-page-header {
+    padding: 24px 0;
+    .reading-list-h2 {
       padding-bottom: 10px;
     }
-    .light-line{
+    .light-line {
       margin: 10px 0;
     }
-
+  }
+  &-left {
+    .reading-list-blog {
+      .blog-card {
+        justify-content: space-between;
+        align-items: center;
+        .gray-link {
+          display: none;
+        }
+        &-bottom {
+          justify-content: flex-start;
+        }
+      }
+    }
   }
   &-right {
     padding-top: 40px;
@@ -38,7 +51,8 @@
       margin-top: 15px;
       margin-bottom: 25px;
     }
-    .edit-btn, .view-all-btn {
+    .edit-btn,
+    .view-all-btn {
       display: inline-flex;
       color: var(--succes-color);
       padding-left: 0 !important;
@@ -46,7 +60,7 @@
     .edit-btn:hover {
       color: var(--primary-color);
     }
-    .view-all-btn{
+    .view-all-btn {
       color: var(--secondary-color);
       margin-top: 30px;
     }

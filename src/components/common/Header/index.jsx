@@ -32,6 +32,7 @@ const Header = () => {
     setShowModal(!show);
     setCreateModalShow(createModalShow);
   };
+
   const modalClick = () => {
     setCreateModalShow(!createModalShow);
   };
@@ -148,7 +149,11 @@ const Header = () => {
                 <h2 className="modal-header">Medium'a Katılın.</h2>
                 <div className="modal-sign-up flex flex-column flex-center-center">
                   <div className="modal-sign-up-buttons flex flex-column">
-                    <SignUpForm show={show}/>
+                    <SignUpForm
+                      show={show}
+                      setCreateModalShow={setCreateModalShow}
+                      createModalShow={createModalShow}
+                    />
                   </div>
                   <div>
                     <span className="primary-text">

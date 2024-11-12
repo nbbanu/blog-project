@@ -17,14 +17,14 @@ import dayjs from "dayjs";
 const Home = () => {
   const [myLists, setMyLists] = useState([]);
   const [blogs, setBlogs] = useState([]);
-  const { email } = useAuth();
-  const userEmail = "@" + email?.split("@")[0];
+  // const { email } = useAuth();
+  // const userEmail = "@" + email?.split("@")[0];
   const { token } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    loadAllBlogsToUI();
-    loadMyLists();
+    token && loadAllBlogsToUI();
+    token && loadMyLists();
   }, [token]);
 
   const loadMyLists = async () => {
@@ -40,8 +40,8 @@ const Home = () => {
     navigate(`detail/${blogTitle}/${blogId}`);
   };
 
-  const openBloggerProfile = () => {
-    navigate(`/${userEmail}/main`);
+  const openBloggerProfile = (email) => {
+    navigate(`/${email}/main`);
   };
 
   if (token) {
@@ -108,6 +108,7 @@ const Home = () => {
                   ))
                 : blogs?.map((blog) => (
                     <BlogCard
+                      user={blog.user}
                       key={blog.id}
                       bloggerName={blog.user.name}
                       title={blog.title}
@@ -124,8 +125,8 @@ const Home = () => {
                         <i className="fa-solid fa-minus minus light-text flex flex-center-center"></i>
                       }
                       openBlogDetail={() => openBlogDetail(blog.title, blog.id)}
-                      openBloggerProfile={openBloggerProfile}
-                      blogId = {blog.id}
+                      openBloggerProfile={() => openBloggerProfile(blog.user.email)}
+                      blogId={blog.id}
                     />
                   ))}
             </div>
@@ -227,10 +228,10 @@ const Home = () => {
                       />
                     ))}
                   </div>
-
+{/* 
                   <Link to={`/${userEmail}/lists`} className="green-text link">
                     Daha Fazla Kaydedilenler Görün
-                  </Link>
+                  </Link> */}
                 </div>
                 <div className="reading-list">
                   <h2 className="loggedin-home-right-title primary-text fs-16">

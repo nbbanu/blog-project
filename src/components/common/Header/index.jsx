@@ -3,9 +3,8 @@ import AuthModal from "../AuthModal";
 import Button from "../Button";
 import { useAuth } from "../../../contexts/AuthContext";
 import { Link } from "react-router-dom";
-import UserPopup from "../UserPopup";
+import UserPopup from "./UserPopup";
 import SearchInput from "../SearchInput";
-import AuthenticationButton from "../AuthenticationButton";
 import LoginForm from "../LoginForm";
 import SignUpForm from "../SignUpForm";
 
@@ -74,7 +73,7 @@ const Header = () => {
               clickItem={
                 <Link className="profile link">
                   <img
-                    src="https://miro.medium.com/v2/resize:fill:40:40/1*i5p9qg4BGA4i2NXsghlnxQ.png"
+                    src=""
                     alt="profile-img"
                     style={{ width: 32, height: 32 }}
                     className="avatar loggedin-profile-img"

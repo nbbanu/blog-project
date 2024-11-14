@@ -10,7 +10,8 @@ export const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use((config) => {
-  config.headers["Content-Type"] = "application/json; charset=UTF-8";
+  config.headers["Content-Type"] =
+    config.headers?.["Content-Type"] || "application/json; charset=UTF-8";
   config.headers["Accept-Language"] = "tr";
   config.headers["Authorization"] = "Bearer " + localStorage.getItem("token");
 
@@ -25,6 +26,9 @@ axiosInstance.interceptors.response.use(
       Swal.fire({
         title: "Oturum süreniz sona erdi",
         text: "Lütfen tekrar giriş yapınız.",
+        color: "#242424",
+        icon: "error",
+        iconColor: "#ffc016",
       }).then(() => {
         window.location.reload();
       });
@@ -144,10 +148,11 @@ export const getMyListById = async (listId) => {
   const data = await get(url, listId);
   return data?.data;
 };
+
 // *************** PUT ***************
-const put = async (url, body) => {
+const put = async (url, body, config = {}) => {
   try {
-    const res = await axiosInstance.put(url, body);
+    const res = await axiosInstance.put(url, body, config);
     return res?.data;
   } catch (error) {
     throw error.response.data;
@@ -155,6 +160,18 @@ const put = async (url, body) => {
 };
 export const updateTopics = async (data) => {
   return await put("topics", data);
+};
+
+export const updateUserInformation = async (body) => {
+  return await put("user", body);
+};
+
+export const updateUserImage = async (data) => {
+  return await put("user/image", data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
 };
 
 // *************** DELETE ***************

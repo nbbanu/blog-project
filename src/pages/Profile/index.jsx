@@ -1,8 +1,9 @@
 import { Outlet, NavLink } from "react-router-dom";
 import Button from "../../components/common/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AuthModal from "../../components/common/AuthModal";
 import EditProfileModal from "../../pages/Profile/EditProfileModal";
+import { getUserDetailById } from "../../service";
 
 const ProfilePage = () => {
   const [show, setShowModal] = useState(false);
@@ -10,7 +11,14 @@ const ProfilePage = () => {
     setShowModal(!show);
   };
 
+  useEffect(() => {
+    loadUserDetailById();
+  },[])
 
+  const loadUserDetailById = async (id) => {
+    const data = await getUserDetailById(1);
+  }
+  
   return (
     <div className="container">
       <AuthModal
@@ -55,7 +63,7 @@ const ProfilePage = () => {
 
         <div className="profile-page-right">
           <img
-            src="https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+            src=""
             className="avatar img-cover"
             alt="avatar"
             style={{ width: 88, height: 88 }}
@@ -65,7 +73,7 @@ const ProfilePage = () => {
           </span>
 
           <Button
-            title="Edit Profile"
+            title="Profili Güncelle"
             className="ghost border-none sm edit-btn"
             handleClick={openEditProfileModal}
           />

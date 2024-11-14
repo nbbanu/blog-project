@@ -110,18 +110,19 @@
       .fa-arrow-right-long {
         transform: rotate(-45deg);
       }
-      .buttons {
-        align-self: flex-end;
-        margin-top: 20px;
-        gap: 15px;
-        .cancel-btn {
-          border: 1px solid var(--succes-color);
-          color: var(--succes-color);
-        }
-        .cancel-btn:hover {
-          border-color: rgb(21, 109, 18);
-          color: rgb(21, 109, 18);
-        }
+     
+    }
+    .buttons {
+      align-self: flex-end;
+      margin-top: 20px;
+      gap: 15px;
+      .cancel-btn {
+        border: 1px solid var(--succes-color);
+        color: var(--succes-color);
+      }
+      .cancel-btn:hover {
+        border-color: rgb(21, 109, 18);
+        color: rgb(21, 109, 18);
       }
     }
   }

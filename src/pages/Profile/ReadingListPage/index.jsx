@@ -134,7 +134,7 @@ const ReadingListPage = () => {
           </span>
 
           <Button
-            title="Edit Profile"
+            title="Profili Güncelle"
             className="ghost border-none sm edit-btn"
             handleClick={openEditProfileModal}
           />

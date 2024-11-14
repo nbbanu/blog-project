@@ -1,11 +1,12 @@
-import { Link } from "react-router-dom";
 import Button from "../../../components/common/Button";
 import { useRef, useState } from "react";
+import { updateUserImage, updateUserInformation } from "../../../service";
 
 const EditProfileModal = ({ setShowModal }) => {
-  const [userName, setUserName] = useState("");
-  const [shortBio, setShortBio] = useState("");
+  const [username, setUserName] = useState("");
+  const [bio, setShortBio] = useState("");
   const [avatar, setAvatar] = useState(null);
+  const [isClickedUptadeBtn, setIsClickedUpdateBtn] = useState(false);
   const [userNameError, setUserNameError] = useState("");
   const [shortBioError, setShortBioError] = useState("");
   const [userNameCharacterCount, setUserNameCharacterCount] = useState(0);
@@ -16,11 +17,17 @@ const EditProfileModal = ({ setShowModal }) => {
   const openFile = (e) => {
     e.preventDefault();
     inputRef.current?.click();
+    setIsClickedUpdateBtn(!isClickedUptadeBtn);
   };
-  const updateAvatar = (e) => {
+  const handleAvatarChange = async (e) => {
     const file = e.target.files[0];
-    // setAvatar(file);
+
+    const formData = new FormData();
+    formData.append("file", file);
+
     setAvatar(window.URL.createObjectURL(file));
+
+    const data = await updateUserImage(formData);
   };
 
   const removeAvatar = (e) => {
@@ -58,18 +65,23 @@ const EditProfileModal = ({ setShowModal }) => {
     setShortBioCharacterCount(0);
     setShowModal(false);
   };
-  const saveEditForm = (e) => {
+  const saveEditForm = async (e) => {
+    e.preventDefault();
     const formData = {
-      avatar,
-      userName,
-      shortBio
-    }
-    cancelEditForm(e);
-  }
+      username,
+      bio,
+    };
+    const data = await updateUserInformation(formData);
+    cancelEditForm(e)
+    
+  };
   return (
     <div className="edit-profile-modal">
       <h2 className="modal-title primary-text fs-20">Profil Bilgileri</h2>
-      <form id="edit-profile-form" className="edit-profile-form">
+      <form
+        id="edit-profile-form"
+        className="edit-profile-form flex flex-column"
+      >
         <div className="edit-profile-photo">
           <label className="photo-text fs-14 light-text">Fotoğraf</label>
           <div className="flex">
@@ -93,7 +105,7 @@ const EditProfileModal = ({ setShowModal }) => {
                     accept="image/*"
                     name="avatar"
                     ref={inputRef}
-                    onChange={updateAvatar}
+                    onChange={handleAvatarChange}
                   />
                   <Button
                     title={"Güncelle"}
@@ -121,7 +133,7 @@ const EditProfileModal = ({ setShowModal }) => {
             <label className="fs-14 primary-text">İsim*</label>
             <div className="flex flex-center" style={{ position: "relative" }}>
               <input
-                value={userName}
+                value={username}
                 type="text"
                 className="name-input primary-text fs-14"
                 required
@@ -139,7 +151,7 @@ const EditProfileModal = ({ setShowModal }) => {
               <div>
                 <span
                   className="entered-character fs-13 primary-text"
-                  style={{ color: userName.length > 50 ? "#C94A4A" : "" }}
+                  style={{ color: username.length > 50 ? "#C94A4A" : "" }}
                 >
                   {userNameCharacterCount}
                 </span>
@@ -156,7 +168,7 @@ const EditProfileModal = ({ setShowModal }) => {
                 rows={3}
                 name="short-bio"
                 onChange={handleShortBİoChange}
-                value={shortBio}
+                value={bio}
                 style={{ borderColor: shortBioError ? "#C94A4A" : "" }}
               ></textarea>
               <i
@@ -180,7 +192,7 @@ const EditProfileModal = ({ setShowModal }) => {
           </div>
         </div>
         <div className="light-line"></div>
-        <div className="about-page">
+        {/* <div className="about-page">
           <div className="flex flex-center-between">
             <p className="fs-14 primary-text">About Page</p>
             <Link className="link" to={"about"} target="_blank">
@@ -190,22 +202,24 @@ const EditProfileModal = ({ setShowModal }) => {
           <span className="about-page-text fs-13 light-text">
           Kısa biyografinizden daha canlı bir portre çizmek için görseller ve daha fazlasıyla kişiselleştirin.
           </span>
-          <div className="buttons flex">
-            <Button
-              className={"ghost cancel-btn"}
-              title={"İptal Et"}
-              handleClick={cancelEditForm}
-            />
-            <Button
-              className={"success"}
-              title={"Save"}
-              disabled={
-                !userName.length > 0 && !userNameCharacterCount < 50
-              
-              }
-              handleClick={saveEditForm}
-            />
-          </div>
+          
+        </div> */}
+        <div className="buttons flex">
+          <Button
+            className={"ghost cancel-btn"}
+            title={"İptal Et"}
+            handleClick={cancelEditForm}
+          />
+          <Button
+            className={"success"}
+            title={"Save"}
+            disabled={
+              !username.length > 0 &&
+              !userNameCharacterCount < 50 &&
+              !isClickedUptadeBtn
+            }
+            handleClick={saveEditForm}
+          />
         </div>
       </form>
     </div>

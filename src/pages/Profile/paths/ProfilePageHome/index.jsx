@@ -75,15 +75,15 @@ const ProfilePageHome = () => {
           ))
         : blogs?.map((blog) => (
             <BlogCard
-              key={blog.id}
-              bloggerName={blog.user.name}
-              title={blog.title}
-              infoText={blog.description}
-              releaseDate={dayjs(blog.created_at).format("MMM DD, YYYY")}
+              key={blog?.id}
+              bloggerName={blog?.user.name}
+              title={blog?.title}
+              infoText={blog?.description}
+              releaseDate={dayjs(blog?.created_at).format("MMM DD, YYYY")}
               profileImg="https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
-              blogImage={blog.image}
-              openBlogDetail={() => openBlogDetail(blog.title, blog.id)}
-              blogId = {blog.id}
+              blogImage={blog?.image}
+              openBlogDetail={() => openBlogDetail(blog?.title, blog?.id)}
+              blogId = {blog?.id}
             />
           ))}
     </div>

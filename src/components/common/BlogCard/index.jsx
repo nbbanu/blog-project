@@ -3,7 +3,7 @@ import SaveButton from "../../../pages/BlogDetail/SaveButton";
 import BloggerTooltip from "../BloggerTooltip";
 
 
-const blogCard = ({
+const BlogCard = ({
   user,
   bloggerName,
   releaseDate,
@@ -89,4 +89,4 @@ const blogCard = ({
   );
 };
 
-export default blogCard;
+export default BlogCard;

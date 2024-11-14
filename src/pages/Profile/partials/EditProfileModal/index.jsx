@@ -1,6 +1,6 @@
-import Button from "../../../components/common/Button";
-import { useRef, useState } from "react";
-import { updateUserImage, updateUserInformation } from "../../../service";
+import { useEffect, useRef, useState } from "react";
+import { getUserDetailById, updateUserImage, updateUserInformation } from "../../../../service";
+import Button from "../../../../components/common/Button";
 
 const EditProfileModal = ({ setShowModal }) => {
   const [username, setUserName] = useState("");
@@ -13,6 +13,14 @@ const EditProfileModal = ({ setShowModal }) => {
   const [shortBioCharacterCount, setShortBioCharacterCount] = useState(0);
 
   const inputRef = useRef(null);
+
+  useEffect(() => {
+    loadUserInformationById();
+  }, []);
+
+  const loadUserInformationById = async (id) => {
+    // const data = await getUserDetailById(id);
+  };
 
   const openFile = (e) => {
     e.preventDefault();
@@ -72,9 +80,9 @@ const EditProfileModal = ({ setShowModal }) => {
       bio,
     };
     const data = await updateUserInformation(formData);
-    cancelEditForm(e)
-    
+    cancelEditForm(e);
   };
+
   return (
     <div className="edit-profile-modal">
       <h2 className="modal-title primary-text fs-20">Profil Bilgileri</h2>

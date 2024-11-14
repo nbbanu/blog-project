@@ -81,14 +81,12 @@ const get = async (url, token) => {
       Authorization: "Bearer " + localStorage.getItem("token"),
     },
   };
-  const res = await fetch(request_url, options);
-  const data = await res.json();
-
-  return data;
+  const res = await axiosInstance.get(request_url, options);
+  return res?.data;
 };
 
 export const getAllBlogs = async () => {
-  const url = "blog/get-all/user";
+  const url = localStorage.getItem("token") ? "blog/get-all/user" : "blog/get-all";
   const data = await get(url);
   return data?.data;
 };

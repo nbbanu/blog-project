@@ -1,0 +1,41 @@
+.reading-list-page {
+
+  .profile-info {
+    .avatar {
+      margin-right: 15px;
+    }
+    .user-name {
+      margin-bottom: 5px;
+    }
+    .profile-info-bottom {
+      gap: 8px;
+    }
+    .story {
+      gap: 5px;
+    }
+  }
+  .list-page-header {
+    padding: 24px 0;
+    .reading-list-h2 {
+      padding-bottom: 10px;
+    }
+    .light-line {
+      margin: 10px 0;
+    }
+  }
+  // &-left {
+  //   .reading-list-blog {
+  //     .blog-card {
+  //       justify-content: space-between;
+  //       align-items: center;
+  //       .gray-link {
+  //         display: none;
+  //       }
+  //       &-bottom {
+  //         justify-content: flex-start;
+  //       }
+  //     }
+  //   }
+  // }
+
+}

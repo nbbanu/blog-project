@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { getMyLists } from "../../../../service";
-import ListCard from "./ListCard";
+import { getMyLists } from "../../../../../service";
+import ListCard from "../../../partials/ListCard";
 
-const Lists = () => {
+const MyLists = () => {
   const [myLists, setMyLists] = useState([]);
 
   useEffect(() => {
     loadMyLists();
   }, []);
+
   const loadMyLists = async () => {
     const data = await getMyLists();
     setMyLists(data);
@@ -40,4 +41,4 @@ const Lists = () => {
   );
 };
 
-export default Lists;
+export default MyLists;

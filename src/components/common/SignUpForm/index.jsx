@@ -2,11 +2,13 @@ import { useForm } from "react-hook-form";
 import Button from "../Button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { signUp } from "../../../service";
 import Swal from "sweetalert2";
+import Loader from "../Loader";
 
 const SignUpForm = ({ show, setCreateModalShow, createModalShow }) => {
+  const [loading, setLoading] = useState(false);
   let passwordRegex = /^(?=.*[0-9]).{5,16}$/;
 
   useEffect(() => {
@@ -71,6 +73,7 @@ const SignUpForm = ({ show, setCreateModalShow, createModalShow }) => {
   });
 
   const onSubmit = (data) => {
+    setLoading(true);
     signUp(data)
       .then((res) => {
         Swal.fire({
@@ -85,7 +88,9 @@ const SignUpForm = ({ show, setCreateModalShow, createModalShow }) => {
         err.errors?.forEach((error) => {
           setError(error.property, { type: "custom", message: error.message });
         });
-      });
+      }).finally(() => {
+        setLoading(false);
+      })
   };
 
   return (
@@ -146,7 +151,7 @@ const SignUpForm = ({ show, setCreateModalShow, createModalShow }) => {
           <p className="error-text fs-13">{errors?.repeatPassword?.message}</p>
         </div>
       </div>
-
+      {loading ? <Loader /> : ""}
       <Button type="button" title={"Kaydol"} className={"success submit-btn"} />
     </form>
   );

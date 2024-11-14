@@ -23,10 +23,10 @@
 @import "../../src/pages/Home/home.scss";
 @import "../../src/pages/Search/search.scss";
 @import "../../src/pages/Profile/profile-page.scss";
-@import "../../src/pages/Profile/paths/ProfilePageHome/profilePage-home.scss";
-@import "../../src/pages/Profile/paths/ProfilePageAbout/profilePage-about.scss";
-@import "../../src/pages/Profile/paths/Lists/lists.scss";
-@import "../../src/pages/Profile/paths/Lists/ListCard/list-card.scss";
+@import "../../src/pages/Profile/tabs/ProfilePageHome/profilePage-home.scss";
+@import "../../src/pages/Profile/tabs/ProfilePageAbout/profilePage-about.scss";
+@import "../../src/pages/Profile/tabs/Lists/MyLists/my-lists.scss";
+@import "../../src/pages/Profile/partials/ListCard/list-card.scss";
 @import "../../src/pages/Write/write.scss";
 @import "../../src/pages/Topics/topics.scss";
 @import "../../src/pages/Admin/admin.scss";
@@ -40,9 +40,9 @@
 @import "../../src/pages/BlogDetail/CommentButton/CommentCard/comment-card.scss";
 @import "../../src/pages/BlogDetail/CommentButton/RepliesButton/replies-button.scss";
 @import "../../src/pages/BlogDetail/CommentButton/ReplyCard/reply-card.scss";
-@import "../../src/pages/Profile/EditProfileModal/edit-profile-modal.scss";
-@import "../pages/Profile/ReadingListPage/reading-list-page.scss";
-@import "../pages/Profile/ReadingListPage/AddNoteInput/add-note-input.scss";
+@import "../../src/pages/Profile/partials/EditProfileModal/edit-profile-modal.scss";
+@import "../pages/Profile/tabs/Lists/ReadingListPage/reading-list-page.scss";
+@import "../pages/Profile/partials/AddNoteInput/add-note-input.scss";
 :root {
   font-family: "Roboto", sans-serif;
 }

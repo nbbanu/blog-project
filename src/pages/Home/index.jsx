@@ -19,7 +19,7 @@ const Home = () => {
   const [blogs, setBlogs] = useState([]);
   // const { email } = useAuth();
   // const userEmail = "@" + email?.split("@")[0];
-  const { token } = useAuth();
+  const { token, user, setUser } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,6 +34,10 @@ const Home = () => {
   const loadAllBlogsToUI = async () => {
     const data = await getAllBlogs();
     setBlogs(data);
+    data.forEach((user) => {
+      localStorage.setItem("user", JSON.stringify(user.user));
+      setUser(user.user);
+    });
   };
 
   const openBlogDetail = (blogTitle, blogId) => {
@@ -125,7 +129,9 @@ const Home = () => {
                         <i className="fa-solid fa-minus minus light-text flex flex-center-center"></i>
                       }
                       openBlogDetail={() => openBlogDetail(blog.title, blog.id)}
-                      openBloggerProfile={() => openBloggerProfile(blog.user.email)}
+                      openBloggerProfile={() =>
+                        openBloggerProfile(blog.user.email)
+                      }
                       blogId={blog.id}
                     />
                   ))}
@@ -228,7 +234,7 @@ const Home = () => {
                       />
                     ))}
                   </div>
-{/* 
+                  {/* 
                   <Link to={`/${userEmail}/lists`} className="green-text link">
                     Daha Fazla Kaydedilenler Görün
                   </Link> */}

@@ -8,7 +8,7 @@ const AuthProvider = (props) => {
   // global olarak tutmak istediğimiz state’lerin bulunacağı component’i oluşturmamız gerekmektedir.Bu durumda AuthProvider
 
   const [token, setToken] = useState(localStorage.getItem("token"));
-  const [email,setEmail] = useState(localStorage.getItem("email"));
+  const [user, setUser] = useState(localStorage.getItem("user"));
 
   const onLoginSuccess = (token) => {
     localStorage.setItem("token", token);
@@ -16,11 +16,11 @@ const AuthProvider = (props) => {
   };
 
   const value = {
-    setEmail,
-    email,
     token,
     setToken,
     onLoginSuccess,
+    user,
+    setUser,
   };
 
   return (

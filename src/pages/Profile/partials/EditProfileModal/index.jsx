@@ -1,11 +1,13 @@
+
 import { useEffect, useRef, useState } from "react";
 import { getUserDetailById, updateUserImage, updateUserInformation } from "../../../../service";
 import Button from "../../../../components/common/Button";
 
-const EditProfileModal = ({ setShowModal }) => {
-  const [username, setUserName] = useState("");
-  const [bio, setShortBio] = useState("");
-  const [avatar, setAvatar] = useState(null);
+const EditProfileModal = ({ user,setShowModal }) => {
+
+  const [username, setUserName] = useState(user?.username);
+  const [bio, setShortBio] = useState(user?.bio);
+  const [avatar, setAvatar] = useState(user?.profileImage);
   const [isClickedUptadeBtn, setIsClickedUpdateBtn] = useState(false);
   const [userNameError, setUserNameError] = useState("");
   const [shortBioError, setShortBioError] = useState("");
@@ -159,7 +161,7 @@ const EditProfileModal = ({ setShowModal }) => {
               <div>
                 <span
                   className="entered-character fs-13 primary-text"
-                  style={{ color: username.length > 50 ? "#C94A4A" : "" }}
+                  style={{ color: username?.length > 50 ? "#C94A4A" : "" }}
                 >
                   {userNameCharacterCount}
                 </span>
@@ -221,11 +223,7 @@ const EditProfileModal = ({ setShowModal }) => {
           <Button
             className={"success"}
             title={"Save"}
-            disabled={
-              !username.length > 0 &&
-              !userNameCharacterCount < 50 &&
-              !isClickedUptadeBtn
-            }
+            // disabled={!isClickedUptadeBtn}
             handleClick={saveEditForm}
           />
         </div>

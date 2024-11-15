@@ -4,9 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 
 const UserPopup = ({ clickItem }) => {
   const [showPopup, setShowPopup] = useState(false);
-  const { setToken, email } = useAuth();
-  const userEmail = "@" + email?.split("@")[0];
+  const { setToken, user, setUser } = useAuth();
+
   const navigate = useNavigate();
+  const email = user?.email
+  const userEmail = "@" + email?.split("@")[0];
 
   const openPopup = () => {
     setShowPopup(!showPopup);
@@ -14,8 +16,9 @@ const UserPopup = ({ clickItem }) => {
 
   const logOut = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("email");
+    localStorage.removeItem("user");
     setToken("");
+    setUser("");
     navigate("/");
   };
 

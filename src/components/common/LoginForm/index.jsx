@@ -7,7 +7,7 @@ import { signIn } from "../../../service";
 import Loader from "../Loader";
 
 const LoginForm = ({ setShowModal }) => {
-  const {setEmail,onLoginSuccess} = useAuth();
+  const {onLoginSuccess} = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
@@ -73,7 +73,6 @@ const LoginForm = ({ setShowModal }) => {
         });
 
         onLoginSuccess(res?.data?.accessToken);
-        localStorage.setItem("email", formData.email);
         setShowModal(false);
       })
       .catch((err) => {
@@ -96,7 +95,6 @@ const LoginForm = ({ setShowModal }) => {
     // }
 
     setFormData((values) => ({ ...values, [name]: value.trim() }));
-    setEmail(formData.email);
     
     // validateForm({ ...formData, [name]: value }); // useEffect yerine ikinci bir kullanım
   };

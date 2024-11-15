@@ -12,7 +12,7 @@ const Header = () => {
   const [show, setShowModal] = useState(false);
   const [createModalShow, setCreateModalShow] = useState(false);
 
-  const { token } = useAuth();
+  const { token,user } = useAuth();
 
   document.addEventListener("scroll", () => {
     const header = document.querySelector("#header");
@@ -73,7 +73,7 @@ const Header = () => {
               clickItem={
                 <Link className="profile link">
                   <img
-                    src=""
+                    src={user.profileImage}
                     alt="profile-img"
                     style={{ width: 32, height: 32 }}
                     className="avatar loggedin-profile-img"

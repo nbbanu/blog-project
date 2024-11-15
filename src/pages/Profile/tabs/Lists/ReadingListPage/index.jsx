@@ -16,8 +16,8 @@ const ReadingListPage = () => {
   const [listed, setListed] = useState([]);
   const [listBlog, setListBlog] = useState([]);
 
-  const { email } = useAuth();
-  const userEmail = "@" + email?.split("@")[0];
+  // const { email } = useAuth();
+  // const userEmail = "@" + email?.split("@")[0];
   const navigate = useNavigate();
   const listParams = useParams();
 

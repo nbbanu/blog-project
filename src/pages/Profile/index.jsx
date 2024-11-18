@@ -71,7 +71,7 @@ const ProfilePage = () => {
 
         <div className="profile-page-right">
           <img
-            src={user.profileImage}
+            src={user?.profileImage}
             className="avatar img-cover"
             alt="avatar"
             style={{ width: 88, height: 88 }}

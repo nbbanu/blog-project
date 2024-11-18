@@ -73,7 +73,7 @@ const Header = () => {
               clickItem={
                 <Link className="profile link">
                   <img
-                    src={user.profileImage}
+                    src={user?.profileImage}
                     alt="profile-img"
                     style={{ width: 32, height: 32 }}
                     className="avatar loggedin-profile-img"

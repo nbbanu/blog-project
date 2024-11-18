@@ -10,8 +10,9 @@ const ListCard = ({
   list,
   children,
 }) => {
-  // const { email } = useAuth();
-  // const userEmail = "@" + email?.split("@")[0];
+  const { user } = useAuth();
+  const email = user?.email;
+  const userEmail = "@" + email?.split("@")[0];
 
   return (
     <div className="list-card">

@@ -40,11 +40,12 @@ const EditProfileModal = ({ user,setShowModal }) => {
     const data = await updateUserImage(formData);
   };
 
-  const removeAvatar = (e) => {
+  const removeAvatar = async (e) => {
     e.preventDefault();
     setAvatar(
       "https://miro.medium.com/v2/resize:fill:80:80/1*dmbNkD5D-u45r44go_cf0g.png"
     );
+    const data = await updateUserImage(formData);
   };
   const handleUserNameChange = (e) => {
     setUserName(e.target.value);

@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import SaveButton from "../../../pages/BlogDetail/SaveButton";
 import BloggerTooltip from "../BloggerTooltip";
 
-
 const BlogCard = ({
   user,
   bloggerName,
@@ -17,10 +16,9 @@ const BlogCard = ({
   blogImage,
   openBlogDetail,
   openBloggerProfile,
-  blogId
+  blogId,
+  isAdded,
 }) => {
-
-
   return (
     <div>
       <div className="blog-card flex flex-center">
@@ -70,7 +68,7 @@ const BlogCard = ({
               </span>
             </div>
             <div className="blog-card-bottom-right flex flex-center">
-              <SaveButton blogId = {blogId}/>
+              <SaveButton blogId={blogId} isAdded={isAdded} />
               {minusIcon}
               <i className="fa-solid fa-ellipsis light-text fs-20"></i>
             </div>

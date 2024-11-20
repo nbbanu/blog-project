@@ -112,6 +112,7 @@ const Home = () => {
                   ))
                 : blogs?.map((blog) => (
                     <BlogCard
+                      isAdded={blog?.lists?.length > 0}
                       user={blog.user}
                       key={blog.id}
                       bloggerName={blog.user.name}

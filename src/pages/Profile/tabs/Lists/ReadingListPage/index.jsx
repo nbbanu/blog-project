@@ -91,6 +91,7 @@ const ReadingListPage = () => {
           <div className="reading-list-blog">
             <AddNoteInput />
             <BlogCard
+              isAdded={blog?.lists?.length > 0}
               bloggerName={"nbbanu"}
               releaseDate={dayjs(blog?.created_at).format("MMM DD, YYYY")}
               profileImg={

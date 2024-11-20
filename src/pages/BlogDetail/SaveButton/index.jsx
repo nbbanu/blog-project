@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import { createReadingList, getListDetailByBlogId } from "../../../service";
 import Loader from "../../../components/common/Loader";
 
-const SaveButton = ({ blogId }) => {
+const SaveButton = ({ blogId, isAdded }) => {
   const [show, setShowModal] = useState(false);
   const [showDescInput, setShowDescInput] = useState(false);
   const [title, setTitle] = useState("");
@@ -212,8 +212,9 @@ const SaveButton = ({ blogId }) => {
           clickItem={
             <MiniTooltip title={"Save"}>
               <i
-                className=
-                "fa-regular fa-bookmark light-text fs-20"
+                className={`fa-${
+                  isAdded ? "solid" : "regular"
+                } fa-bookmark light-text fs-20`}
                 onClick={handleSaveClick}
               ></i>
             </MiniTooltip>

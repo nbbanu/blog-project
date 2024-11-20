@@ -84,6 +84,7 @@ const ProfilePageHome = () => {
               blogImage={blog?.image}
               openBlogDetail={() => openBlogDetail(blog?.title, blog?.id)}
               blogId = {blog?.id}
+              isAdded={blog?.lists?.length > 0}
             />
           ))}
     </div>

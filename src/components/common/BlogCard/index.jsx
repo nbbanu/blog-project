@@ -1,24 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SaveButton from "../../../pages/BlogDetail/SaveButton";
 import BloggerTooltip from "../BloggerTooltip";
+import dayjs from "dayjs";
 
-const BlogCard = ({
-  user,
-  bloggerName,
-  releaseDate,
-  profileImg,
-  title,
-  infoText,
-  categoryLink,
-  readingTime,
-  minusIcon,
-  dot,
-  blogImage,
-  openBlogDetail,
-  openBloggerProfile,
-  blogId,
-  isAdded,
-}) => {
+const BlogCard = ({blog}) => {
+  const navigate = useNavigate();
+
+  const openBlogDetail = () => {
+    navigate(`detail/${blog?.slug}/${blog?.id}`);
+  };
+  const openBloggerProfile = (email) => {
+    const userEmail = "@" + email?.split("@")[0];
+    navigate(`/${userEmail}/main`);
+  };
   return (
     <div>
       <div className="blog-card flex flex-center">
@@ -26,50 +20,51 @@ const BlogCard = ({
           <div className="blog-card-left-header flex flex-center">
             <div className="blogger-profile flex flex-center">
               <BloggerTooltip
-                bloggerName={user?.name}
-                bloggerInformation={user?.bio}
-                followersCount={"1.2K"}
-                profileImg={user?.profileImage}
+              user={blog?.user}
               />
               <img
                 className="avatar img-cover"
-                src={profileImg}
+                src={blog?.user?.profileImage}
                 alt="avatar"
                 style={{ width: 24, height: 24 }}
               />
 
               <span
                 className="blogger-name fs-14 primary-text"
-                onClick={openBloggerProfile}
+                onClick={() => openBloggerProfile(blog?.user?.email)}
               >
-                {bloggerName}
+                {blog?.user?.name}
               </span>
             </div>
-            {dot}
+         
 
             <span className="blog-card-release-date fs-14 light-text">
-              {releaseDate}
+              {dayjs(blog?.created_at).format(
+                        "MMM DD, YYYY"
+                      )}
             </span>
           </div>
-          <div className="blog-card-left-title flex" onClick={openBlogDetail}>
+          <div className="blog-card-left-title flex" 
+          onClick={openBlogDetail}
+          >
             <div>
-              <h2 className="blog-card-title-h2 fs-20 primary-text">{title}</h2>
+              <h2 className="blog-card-title-h2 fs-20 primary-text">{blog?.title}</h2>
               <p className="blog-card-info-text fs-16 primary-text line-clamp">
-                {infoText}
+                {blog?.description}
               </p>
             </div>
           </div>
 
           <div className="blog-card-bottom flex flex-center-between">
             <div className="blog-card-bottom-left flex flex-center">
-              <Link className="link gray-link">{categoryLink}</Link>
+              <Link className="link gray-link">{"Micro Frontends"}</Link>
               <span className="mini-card-reading-time fs-13 light-text">
-                {readingTime}
+                {"4 min read"}
               </span>
             </div>
             <div className="blog-card-bottom-right flex flex-center">
-              <SaveButton blogId={blogId} isAdded={isAdded} />
-              {minusIcon}
+              <SaveButton blog={blog} isAdded={blog?.lists?.length > 0} />
+              <i className="fa-solid fa-minus minus light-text flex flex-center-center"></i>
               <i className="fa-solid fa-ellipsis light-text fs-20"></i>
             </div>
           </div>
@@ -79,7 +74,7 @@ const BlogCard = ({
           style={{ width: 112, height: 112 }}
           onClick={openBlogDetail}
         >
-          <img src={blogImage} alt="blog-image" className="img-cover" />
+          <img src={blog?.image} alt="blog-image" className="img-cover" />
         </div>
       </div>
       <div className="light-line"></div>

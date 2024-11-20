@@ -1,14 +1,12 @@
-import * as React from "react";
+import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
+import * as React from "react";
 import MiniTooltip from "../../../../components/common/MiniTooltip";
-import { Input, Typography } from "@mui/material";
-import Button from "../../../../components/common/Button";
 import CommentCard from "../CommentCard";
-import RepliesCard from "../RepliesButton";
 import CommentForm from "../CommentForm";
 
-export default function CommentDrawer({ commentCount, userName }) {
+export default function CommentDrawer({ commentCount, blog }) {
   const [state, setState] = React.useState({
     // top: false,
     // left: false,
@@ -19,8 +17,6 @@ export default function CommentDrawer({ commentCount, userName }) {
   const toggleDrawer = (anchor, open) => () => {
     setState({ ...state, [anchor]: open });
   };
-
-
 
   const drawerContent = {
     minWidth: 300,
@@ -74,14 +70,14 @@ export default function CommentDrawer({ commentCount, userName }) {
             style={{ width: 35, height: 35, marginRight: 10 }}
           />
           <Typography className="primary-text" sx={{ fontSize: 14 }}>
-            {userName}
+            {blog?.username}
           </Typography>
         </Box>
         <CommentForm placeholder={"Düşüncelerin neler?"}/>
       </Box>
       <div className="light-line"></div>
       <CommentCard
-        userName={userName}
+        blog={blog}
         commentDate={"about 1 month ago"}
         commentCardContent="Your point is the comparison of threaded parallelism vs. event-based pseudo-parallelism.
         If you are stuck with a single thread and want to not wait for I/O wait, then you can switch to something else. That's what the JS Event Loop does."

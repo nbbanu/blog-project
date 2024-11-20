@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import { createReadingList, getListDetailByBlogId } from "../../../service";
 import Loader from "../../../components/common/Loader";
 
-const SaveButton = ({ blogId, isAdded }) => {
+const SaveButton = ({blog, isAdded }) => {
   const [show, setShowModal] = useState(false);
   const [showDescInput, setShowDescInput] = useState(false);
   const [title, setTitle] = useState("");
@@ -91,7 +91,7 @@ const SaveButton = ({ blogId, isAdded }) => {
   };
 
   const handleSaveClick = async () => {
-    const data = await getListDetailByBlogId(blogId);
+    const data = await getListDetailByBlogId(blog.id);
     setBlogDetailInList(data.lists);
     setLoading(false);
   };

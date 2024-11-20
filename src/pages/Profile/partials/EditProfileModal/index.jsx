@@ -1,18 +1,20 @@
-
 import { useEffect, useRef, useState } from "react";
-import { getUserDetailById, updateUserImage, updateUserInformation } from "../../../../service";
+import {
+  getUserDetailById,
+  updateUserImage,
+  updateUserInformation,
+} from "../../../../service";
 import Button from "../../../../components/common/Button";
 
-const EditProfileModal = ({ user,setShowModal }) => {
-
+const EditProfileModal = ({ user, setShowModal }) => {
   const [username, setUserName] = useState(user?.username);
   const [bio, setShortBio] = useState(user?.bio);
   const [avatar, setAvatar] = useState(user?.profileImage);
   const [isClickedUptadeBtn, setIsClickedUpdateBtn] = useState(false);
   const [userNameError, setUserNameError] = useState("");
   const [shortBioError, setShortBioError] = useState("");
-  const [userNameCharacterCount, setUserNameCharacterCount] = useState(0);
-  const [shortBioCharacterCount, setShortBioCharacterCount] = useState(0);
+  const [userNameCharacterCount, setUserNameCharacterCount] = useState(user?.username?.length);
+  const [shortBioCharacterCount, setShortBioCharacterCount] = useState(user?.bio?.length);
 
   const inputRef = useRef(null);
 
@@ -33,7 +35,7 @@ const EditProfileModal = ({ user,setShowModal }) => {
     const file = e.target.files[0];
 
     const formData = new FormData();
-    formData.append("file", file);
+    formData?.append("file", file);
 
     setAvatar(window.URL.createObjectURL(file));
 
@@ -45,8 +47,11 @@ const EditProfileModal = ({ user,setShowModal }) => {
     setAvatar(
       "https://miro.medium.com/v2/resize:fill:80:80/1*dmbNkD5D-u45r44go_cf0g.png"
     );
-    const data = await updateUserImage(formData);
+ 
+
+    const data = await updateUserImage();
   };
+
   const handleUserNameChange = (e) => {
     setUserName(e.target.value);
     setUserNameCharacterCount(e.target.value.length);
@@ -70,10 +75,10 @@ const EditProfileModal = ({ user,setShowModal }) => {
   };
   const cancelEditForm = (e) => {
     e.preventDefault();
-    setUserName("");
-    setShortBio("");
-    setUserNameCharacterCount(0);
-    setShortBioCharacterCount(0);
+    // setUserName("");
+    // setShortBio("");
+    // setUserNameCharacterCount(0);
+    // setShortBioCharacterCount(0);
     setShowModal(false);
   };
   const saveEditForm = async (e) => {

@@ -118,10 +118,7 @@ const BlogDetailPage = () => {
                       style={{ width: 40, height: 40 }}
                     />
                     <BloggerTooltip
-                      bloggerName={blog?.user?.name}
-                      bloggerInformation="Professional domestic abuse advocate by day; a writer by night and a street photographer in my free time. A counsellor in the make."
-                      followersCount={"1.2K"}
-                      profileImg="https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+                     user={blog?.user}
                     />
                   </div>
 
@@ -132,10 +129,7 @@ const BlogDetailPage = () => {
                           {blog?.user?.name}
                         </div>
                         <BloggerTooltip
-                          bloggerName={blog?.user?.name}
-                          bloggerInformation="Professional domestic abuse advocate by day; a writer by night and a street photographer in my free time. A counsellor in the make."
-                          followersCount={"1.2K"}
-                          profileImg="https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+                      user={blog?.user}
                         />
                       </div>
 
@@ -178,7 +172,7 @@ const BlogDetailPage = () => {
                     <li className="link">
                       <CommentButton
                         commentCount={"18"}
-                        userName={blog?.user?.name}
+                        blog={blog}
                       />
                     </li>
                   </ul>

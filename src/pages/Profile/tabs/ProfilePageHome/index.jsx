@@ -3,8 +3,6 @@ import BlogCard from "../../../../components/common/BlogCard";
 import { getAllBlogs } from "../../../../service";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import dayjs from "dayjs";
-import { useNavigate } from "react-router-dom";
 
 const ProfilePageHome = () => {
   const [blogs, setBlogs] = useState([]);
@@ -13,8 +11,6 @@ const ProfilePageHome = () => {
     loadAllBlogsToUI();
   }, []);
 
-  const navigate = useNavigate();
-
   const loadAllBlogsToUI = async () => {
     const data = await getAllBlogs();
     let newBlogDates = data?.sort(
@@ -22,9 +18,6 @@ const ProfilePageHome = () => {
         new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
     );
     setBlogs(newBlogDates);
-  };
-  const openBlogDetail = (blogTitle, blogId) => {
-    navigate(`/detail/${blogTitle}/${blogId}`);
   };
 
   return (
@@ -73,20 +66,7 @@ const ProfilePageHome = () => {
               </div>
             </div>
           ))
-        : blogs?.map((blog) => (
-            <BlogCard
-              key={blog?.id}
-              bloggerName={blog?.user.name}
-              title={blog?.title}
-              infoText={blog?.description}
-              releaseDate={dayjs(blog?.created_at).format("MMM DD, YYYY")}
-              profileImg="https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
-              blogImage={blog?.image}
-              openBlogDetail={() => openBlogDetail(blog?.title, blog?.id)}
-              blogId = {blog?.id}
-              isAdded={blog?.lists?.length > 0}
-            />
-          ))}
+        : blogs?.map((blog) => <BlogCard blog={blog} />)}
     </div>
   );
 };

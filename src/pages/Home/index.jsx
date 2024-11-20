@@ -1,26 +1,24 @@
+import { useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import { Link, useNavigate } from "react-router-dom";
 import Banner from "../../components/common/Banner";
 import BlogCard from "../../components/common/BlogCard";
 import FollowPersonCard from "../../components/common/FollowPersonCard";
 import Footer from "../../components/common/Footer";
-import HorizantalScrobbleBar from "../../components/common/HorizantalScrobbleBar";
+import HorizontalScrobbleBar from "../../components/common/HorizontalScrobbleBar";
+import MiniBlogCard from "../../components/common/MiniBlogCard";
 import StaffPicksCard from "../../components/common/StaffPicksCard";
 import Trending from "../../components/common/Trending";
 import { useAuth } from "../../contexts/AuthContext";
-import { useEffect, useState } from "react";
 import { getAllBlogs, getMyLists } from "../../service";
-import MiniBlogCard from "../../components/common/MiniBlogCard";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
-import dayjs from "dayjs";
 
 const Home = () => {
   const [myLists, setMyLists] = useState([]);
   const [blogs, setBlogs] = useState([]);
   // const { email } = useAuth();
   // const userEmail = "@" + email?.split("@")[0];
-  const { token, user, setUser } = useAuth();
-  const navigate = useNavigate();
+  const { token, setUser } = useAuth();
 
   useEffect(() => {
     token && loadAllBlogsToUI();
@@ -40,13 +38,13 @@ const Home = () => {
     });
   };
 
-  const openBlogDetail = (blogTitle, blogId) => {
-    navigate(`detail/${blogTitle}/${blogId}`);
-  };
+  // const openBlogDetail = (blogTitle, blogId) => {
+  //   navigate(`detail/${blogTitle}/${blogId}`);
+  // };
 
-  const openBloggerProfile = (email) => {
-    navigate(`/${email}/main`);
-  };
+  // const openBloggerProfile = (email) => {
+  //   navigate(`/${email}/main`);
+  // };
 
   if (token) {
     return (
@@ -54,7 +52,7 @@ const Home = () => {
         <div className="container">
           <div className="flex loggedin-home-container">
             <div className="loggedin-home-left">
-              <HorizantalScrobbleBar />
+              <HorizontalScrobbleBar />
               {blogs?.length === 0
                 ? [1, 2, 3, 4, 5].map((item) => (
                     <div
@@ -112,28 +110,29 @@ const Home = () => {
                   ))
                 : blogs?.map((blog) => (
                     <BlogCard
-                      isAdded={blog?.lists?.length > 0}
+                      // isAdded={blog?.lists?.length > 0}
                       user={blog.user}
-                      key={blog.id}
-                      bloggerName={blog.user.name}
-                      title={blog.title}
-                      infoText={blog.description}
-                      releaseDate={dayjs(blog.created_at).format(
-                        "MMM DD, YYYY"
-                      )}
-                      profileImg="https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
-                      blogImage={blog.image}
-                      categoryLink={"Micro Frontends"}
-                      dot={<span className="dot light-text"></span>}
-                      readingTime={"4 min read"}
-                      minusIcon={
-                        <i className="fa-solid fa-minus minus light-text flex flex-center-center"></i>
-                      }
-                      openBlogDetail={() => openBlogDetail(blog.title, blog.id)}
-                      openBloggerProfile={() =>
-                        openBloggerProfile(blog.user.email)
-                      }
-                      blogId={blog.id}
+                      // key={blog.id}
+                      // bloggerName={blog.user.name}
+                      // title={blog.title}
+                      // infoText={blog.description}
+                      blog={blog}
+                      // releaseDate={dayjs(blog.created_at).format(
+                      //   "MMM DD, YYYY"
+                      // )}
+                      // profileImg="https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+                      // blogImage={blog.image}
+                      // categoryLink={"Micro Frontends"}
+                      // dot={<span className="dot light-text"></span>}
+                      // readingTime={"4 min read"}
+                      // minusIcon={
+                      //   <i className="fa-solid fa-minus minus light-text flex flex-center-center"></i>
+                      // }
+                      // openBlogDetail={() => openBlogDetail(blog.title, blog.id)}
+                      // openBloggerProfile={() =>
+                      //   openBloggerProfile(blog.user.email)
+                      // }
+                      // blogId={blog.id}
                     />
                   ))}
             </div>
@@ -141,21 +140,11 @@ const Home = () => {
             <div className="loggedin-home-right">
               <div>
                 <h2 className="loggedin-home-right-title primary-text fs-16">
-                  Personel Seçimleri
+                  Sizin İçin Seçtiklerimiz
                 </h2>
                 <div className="staff-picks-cards flex flex-column">
                   {blogs?.slice(0, 3).map((blog) => (
-                    <StaffPicksCard
-                      key={blog.id}
-                      profileImg={
-                        "https://miro.medium.com/v2/resize:fill:40:40/1*i5p9qg4BGA4i2NXsghlnxQ.png"
-                      }
-                      bloggerName={blog.user.name}
-                      publishedBy={"Middle-Pause"}
-                      title={blog.title}
-                      openBlogDetail={() => openBlogDetail(blog.title, blog.id)}
-                      openBloggerProfile={openBloggerProfile}
-                    />
+                    <StaffPicksCard blog={blog} key={blog.id} />
                   ))}
                 </div>
                 <Link className="green-text link">Tüm Listeyi Görün</Link>
@@ -222,16 +211,11 @@ const Home = () => {
                     {blogs?.map((blog) => (
                       <StaffPicksCard
                         key={blog.id}
-                        profileImg={
-                          "https://miro.medium.com/v2/resize:fill:40:40/1*i5p9qg4BGA4i2NXsghlnxQ.png"
-                        }
-                        bloggerName={blog.user.name}
-                        publishedBy={"Middle-Pause"}
-                        title={blog.title}
-                        openBlogDetail={() =>
-                          openBlogDetail(blog.title, blog.id)
-                        }
-                        openBloggerProfile={openBloggerProfile}
+                        blog={blog}
+                        // openBlogDetail={() =>
+                        //   openBlogDetail(blog.title, blog.id)
+                        // }
+                        // openBloggerProfile={openBloggerProfile}
                       />
                     ))}
                   </div>
@@ -271,21 +255,8 @@ const Home = () => {
         <div className="home-bottom-left">
           {blogs?.map((blog) => (
             <MiniBlogCard
-              key={blog.id}
-              bloggerName={blog.user.name}
-              title={blog.title}
-              description={blog.description}
-              releaseDate={dayjs(blog.created_at).format("MMM DD, YYYY")}
-              profileImg="https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
-              miniCardImg={
-                <img
-                  src={blog.image}
-                  alt=""
-                  className="mini-blogcard-img"
-                  style={{ width: 200, height: 134 }}
-                />
-              }
-              readingTime={"4 min read"}
+              blog={blog}
+              user={blog?.user}
             />
           ))}
         </div>

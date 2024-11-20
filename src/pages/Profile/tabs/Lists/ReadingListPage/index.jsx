@@ -1,14 +1,9 @@
 import { useEffect, useState } from "react";
-import Button from "../../../../../components/common/Button";
-import AuthModal from "../../../../../components/common/AuthModal";
+import { useParams } from "react-router-dom";
+import BlogCard from "../../../../../components/common/BlogCard";
+import { getMyListById } from "../../../../../service";
 import ClapButton from "../../../../BlogDetail/ClapButton";
 import CommentButton from "../../../../BlogDetail/CommentButton";
-import BlogCard from "../../../../../components/common/BlogCard";
-import { useNavigate, useParams } from "react-router-dom";
-import { useAuth } from "../../../../../contexts/AuthContext";
-import { getMyListById } from "../../../../../service";
-import dayjs from "dayjs";
-import EditProfileModal from "../../../partials/EditProfileModal";
 import AddNoteInput from "../../../partials/AddNoteInput";
 
 const ReadingListPage = () => {
@@ -18,7 +13,7 @@ const ReadingListPage = () => {
 
   // const { email } = useAuth();
   // const userEmail = "@" + email?.split("@")[0];
-  const navigate = useNavigate();
+
   const listParams = useParams();
 
   useEffect(() => {
@@ -31,16 +26,6 @@ const ReadingListPage = () => {
     setListBlog(data?.blogs);
   };
 
-  const openEditProfileModal = () => {
-    setShowModal(!show);
-  };
-  const openBloggerProfile = () => {
-    navigate(`/${userEmail}/main`);
-  };
-
-  const openBlogDetail = (blogTitle, blogId) => {
-    navigate(`/detail/${blogTitle}/${blogId}`);
-  };
 
   return (
     <div className="reading-list-page">
@@ -91,24 +76,7 @@ const ReadingListPage = () => {
           <div className="reading-list-blog">
             <AddNoteInput />
             <BlogCard
-              isAdded={blog?.lists?.length > 0}
-              bloggerName={"nbbanu"}
-              releaseDate={dayjs(blog?.created_at).format("MMM DD, YYYY")}
-              profileImg={
-                "https://miro.medium.com/v2/resize:fill:48:48/0*PVc8ycK2VwtFt7R0"
-              }
-              title={blog.title}
-              infoText={
-                blog.text && (
-                  <div
-                    className="light-text fs-16"
-                    dangerouslySetInnerHTML={{ __html: blog?.text }}
-                  ></div>
-                )
-              }
-              blogImage={blog.image}
-              openBloggerProfile={openBloggerProfile}
-              openBlogDetail={() => openBlogDetail(blog.title, blog.id)}
+             blog={blog}
             />
           </div>
         ))}

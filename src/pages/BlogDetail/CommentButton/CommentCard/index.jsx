@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Button from "../../../../components/common/Button";
 import BloggerTooltip from "../../../../components/common/BloggerTooltip";
-import RepliesCard from "../RepliesButton";
 import ReplyCard from "../ReplyCard";
 import RepliesButton from "../RepliesButton";
 
@@ -13,10 +12,9 @@ const contentStyle = {
 };
 
 const CommentCard = ({
-  userName,
+  blog,
   commentDate,
   commentCardContent,
-  replyCount,
   clapCount,
 }) => {
   const [show, setShow] = useState(false);
@@ -44,13 +42,10 @@ const CommentCard = ({
           <div>
             <div className="commenter-profile">
               <div className="commenter-name primary-text fs-14">
-                {userName}
+                {blog?.userName}
               </div>
               <BloggerTooltip
-                bloggerName={userName}
-                bloggerInformation="Professional domestic abuse advocate by day; a writer by night and a street photographer in my free time. A counsellor in the make."
-                followersCount={"1.2K"}
-                profileImg="https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+              user={blog.user}
               />
             </div>
 

@@ -3,11 +3,8 @@ import "react-loading-skeleton/dist/skeleton.css";
 import Button from "../Button";
 
 const BloggerTooltip = ({
-  profileImg,
+  user,
   loading,
-  bloggerName,
-  bloggerInformation,
-  followersCount,
 }) => {
   return (
     <div className="tooltip-container">
@@ -29,23 +26,23 @@ const BloggerTooltip = ({
           <div className="tooltip-header flex flex-center">
             <div className="tooltip-profile-img">
               <img
-                src={profileImg}
+                src={user?.profileImage}
                 alt="avatar"
                 className="avatar"
                 style={{ width: 35, height: 35 }}
               />
             </div>
             <div className="tooltip-name">
-              <h2 className="fs-16 primary-text">{bloggerName}</h2>
+              <h2 className="fs-16 primary-text">{user?.name}</h2>
             </div>
           </div>
           <div className="tooltip-info">
-            <p className="primary-text fs-13">{bloggerInformation}</p>
+            <p className="primary-text fs-13">{user?.bio}</p>
           </div>
           <div className="light-line"></div>
           <div className="tooltip-bottom flex flex-center-between">
             <div className="followers-count">
-              <span className="light-text fs-13">{followersCount}</span>
+              <span className="light-text fs-13">{"1.2K"}</span>
               <span className="light-text fs-13">{" Followers"} </span>
             </div>
             <Button className={"success xs blogger-tooltip-btn"} title={"Follow"} />

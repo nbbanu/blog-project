@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import MiniBlogCard from "../MiniBlogCard";
 import { getAllBlogs } from "../../../service";
-import dayjs from "dayjs";
+import MiniBlogCard from "../MiniBlogCard";
 
 const Trending = () => {
   useEffect(() => {
@@ -30,13 +29,8 @@ const Trending = () => {
           {
             showAllBlogs?.map((blog,index) => (
               <MiniBlogCard 
-              cardIndex={index+1}
-              profileImg={"https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"}
-              bloggerName={blog.user.name}
-              readingTime={"8 min read"}
-              title={blog.title}
-              releaseDate={dayjs(blog.created_at).format('MMM DD, YYYY')}
-              publishedBy={"Towards Data Science"}
+              blog={blog}
+              index={index}
               />
             ))
           }

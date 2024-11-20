@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
 
-const HorizantalScrobbleBar = () => {
+const HorizontalScrobbleBar = () => {
   const slider = document.querySelector(".scrobble-area");
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [linkActive, setLinkActive] = useState(false);
@@ -36,7 +36,7 @@ const HorizantalScrobbleBar = () => {
 
   return (
     <div>
-      <div className="horizantal-scrobble-bar flex flex-center">
+      <div className="horizontal-scrobble-bar flex flex-center">
         {/* <div
           className="gradient-left"
           style={{ display: showLeftArrow ? "flex" : "none" }}
@@ -67,4 +67,4 @@ const HorizantalScrobbleBar = () => {
   );
 };
 
-export default HorizantalScrobbleBar;
+export default HorizontalScrobbleBar;

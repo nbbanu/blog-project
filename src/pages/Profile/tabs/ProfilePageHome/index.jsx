@@ -66,7 +66,7 @@ const ProfilePageHome = () => {
               </div>
             </div>
           ))
-        : blogs?.map((blog) => <BlogCard blog={blog} />)}
+        : blogs?.map((blog) => <BlogCard blog={blog} key={blog.id}/>)}
     </div>
   );
 };

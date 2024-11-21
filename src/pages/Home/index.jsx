@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Banner from "../../components/common/Banner";
 import BlogCard from "../../components/common/BlogCard";
 import FollowPersonCard from "../../components/common/FollowPersonCard";
@@ -18,7 +18,7 @@ const Home = () => {
   const [blogs, setBlogs] = useState([]);
   // const { email } = useAuth();
   // const userEmail = "@" + email?.split("@")[0];
-  const { token, setUser } = useAuth();
+  const { token } = useAuth();
 
   useEffect(() => {
     token && loadAllBlogsToUI();
@@ -32,19 +32,7 @@ const Home = () => {
   const loadAllBlogsToUI = async () => {
     const data = await getAllBlogs();
     setBlogs(data);
-    data.forEach((user) => {
-      localStorage.setItem("user", JSON.stringify(user.user));
-      setUser(user.user);
-    });
   };
-
-  // const openBlogDetail = (blogTitle, blogId) => {
-  //   navigate(`detail/${blogTitle}/${blogId}`);
-  // };
-
-  // const openBloggerProfile = (email) => {
-  //   navigate(`/${email}/main`);
-  // };
 
   if (token) {
     return (
@@ -108,33 +96,7 @@ const Home = () => {
                       </div>
                     </div>
                   ))
-                : blogs?.map((blog) => (
-                    <BlogCard
-                      // isAdded={blog?.lists?.length > 0}
-                      user={blog.user}
-                      // key={blog.id}
-                      // bloggerName={blog.user.name}
-                      // title={blog.title}
-                      // infoText={blog.description}
-                      blog={blog}
-                      // releaseDate={dayjs(blog.created_at).format(
-                      //   "MMM DD, YYYY"
-                      // )}
-                      // profileImg="https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
-                      // blogImage={blog.image}
-                      // categoryLink={"Micro Frontends"}
-                      // dot={<span className="dot light-text"></span>}
-                      // readingTime={"4 min read"}
-                      // minusIcon={
-                      //   <i className="fa-solid fa-minus minus light-text flex flex-center-center"></i>
-                      // }
-                      // openBlogDetail={() => openBlogDetail(blog.title, blog.id)}
-                      // openBloggerProfile={() =>
-                      //   openBloggerProfile(blog.user.email)
-                      // }
-                      // blogId={blog.id}
-                    />
-                  ))}
+                : blogs?.map((blog) => <BlogCard key={blog.id} blog={blog} />)}
             </div>
             <div className="vertical-line"></div>
             <div className="loggedin-home-right">
@@ -209,14 +171,7 @@ const Home = () => {
                   </h2>
                   <div className="staff-picks-cards flex flex-column">
                     {blogs?.map((blog) => (
-                      <StaffPicksCard
-                        key={blog.id}
-                        blog={blog}
-                        // openBlogDetail={() =>
-                        //   openBlogDetail(blog.title, blog.id)
-                        // }
-                        // openBloggerProfile={openBloggerProfile}
-                      />
+                      <StaffPicksCard key={blog.id} blog={blog} />
                     ))}
                   </div>
                   {/* 
@@ -254,10 +209,7 @@ const Home = () => {
       <div className="home-bottom container">
         <div className="home-bottom-left">
           {blogs?.map((blog) => (
-            <MiniBlogCard
-              blog={blog}
-              user={blog?.user}
-            />
+            <MiniBlogCard blog={blog} user={blog?.user} />
           ))}
         </div>
 

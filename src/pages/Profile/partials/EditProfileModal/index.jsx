@@ -1,10 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  getUserDetailById,
-  updateUserImage,
-  updateUserInformation,
-} from "../../../../service";
+import { updateUserImage, updateUserInformation } from "../../../../service";
 import Button from "../../../../components/common/Button";
+import { useAuth } from "../../../../contexts/AuthContext";
 
 const EditProfileModal = ({ user, setShowModal }) => {
   const [username, setUserName] = useState(user?.username);
@@ -13,18 +10,21 @@ const EditProfileModal = ({ user, setShowModal }) => {
   const [isClickedUptadeBtn, setIsClickedUpdateBtn] = useState(false);
   const [userNameError, setUserNameError] = useState("");
   const [shortBioError, setShortBioError] = useState("");
-  const [userNameCharacterCount, setUserNameCharacterCount] = useState(user?.username?.length);
-  const [shortBioCharacterCount, setShortBioCharacterCount] = useState(user?.bio?.length);
-
-  const inputRef = useRef(null);
+  const [userNameCharacterCount, setUserNameCharacterCount] = useState(
+    user?.username?.length
+  );
+  const [shortBioCharacterCount, setShortBioCharacterCount] = useState(
+    user?.bio?.length
+  );
 
   useEffect(() => {
-    loadUserInformationById();
-  }, []);
+    setUserName(user?.username);
+    setShortBio(user?.bio);
+    setAvatar(user?.profileImage);
+  }, [user]);
 
-  const loadUserInformationById = async (id) => {
-    // const data = await getUserDetailById(id);
-  };
+  const { setUser } = useAuth();
+  const inputRef = useRef(null);
 
   const openFile = (e) => {
     e.preventDefault();
@@ -38,8 +38,7 @@ const EditProfileModal = ({ user, setShowModal }) => {
     formData?.append("file", file);
 
     setAvatar(window.URL.createObjectURL(file));
-
-    const data = await updateUserImage(formData);
+    updateUserImage(formData);
   };
 
   const removeAvatar = async (e) => {
@@ -47,7 +46,6 @@ const EditProfileModal = ({ user, setShowModal }) => {
     setAvatar(
       "https://miro.medium.com/v2/resize:fill:80:80/1*dmbNkD5D-u45r44go_cf0g.png"
     );
- 
 
     const data = await updateUserImage();
   };
@@ -75,20 +73,31 @@ const EditProfileModal = ({ user, setShowModal }) => {
   };
   const cancelEditForm = (e) => {
     e.preventDefault();
-    // setUserName("");
-    // setShortBio("");
-    // setUserNameCharacterCount(0);
-    // setShortBioCharacterCount(0);
     setShowModal(false);
   };
+
   const saveEditForm = async (e) => {
     e.preventDefault();
-    const formData = {
+    const body = {
       username,
       bio,
     };
-    const data = await updateUserInformation(formData);
-    cancelEditForm(e);
+
+    updateUserInformation(body)
+      .then(() => {
+        const storageUser = JSON.parse(localStorage.getItem("user")) || {
+          ...user,
+        };
+
+        storageUser.username = body.username;
+        storageUser.bio = body.bio;
+
+        localStorage.setItem("user", JSON.stringify(storageUser));
+        setUser(storageUser);
+      })
+      .finally(() => {
+        cancelEditForm(e);
+      });
   };
 
   return (

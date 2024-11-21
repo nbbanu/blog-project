@@ -18,6 +18,7 @@ const MyLists = () => {
     <div className="profile-page-lists flex flex-column">
       {myLists?.map((list) => (
         <ListCard
+        key={list.id}
           profilImg={
             "https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
           }

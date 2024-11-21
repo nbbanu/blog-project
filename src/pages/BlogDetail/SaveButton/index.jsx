@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import AuthModal from "../../../components/common/AuthModal";
 import BasicPopup from "../../../components/common/BasicPopup";
 import Button from "../../../components/common/Button";
 import MiniTooltip from "../../../components/common/MiniTooltip";
 import Swal from "sweetalert2";
-import { createReadingList, getListDetailByBlogId } from "../../../service";
+import {
+  addOrrRemoveBlogToList,
+  createReadingList,
+  getListDetailByBlogId,
+} from "../../../service";
 import Loader from "../../../components/common/Loader";
 
-const SaveButton = ({blog, isAdded }) => {
+const SaveButton = ({ blog, isAdded }) => {
   const [show, setShowModal] = useState(false);
   const [showDescInput, setShowDescInput] = useState(false);
   const [title, setTitle] = useState("");
@@ -18,8 +22,10 @@ const SaveButton = ({blog, isAdded }) => {
   const [listNameError, setListNameError] = useState("");
   const [descriptionError, setDescriptionError] = useState("");
   const [blogDetailInList, setBlogDetailInList] = useState([]);
-  const [checked, setChecked] = useState(false);
+  const [isCheked, setIsChecked] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  const checkboxRef = useRef(null);
 
   const openCreateListModal = () => {
     setShowModal(!show);
@@ -51,7 +57,6 @@ const SaveButton = ({blog, isAdded }) => {
     e.preventDefault();
     setShowDescInput(!showDescInput);
   };
-
   const createList = (e) => {
     e.preventDefault();
     const readingListFormData = {
@@ -96,9 +101,17 @@ const SaveButton = ({blog, isAdded }) => {
     setLoading(false);
   };
 
-  const checkHandler = () => {
-    setChecked(!checked);
+  const checkHandler = async (listId, isAdd) => {
+    // setIsChecked(!checked);
+
+    const markedList = {
+      listId: listId,
+      blogId: blog.id,
+      isAdd: isAdd,
+    };
+    //  const data = await addOrrRemoveBlogToList(markedList);
   };
+
   return (
     <div>
       <AuthModal
@@ -224,13 +237,19 @@ const SaveButton = ({blog, isAdded }) => {
               {loading ? <Loader /> : ""}
               <div className="checkboxes">
                 {blogDetailInList?.map((list) => (
-                  <div className="list-to-save flex flex-center-between">
+                  <div
+                    key={list.id}
+                    className="list-to-save flex flex-center-between"
+                  >
                     <div>
                       <label className="custom-checkbox">
                         <input
+                          ref={checkboxRef}
                           type="checkbox"
                           defaultChecked={list.isAdded ? true : false}
-                          onClick={checkHandler}
+                          onChange={(e) => {
+                            console.log(e.target.checked);
+                          }}
                         />
                         <span className="checkmark primary-text"></span>
                         {list.title}

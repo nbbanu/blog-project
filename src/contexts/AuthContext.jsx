@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
 
@@ -6,21 +6,26 @@ export const useAuth = () => useContext(AuthContext);
 
 const AuthProvider = (props) => {
   // global olarak tutmak istediğimiz state’lerin bulunacağı component’i oluşturmamız gerekmektedir.Bu durumda AuthProvider
-
   const [token, setToken] = useState(localStorage.getItem("token"));
-  const [user, setUser] = useState(localStorage.getItem("user"));
+  const [user, setUser] = useState(null);
 
-  const onLoginSuccess = (token) => {
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("user")));
+  }, []);
+
+  const onLoginSuccess = (token, user) => {
     localStorage.setItem("token", token);
     setToken(token);
+    localStorage.setItem("user", JSON.stringify(user));
+    setUser(user);
   };
 
   const value = {
+    user,
+    setUser,
     token,
     setToken,
     onLoginSuccess,
-    user,
-    setUser,
   };
 
   return (

@@ -111,7 +111,7 @@ const BlogDetailPage = () => {
                 <div className="blogger-info flex flex-center">
                   <div className="blogger-image">
                     <img
-                      src="https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+                      src={blog?.user?.profileImage}
                       className="avatar bloger-profile-img"
                       id="name2"
                       alt="blogger-profile-photo"

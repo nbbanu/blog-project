@@ -29,6 +29,7 @@ const Trending = () => {
           {
             showAllBlogs?.map((blog,index) => (
               <MiniBlogCard 
+              key={blog.id}
               blog={blog}
               index={index}
               />

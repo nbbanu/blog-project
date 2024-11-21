@@ -5,7 +5,6 @@ import { useState } from "react";
 import AuthModal from "../../components/common/AuthModal";
 import EditProfileModal from "./partials/EditProfileModal";
 
-
 const tabs = [
   {
     path: "main",
@@ -23,7 +22,8 @@ const tabs = [
 
 const ProfilePage = () => {
   const [show, setShowModal] = useState(false);
-  const {user} = useAuth();
+  const { user } = useAuth();
+
   const location = useLocation();
 
   const isTabPath = tabs.some((tabPath) =>
@@ -39,14 +39,14 @@ const ProfilePage = () => {
       <AuthModal
         show={show}
         setShowModal={setShowModal}
-        children={<EditProfileModal  user={user} setShowModal={setShowModal} />}
+        children={<EditProfileModal user={user} setShowModal={setShowModal} />}
       />
       <div className="profile-page">
         <div className="profile-page-left flex flex-column">
           {isTabPath && (
             <>
               <div className="profile-page-left-top flex">
-                <span className="left-userName">{user.username}</span>
+                <span className="left-userName">{user?.username}</span>
                 <i
                   className="fa-solid fa-ellipsis"
                   style={{ color: "rgba(0,0,0,0.8)" }}
@@ -55,9 +55,13 @@ const ProfilePage = () => {
 
               <div className="profile-page-left-menu">
                 <div className="navLinks flex flex-center">
-                  {tabs.map((tab) => (
-                    <NavLink to={tab.path} className="light-text fs-14 link">
-                      {tab.title}
+                  {tabs.map((tab, index) => (
+                    <NavLink
+                      key={index}
+                      to={tab.path}
+                      className="light-text fs-14 link"
+                    >
+                      {tab?.title}
                     </NavLink>
                   ))}
                 </div>
@@ -77,7 +81,7 @@ const ProfilePage = () => {
             style={{ width: 88, height: 88 }}
           />
           <span className="profile-page-right-userName primary-text">
-            {user.username}
+            {user?.username}
           </span>
 
           <Button

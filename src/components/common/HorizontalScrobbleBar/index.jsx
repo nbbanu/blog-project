@@ -51,8 +51,8 @@ const HorizontalScrobbleBar = () => {
         )}
         <div className="scrobble-area flex flex-center">
           <ul className="tag-list flex flex-center">
-            {tags.map((tag) => (
-              <li className="link">
+            {tags.map((tag, index) => (
+              <li className="link" key={index}>
                 <a className="link light-text fs-14">{tag}</a>
               </li>
             ))}

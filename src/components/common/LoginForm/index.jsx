@@ -71,8 +71,7 @@ const LoginForm = ({ setShowModal }) => {
           icon: "success",
           iconColor: "#ffc016",
         });
-
-        onLoginSuccess(res?.data?.accessToken);
+        onLoginSuccess(res?.data?.accessToken, res?.data?.user);
         setShowModal(false);
       })
       .catch((err) => {

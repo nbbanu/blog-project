@@ -11,8 +11,7 @@ const ReadingListPage = () => {
   const [listed, setListed] = useState([]);
   const [listBlog, setListBlog] = useState([]);
 
-  // const { email } = useAuth();
-  // const userEmail = "@" + email?.split("@")[0];
+ 
 
   const listParams = useParams();
 
@@ -73,7 +72,7 @@ const ReadingListPage = () => {
       </div>
       <div className="reading-list-blogs">
         {listBlog?.map((blog) => (
-          <div className="reading-list-blog">
+          <div key={blog.id} className="reading-list-blog">
             <AddNoteInput />
             <BlogCard
              blog={blog}

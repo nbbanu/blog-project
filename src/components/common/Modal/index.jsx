@@ -5,9 +5,7 @@ const Modal = ({ setShowModal, children }) => {
 
   return (
     <div className={`modal flex flex-column flex-center-center`}>
-      <div className="close light-text" onClick={closeModal}>
-        X
-      </div>
+      <i className="fa-solid fa-xmark close light-text fs-24" onClick={closeModal}></i>
       {children}
     </div>
   );

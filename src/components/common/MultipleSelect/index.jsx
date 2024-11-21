@@ -83,7 +83,7 @@ const CustomSelect = () => {
                 <>
                   {topics?.map((topic) => (
                     <li
-                      key={topic.id}
+                      key={topic.topicId}
                       className="link fs-13 primary-text flex flex-center-between"
                       onClick={() => {
                         if (values.find((x) => x.id === topic.id)) {

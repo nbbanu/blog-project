@@ -18,7 +18,7 @@ const Home = () => {
   const [blogs, setBlogs] = useState([]);
   // const { email } = useAuth();
   // const userEmail = "@" + email?.split("@")[0];
-  const { token } = useAuth();
+  const { token,user } = useAuth();
 
   useEffect(() => {
     token && loadAllBlogsToUI();
@@ -209,7 +209,7 @@ const Home = () => {
       <div className="home-bottom container">
         <div className="home-bottom-left">
           {blogs?.map((blog) => (
-            <MiniBlogCard blog={blog} user={blog?.user} />
+            <MiniBlogCard blog={blog} user={user} />
           ))}
         </div>
 

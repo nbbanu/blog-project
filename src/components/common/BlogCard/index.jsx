@@ -2,9 +2,11 @@ import { Link, useNavigate } from "react-router-dom";
 import SaveButton from "../../../pages/BlogDetail/SaveButton";
 import BloggerTooltip from "../BloggerTooltip";
 import dayjs from "dayjs";
+import { useAuth } from "../../../contexts/AuthContext";
 
 const BlogCard = ({blog}) => {
   const navigate = useNavigate();
+  const {user} = useAuth();
 
   const openBlogDetail = () => {
     navigate(`/detail/${blog?.slug}/${blog?.id}`);
@@ -20,11 +22,11 @@ const BlogCard = ({blog}) => {
           <div className="blog-card-left-header flex flex-center">
             <div className="blogger-profile flex flex-center">
               <BloggerTooltip
-              user={blog?.user}
+              user={user}
               />
               <img
                 className="avatar img-cover"
-                src={blog?.user?.profileImage}
+                src={user?.profileImage}
                 alt="avatar"
                 style={{ width: 24, height: 24 }}
               />

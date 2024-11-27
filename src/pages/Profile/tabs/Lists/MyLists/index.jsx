@@ -17,26 +17,7 @@ const MyLists = () => {
   return (
     <div className="profile-page-lists flex flex-column">
       {myLists?.map((list) => (
-        <ListCard
-        key={list.id}
-          profilImg={
-            "https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
-          }
-          list={list}
-          username={list.user.username}
-          listTitle={list.title}
-          stories={list.blogCount}
-          listId={list.id}
-          isPrivate={
-            list.isPrivate == true ? (
-              <span>
-                <i className="fa-solid fa-lock fs-12 light-text"></i>
-              </span>
-            ) : (
-              ""
-            )
-          }
-        />
+        <ListCard key={list.id} list={list} />
       ))}
     </div>
   );

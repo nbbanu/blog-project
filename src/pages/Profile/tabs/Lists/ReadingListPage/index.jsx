@@ -7,11 +7,8 @@ import CommentButton from "../../../../BlogDetail/CommentButton";
 import AddNoteInput from "../../../partials/AddNoteInput";
 
 const ReadingListPage = () => {
-  const [show, setShowModal] = useState(false);
-  const [listed, setListed] = useState([]);
+  const [listedBlog, setListedBlog] = useState([]);
   const [listBlog, setListBlog] = useState([]);
-
- 
 
   const listParams = useParams();
 
@@ -21,7 +18,7 @@ const ReadingListPage = () => {
 
   const loadReadingListBlogById = async () => {
     const data = await getMyListById(listParams.listId);
-    setListed(data || []);
+    setListedBlog(data || []);
     setListBlog(data?.blogs);
   };
 
@@ -48,7 +45,7 @@ const ReadingListPage = () => {
             <div className="story flex flex-center">
               <span className="fs-13 light-text">{listBlog?.length}</span>
               <span className="fs-13 light-text story-text">stories</span>
-              {listed?.isPrivate == true ? (
+              {listedBlog?.isPrivate == true ? (
                 <span>
                   <i className="fa-solid fa-lock fs-12 light-text"></i>
                 </span>
@@ -60,7 +57,7 @@ const ReadingListPage = () => {
         </div>
       </div>
       <div className="list-page-header">
-        <h2 className="reading-list-h2 primary-text fs-32">{listed?.title}</h2>
+        <h2 className="reading-list-h2 primary-text fs-32">{listedBlog?.title}</h2>
         <div>
           <div className="light-line"></div>
           <div className="flex flex-center " style={{ gap: 25 }}>

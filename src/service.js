@@ -86,7 +86,9 @@ const get = async (url, token) => {
 };
 
 export const getAllBlogs = async () => {
-  const url = localStorage.getItem("token") ? "blog/get-all/user" : "blog/get-all";
+  const url = localStorage.getItem("token")
+    ? "blog/get-all/user"
+    : "blog/get-all";
   const data = await get(url);
   return data?.data;
 };
@@ -184,4 +186,8 @@ const deleteRequest = async (url, id) => {
 
 export const deleteTopic = async (id) => {
   return await deleteRequest(`topics/${id}`);
+};
+
+export const removeUserImage = async (key) => {
+  return await deleteRequest(`user/image/${key}`);
 };

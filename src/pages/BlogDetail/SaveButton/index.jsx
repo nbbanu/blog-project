@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import AuthModal from "../../../components/common/AuthModal";
 import BasicPopup from "../../../components/common/BasicPopup";
 import Button from "../../../components/common/Button";
@@ -10,6 +10,7 @@ import {
   getListDetailByBlogId,
 } from "../../../service";
 import Loader from "../../../components/common/Loader";
+import { toast, ToastContainer } from "react-toastify";
 
 const SaveButton = ({ blog, isAdded }) => {
   const [show, setShowModal] = useState(false);
@@ -22,10 +23,7 @@ const SaveButton = ({ blog, isAdded }) => {
   const [listNameError, setListNameError] = useState("");
   const [descriptionError, setDescriptionError] = useState("");
   const [blogDetailInList, setBlogDetailInList] = useState([]);
-  const [isCheked, setIsChecked] = useState(false);
   const [loading, setLoading] = useState(true);
-
-  const checkboxRef = useRef(null);
 
   const openCreateListModal = () => {
     setShowModal(!show);
@@ -101,15 +99,24 @@ const SaveButton = ({ blog, isAdded }) => {
     setLoading(false);
   };
 
-  const checkHandler = async (listId, isAdd) => {
-    // setIsChecked(!checked);
-
+  const checkHandler = async (e, list) => {
     const markedList = {
-      listId: listId,
+      listId: list.id,
       blogId: blog.id,
-      isAdd: isAdd,
+      isAdd: e.target.checked,
     };
-    //  const data = await addOrrRemoveBlogToList(markedList);
+    addOrrRemoveBlogToList(markedList).then(() => {
+      toast("Başarıyla kaydedildi", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    });
   };
 
   return (
@@ -244,12 +251,9 @@ const SaveButton = ({ blog, isAdded }) => {
                     <div>
                       <label className="custom-checkbox">
                         <input
-                          ref={checkboxRef}
                           type="checkbox"
-                          defaultChecked={list.isAdded ? true : false}
-                          onChange={(e) => {
-                            console.log(e.target.checked);
-                          }}
+                          defaultChecked={list?.isAdded ? true : false}
+                          onChange={(e) => checkHandler(e, list)}
                         />
                         <span className="checkmark primary-text"></span>
                         {list.title}

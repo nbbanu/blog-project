@@ -3,16 +3,18 @@ import BlogCard from "../../../../components/common/BlogCard";
 import { getAllBlogs } from "../../../../service";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { useParams } from "react-router-dom";
 
 const ProfilePageHome = () => {
   const [blogs, setBlogs] = useState([]);
+  const params = useParams();
 
   useEffect(() => {
-    loadAllBlogsToUI();
-  }, []);
+    loadBlogsToUI();
+  }, [params]);
 
-  const loadAllBlogsToUI = async () => {
-    const data = await getAllBlogs();
+  const loadBlogsToUI = async () => {
+    const data = await getAllBlogs(params.userId);
     let newBlogDates = data?.sort(
       (a, b) =>
         new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
@@ -66,7 +68,7 @@ const ProfilePageHome = () => {
               </div>
             </div>
           ))
-        : blogs?.map((blog) => <BlogCard blog={blog} key={blog.id}/>)}
+        : blogs?.map((blog) => <BlogCard blog={blog} key={blog.id} />)}
     </div>
   );
 };

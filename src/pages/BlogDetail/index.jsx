@@ -63,9 +63,9 @@ const BlogDetailPage = () => {
                   <Skeleton width={45}></Skeleton>
                 </div>
                 <div className="flex">
+                  {/* <Skeleton width={30} style={{ marginRight: 20 }} />
                   <Skeleton width={30} style={{ marginRight: 20 }} />
-                  <Skeleton width={30} style={{ marginRight: 20 }} />
-                  <Skeleton width={30} style={{ marginRight: 20 }} />
+                  <Skeleton width={30} style={{ marginRight: 20 }} /> */}
                   <Skeleton width={30} />
                 </div>
               </div>
@@ -182,7 +182,7 @@ const BlogDetailPage = () => {
                         <i className="fa-regular fa-bookmark light-text"></i>
                       </MiniTooltip>
                     </li>
-                    <li className="link">
+                    {/* <li className="link">
                       <MiniTooltip title={"Listen"}>
                         <i className="fa-regular fa-circle-play light-text"></i>
                       </MiniTooltip>
@@ -196,7 +196,7 @@ const BlogDetailPage = () => {
                       <MiniTooltip title={"More"}>
                         <i className="fa-solid fa-ellipsis light-text"></i>
                       </MiniTooltip>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
                 <div className="light-line"></div>

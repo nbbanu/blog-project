@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useAuth } from "../../../../contexts/AuthContext";
 
 const ListCard = ({
@@ -8,6 +8,7 @@ const ListCard = ({
   const { user } = useAuth();
   const email = user?.email;
   const userEmail = "@" + email?.split("@")[0];
+  const params = useParams();
 
   return (
     <div className="list-card">
@@ -19,7 +20,7 @@ const ListCard = ({
           </div>
         </Link>
         <div>
-          <Link className="link" to={`/${userEmail}/list/${list.id}`}>
+          <Link className="link" to={`/${userEmail}/${params?.userId}/list/${list.id}`}>
             <div className="list-title fs-20 primary-text">{list.title}</div>
             <div className="flex flex-center-between">
               <div className="stories flex flex-center">

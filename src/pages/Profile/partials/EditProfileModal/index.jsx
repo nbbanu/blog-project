@@ -12,7 +12,7 @@ const EditProfileModal = ({ user, setShowModal }) => {
   const [username, setUserName] = useState(user?.username);
   const [bio, setShortBio] = useState(user?.bio);
   const [avatar, setAvatar] = useState(user?.profileImage);
-  const [isClickedUptadeBtn, setIsClickedUpdateBtn] = useState(false);
+  // const [isClickedUptadeBtn, setIsClickedUpdateBtn] = useState(false);
   const [userNameError, setUserNameError] = useState("");
   const [shortBioError, setShortBioError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -23,21 +23,21 @@ const EditProfileModal = ({ user, setShowModal }) => {
     setAvatar(user?.profileImage);
   }, [user]);
 
-  const { setUser } = useAuth();
+  const { setUser, token } = useAuth();
   const inputRef = useRef(null);
 
   const openFile = (e) => {
     e.preventDefault();
     inputRef.current?.click();
-    setIsClickedUpdateBtn(!isClickedUptadeBtn);
+    // setIsClickedUpdateBtn(!isClickedUptadeBtn);
   };
+  
   const handleAvatarChange = async (e) => {
     const file = e.target.files[0];
-
     const formData = new FormData();
     formData?.append("file", file);
-
     setAvatar(window.URL.createObjectURL(file));
+
     setLoading(true);
     updateUserImage(formData)
       .then((res) => {
@@ -120,7 +120,6 @@ const EditProfileModal = ({ user, setShowModal }) => {
         setLoading(false);
       });
   };
-
   return (
     <div className="auth-container">
       {loading ? <Loader /> : ""}

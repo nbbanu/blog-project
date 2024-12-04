@@ -1,0 +1,45 @@
+.follow-container {
+  gap: 40px;
+  .follow-card {
+    gap: 15px;
+    .buttons {
+      gap: 10px;
+    }
+  }
+  .following-card {
+    &-header {
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+    &-list {
+      padding-left: 0;
+      gap: 15px;
+
+      .following-card-link {
+        justify-content: space-between;
+        -webkit-line-clamp: 1;
+        font-weight: 400;
+        line-height: 20px;
+
+        .blogger-tooltip {
+          .tooltip-container {
+            display: flex;
+            top: -120px;
+            transform: translateX(-50%);
+          }
+          position: relative;
+        }
+        .username {
+          margin-left: 12px;
+        }
+        .username:hover {
+          border-bottom: 1px solid red;
+        }
+      }
+    }
+    .see-all-link {
+      display: inline-flex;
+      margin: 20px 0;
+    }
+  }
+}

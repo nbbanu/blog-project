@@ -5,13 +5,11 @@ import {
   getAllTopics,
 } from "../../service";
 import SearchInput from "../../components/common/SearchInput";
-import Home from "../Home";
-import { useAuth } from "../../contexts/AuthContext";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 const Topics = () => {
-  const { token } = useAuth();
+
   useEffect(() => {
     loadAllTopicsToUI();
   }, []);
@@ -108,18 +106,18 @@ const Topics = () => {
         </div>
       ) : (
         <div className="all-topics">
-          {allTopics?.map((category, id) => (
+          {allTopics?.map((category) => (
             <div className="topics-list">
-              <ul className="category-list">
+              <ul className="category-list" >
                 <Link className="link category-link primary-text fs-24">
                   {category?.title}
                   <ul className="subcategory-list">
                     {category?.subcategories?.map((subcategory) => (
-                      <Link className="link subcategory-link primary-text fs-16">
+                      <Link className="link subcategory-link primary-text fs-16" >
                         {subcategory.title}
                         <ul className="topic-list">
                           {subcategory.topics?.map((topic) => (
-                            <Link className="link topic-link light-text fs-16">
+                            <Link className="link topic-link light-text fs-16" to={`/${topic?.title}`}>
                               {topic.title}
                             </Link>
                           ))}

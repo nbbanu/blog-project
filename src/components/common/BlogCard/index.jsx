@@ -2,18 +2,16 @@ import { Link, useNavigate } from "react-router-dom";
 import SaveButton from "../../../pages/BlogDetail/SaveButton";
 import BloggerTooltip from "../BloggerTooltip";
 import dayjs from "dayjs";
-import { useAuth } from "../../../contexts/AuthContext";
 
-const BlogCard = ({blog}) => {
+const BlogCard = ({ blog }) => {
   const navigate = useNavigate();
-  const {user} = useAuth();
 
   const openBlogDetail = () => {
     navigate(`/detail/${blog?.slug}/${blog?.id}`);
   };
-  const openBloggerProfile = (email) => {
+  const openBloggerProfile = (email,userId) => {
     const userEmail = "@" + email?.split("@")[0];
-    navigate(`/${userEmail}/main`);
+    navigate(`/${userEmail}/${userId}/main`);
   };
   return (
     <div>
@@ -21,36 +19,31 @@ const BlogCard = ({blog}) => {
         <div className="blog-card-left">
           <div className="blog-card-left-header flex flex-center">
             <div className="blogger-profile flex flex-center">
-              <BloggerTooltip
-              user={user}
-              />
+              <BloggerTooltip user={blog.user} />
               <img
                 className="avatar img-cover"
-                src={user?.profileImage}
+                src={blog?.user?.profileImage}
                 alt="avatar"
                 style={{ width: 24, height: 24 }}
               />
 
               <span
                 className="blogger-name fs-14 primary-text"
-                onClick={() => openBloggerProfile(blog?.user?.email)}
+                onClick={() => openBloggerProfile(blog?.user?.email, blog?.user?.id)}
               >
                 {blog?.user?.name}
               </span>
             </div>
-         
 
             <span className="blog-card-release-date fs-14 light-text">
-              {dayjs(blog?.created_at).format(
-                        "MMM DD, YYYY"
-                      )}
+              {dayjs(blog?.created_at).format("MMM DD, YYYY")}
             </span>
           </div>
-          <div className="blog-card-left-title flex" 
-          onClick={openBlogDetail}
-          >
+          <div className="blog-card-left-title flex" onClick={openBlogDetail}>
             <div>
-              <h2 className="blog-card-title-h2 fs-20 primary-text">{blog?.title}</h2>
+              <h2 className="blog-card-title-h2 fs-20 primary-text">
+                {blog?.title}
+              </h2>
               <p className="blog-card-info-text fs-16 primary-text line-clamp">
                 {blog?.description}
               </p>
@@ -66,8 +59,8 @@ const BlogCard = ({blog}) => {
             </div>
             <div className="blog-card-bottom-right flex flex-center">
               <SaveButton blog={blog} isAdded={blog?.lists?.length > 0} />
-              <i className="fa-solid fa-minus minus light-text flex flex-center-center"></i>
-              <i className="fa-solid fa-ellipsis light-text fs-20"></i>
+              {/* <i className="fa-solid fa-minus minus light-text flex flex-center-center"></i> */}
+              {/* <i className="fa-solid fa-ellipsis light-text fs-20"></i> */}
             </div>
           </div>
         </div>

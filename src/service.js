@@ -72,7 +72,7 @@ export const addOrrRemoveBlogToList = async (body) => {
   return await post("list/add-remove-blog", body);
 };
 // *************** GET ***************
-const get = async (url, token) => {
+const get = async (url, customOptions) => {
   const request_url = base_api + url;
   const options = {
     method: "GET",
@@ -80,16 +80,15 @@ const get = async (url, token) => {
       accept: "application/json",
       Authorization: "Bearer " + localStorage.getItem("token"),
     },
+    ...customOptions,
   };
   const res = await axiosInstance.get(request_url, options);
   return res?.data;
 };
 
-export const getAllBlogs = async () => {
-  const url = localStorage.getItem("token")
-    ? "blog/get-all/user"
-    : "blog/get-all";
-  const data = await get(url);
+export const getAllBlogs = async (userId) => {
+  const url = "blog/get-all";
+  const data = await get(url, { params: { userId } });
   return data?.data;
 };
 
@@ -132,9 +131,13 @@ export const getUserDetailById = async (userId) => {
   const data = await get(url, userId);
   return data?.data;
 };
-export const getMyLists = async () => {
-  const url = "list/my-lists";
-  const data = await get(url);
+export const getLists = async (userId) => {
+  const url = "list";
+  const data = await get(url, {
+    params: {
+      userId,
+    },
+  });
   return data?.data;
 };
 

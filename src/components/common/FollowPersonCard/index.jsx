@@ -16,7 +16,7 @@ const FollowPersonCard = ({ profieImg, bloggerName, bloggerInfo }) => {
         </span>
       </div>
 
-      <Button className={"ghost follow-btn"} size={"sm"} title={"follow"} />
+      <Button className={"ghost follow-btn"} size={"sm"} title={"Takip Et"} />
     </div>
   );
 };

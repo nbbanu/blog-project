@@ -11,24 +11,17 @@ import MiniBlogCard from "../../components/common/MiniBlogCard";
 import StaffPicksCard from "../../components/common/StaffPicksCard";
 import Trending from "../../components/common/Trending";
 import { useAuth } from "../../contexts/AuthContext";
-import { getAllBlogs, getMyLists } from "../../service";
+import { getAllBlogs } from "../../service";
 
 const Home = () => {
-  const [myLists, setMyLists] = useState([]);
   const [blogs, setBlogs] = useState([]);
-  // const { email } = useAuth();
   // const userEmail = "@" + email?.split("@")[0];
-  const { token,user } = useAuth();
+  const { token, user } = useAuth();
 
   useEffect(() => {
     token && loadAllBlogsToUI();
-    token && loadMyLists();
   }, [token]);
 
-  const loadMyLists = async () => {
-    const data = await getMyLists();
-    setMyLists(data);
-  };
   const loadAllBlogsToUI = async () => {
     const data = await getAllBlogs();
     setBlogs(data);

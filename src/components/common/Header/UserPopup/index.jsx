@@ -9,7 +9,7 @@ const UserPopup = ({ clickItem }) => {
   const navigate = useNavigate();
   const email = user?.email
   const userEmail = "@" + email?.split("@")[0];
-
+  
   const openPopup = () => {
     setShowPopup(!showPopup);
   };
@@ -44,7 +44,7 @@ const UserPopup = ({ clickItem }) => {
             <>
               <div className="links flex flex-column">
                 <Link
-                  to={`/${userEmail}/main`}
+                  to={`/${userEmail}/${user?.id}/main`}
                   className="link flex flex-center light-text"
                 >
                   <i className="fa-regular fa-user fs-20 "></i>

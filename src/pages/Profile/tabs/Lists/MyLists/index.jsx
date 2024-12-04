@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
-import { getMyLists } from "../../../../../service";
+import { getLists } from "../../../../../service";
 import ListCard from "../../../partials/ListCard";
+import { useParams } from "react-router-dom";
 
 const MyLists = () => {
   const [myLists, setMyLists] = useState([]);
+  const params = useParams();
 
   useEffect(() => {
     loadMyLists();
   }, []);
 
   const loadMyLists = async () => {
-    const data = await getMyLists();
+    const data = await getLists(params.userId);
     setMyLists(data);
   };
 

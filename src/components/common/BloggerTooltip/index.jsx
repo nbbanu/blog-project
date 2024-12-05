@@ -6,6 +6,7 @@ const BloggerTooltip = ({
   user,
   loading,
 }) => {
+
   return (
     <div className="tooltip-container">
       {loading ? (
@@ -42,7 +43,7 @@ const BloggerTooltip = ({
           <div className="light-line"></div>
           <div className="tooltip-bottom flex flex-center-between">
             <div className="followers-count">
-              <span className="light-text fs-13">{"1.2K"}</span>
+              <span className="light-text fs-13">{user?.followerCount}</span>
               <span className="light-text fs-13">{" Followers"} </span>
             </div>
             <Button className={"success xs blogger-tooltip-btn"} title={"Follow"} />

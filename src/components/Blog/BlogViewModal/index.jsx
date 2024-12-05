@@ -5,11 +5,16 @@ import { useCreateBlog } from "../../../contexts/CreateBlogContext";
 import { createBlog } from "../../../service";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../contexts/AuthContext";
 
 const BlogViewModal = ({ clickItem, newBlog }) => {
   const [showBlogModal, setShowBlogModal] = useState(false);
-  const { blogItems, topicIds, setText,setTitle, setSlug, setFiles } = useCreateBlog();
+  const { blogItems, topicIds, setText, setTitle, setSlug, setFiles } =
+    useCreateBlog();
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const email = user?.email;
+  const userEmail = "@" + email?.split("@")[0];
 
   const openBlogViewModal = () => {
     setShowBlogModal(!showBlogModal);
@@ -42,11 +47,7 @@ const BlogViewModal = ({ clickItem, newBlog }) => {
           icon: "success",
           iconColor: "#ffc016",
         });
-        setText("");
-        setTitle("");
-        setSlug("")
-        setFiles([]);
-        navigate("/:userName/main");
+        navigate(`/${userEmail}/${user.id}/main`);
       })
       .catch((err) => {
         if (err.statusCode == 401) {
@@ -66,6 +67,12 @@ const BlogViewModal = ({ clickItem, newBlog }) => {
             iconColor: "#ffc016",
           });
         }
+      })
+      .finally(() => {
+        setText("");
+        setTitle("");
+        setSlug("");
+        setFiles([]);
       });
   };
   return (

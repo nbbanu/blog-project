@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import AuthModal from "../../components/common/AuthModal";
 import EditProfileModal from "./partials/EditProfileModal";
 import { getUserDetailById } from "../../service";
-import FollowPersonCard from "../../components/common/FollowPersonCard";
 import FollowCard from "./partials/FollowCard";
 
 const tabs = [
@@ -111,7 +110,7 @@ const ProfilePage = () => {
               />
             )}
             {userDetail?.id !== user?.id && 
-            <FollowCard/>
+            <FollowCard userDetail={userDetail}/>
             }
 
           </div>

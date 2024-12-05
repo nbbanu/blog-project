@@ -80,7 +80,7 @@ const CustomSelect = () => {
           <div className="topics-popup-container">
             <div className="topics-popup">
               <ul className="links flex flex-column">
-                <>
+                <div>
                   {topics?.map((topic) => (
                     <li
                       key={topic.topicId}
@@ -99,7 +99,7 @@ const CustomSelect = () => {
                       )}
                     </li>
                   ))}
-                </>
+                </div>
               </ul>
             </div>
           </div>

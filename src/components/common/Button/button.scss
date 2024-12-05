@@ -45,6 +45,11 @@ button{
     font-size: 12px;
     font-weight: 400;
   }
+  &.green-ghost{
+    background-color: transparent;
+    color: var(--succes-color);
+    border: 1px solid var(--succes-color);
+  }
 }
 button:disabled{
   background-color: rgba(26, 137, 23, .25);

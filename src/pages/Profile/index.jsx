@@ -25,6 +25,8 @@ const tabs = [
 const ProfilePage = () => {
   const [show, setShowModal] = useState(false);
   const [userDetail, setUserDetail] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   const { user, token } = useAuth();
 
   const params = useParams();
@@ -37,8 +39,10 @@ const ProfilePage = () => {
   }, [params]);
 
   const getUserDetail = async () => {
+    setLoading(true);
     const data = await getUserDetailById(userId);
     setUserDetail(data);
+    setLoading(false);
   };
 
   const isTabPath = tabs.some((tabPath) =>
@@ -109,10 +113,9 @@ const ProfilePage = () => {
                 handleClick={openEditProfileModal}
               />
             )}
-            {userDetail?.id !== user?.id && 
-            <FollowCard userDetail={userDetail}/>
-            }
-
+            {userDetail?.id !== user?.id && (
+              <FollowCard userDetail={userDetail} loading={loading}/>
+            )}
           </div>
         </div>
       </div>

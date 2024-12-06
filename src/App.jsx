@@ -19,9 +19,14 @@ import MyLists from "./pages/Profile/tabs/Lists/MyLists";
 import ProfilePage from "./pages/Profile";
 import TopicDetailPage from "./pages/Topics/TopicDetailPage";
 import { useEffect } from "react";
+import dayjs from "dayjs";
+import "dayjs/locale/tr";
+
+dayjs.locale("tr-TR");
 
 function App() {
   const location = useLocation();
+
 
   useEffect(() => {
     document.documentElement.scrollTop = 0;
@@ -53,7 +58,7 @@ function App() {
                 <Route path="categories" element={<CategoriesPage />} />
               </Route>
               <Route
-                path="detail/:blogTitle/:id"
+                path="detail/:id"
                 element={<BlogDetailPage />}
               />
             </Routes>

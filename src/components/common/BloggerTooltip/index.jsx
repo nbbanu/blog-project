@@ -2,6 +2,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import Button from "../Button";
 
+
 const BloggerTooltip = ({
   user,
   loading,
@@ -43,7 +44,7 @@ const BloggerTooltip = ({
           <div className="light-line"></div>
           <div className="tooltip-bottom flex flex-center-between">
             <div className="followers-count">
-              <span className="light-text fs-13">{user?.followerCount}</span>
+              <span className="light-text fs-13">{}</span>
               <span className="light-text fs-13">{" Followers"} </span>
             </div>
             <Button className={"success xs blogger-tooltip-btn"} title={"Follow"} />

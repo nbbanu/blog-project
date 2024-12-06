@@ -6,11 +6,13 @@ import { createBlog } from "../../../service";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../contexts/AuthContext";
+import Loader from "../../common/Loader";
 
 const BlogViewModal = ({ clickItem, newBlog }) => {
   const [showBlogModal, setShowBlogModal] = useState(false);
   const { blogItems, topicIds, setText, setTitle, setSlug, setFiles } =
     useCreateBlog();
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { user } = useAuth();
   const email = user?.email;
@@ -24,6 +26,7 @@ const BlogViewModal = ({ clickItem, newBlog }) => {
   };
 
   const createBlogItems = async () => {
+    setLoading(true)
     const header = {
       "Content-Type": "multipart/form-data",
     };
@@ -69,6 +72,7 @@ const BlogViewModal = ({ clickItem, newBlog }) => {
         }
       })
       .finally(() => {
+        setLoading(false);
         setText("");
         setTitle("");
         setSlug("");
@@ -83,6 +87,7 @@ const BlogViewModal = ({ clickItem, newBlog }) => {
       {showBlogModal && (
         <div className="blog-view-modal-container flex flex-center-center">
           <div className="blog-view-modal">
+          {loading && <Loader />}
             <div className="close light-text fs-18" onClick={closeBlogModal}>
               X
             </div>
@@ -151,10 +156,10 @@ const BlogViewModal = ({ clickItem, newBlog }) => {
                     handleClick={createBlogItems}
                     disabled={!topicIds.length > 0}
                   />
-                  <Button
-                    title={"Sonrası için planla"}
-                    className={"ghost border-none schedule-btn"}
-                  />
+                  {/* <Button
+                      title={"Sonrası için planla"}
+                      className={"ghost border-none schedule-btn"}
+                    /> */}
                 </div>
               </div>
             </div>

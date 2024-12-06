@@ -6,7 +6,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { useParams } from "react-router-dom";
 
 const ProfilePageHome = () => {
-  const [blogs, setBlogs] = useState([]);
+  const [blogs, setBlogs] = useState(null);
   const params = useParams();
 
   useEffect(() => {
@@ -24,8 +24,8 @@ const ProfilePageHome = () => {
 
   return (
     <div className="profilePage-home">
-      {blogs?.length === 0
-        ? [1, 2, 3, 4, 5].map((item) => (
+      {blogs === null
+        ? Array.from({ length: 5 }).map((item) => (
             <div
               key={item}
               className="flex flex-between"

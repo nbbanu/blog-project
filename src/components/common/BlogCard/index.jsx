@@ -7,7 +7,7 @@ const BlogCard = ({ blog }) => {
   const navigate = useNavigate();
 
   const openBlogDetail = () => {
-    navigate(`/detail/${blog?.slug}/${blog?.id}`);
+    navigate(`/detail/${blog?.id}`);
   };
   const openBloggerProfile = (email,userId) => {
     const userEmail = "@" + email?.split("@")[0];

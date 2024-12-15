@@ -3,6 +3,7 @@ import Button from "../../../../components/common/Button";
 import BloggerTooltip from "../../../../components/common/BloggerTooltip";
 import ReplyCard from "../ReplyCard";
 import RepliesButton from "../RepliesButton";
+import dayjs from "dayjs";
 
 const contentStyle = {
   overflow: "hidden",
@@ -11,15 +12,11 @@ const contentStyle = {
   WebkitBoxOrient: "vertical",
 };
 
-const CommentCard = ({
-  blog,
-  commentDate,
-  commentCardContent,
-  clapCount,
-}) => {
+const CommentCard = ({ blog,comment }) => {
   const [show, setShow] = useState(false);
   const [showReadMoreButton, setShowReadMoreButton] = useState(false);
   const [showRepliesButton, setShowRepliesButton] = useState(true);
+
 
   const ref = useRef("");
 
@@ -42,19 +39,17 @@ const CommentCard = ({
           <div>
             <div className="commenter-profile">
               <div className="commenter-name primary-text fs-14">
-                {blog?.userName}
+                {comment?.user?.username}
               </div>
-              <BloggerTooltip
-              user={blog.user}
-              />
+              <BloggerTooltip user={blog?.user} />
             </div>
 
-            <div className="comment-date light-text fs-14">{commentDate}</div>
+            <div className="comment-date light-text fs-14">
+              {dayjs(comment?.created_at).format("MMM DD, YYYY")}
+            </div>
           </div>
         </div>
-        <div className="comment-card-option">
-          <i className="fa-solid fa-ellipsis"></i>
-        </div>
+    
       </div>
       <div>
         <div
@@ -62,7 +57,7 @@ const CommentCard = ({
           style={show ? null : contentStyle}
           className="comment-card-content fs-14 primary-text"
         >
-          {commentCardContent}
+          {comment?.comment}
         </div>
         {showReadMoreButton && (
           <Button
@@ -77,11 +72,11 @@ const CommentCard = ({
           <div className="clap">
             <i className="fa-solid fa-hands-clapping primary-text fs-15"></i>
             <span className="clap-count-text primary-text fs-14">
-              {clapCount}
+              {"5"}
             </span>
           </div>
 
-          {showRepliesButton && <RepliesButton />}
+          {showRepliesButton && <RepliesButton comment={comment}/>}
         </div>
         <ReplyCard />
       </div>

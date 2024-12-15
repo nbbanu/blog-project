@@ -1,8 +1,11 @@
+import { useAuth } from "../../../contexts/AuthContext";
 import CommentDrawer from "./CommentDrawer";
-const CommentButton = ({ commentCount, blog}) => {
+const CommentButton = ({blog}) => {
+  const {user} = useAuth();
   return (
     <div className="comment-button">
-      <CommentDrawer commentCount={commentCount} blog={blog}/>
+      <CommentDrawer blog={blog} user={user}/>
+
     </div>
   );
 };

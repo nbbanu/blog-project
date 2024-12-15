@@ -1,15 +1,15 @@
+import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import Button from "../Button";
-import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getUserDetailById } from "../../../service";
-import { Link, useNavigate } from "react-router-dom";
+import Button from "../Button";
 
 const BloggerTooltip = ({ user, loading }) => {
   const [followerData, setFollowerData] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    // getFollowerData();
+
   }, []);
 
   const getFollowerData = async () => {

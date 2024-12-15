@@ -146,7 +146,7 @@ const FollowCard = ({ userDetail, loading }) => {
                       />
                       <div className="username">{user?.username}</div>
                     </div>
-                    <div
+                    {/* <div
                       className="blogger-tooltip"
                       onClick={(e) => {
                         e.preventDefault();
@@ -155,7 +155,7 @@ const FollowCard = ({ userDetail, loading }) => {
                     >
                       {showBloggerTooltip && <BloggerTooltip user={user} />}
                       <i className="fa-solid fa-ellipsis light-text fs-18"></i>
-                    </div>
+                    </div> */}
                   </Link>
                 ))}
               </ul>

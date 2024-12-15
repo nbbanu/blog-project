@@ -9,7 +9,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import BloggerTooltip from "../../components/common/BloggerTooltip";
 import dayjs from "dayjs";
 import CommentButton from "./CommentButton";
-import MiniTooltip from "../../components/common/MiniTooltip";
+import SaveButton from "./SaveButton";
 
 const BlogDetailPage = () => {
   const [blog, setBlog] = useState("");
@@ -117,9 +117,7 @@ const BlogDetailPage = () => {
                       alt="blogger-profile-photo"
                       style={{ width: 40, height: 40 }}
                     />
-                    <BloggerTooltip
-                     user={blog?.user}
-                    />
+                    <BloggerTooltip user={blog?.user} />
                   </div>
 
                   <div>
@@ -128,9 +126,7 @@ const BlogDetailPage = () => {
                         <div className="blogger-top-name primary-text">
                           {blog?.user?.name}
                         </div>
-                        <BloggerTooltip
-                      user={blog?.user}
-                        />
+                        <BloggerTooltip user={blog?.user} />
                       </div>
 
                       <i
@@ -170,33 +166,16 @@ const BlogDetailPage = () => {
                       />
                     </li>
                     <li className="link">
-                      <CommentButton
-                        commentCount={"18"}
-                        blog={blog}
-                      />
+                      <CommentButton blog={blog} />
                     </li>
                   </ul>
                   <ul className="flex flex-center header-lists-right">
                     <li className="link">
-                      <MiniTooltip title={"Save"}>
-                        <i className="fa-regular fa-bookmark light-text"></i>
-                      </MiniTooltip>
+                      <SaveButton
+                        blog={blog}
+                        isAdded={blog?.lists?.length > 0}
+                      />
                     </li>
-                    {/* <li className="link">
-                      <MiniTooltip title={"Listen"}>
-                        <i className="fa-regular fa-circle-play light-text"></i>
-                      </MiniTooltip>
-                    </li>
-                    <li className="link">
-                      <MiniTooltip title={"Share"}>
-                        <i className="fa-solid fa-arrow-up-from-bracket light-text"></i>
-                      </MiniTooltip>
-                    </li>
-                    <li className="link">
-                      <MiniTooltip title={"More"}>
-                        <i className="fa-solid fa-ellipsis light-text"></i>
-                      </MiniTooltip>
-                    </li> */}
                   </ul>
                 </div>
                 <div className="light-line"></div>

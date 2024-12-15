@@ -3,31 +3,50 @@ import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import * as React from "react";
 import MiniTooltip from "../../../../components/common/MiniTooltip";
+import {
+  getCommentRepliesByCommentId,
+  getCommentsByBlogId,
+} from "../../../../service";
 import CommentCard from "../CommentCard";
 import CommentForm from "../CommentForm";
 
-export default function CommentDrawer({ commentCount, blog }) {
+const drawerContent = {
+  width: 410,
+  minWidth: 300,
+  heigth: "100%",
+  padding: 3,
+};
+const drawerTitle = {
+  fontSize: 20,
+  color: "#242424",
+  fontWeight: 500,
+  marginRight: 1,
+};
+export default function CommentDrawer({ blog, user }) {
   const [state, setState] = React.useState({
-    // top: false,
-    // left: false,
-    // bottom: false,
     right: false,
   });
+  const [comments, setComments] = React.useState([]);
+  const [replies, setReplies] = React.useState([]);
 
   const toggleDrawer = (anchor, open) => () => {
+    if (open) {
+      getComments();
+
+      getReplies();
+    }
     setState({ ...state, [anchor]: open });
   };
 
-  const drawerContent = {
-    minWidth: 300,
-    maxWidth: 450,
-    heigth: "100%",
-    padding: 3,
+  const getComments = async () => {
+    const data = await getCommentsByBlogId(blog?.id);
+    setComments(data);
   };
-  const drawerTitle = {
-    fontSize: 20,
-    color: "#242424",
-    fontWeight: 500,
+
+  const getReplies = async () => {
+    const commentId = comments.map((comment) => comment.id);
+    const data = await getCommentRepliesByCommentId(commentId);
+    setReplies(data);
   };
 
   const context = (anchor) => (
@@ -40,8 +59,7 @@ export default function CommentDrawer({ commentCount, blog }) {
         }}
       >
         <Typography className="flex flex-center" variant="h2" sx={drawerTitle}>
-          Responses
-          <Typography sx={drawerTitle}>({commentCount})</Typography>
+          {`Responses (${comments?.length})`}
         </Typography>
         <Typography
           onClick={toggleDrawer(anchor, false)}
@@ -64,26 +82,21 @@ export default function CommentDrawer({ commentCount, blog }) {
       >
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <img
-            src="https://miro.medium.com/v2/resize:fill:40:40/0*PVc8ycK2VwtFt7R0"
+            src={user?.profileImage}
             alt="avatar"
             className="avatar"
             style={{ width: 35, height: 35, marginRight: 10 }}
           />
           <Typography className="primary-text" sx={{ fontSize: 14 }}>
-            {blog?.username}
+            {user?.username}
           </Typography>
         </Box>
-        <CommentForm placeholder={"Düşüncelerin neler?"}/>
+        <CommentForm placeholder={"Düşüncelerin neler?"} />
       </Box>
       <div className="light-line"></div>
-      <CommentCard
-        blog={blog}
-        commentDate={"about 1 month ago"}
-        commentCardContent="Your point is the comparison of threaded parallelism vs. event-based pseudo-parallelism.
-        If you are stuck with a single thread and want to not wait for I/O wait, then you can switch to something else. That's what the JS Event Loop does."
-        replyCount={"4"}
-        clapCount={"205"}
-      />
+      {comments.map((comment) => (
+        <CommentCard key={comment.id} blog={blog} comment={comment} />
+      ))}
     </Box>
   );
 
@@ -98,7 +111,7 @@ export default function CommentDrawer({ commentCount, blog }) {
                 style={{ marginRight: 5 }}
               ></i>
               <span className="light-text fs-13 comment-count">
-                {commentCount}
+                {comments?.length}
               </span>
             </MiniTooltip>
           </Typography>

@@ -74,8 +74,8 @@ export const addOrrRemoveBlogToList = async (body) => {
 
 export const followAUser = async (body) => {
   return await post("user/follow", body);
-
 }
+
 // *************** GET ***************
 const get = async (url, customOptions) => {
   const request_url = base_api + url;
@@ -142,6 +142,7 @@ export const getUserDetailById = async (userId) => {
   const data = await get(url, userId);
   return data?.data;
 };
+
 export const getLists = async (userId) => {
   const url = "list";
   const data = await get(url, {
@@ -162,7 +163,17 @@ export const getMyListById = async (listId) => {
   const data = await get(url, listId);
   return data?.data;
 };
+export const getCommentsByBlogId = async (blogId) => {
+  const url = `comment/comments/${blogId}`;
+  const data = await get(url,blogId);
+  return data?.data;
+}
 
+export const getCommentRepliesByCommentId = async (commentId) => {
+  const url = `comment/replies/${commentId}`;
+  const data = await get(url, commentId);
+  return data?.data;
+}
 // *************** PUT ***************
 const put = async (url, body, config = {}) => {
   try {

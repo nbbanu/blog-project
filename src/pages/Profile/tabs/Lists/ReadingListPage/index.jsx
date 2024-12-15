@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import BlogCard from "../../../../../components/common/BlogCard";
-import { getMyListById } from "../../../../../service";
+import { getBLogById, getMyListById } from "../../../../../service";
 import ClapButton from "../../../../BlogDetail/ClapButton";
 import CommentButton from "../../../../BlogDetail/CommentButton";
 import AddNoteInput from "../../../partials/AddNoteInput";
+import dayjs from "dayjs";
 
 const ReadingListPage = () => {
   const [listedBlog, setListedBlog] = useState([]);
   const [listBlog, setListBlog] = useState([]);
+  const [blogDetail, setBlogDetail] = useState([]);
 
   const listParams = useParams();
 
@@ -22,7 +24,6 @@ const ReadingListPage = () => {
     setListBlog(data?.blogs);
   };
 
-
   return (
     <div className="reading-list-page">
       <div className="profile-info flex flex-center">
@@ -33,9 +34,11 @@ const ReadingListPage = () => {
           alt="avatar"
         />
         <div>
-          <div className="user-name primary-text">Banubkrli</div>
+          <div className="user-name primary-text">{}</div>
           <div className="profile-info-bottom flex flex-center">
-            <div className="date light-text fs-14">Aug 26, 2024</div>
+            <div className="date light-text fs-14">
+              {dayjs(listedBlog?.created_at).format("MMM DD, YYYY")}
+            </div>
             <div className="flex flex-center-center">
               <i
                 className="fa-solid fa-circle light-text"
@@ -44,7 +47,7 @@ const ReadingListPage = () => {
             </div>
             <div className="story flex flex-center">
               <span className="fs-13 light-text">{listBlog?.length}</span>
-              <span className="fs-13 light-text story-text">stories</span>
+              <span className="fs-13 light-text story-text">blog</span>
               {listedBlog?.isPrivate == true ? (
                 <span>
                   <i className="fa-solid fa-lock fs-12 light-text"></i>
@@ -57,7 +60,9 @@ const ReadingListPage = () => {
         </div>
       </div>
       <div className="list-page-header">
-        <h2 className="reading-list-h2 primary-text fs-32">{listedBlog?.title}</h2>
+        <h2 className="reading-list-h2 primary-text fs-32">
+          {listedBlog?.title}
+        </h2>
         <div>
           <div className="light-line"></div>
           <div className="flex flex-center " style={{ gap: 25 }}>
@@ -71,9 +76,7 @@ const ReadingListPage = () => {
         {listBlog?.map((blog) => (
           <div key={blog.id} className="reading-list-blog">
             <AddNoteInput />
-            <BlogCard
-             blog={blog}
-            />
+            <BlogCard blog={blog} />
           </div>
         ))}
       </div>

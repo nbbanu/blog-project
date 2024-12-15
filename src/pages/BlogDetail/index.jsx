@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getBlogById } from "../../service";
+import { getBlogByTopicId } from "../../service";
 import Button from "../../components/common/Button";
 import ClapButton from "./ClapButton";
 import Skeleton from "react-loading-skeleton";
@@ -22,7 +22,7 @@ const BlogDetailPage = () => {
 
   const loadBlogByID = async (topicId) => {
     setLoading(true);
-    const data = await getBlogById(topicId);
+    const data = await getBlogByTopicId(topicId);
     setBlog(data);
     setLoading(false);
   };

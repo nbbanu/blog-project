@@ -114,7 +114,7 @@ const ProfilePage = () => {
               />
             )}
             {userDetail?.id !== user?.id && (
-              <FollowCard userDetail={userDetail} loading={loading}/>
+              <FollowCard  userDetail={userDetail} loading={loading}/>
             )}
           </div>
         </div>

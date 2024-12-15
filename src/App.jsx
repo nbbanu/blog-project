@@ -21,12 +21,13 @@ import TopicDetailPage from "./pages/Topics/TopicDetailPage";
 import { useEffect } from "react";
 import dayjs from "dayjs";
 import "dayjs/locale/tr";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 dayjs.locale("tr-TR");
 
 function App() {
   const location = useLocation();
-
 
   useEffect(() => {
     document.documentElement.scrollTop = 0;
@@ -35,36 +36,34 @@ function App() {
   return (
     <div>
       {/* Provider component’imizin diğer componentler tarafında erişilebilir olmasını sağlayabilmek için component ağacımızın en üstüne yerleştirmemiz gerekir. */}
-      <LangProvider>
-        <AuthProvider>
-          <CreateBlogProvider>
-            <Header />
-            <Routes>
-              <Route path="/" element={<Home />}></Route>
-              <Route path="new-story" element={<WritePage />} />
-              <Route path="/:userName/:userId" element={<ProfilePage />}>
-                <Route path="main" element={<ProfilePageHome />} />
-                <Route path="lists" element={<MyLists />} />
-                <Route path="about" element={<ProfilePageAbout />} />
-                <Route path="list/:listId" element={<ReadingListPage />} />
-              </Route>
 
-              <Route path="explore-topics" element={<Topics />}>
-                <Route path="title" element={<TopicDetailPage />} />
-              </Route>
-              <Route path="search" element={<Search />} />
-              <Route path="admin" element={<Admin />}>
-                <Route path="" element={<HomePage />} />
-                <Route path="categories" element={<CategoriesPage />} />
-              </Route>
-              <Route
-                path="detail/:id"
-                element={<BlogDetailPage />}
-              />
-            </Routes>
-          </CreateBlogProvider>
-        </AuthProvider>
-      </LangProvider>
+      <AuthProvider>
+        <CreateBlogProvider>
+          <Header />
+
+          <Routes>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="new-story" element={<WritePage />} />
+            <Route path="/:userName/:userId" element={<ProfilePage />}>
+              <Route path="main" element={<ProfilePageHome />} />
+              <Route path="lists" element={<MyLists />} />
+              <Route path="about" element={<ProfilePageAbout />} />
+              <Route path="list/:listId" element={<ReadingListPage />} />
+            </Route>
+
+            <Route path="explore-topics" element={<Topics />}>
+              <Route path="title" element={<TopicDetailPage />} />
+            </Route>
+            <Route path="search" element={<Search />} />
+            <Route path="admin" element={<Admin />}>
+              <Route path="" element={<HomePage />} />
+              <Route path="categories" element={<CategoriesPage />} />
+            </Route>
+            <Route path="detail/:id" element={<BlogDetailPage />} />
+          </Routes>
+          <ToastContainer />
+        </CreateBlogProvider>
+      </AuthProvider>
     </div>
   );
 }

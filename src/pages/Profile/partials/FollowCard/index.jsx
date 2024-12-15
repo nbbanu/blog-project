@@ -2,12 +2,54 @@ import { Link } from "react-router-dom";
 import Button from "../../../../components/common/Button";
 import "./follow-card.scss";
 import BloggerTooltip from "../../../../components/common/BloggerTooltip";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
+import { followAUser } from "../../../../service";
+import { Flip, toast } from "react-toastify";
 
 const FollowCard = ({ userDetail, loading }) => {
   const [showBloggerTooltip, setShowBloggerTooltip] = useState(false);
-  const handleFollowClick = () => {};
+  const [followerCount, setFollowerCount] = useState(null);
+  const [isFollowing, setIsFollowing] = useState(null);
+  const [followLoading, setFollowLoading] = useState(false);
+
+  useEffect(() => {
+    setIsFollowing(userDetail?.isFollowingByUser);
+    setFollowerCount(userDetail?.followerCount);
+  }, [userDetail]);
+
+  const handleFollowClick = () => {
+    const body = {
+      userId: userDetail?.id,
+      isFollowing: !userDetail?.isFollowingByUser,
+    };
+
+    setFollowLoading(true);
+
+    followAUser(body)
+      .then((res) => {
+        setIsFollowing(!isFollowing);
+        setFollowerCount((count) => (!isFollowing ? count + 1 : count - 1));
+
+        !isFollowing
+          ? toast.success("Kullanıcı Takip Edildi", {
+              position: "top-right",
+              autoClose: 1000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+              transition: Flip,
+            })
+          : "";
+      })
+      .catch((err) => console.error(err))
+      .finally(() => {
+        setFollowLoading(false);
+      });
+  };
 
   return (
     <div className="follow-container flex flex-column">
@@ -63,17 +105,16 @@ const FollowCard = ({ userDetail, loading }) => {
         <>
           <div className="follow-card flex flex-column">
             <></>
-            <div className="followers-count fs-16 light-text">{`${userDetail?.followerCount} Takipçi`}</div>
+            <div className="followers-count fs-16 light-text">
+              {followerCount?.toString()} Takipçi
+            </div>
             <div className="user-bio fs-14 light-text">{userDetail?.bio}</div>
 
             <div className="buttons flex">
               <Button
-                title={`${
-                  userDetail?.isFollowingByUser ? "Takip Ediliyor" : "Takip Et"
-                }`}
-                className={`${
-                  userDetail?.isFollowingByUser ? "green-ghost" : "success"
-                }`}
+                disabled={followLoading}
+                title={`${isFollowing ? "Takip Ediliyor" : "Takip Et"}`}
+                className={`${isFollowing ? "green-ghost" : "success"}`}
                 size="md"
                 handleClick={handleFollowClick}
               />
@@ -91,7 +132,10 @@ const FollowCard = ({ userDetail, loading }) => {
 
               <ul className="following-card-list flex flex-column">
                 {userDetail?.following?.map((user) => (
-                  <Link className="link fs-13 light-text following-card-link flex">
+                  <Link
+                    key={user.id}
+                    className="link fs-13 light-text following-card-link flex"
+                  >
                     <div className="flex flex-center">
                       <img
                         src={user?.profileImage}
@@ -102,16 +146,15 @@ const FollowCard = ({ userDetail, loading }) => {
                       />
                       <div className="username">{user?.username}</div>
                     </div>
-                    <div className="blogger-tooltip">
-                      <div>
-                        {showBloggerTooltip && <BloggerTooltip user={user} />}
-                        <i
-                          className="fa-solid fa-ellipsis light-text fs-18"
-                          onClick={() =>
-                            setShowBloggerTooltip(!showBloggerTooltip)
-                          }
-                        ></i>
-                      </div>
+                    <div
+                      className="blogger-tooltip"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setShowBloggerTooltip(!showBloggerTooltip);
+                      }}
+                    >
+                      {showBloggerTooltip && <BloggerTooltip user={user} />}
+                      <i className="fa-solid fa-ellipsis light-text fs-18"></i>
                     </div>
                   </Link>
                 ))}

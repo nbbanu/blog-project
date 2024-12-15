@@ -71,6 +71,11 @@ export const createReadingList = async (body) => {
 export const addOrrRemoveBlogToList = async (body) => {
   return await post("list/add-remove-blog", body);
 };
+
+export const followAUser = async (body) => {
+  return await post("user/follow", body);
+
+}
 // *************** GET ***************
 const get = async (url, customOptions) => {
   const request_url = base_api + url;
@@ -92,7 +97,13 @@ export const getAllBlogs = async (userId) => {
   return data?.data;
 };
 
-export const getBlogById = async (topicId) => {
+export const getBLogById = async(blogId) => {
+  const url = `blog/${blogId}`;
+  const data = await get(url, blogId);
+  return data?.data;
+}
+
+export const getBlogByTopicId = async (topicId) => {
   const url = `blog/${topicId}`;
   const data = await get(url, topicId);
   return data?.data;

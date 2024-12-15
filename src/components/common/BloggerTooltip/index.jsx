@@ -1,12 +1,27 @@
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import Button from "../Button";
+import { useEffect, useState } from "react";
+import { getUserDetailById } from "../../../service";
+import { Link, useNavigate } from "react-router-dom";
 
+const BloggerTooltip = ({ user, loading }) => {
+  const [followerData, setFollowerData] = useState([]);
+  const navigate = useNavigate();
+  useEffect(() => {
+    // getFollowerData();
+  }, []);
 
-const BloggerTooltip = ({
-  user,
-  loading,
-}) => {
+  const getFollowerData = async () => {
+    const data = await getUserDetailById(user?.id);
+    setFollowerData(data);
+  };
+
+  const openBloggerProfile = (followerData) => {
+    const userEmail = "@" + followerData?.email?.split("@")[0];
+
+    navigate(`/${userEmail}/${followerData?.id}/main`);
+  };
 
   return (
     <div className="tooltip-container">
@@ -28,26 +43,43 @@ const BloggerTooltip = ({
           <div className="tooltip-header flex flex-center">
             <div className="tooltip-profile-img">
               <img
-                src={user?.profileImage}
+                src={followerData?.profileImage}
                 alt="avatar"
                 className="avatar"
                 style={{ width: 35, height: 35 }}
               />
             </div>
             <div className="tooltip-name">
-              <h2 className="fs-16 primary-text">{user?.name}</h2>
+              <h2
+                className="fs-16 primary-text"
+                onClick={() => openBloggerProfile(followerData)}
+              >
+                {followerData?.name}
+              </h2>
             </div>
           </div>
           <div className="tooltip-info">
-            <p className="primary-text fs-13">{user?.bio}</p>
+            <p className="primary-text fs-13">{followerData?.bio}</p>
           </div>
           <div className="light-line"></div>
           <div className="tooltip-bottom flex flex-center-between">
             <div className="followers-count">
-              <span className="light-text fs-13">{}</span>
-              <span className="light-text fs-13">{" Followers"} </span>
+              <span className="light-text fs-13">
+                {followerData?.followerCount}
+              </span>
+              <span className="light-text fs-13">{" Takipçi"} </span>
             </div>
-            <Button className={"success xs blogger-tooltip-btn"} title={"Follow"} />
+            <Button
+              // className={"success xs blogger-tooltip-btn"}
+              className={`${
+                followerData?.isFollowingByUser ? "green-ghost" : "success"
+              } blogger-tooltip-btn`}
+              size={"xs"}
+              title={`${
+                followerData?.isFollowingByUser ? "Takip Ediliyor" : "Takip Et"
+              }`}
+              
+            />
           </div>
         </>
       )}

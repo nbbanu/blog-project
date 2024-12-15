@@ -10,7 +10,7 @@ import {
   getListDetailByBlogId,
 } from "../../../service";
 import Loader from "../../../components/common/Loader";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 const SaveButton = ({ blog, isAdded }) => {
   const [show, setShowModal] = useState(false);
@@ -106,7 +106,7 @@ const SaveButton = ({ blog, isAdded }) => {
       isAdd: e.target.checked,
     };
     addOrrRemoveBlogToList(markedList).then(() => {
-      toast("Başarıyla kaydedildi", {
+      toast.success("Başarıyla kaydedildi", {
         position: "top-right",
         autoClose: 1000,
         hideProgressBar: false,
@@ -114,7 +114,6 @@ const SaveButton = ({ blog, isAdded }) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
       });
     });
   };

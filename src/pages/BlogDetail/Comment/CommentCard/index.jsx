@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import Button from "../../../../components/common/Button";
 import BloggerTooltip from "../../../../components/common/BloggerTooltip";
-import ReplyCard from "../ReplyCard";
 import RepliesButton from "../RepliesButton";
 import dayjs from "dayjs";
+import CommentForm from "../CommentForm";
+import ClapButton from "../../ClapButton";
+import { useAuth } from "../../../../contexts/AuthContext";
 
 const contentStyle = {
   overflow: "hidden",
@@ -12,12 +14,12 @@ const contentStyle = {
   WebkitBoxOrient: "vertical",
 };
 
-const CommentCard = ({ blog,comment }) => {
+const CommentCard = ({ blog, comment }) => {
   const [show, setShow] = useState(false);
   const [showReadMoreButton, setShowReadMoreButton] = useState(false);
-  const [showRepliesButton, setShowRepliesButton] = useState(true);
+  const [showReplyCard, setShowReplyCard] = useState(false);
 
-
+  const { user } = useAuth();
   const ref = useRef("");
 
   useEffect(() => {
@@ -26,36 +28,38 @@ const CommentCard = ({ blog,comment }) => {
     );
   }, []);
 
+  const openReplyCard = () => {
+    setShowReplyCard(!showReplyCard);
+  };
+
   return (
     <div className="comment-card">
       <div className="comment-card-top flex">
         <div className="flex">
           <img
-            src="https://miro.medium.com/v2/resize:fill:32:32/0*xgLgNrZxf2ZhQcOk"
+            src={comment?.user?.profileImage}
             style={{ width: 32, height: 32 }}
             alt="profile-photo"
             className="avatar"
           />
           <div>
-            <div className="commenter-profile">
+            <div className="commenter-info">
               <div className="commenter-name primary-text fs-14">
                 {comment?.user?.username}
               </div>
               <BloggerTooltip user={blog?.user} />
             </div>
-
             <div className="comment-date light-text fs-14">
               {dayjs(comment?.created_at).format("MMM DD, YYYY")}
             </div>
           </div>
         </div>
-    
       </div>
       <div>
         <div
+          className="comment-card-content fs-14 primary-text"
           ref={ref}
           style={show ? null : contentStyle}
-          className="comment-card-content fs-14 primary-text"
         >
           {comment?.comment}
         </div>
@@ -69,16 +73,29 @@ const CommentCard = ({ blog,comment }) => {
       </div>
       <div className="comment-card-bottom flex">
         <div className="flex">
-          <div className="clap">
+          <div className="clap flex">
             <i className="fa-solid fa-hands-clapping primary-text fs-15"></i>
-            <span className="clap-count-text primary-text fs-14">
-              {"5"}
-            </span>
+            <span className="clap-count-text primary-text fs-14">{"5"}</span>
           </div>
-
-          {showRepliesButton && <RepliesButton comment={comment}/>}
+          <RepliesButton blog={blog} comment={comment} />
         </div>
-        <ReplyCard />
+        <div className="reply-card">
+          <Button
+            title="Yanıt Ver"
+            handleClick={openReplyCard}
+            className={"ghost border-none reply-btn"}
+          />
+          {showReplyCard && (
+            <div className="card-content">
+              <CommentForm
+                blog={blog}
+                user={user}
+                comment={comment}
+                placeholder={`${comment?.user?.username} kullanıcısına yanıt veriyorsun`}
+              />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

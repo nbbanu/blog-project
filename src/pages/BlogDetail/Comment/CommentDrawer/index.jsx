@@ -2,18 +2,14 @@ import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import * as React from "react";
-import MiniTooltip from "../../../../components/common/MiniTooltip";
-import {
-  getCommentRepliesByCommentId,
-  getCommentsByBlogId,
-} from "../../../../service";
+import { getCommentsByBlogId } from "../../../../service";
 import CommentCard from "../CommentCard";
 import CommentForm from "../CommentForm";
+import MiniTooltip from "../../../../components/common/MiniTooltip";
 
 const drawerContent = {
   width: 410,
-  minWidth: 300,
-  heigth: "100%",
+  height: "100%",
   padding: 3,
 };
 const drawerTitle = {
@@ -27,13 +23,10 @@ export default function CommentDrawer({ blog, user }) {
     right: false,
   });
   const [comments, setComments] = React.useState([]);
-  const [replies, setReplies] = React.useState([]);
 
   const toggleDrawer = (anchor, open) => () => {
     if (open) {
       getComments();
-
-      getReplies();
     }
     setState({ ...state, [anchor]: open });
   };
@@ -41,12 +34,6 @@ export default function CommentDrawer({ blog, user }) {
   const getComments = async () => {
     const data = await getCommentsByBlogId(blog?.id);
     setComments(data);
-  };
-
-  const getReplies = async () => {
-    const commentId = comments.map((comment) => comment.id);
-    const data = await getCommentRepliesByCommentId(commentId);
-    setReplies(data);
   };
 
   const context = (anchor) => (
@@ -73,30 +60,18 @@ export default function CommentDrawer({ blog, user }) {
           X
         </Typography>
       </Box>
-      <Box
-        sx={{
-          boxShadow: "0px 1px 4px rgba(0,0,0, 0.2)",
-          marginTop: 3,
-          padding: "14px",
-        }}
-      >
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <img
-            src={user?.profileImage}
-            alt="avatar"
-            className="avatar"
-            style={{ width: 35, height: 35, marginRight: 10 }}
-          />
-          <Typography className="primary-text" sx={{ fontSize: 14 }}>
-            {user?.username}
-          </Typography>
-        </Box>
-        <CommentForm placeholder={"Düşüncelerin neler?"} />
-      </Box>
+      <CommentForm
+        blog={blog}
+        user={user}
+        comment={comments.forEach(comment => comment.comment)}
+        placeholder={"Düşüncelerin neler?"}
+      />
       <div className="light-line"></div>
-      {comments.map((comment) => (
-        <CommentCard key={comment.id} blog={blog} comment={comment} />
-      ))}
+      <Box className="comment-cards">
+        {comments.map((comment) => (
+          <CommentCard key={comment.id} blog={blog} comment={comment} />
+        ))}
+      </Box>
     </Box>
   );
 

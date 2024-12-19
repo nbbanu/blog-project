@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 import BlogCard from "../../../../../components/common/BlogCard";
 import { getBLogById, getMyListById } from "../../../../../service";
 import ClapButton from "../../../../BlogDetail/ClapButton";
-import CommentButton from "../../../../BlogDetail/CommentButton";
 import AddNoteInput from "../../../partials/AddNoteInput";
 import dayjs from "dayjs";
+import Comment from "../../../../BlogDetail/Comment";
 
 const ReadingListPage = () => {
   const [listedBlog, setListedBlog] = useState([]);
@@ -67,7 +67,7 @@ const ReadingListPage = () => {
           <div className="light-line"></div>
           <div className="flex flex-center " style={{ gap: 25 }}>
             <ClapButton />
-            <CommentButton />
+            <Comment />
           </div>
           <div className="light-line"></div>
         </div>

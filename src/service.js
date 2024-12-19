@@ -76,6 +76,10 @@ export const followAUser = async (body) => {
   return await post("user/follow", body);
 }
 
+export const makeComment = async (body) => {
+  return await post("comment", body);
+}
+
 // *************** GET ***************
 const get = async (url, customOptions) => {
   const request_url = base_api + url;

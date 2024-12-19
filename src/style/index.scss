@@ -35,11 +35,9 @@
 @import "../../src/pages/Admin/CategoriesPage/TopicsTable/table.scss";
 @import "../../src/pages/BlogDetail/blog-detail.scss";
 @import "../../src/pages/BlogDetail/ClapButton/clap-button.scss";
-@import "../../src/pages/BlogDetail/CommentButton/comment-button.scss";
-@import "../../src/pages/BlogDetail/CommentButton/CommentDrawer/comment-drawer.scss";
-@import "../../src/pages/BlogDetail/CommentButton/CommentCard/comment-card.scss";
-@import "../../src/pages/BlogDetail/CommentButton/RepliesButton/replies-button.scss";
-@import "../../src/pages/BlogDetail/CommentButton/ReplyCard/reply-card.scss";
+@import "../pages/BlogDetail/Comment/comment.scss";
+@import "../../src/pages/BlogDetail/Comment/CommentCard/comment-card.scss";
+@import "../../src/pages/BlogDetail/Comment/RepliesButton/replies-button.scss";
 @import "../../src/pages/Profile/partials/EditProfileModal/edit-profile-modal.scss";
 @import "../pages/Profile/tabs/Lists/ReadingListPage/reading-list-page.scss";
 @import "../pages/Profile/partials/AddNoteInput/add-note-input.scss";

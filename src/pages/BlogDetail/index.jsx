@@ -8,8 +8,8 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import BloggerTooltip from "../../components/common/BloggerTooltip";
 import dayjs from "dayjs";
-import CommentButton from "./CommentButton";
 import SaveButton from "./SaveButton";
+import Comment from "./Comment";
 
 const BlogDetailPage = () => {
   const [blog, setBlog] = useState("");
@@ -166,7 +166,7 @@ const BlogDetailPage = () => {
                       />
                     </li>
                     <li className="link">
-                      <CommentButton blog={blog} />
+                      <Comment blog={blog} />
                     </li>
                   </ul>
                   <ul className="flex flex-center header-lists-right">

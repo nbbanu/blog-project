@@ -22,7 +22,7 @@ const Trending = () => {
             style={{ width: "20px", height: "20px", objectFit: "cover" }}
           />
           <h2 className="trending-header-h2 fs-16 primary-text">
-            Trending on Medium
+            Trendler
           </h2>
         </div>
         <div className="mini-blog-cards">

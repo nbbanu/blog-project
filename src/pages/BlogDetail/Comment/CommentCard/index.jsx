@@ -21,7 +21,6 @@ const CommentCard = ({ blog, comment }) => {
 
   const { user } = useAuth();
   const ref = useRef("");
-
   useEffect(() => {
     setShowReadMoreButton(
       ref?.current.scrollHeight !== ref?.current.clientHeight

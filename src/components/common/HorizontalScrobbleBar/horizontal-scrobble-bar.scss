@@ -10,28 +10,34 @@
     overflow-x: scroll;
     white-space: nowrap;
     scroll-behavior: smooth;
-    padding: 0 20px !important;
+    // padding: 0 20px !important;
     width: 95%;
     margin: 0 auto;
+    height: 100%;
   }
-
-  .tag-list {
-    gap: 30px;
+  .following-btn {
+    margin-right: 30px;
     padding: 0 !important;
   }
+  .tag-list {
+    gap: 30px;
+    padding: 0;
+    height: 100%;
+  
+    a:active {
+      position: relative;
+      color: var(--primary-color);
+    }
 
-  a.active {
-    color: var(--primary-color);
-    position: relative;
-    background: "red"
+    a:active::before {
+      content: "";
+      border-bottom: .5px solid var(--primary-color);
+      width: 100%;
+      position: absolute;
+      bottom: -18px;
+    }
   }
-  a.active::before {
-    content: "";
-    border-bottom: 1px solid var(--primary-color);
-    width: 100%;
-    position: absolute;
-    bottom: -21px;
-  }
+
   .right-arrow {
     position: absolute;
     right: 0px;
@@ -46,16 +52,6 @@
     color: var(--primary-color);
   }
 
-  .plus-icon {
-    width: 20px;
-    height: 20px;
-    // position: absolute;
-    // left: 0px;
-  }
-  .plus-icon:hover {
-    background-color: var(--light-border-color);
-    border-radius: 50%;
-  }
   ::-webkit-scrollbar {
     height: 0px;
   }

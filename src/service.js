@@ -31,7 +31,7 @@ axiosInstance.interceptors.response.use(
         iconColor: "#ffc016",
       }).then(() => {
         window.location.reload();
-      });
+      })
     }
     return Promise.reject(error);
   }

@@ -36,6 +36,7 @@ export default function CommentDrawer({ blog, user }) {
     setComments(data);
   };
 
+
   const context = (anchor) => (
     <Box sx={drawerContent} role="presentation">
       <Box
@@ -46,7 +47,7 @@ export default function CommentDrawer({ blog, user }) {
         }}
       >
         <Typography className="flex flex-center" variant="h2" sx={drawerTitle}>
-          {`Responses (${comments?.length})`}
+          {`Yorumlar (${comments?.length})`}
         </Typography>
         <Typography
           onClick={toggleDrawer(anchor, false)}
@@ -63,7 +64,7 @@ export default function CommentDrawer({ blog, user }) {
       <CommentForm
         blog={blog}
         user={user}
-        comment={comments.forEach(comment => comment.comment)}
+        comment={Math.floor(Math.random() * Math.floor(Math.random() * Date.now()))}
         placeholder={"Düşüncelerin neler?"}
       />
       <div className="light-line"></div>

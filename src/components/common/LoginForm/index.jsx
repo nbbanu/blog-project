@@ -135,14 +135,14 @@ const LoginForm = ({ setShowModal }) => {
       <div className="form-login-buttons flex flex-center-center flex-column">
         {loading ? <Loader /> : ""}
         <AuthenticationButton className={"authentication-button fs-16 success"} title={"Giriş Yap"} />
-        <AuthenticationButton
+        {/* <AuthenticationButton
           icon={"fa-brands fa-google"}
           title={"Sign in with Google"}
         />
         <AuthenticationButton
           icon={"fa-brands fa-facebook"}
           title={"Sign in with Facebook"}
-        />
+        /> */}
       </div>
     </form>
   );

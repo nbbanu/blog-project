@@ -1,55 +1,18 @@
-import { Link } from "react-router-dom";
-import Button from "../../../../components/common/Button";
-import "./follow-card.scss";
-import BloggerTooltip from "../../../../components/common/BloggerTooltip";
 import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
-import { followAUser } from "../../../../service";
-import { Flip, toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import Button from "../../../../components/common/Button";
+import FollowButton from "../FollowButton";
+import "./follow-card.scss";
 
 const FollowCard = ({ userDetail, loading }) => {
-  const [showBloggerTooltip, setShowBloggerTooltip] = useState(false);
   const [followerCount, setFollowerCount] = useState(null);
   const [isFollowing, setIsFollowing] = useState(null);
-  const [followLoading, setFollowLoading] = useState(false);
 
   useEffect(() => {
     setIsFollowing(userDetail?.isFollowingByUser);
     setFollowerCount(userDetail?.followerCount);
   }, [userDetail]);
-
-  const handleFollowClick = () => {
-    const body = {
-      userId: userDetail?.id,
-      isFollowing: !userDetail?.isFollowingByUser,
-    };
-
-    setFollowLoading(true);
-
-    followAUser(body)
-      .then((res) => {
-        setIsFollowing(!isFollowing);
-        setFollowerCount((count) => (!isFollowing ? count + 1 : count - 1));
-
-        !isFollowing
-          ? toast.success("Kullanıcı Takip Edildi", {
-              position: "top-right",
-              autoClose: 1000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-              transition: Flip,
-            })
-          : "";
-      })
-      .catch((err) => console.error(err))
-      .finally(() => {
-        setFollowLoading(false);
-      });
-  };
 
   return (
     <div className="follow-container flex flex-column">
@@ -111,13 +74,7 @@ const FollowCard = ({ userDetail, loading }) => {
             <div className="user-bio fs-14 light-text">{userDetail?.bio}</div>
 
             <div className="buttons flex">
-              <Button
-                disabled={followLoading}
-                title={`${isFollowing ? "Takip Ediliyor" : "Takip Et"}`}
-                className={`${isFollowing ? "green-ghost" : "success"}`}
-                size="md"
-                handleClick={handleFollowClick}
-              />
+           <FollowButton isFollowing={isFollowing} setIsFollowing={setIsFollowing} setFollowerCount={setFollowerCount} userDetail={userDetail}/>
               <Button className={"success mail-btn"} size={"md"}>
                 <i className="fa-regular fa-envelope"></i>
               </Button>

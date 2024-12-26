@@ -17,7 +17,11 @@
         }
       }
     }
-  
+    .follow-button{
+      border: none;
+      background-color: transparent;
+      color: var(--succes-color);
+    }
     .blogger-info {
       margin-bottom: 32px;
       .blogger-image {

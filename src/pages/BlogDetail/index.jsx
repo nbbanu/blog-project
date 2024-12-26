@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { getBlogByTopicId } from "../../service";
-import Button from "../../components/common/Button";
+import { Link, useParams } from "react-router-dom";
+import { getBlogByTopicId, getUserDetailById } from "../../service";
 import ClapButton from "./ClapButton";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -10,21 +9,40 @@ import BloggerTooltip from "../../components/common/BloggerTooltip";
 import dayjs from "dayjs";
 import SaveButton from "./SaveButton";
 import Comment from "./Comment";
+import { useAuth } from "../../contexts/AuthContext";
+import FollowButton from "../Profile/partials/FollowButton";
 
 const BlogDetailPage = () => {
   const [blog, setBlog] = useState("");
-  const topicId = useParams();
   const [loading, setLoading] = useState(false);
+  const [userDetail, setUserDetail] = useState([]);
+  const [followerCount, setFollowerCount] = useState(null);
+  const [isFollowing, setIsFollowing] = useState(null);
+
+  const topicId = useParams();
+  const { user } = useAuth();
+  const email = blog?.user?.email;
+  const userEmail = "@" + email?.split("@")[0];
 
   useEffect(() => {
     loadBlogByID(topicId.id);
+    getUserDetail();
   }, []);
+  useEffect(() => {
+    setIsFollowing(userDetail?.isFollowingByUser);
+    setFollowerCount(userDetail?.followerCount);
+  }, [userDetail]);
 
   const loadBlogByID = async (topicId) => {
     setLoading(true);
     const data = await getBlogByTopicId(topicId);
     setBlog(data);
     setLoading(false);
+  };
+
+  const getUserDetail = async () => {
+    const data = await getUserDetailById(blog?.user?.id);
+    setUserDetail(data);
   };
 
   return (
@@ -122,30 +140,44 @@ const BlogDetailPage = () => {
 
                   <div>
                     <div className="blogger-top flex flex-center">
-                      <div className="blogger-name">
-                        <div className="blogger-top-name primary-text">
-                          {blog?.user?.name}
+                      <Link
+                        className="link"
+                        to={`/${userEmail}/${blog?.user?.id}/main`}
+                      >
+                        <div className="blogger-name">
+                          <div className="blogger-top-name primary-text">
+                            {blog?.user?.name}
+                          </div>
+                          <BloggerTooltip user={blog?.user} />
                         </div>
-                        <BloggerTooltip user={blog?.user} />
-                      </div>
+                      </Link>
 
-                      <i
-                        className="fa-solid fa-circle"
-                        style={{ fontSize: 2, marginLeft: 10 }}
-                      ></i>
-                      <Button
-                        className={"ghost border-none"}
-                        title={"Follow"}
-                      />
+                      <div
+                        className="flex flex-center"
+                        style={{
+                          display: user?.id == blog?.user?.id ? "none" : "flex",
+                        }}
+                      >
+                        <i
+                          className="fa-solid fa-circle"
+                          style={{ fontSize: 2, marginLeft: 10 }}
+                        ></i>
+                        <FollowButton
+                          isFollowing={isFollowing}
+                          setIsFollowing={setIsFollowing}
+                          setFollowerCount={setFollowerCount}
+                          userDetail={userDetail}
+                        />
+                      </div>
                     </div>
                     <div className="blogger-bottom flex flex-center">
-                      <span className="blog-reading-time light-text fs-14">
+                      {/* <span className="blog-reading-time light-text fs-14">
                         6 min read
-                      </span>
-                      <i
+                      </span> */}
+                      {/* <i
                         className="fa-solid fa-circle"
                         style={{ fontSize: 2, marginLeft: 10, marginRight: 10 }}
-                      ></i>
+                      ></i> */}
 
                       <span className="blog-release-date light-text fs-14">
                         {dayjs(blog?.created_at).format("MMM DD, YYYY")}

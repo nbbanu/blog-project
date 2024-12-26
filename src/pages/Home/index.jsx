@@ -206,7 +206,7 @@ const Home = () => {
           ))}
         </div>
 
-        <div className="home-bottom-right">
+        {/* <div className="home-bottom-right">
           <div className="recommended-topics">
             <h2 className="home-bottom-right-title primary-text fs-16">
               Daha Fazlasını Keşfedin
@@ -223,7 +223,7 @@ const Home = () => {
               Daha Fazla Konu Görün
             </Link>
           </div>
-        </div>
+        </div> */}
       </div>
     </main>
   );

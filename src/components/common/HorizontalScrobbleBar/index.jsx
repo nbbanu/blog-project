@@ -1,21 +1,10 @@
-import { Link, NavLink } from "react-router-dom";
-import { useState } from "react";
+import { Link, NavLink, Outlet } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getAllTopics } from "../../../service";
 
 const HorizontalScrobbleBar = () => {
   const slider = document.querySelector(".scrobble-area");
-  const [showLeftArrow, setShowLeftArrow] = useState(false);
-  const [linkActive, setLinkActive] = useState(false);
-
-  const sliderLeft = () => {
-    slider.scrollLeft = slider.scrollLeft - 200;
-    if (slider.scrollLeft == 0) {
-      setShowLeftArrow(false);
-    }
-  };
-  const sliderRight = () => {
-    slider.scrollLeft = slider.scrollLeft + 200;
-    setShowLeftArrow(true);
-  };
+  const [topics, setTopics] = useState([]);
 
   const tags = [
     "Senin İçin",
@@ -33,6 +22,21 @@ const HorizontalScrobbleBar = () => {
     "Teknoloji",
     "Programlama",
   ];
+  const sliderLeft = () => {
+    slider.scrollLeft = slider.scrollLeft - 200;
+  };
+  const sliderRight = () => {
+    slider.scrollLeft = slider.scrollLeft + 200;
+  };
+
+  useEffect(() => {
+    loadAllTopics();
+  }, []);
+
+  const loadAllTopics = async () => {
+    const data = await getAllTopics();
+    setTopics(data);
+  };
 
   return (
     <div>
@@ -41,22 +45,24 @@ const HorizontalScrobbleBar = () => {
           className="gradient-left"
           style={{ display: showLeftArrow ? "flex" : "none" }}
         ></div> */}
-        {showLeftArrow ? (
-          <i
-            className="fa-solid fa-chevron-left left-arrow light-text"
-            onClick={sliderLeft}
-          ></i>
-        ) : (
-          <i className="fa-solid fa-plus light-text plus-icon flex flex-center-center"></i>
-        )}
+
+        <i
+          className="fa-solid fa-chevron-left left-arrow light-text"
+          onClick={sliderLeft}
+        ></i>
+
         <div className="scrobble-area flex flex-center">
+          <Link className="link light-text fs-14 following-btn">
+            Takip Ettiklerin
+          </Link>
           <ul className="tag-list flex flex-center">
-            {tags.map((tag, index) => (
-              <li className="link" key={index}>
-                <a className="link light-text fs-14">{tag}</a>
-              </li>
+            {topics.map((topic) => (
+              <NavLink className="link light-text fs-14" key={topic.id} to={""}>
+                {topic.title}
+              </NavLink>
             ))}
           </ul>
+          <Outlet />
         </div>
         <i
           className="fa-solid fa-chevron-right right-arrow light-text"

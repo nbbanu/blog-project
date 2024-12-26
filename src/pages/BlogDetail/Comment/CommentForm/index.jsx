@@ -1,6 +1,7 @@
 import { Box, Input, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../../../components/common/Button";
+import { makeComment } from "../../../../service";
 
 const multilineInput = {
   width: "100%",
@@ -11,38 +12,41 @@ const multilineInput = {
   paddingTop: 3,
 };
 
-const CommentForm = ({
-  blog,
-  user,
-  comment,
-  placeholder,
-}) => {
+const CommentForm = ({ blog, user, comment, placeholder }) => {
   const [respondText, setRespondText] = useState("");
   const [showReplyRespondCard, setShowReplyRespondCard] = useState(false);
-  const [body, setBody] = useState({
-    comment: respondText,
-    blogId: blog?.id,
-    // parentCommentId
-  });
 
   const handleChange = (e) => {
     setRespondText(e.target.value);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    const body = {
+      comment: respondText,
+      blogId: blog?.id,
+      parentCommentId: comment?.id ? comment?.id : comment,
+    };
+
+    makeComment(body)
+      .then((res) => {
+        
+      })
+      .catch((err) => console.log(err));
   };
 
   const closeCard = (e) => {
     e.preventDefault();
     setShowReplyRespondCard(!showReplyRespondCard);
-  }
+  };
 
   return (
-    <Box    sx={{
-      boxShadow: "0px 1px 4px rgba(0,0,0, 0.2)",
-      marginTop: 3,
-      padding: "14px",
-    }}>
+    <Box
+      sx={{
+        boxShadow: "0px 1px 4px rgba(0,0,0, 0.2)",
+        marginTop: 3,
+        padding: "14px",
+      }}
+    >
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <img
           src={user?.profileImage}
@@ -66,10 +70,10 @@ const CommentForm = ({
           onChange={handleChange}
           value={respondText}
         />
-        <Box>
+        <Box sx={{ alignSelf: "flex-end" }}>
           <Button
             title={"İptal Et"}
-            handleClick={closeCard }
+            handleClick={closeCard}
             className="ghost border-none"
           />
           <Button

@@ -72,7 +72,6 @@ const SaveButton = ({ blog, isAdded }) => {
           iconColor: "#ffc016",
         });
         setShowModal(false);
-        console.log(readingListFormData);
       })
       .catch((err) => {
         console.error(err.message);

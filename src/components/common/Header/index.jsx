@@ -29,8 +29,13 @@ const Header = () => {
 
   const handleClick = () => {
     setShowModal(!show);
-    setCreateModalShow(createModalShow);
+    setCreateModalShow(true);
   };
+
+  const openSignUpModal = () => {
+    setShowModal(!show);
+    setCreateModalShow(false);
+  }
 
   const modalClick = () => {
     setCreateModalShow(!createModalShow);
@@ -195,9 +200,9 @@ const Header = () => {
             />
           </Link>
           <nav id="menu" className="menu flex flex-center">
-            <Link className="link primary-text">Our Story</Link>
+            {/* <Link className="link primary-text">Our Story</Link>
             <Link className="link primary-text">Membership</Link>
-            <Link className="link primary-text">Write</Link>
+            <Link className="link primary-text">Write</Link> */}
             {/* <AuthModal clickItem={<>
               <Button
               className={"primary-text link ghost border-none"}
@@ -210,8 +215,8 @@ const Header = () => {
             /></>}/> */}
             <Button
               className={"primary-text link ghost border-none"}
-              title={"Giriş Yap"}
-              handleClick={handleClick}
+              title={"Kayıt Olun"}
+              handleClick={openSignUpModal}
             />
             <Button
               title={token ? "Çıkış Yap" : "Giriş Yap"}

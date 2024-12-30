@@ -3,11 +3,11 @@ import CommentCard from "../CommentCard";
 import { getCommentRepliesByCommentId } from "../../../../service";
 
 const RepliesButton = ({ blog, comment }) => {
-  const [showCards, setShowCards] = useState(false);
+  // const [showCards, setShowCards] = useState(false);
   const [replies, setReplies] = useState([]);
 
   const showReplies = () => {
-    setShowCards(!showCards);
+    // setShowCards(!showCards);
     getReplies();
   };
   const getReplies = async () => {
@@ -20,18 +20,18 @@ const RepliesButton = ({ blog, comment }) => {
       <div>
         <i className="fa-regular fa-comment primary-text fs-15"></i>
         <span className="reply-text primary-text fs-14">
-          {showCards ? "Yanıtları Gizle" : `${comment?.replyCount} Yanıt`}
+          {/* {showCards ? "Yanıtları Gizle" : `${comment?.replyCount} Yanıt`} */}
+          { `${comment?.replyCount} Yanıt`}
         </span>
       </div>
-      {showCards ? (
+
         <div>
           {replies.map((reply) => (
             <CommentCard key={replies.id} blog={blog} comment={reply} />
           ))}
         </div>
-      ) : (
-        ""
-      )}
+
+   
     </div>
   );
 };

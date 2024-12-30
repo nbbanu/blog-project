@@ -15,6 +15,7 @@ const contentStyle = {
 };
 
 const CommentCard = ({ blog, comment }) => {
+
   const [show, setShow] = useState(false);
   const [showReadMoreButton, setShowReadMoreButton] = useState(false);
   const [showReplyCard, setShowReplyCard] = useState(false);
@@ -84,18 +85,19 @@ const CommentCard = ({ blog, comment }) => {
             handleClick={openReplyCard}
             className={"ghost border-none reply-btn"}
           />
-          {showReplyCard && (
-            <div className="card-content">
-              <CommentForm
-                blog={blog}
-                user={user}
-                comment={comment}
-                placeholder={`${comment?.user?.username} kullanıcısına yanıt veriyorsun`}
-              />
-            </div>
-          )}
         </div>
+       
       </div>
+      {showReplyCard && (
+          <div className="card-content">
+            <CommentForm
+              blog={blog}
+              user={user}
+              comment={comment}
+              placeholder={`${comment?.user?.username} kullanıcısına yanıt veriyorsun`}
+            />
+          </div>
+        )}
     </div>
   );
 };

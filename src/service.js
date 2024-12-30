@@ -113,6 +113,12 @@ export const getBlogByTopicId = async (topicId) => {
   return data?.data;
 };
 
+export const getAllBlogByTopicId = async(topicId) => {
+  const url = `blog/get-all/${topicId}`;
+  const data = await get(url, topicId);
+  return data?.data;
+}
+
 export const getAllCategories = async () => {
   const url = "category";
   const data = await get(url);

@@ -1,4 +1,4 @@
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getAllTopics } from "../../../service";
 
@@ -6,22 +6,10 @@ const HorizontalScrobbleBar = () => {
   const slider = document.querySelector(".scrobble-area");
   const [topics, setTopics] = useState([]);
 
-  const tags = [
-    "Senin İçin",
-    "Takip Edilenler",
-    "Kişisel Gelişim",
-    "Psikoloji",
-    "Sosyal Medya",
-    "Web Geliştirme",
-    "Kodlama",
-    "Yazılım Mühendisliği",
-    "JavaScript",
-    "Tasarım",
-    "Bilim",
-    "Sağlık",
-    "Teknoloji",
-    "Programlama",
-  ];
+  const searchParams = new URLSearchParams(location.search);
+  const [search, setSearch] = useSearchParams(searchParams);
+  const id = search.get("id");
+
   const sliderLeft = () => {
     slider.scrollLeft = slider.scrollLeft - 200;
   };
@@ -52,14 +40,29 @@ const HorizontalScrobbleBar = () => {
         ></i>
 
         <div className="scrobble-area flex flex-center">
-          <Link className="link light-text fs-14 following-btn">
-            Takip Ettiklerin
-          </Link>
           <ul className="tag-list flex flex-center">
+            <Link
+              to={"/"}
+              className={`link light-text fs-14 following-btn ${
+                !id && "active"
+              }`}
+            >
+              Takip Ettiklerin
+            </Link>
             {topics.map((topic) => (
-              <NavLink className="link light-text fs-14" key={topic.id} to={""}>
+              <div
+                className={`link light-text fs-14 ${
+                  id == topic.id && "active"
+                }`}
+                key={topic.id}
+                onClick={() => {
+                  searchParams.set("id", topic?.id);
+                  searchParams.set("tag", topic?.title);
+                  setSearch(searchParams);
+                }}
+              >
                 {topic.title}
-              </NavLink>
+              </div>
             ))}
           </ul>
           <Outlet />

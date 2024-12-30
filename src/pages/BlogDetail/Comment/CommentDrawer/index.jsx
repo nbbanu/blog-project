@@ -6,10 +6,10 @@ import { getCommentsByBlogId } from "../../../../service";
 import CommentCard from "../CommentCard";
 import CommentForm from "../CommentForm";
 import MiniTooltip from "../../../../components/common/MiniTooltip";
+import { BorderAll } from "@mui/icons-material";
 
 const drawerContent = {
   width: 410,
-  height: "100%",
   padding: 3,
 };
 const drawerTitle = {

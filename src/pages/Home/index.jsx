@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import Banner from "../../components/common/Banner";
 import BlogCard from "../../components/common/BlogCard";
 import FollowPersonCard from "../../components/common/FollowPersonCard";
@@ -11,20 +11,36 @@ import MiniBlogCard from "../../components/common/MiniBlogCard";
 import StaffPicksCard from "../../components/common/StaffPicksCard";
 import Trending from "../../components/common/Trending";
 import { useAuth } from "../../contexts/AuthContext";
-import { getAllBlogs } from "../../service";
+import { getAllBlogByTopicId, getAllBlogs } from "../../service";
 
 const Home = () => {
   const [blogs, setBlogs] = useState([]);
   // const userEmail = "@" + email?.split("@")[0];
   const { token, user } = useAuth();
+  const location = useLocation();
+
+  const searchParams = new URLSearchParams(location.search);
+
+  const tag = searchParams.get("tag");
+  const topicId = searchParams.get("id");
 
   useEffect(() => {
     token && loadAllBlogsToUI();
   }, [token]);
 
+  useEffect(() => {
+    token && topicId && loadAllBlogsByTopicId();
+    token && !topicId && loadAllBlogsToUI();
+  }, [topicId]);
+
   const loadAllBlogsToUI = async () => {
     const data = await getAllBlogs();
     setBlogs(data);
+  };
+
+  const loadAllBlogsByTopicId = async () => {
+    const data = await getAllBlogByTopicId(topicId);
+    setBlogs(data?.blogs);
   };
 
   if (token) {
@@ -34,62 +50,68 @@ const Home = () => {
           <div className="flex loggedin-home-container">
             <div className="loggedin-home-left">
               <HorizontalScrobbleBar />
-              {blogs?.length === 0
-                ? [1, 2, 3, 4, 5].map((item) => (
-                    <div
-                      key={item}
-                      className="flex flex-between"
-                      style={{ marginBottom: 25, marginTop: 50 }}
-                    >
-                      <div style={{ width: "100%" }}>
-                        <div
-                          className="flex flex-center"
-                          style={{ marginBottom: 15 }}
-                        >
-                          <Skeleton circle width={24} height={24} />
-                          <Skeleton width={100} style={{ marginLeft: 7 }} />
-                          <Skeleton width={100} style={{ marginLeft: 7 }} />
-                        </div>
-                        <div>
-                          <Skeleton width={200} style={{ marginBottom: 10 }} />
-                          <Skeleton width={300} />
-                          <Skeleton width={300} />
-                        </div>
-                        <div
-                          className="bottom flex"
-                          style={{ marginTop: 15, alignItems: "flex-end" }}
-                        >
-                          <Skeleton width={80} height={25} borderRadius={25} />
-                          <Skeleton width={70} style={{ marginLeft: 15 }} />
-                        </div>
+              {blogs?.length === 0 ? (
+                [1, 2, 3, 4, 5].map((item) => (
+                  <div
+                    key={item}
+                    className="flex flex-between"
+                    style={{ marginBottom: 25, marginTop: 50 }}
+                  >
+                    <div style={{ width: "100%" }}>
+                      <div
+                        className="flex flex-center"
+                        style={{ marginBottom: 15 }}
+                      >
+                        <Skeleton circle width={24} height={24} />
+                        <Skeleton width={100} style={{ marginLeft: 7 }} />
+                        <Skeleton width={100} style={{ marginLeft: 7 }} />
                       </div>
-                      <div className="right" style={{ alignSelf: "flex-end" }}>
-                        <div
-                          className="flex"
-                          style={{ marginRight: 15, alignItems: "flex-end" }}
-                        >
-                          <Skeleton
-                            width={25}
-                            height={25}
-                            style={{ marginRight: 10 }}
-                          />
-                          <Skeleton
-                            width={25}
-                            height={25}
-                            style={{ marginRight: 10 }}
-                            borderRadius={"50%"}
-                          />
-                          <Skeleton
-                            width={25}
-                            height={25}
-                            style={{ marginRight: 25 }}
-                          />
-                          <Skeleton width={120} height={120} />
-                        </div>
+                      <div>
+                        <Skeleton width={200} style={{ marginBottom: 10 }} />
+                        <Skeleton width={300} />
+                        <Skeleton width={300} />
+                      </div>
+                      <div
+                        className="bottom flex"
+                        style={{ marginTop: 15, alignItems: "flex-end" }}
+                      >
+                        <Skeleton width={80} height={25} borderRadius={25} />
+                        <Skeleton width={70} style={{ marginLeft: 15 }} />
                       </div>
                     </div>
-                  ))
-                : blogs?.map((blog) => <BlogCard key={blog.id} blog={blog} />)}
+                    <div className="right" style={{ alignSelf: "flex-end" }}>
+                      <div
+                        className="flex"
+                        style={{ marginRight: 15, alignItems: "flex-end" }}
+                      >
+                        <Skeleton
+                          width={25}
+                          height={25}
+                          style={{ marginRight: 10 }}
+                        />
+                        <Skeleton
+                          width={25}
+                          height={25}
+                          style={{ marginRight: 10 }}
+                          borderRadius={"50%"}
+                        />
+                        <Skeleton
+                          width={25}
+                          height={25}
+                          style={{ marginRight: 25 }}
+                        />
+                        <Skeleton width={120} height={120} />
+                      </div>
+                    </div>
+                  </div>
+                ))
+              ) : blogs ? (
+                blogs?.map((blog) => <BlogCard key={blog?.id} blog={blog} />)
+              ) : (
+                <div style={{ marginTop: 50 }}>
+                  Üzgünüz! '{tag}'' için henüz oluşturulmuş blog yok.
+                </div>
+              )}
             </div>
             <div className="vertical-line"></div>
             <div className="loggedin-home-right">

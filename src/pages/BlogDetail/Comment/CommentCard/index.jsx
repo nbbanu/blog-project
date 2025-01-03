@@ -15,10 +15,10 @@ const contentStyle = {
 };
 
 const CommentCard = ({ blog, comment }) => {
-
   const [show, setShow] = useState(false);
   const [showReadMoreButton, setShowReadMoreButton] = useState(false);
   const [showReplyCard, setShowReplyCard] = useState(false);
+
 
   const { user } = useAuth();
   const ref = useRef("");
@@ -86,18 +86,18 @@ const CommentCard = ({ blog, comment }) => {
             className={"ghost border-none reply-btn"}
           />
         </div>
-       
       </div>
       {showReplyCard && (
-          <div className="card-content">
-            <CommentForm
-              blog={blog}
-              user={user}
-              comment={comment}
-              placeholder={`${comment?.user?.username} kullanıcısına yanıt veriyorsun`}
-            />
-          </div>
-        )}
+        <div className="card-content">
+          <CommentForm
+            blog={blog}
+            user={user}
+            comment={comment}
+            placeholder={`${comment?.user?.username} kullanıcısına yanıttt veriyorsun`}
+            cancelType={"closeAndClear"}
+          />
+        </div>
+      )}
     </div>
   );
 };

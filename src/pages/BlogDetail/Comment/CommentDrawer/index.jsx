@@ -6,7 +6,7 @@ import { getCommentsByBlogId } from "../../../../service";
 import CommentCard from "../CommentCard";
 import CommentForm from "../CommentForm";
 import MiniTooltip from "../../../../components/common/MiniTooltip";
-import { BorderAll } from "@mui/icons-material";
+import Loader from "../../../../components/common/Loader";
 
 const drawerContent = {
   width: 410,
@@ -23,6 +23,7 @@ export default function CommentDrawer({ blog, user }) {
     right: false,
   });
   const [comments, setComments] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
 
   const toggleDrawer = (anchor, open) => () => {
     if (open) {
@@ -32,10 +33,11 @@ export default function CommentDrawer({ blog, user }) {
   };
 
   const getComments = async () => {
+    setLoading(true);
     const data = await getCommentsByBlogId(blog?.id);
     setComments(data);
+    setLoading(false);
   };
-
 
   const context = (anchor) => (
     <Box sx={drawerContent} role="presentation">
@@ -64,14 +66,21 @@ export default function CommentDrawer({ blog, user }) {
       <CommentForm
         blog={blog}
         user={user}
-        comment={Math.floor(Math.random() * Math.floor(Math.random() * Date.now()))}
+        comment={Math.floor(
+          Math.random() * Math.floor(Math.random() * Date.now())
+        )}
         placeholder={"Düşüncelerin neler?"}
+        cancelType={"clear"}
       />
       <div className="light-line"></div>
       <Box className="comment-cards">
-        {comments.map((comment) => (
-          <CommentCard key={comment.id} blog={blog} comment={comment} />
-        ))}
+        {loading ? (
+          <Loader />
+        ) : (
+          comments.map((comment) => (
+            <CommentCard key={comment.id} blog={blog} comment={comment} />
+          ))
+        )}
       </Box>
     </Box>
   );

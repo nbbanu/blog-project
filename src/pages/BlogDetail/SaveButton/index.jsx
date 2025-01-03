@@ -55,33 +55,7 @@ const SaveButton = ({ blog, isAdded }) => {
     e.preventDefault();
     setShowDescInput(!showDescInput);
   };
-  const createList = (e) => {
-    e.preventDefault();
-    const readingListFormData = {
-      title,
-      description,
-      isPrivate,
-    };
 
-    createReadingList(readingListFormData)
-      .then((res) => {
-        Swal.fire({
-          title: "Okuma Listesi Oluşturuldu",
-          color: "#242424",
-          icon: "success",
-          iconColor: "#ffc016",
-        });
-        setShowModal(false);
-      })
-      .catch((err) => {
-        console.error(err.message);
-      })
-      .finally(() => {
-        setTitle("");
-        setDescription("");
-        // setIsPrivate(false);
-      });
-  };
   const cancelReadingListForm = (e) => {
     e.preventDefault();
     setTitle("");
@@ -115,6 +89,35 @@ const SaveButton = ({ blog, isAdded }) => {
         progress: undefined,
       });
     });
+  };
+
+  const createList = (e) => {
+    e.preventDefault();
+
+    const readingListFormData = {
+      title,
+      description,
+      isPrivate,
+    };
+
+    createReadingList(readingListFormData)
+      .then((res) => {
+        Swal.fire({
+          title: "Okuma Listesi Oluşturuldu",
+          color: "#242424",
+          icon: "success",
+          iconColor: "#ffc016",
+        });
+        setShowModal(false);
+      })
+      .catch((err) => {
+        console.error(err.message);
+      })
+      .finally(() => {
+        setTitle("");
+        setDescription("");
+        // setIsPrivate(false);
+      });
   };
 
   return (

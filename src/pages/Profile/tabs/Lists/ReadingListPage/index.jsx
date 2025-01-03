@@ -28,13 +28,13 @@ const ReadingListPage = () => {
     <div className="reading-list-page">
       <div className="profile-info flex flex-center">
         <img
-          src="https://miro.medium.com/v2/resize:fill:48:48/0*PVc8ycK2VwtFt7R0"
+          src={listedBlog?.user?.profileImage}
           className="avatar"
           style={{ width: 48, height: 48 }}
           alt="avatar"
         />
         <div>
-          <div className="user-name primary-text">{}</div>
+          <div className="user-name primary-text">{listedBlog?.user?.username}</div>
           <div className="profile-info-bottom flex flex-center">
             <div className="date light-text fs-14">
               {dayjs(listedBlog?.created_at).format("MMM DD, YYYY")}

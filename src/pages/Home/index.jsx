@@ -11,10 +11,11 @@ import MiniBlogCard from "../../components/common/MiniBlogCard";
 import StaffPicksCard from "../../components/common/StaffPicksCard";
 import Trending from "../../components/common/Trending";
 import { useAuth } from "../../contexts/AuthContext";
-import { getAllBlogByTopicId, getAllBlogs } from "../../service";
+import { getAllBlogByTopicId, getAllBlogs, getLists, getMyListById } from "../../service";
 
 const Home = () => {
   const [blogs, setBlogs] = useState([]);
+  const [myList, setMyList] = useState([]);
   // const userEmail = "@" + email?.split("@")[0];
   const { token, user } = useAuth();
   const location = useLocation();
@@ -26,6 +27,7 @@ const Home = () => {
 
   useEffect(() => {
     token && loadAllBlogsToUI();
+    token && getMyList();
   }, [token]);
 
   useEffect(() => {
@@ -41,7 +43,18 @@ const Home = () => {
   const loadAllBlogsByTopicId = async () => {
     const data = await getAllBlogByTopicId(topicId);
     setBlogs(data?.blogs);
+
   };
+
+  const getMyList = async () => {
+    const data = await getLists(user?.id);
+    let sortedLists = data?.sort(
+      (a, b) =>
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    );
+    setMyList(sortedLists);
+    // setMyList(data)
+  }
 
   if (token) {
     return (
@@ -109,7 +122,7 @@ const Home = () => {
                 blogs?.map((blog) => <BlogCard key={blog?.id} blog={blog} />)
               ) : (
                 <div style={{ marginTop: 50 }}>
-                  Üzgünüz! '{tag}'' için henüz oluşturulmuş blog yok.
+                  Üzgünüz! '{tag}' için henüz oluşturulmuş blog yok.
                 </div>
               )}
             </div>
@@ -185,9 +198,10 @@ const Home = () => {
                     Son Kaydedilenler
                   </h2>
                   <div className="staff-picks-cards flex flex-column">
-                    {blogs?.map((blog) => (
-                      <StaffPicksCard key={blog.id} blog={blog} />
-                    ))}
+                    {/* {myList?.slice(0,3).map((list) => (
+                      <StaffPicksCard key={list.id} blog={list} />
+                    ))} */}
+             
                   </div>
                   {/* 
                   <Link to={`/${userEmail}/lists`} className="green-text link">

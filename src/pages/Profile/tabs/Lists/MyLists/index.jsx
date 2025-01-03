@@ -13,13 +13,17 @@ const MyLists = () => {
 
   const loadMyLists = async () => {
     const data = await getLists(params.userId);
-    setMyLists(data);
+    let sortedLists = data?.sort(
+      (a, b) =>
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    );
+    setMyLists(sortedLists);
   };
 
   return (
     <div className="profile-page-lists flex flex-column">
       {myLists?.map((list) => (
-        <ListCard key={list.id} list={list} />
+        <ListCard key={list.id} list={list} loadMyLists={loadMyLists}/>
       ))}
     </div>
   );

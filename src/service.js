@@ -226,3 +226,7 @@ export const deleteTopic = async (id) => {
 export const removeUserImage = async (key) => {
   return await deleteRequest(`user/image/${key}`);
 };
+
+export const deleteListCard = async (id) => {
+  return await deleteRequest(`list/${id}`);
+}

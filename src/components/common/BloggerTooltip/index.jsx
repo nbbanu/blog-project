@@ -8,10 +8,6 @@ import Button from "../Button";
 const BloggerTooltip = ({ user, loading }) => {
   const [followerData, setFollowerData] = useState([]);
   const navigate = useNavigate();
-  useEffect(() => {
-
-  }, []);
-
   const getFollowerData = async () => {
     const data = await getUserDetailById(user?.id);
     setFollowerData(data);
@@ -78,7 +74,6 @@ const BloggerTooltip = ({ user, loading }) => {
               title={`${
                 followerData?.isFollowingByUser ? "Takip Ediliyor" : "Takip Et"
               }`}
-              
             />
           </div>
         </>

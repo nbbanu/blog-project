@@ -11,12 +11,14 @@ import SaveButton from "./SaveButton";
 import Comment from "./Comment";
 import { useAuth } from "../../contexts/AuthContext";
 import FollowButton from "../Profile/partials/FollowButton";
+import MiniTooltip from "../../components/common/MiniTooltip";
 
 const BlogDetailPage = () => {
   const [blog, setBlog] = useState("");
   const [loading, setLoading] = useState(false);
   const [userDetail, setUserDetail] = useState([]);
   const [followerCount, setFollowerCount] = useState(null);
+  const [hovered, setHovered] = useState(false);
   const [isFollowing, setIsFollowing] = useState(null);
 
   const topicId = useParams();
@@ -208,6 +210,15 @@ const BlogDetailPage = () => {
                         isAdded={blog?.lists?.length > 0}
                       />
                     </li>
+                    <Link to={"/new-story"} className="link edit-link">
+                      <MiniTooltip title={"Düzenle"}>
+                        <i
+                          className={
+                            "fa-regular fa-pen-to-square light-text fs-20"
+                          }
+                        ></i>
+                      </MiniTooltip>
+                    </Link>
                   </ul>
                 </div>
                 <div className="light-line"></div>

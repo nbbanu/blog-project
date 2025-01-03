@@ -2,8 +2,10 @@ import { Link, useNavigate } from "react-router-dom";
 import SaveButton from "../../../pages/BlogDetail/SaveButton";
 import BloggerTooltip from "../BloggerTooltip";
 import dayjs from "dayjs";
+import { useState } from "react";
 
 const BlogCard = ({ blog }) => {
+
   const navigate = useNavigate();
 
   const openBlogDetail = () => {
@@ -18,7 +20,7 @@ const BlogCard = ({ blog }) => {
       <div className="blog-card flex flex-center">
         <div className="blog-card-left">
           <div className="blog-card-left-header flex flex-center">
-            <div className="blogger-profile flex flex-center">
+            <div className="blogger-profile flex flex-center" >
               <BloggerTooltip user={blog.user} />
               <img
                 className="avatar img-cover"

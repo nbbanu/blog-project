@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { getAllTopics } from "../../../service";
+import { getAllTopics, getTopicsById } from "../../../service";
 import { useAuth } from "../../../contexts/AuthContext";
 import { useCreateBlog } from "../../../contexts/CreateBlogContext";
 import Loader from "../Loader";
 
-const CustomSelect = () => {
+const CustomSelect = ({ blogId }) => {
   const [values, setValues] = useState([]);
   const [topics, setTopics] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
@@ -15,12 +15,11 @@ const CustomSelect = () => {
 
   useEffect(() => {
     loadAllTopicsToPopup();
-  },[])
+  }, []);
 
   const loadAllTopicsToPopup = async () => {
     const topics = await getAllTopics(token);
     setTopics(topics);
-
   };
 
   const handleClick = (topic) => {
@@ -63,7 +62,6 @@ const CustomSelect = () => {
           type="text"
           placeholder="Bir konu ekleyin..."
           className="search-input"
-          
         />
       </div>
       {showPopup && (

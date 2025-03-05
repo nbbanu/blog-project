@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { Link, useLocation, useSearchParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Banner from "../../components/common/Banner";
 import BlogCard from "../../components/common/BlogCard";
 import FollowPersonCard from "../../components/common/FollowPersonCard";
@@ -11,7 +11,7 @@ import MiniBlogCard from "../../components/common/MiniBlogCard";
 import StaffPicksCard from "../../components/common/StaffPicksCard";
 import Trending from "../../components/common/Trending";
 import { useAuth } from "../../contexts/AuthContext";
-import { getAllBlogByTopicId, getAllBlogs, getLists, getMyListById } from "../../service";
+import { getAllBlogByTopicId, getAllBlogs, getLists } from "../../service";
 
 const Home = () => {
   const [blogs, setBlogs] = useState([]);
@@ -43,7 +43,6 @@ const Home = () => {
   const loadAllBlogsByTopicId = async () => {
     const data = await getAllBlogByTopicId(topicId);
     setBlogs(data?.blogs);
-
   };
 
   const getMyList = async () => {

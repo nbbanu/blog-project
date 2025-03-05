@@ -1,20 +1,20 @@
 import { useState } from "react";
-import CustomSelect from "../../common/MultipleSelect";
-import Button from "../../common/Button";
+import CustomSelect from "../../../components/common/MultipleSelect";
+import Button from "../../../components/common/Button";
 import { useCreateBlog } from "../../../contexts/CreateBlogContext";
 import { createBlog } from "../../../service";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../contexts/AuthContext";
-import Loader from "../../common/Loader";
+import Loader from "../../../components/common/Loader";
 
-const BlogViewModal = ({ clickItem, newBlog }) => {
+const BlogViewModal = ({blogId, clickItem, newBlog }) => {
   const [showBlogModal, setShowBlogModal] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { blogItems, topicIds, setText, setTitle, setSlug, setFiles } =
     useCreateBlog();
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
   const { user } = useAuth();
+  const navigate = useNavigate();
   const email = user?.email;
   const userEmail = "@" + email?.split("@")[0];
 
@@ -26,7 +26,7 @@ const BlogViewModal = ({ clickItem, newBlog }) => {
   };
 
   const createBlogItems = async () => {
-    setLoading(true)
+    setLoading(true);
     const header = {
       "Content-Type": "multipart/form-data",
     };
@@ -53,7 +53,7 @@ const BlogViewModal = ({ clickItem, newBlog }) => {
         navigate(`/${userEmail}/${user.id}/main`);
       })
       .catch((err) => {
-        if (err.statusCode == 401) {
+        if (err.statusCode === 401) {
           Swal.fire({
             title: "Lütfen Tekrar Giriş Yapınız",
             color: "#242424",
@@ -62,7 +62,7 @@ const BlogViewModal = ({ clickItem, newBlog }) => {
           });
           localStorage.removeItem("token");
           navigate("/");
-        } else if (err.statusCode == 400) {
+        } else if (err.statusCode === 400) {
           Swal.fire({
             title: "Oluşturmak istediğiniz blog sistemde zaten mevcut!",
             color: "#242424",
@@ -87,7 +87,7 @@ const BlogViewModal = ({ clickItem, newBlog }) => {
       {showBlogModal && (
         <div className="blog-view-modal-container flex flex-center-center">
           <div className="blog-view-modal">
-          {loading && <Loader />}
+            {loading && <Loader />}
             <div className="close light-text fs-18" onClick={closeBlogModal}>
               X
             </div>
@@ -137,7 +137,7 @@ const BlogViewModal = ({ clickItem, newBlog }) => {
                   Okuyucuların bloğunuzun neyle ilgili olduğunu bilmesi için
                   konuları (en fazla 5 adet) ekleyin veya değiştirin
                 </span>
-                <CustomSelect />
+                <CustomSelect blogId={blogId}/>
                 <div className="learn-more fs-14">
                   <span
                     style={{
@@ -156,10 +156,7 @@ const BlogViewModal = ({ clickItem, newBlog }) => {
                     handleClick={createBlogItems}
                     disabled={!topicIds.length > 0}
                   />
-                  {/* <Button
-                      title={"Sonrası için planla"}
-                      className={"ghost border-none schedule-btn"}
-                    /> */}
+              
                 </div>
               </div>
             </div>

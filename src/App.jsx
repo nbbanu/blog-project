@@ -43,7 +43,7 @@ function App() {
 
           <Routes>
             <Route path="/" element={<Home />}></Route>
-            <Route path="new-story" element={<WritePage />} />
+            <Route path="new-story/:id?" element={<WritePage />} />
             <Route path="/:userName/:userId" element={<ProfilePage />}>
               <Route path="main" element={<ProfilePageHome />} />
               <Route path="lists" element={<MyLists />} />

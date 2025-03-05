@@ -84,7 +84,7 @@ export default function BasicFormControl({ selectedItem, setOpen }) {
     }
   };
 
-  return categories?.length > 0 ? (
+  return categories ? (
     <form onSubmit={handleSubmit}>
       <TextField
         id="outlined-basic"

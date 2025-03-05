@@ -21,7 +21,7 @@ const BlogCard = ({ blog }) => {
         <div className="blog-card-left">
           <div className="blog-card-left-header flex flex-center">
             <div className="blogger-profile flex flex-center" >
-              <BloggerTooltip user={blog.user} />
+              <BloggerTooltip user={blog?.user} />
               <img
                 className="avatar img-cover"
                 src={blog?.user?.profileImage}

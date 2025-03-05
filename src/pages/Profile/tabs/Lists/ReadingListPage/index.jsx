@@ -6,12 +6,12 @@ import ClapButton from "../../../../BlogDetail/ClapButton";
 import AddNoteInput from "../../../partials/AddNoteInput";
 import dayjs from "dayjs";
 import Comment from "../../../../BlogDetail/Comment";
+import Skeleton from "react-loading-skeleton";
 
 const ReadingListPage = () => {
   const [listedBlog, setListedBlog] = useState([]);
   const [listBlog, setListBlog] = useState([]);
-  const [blogDetail, setBlogDetail] = useState([]);
-
+  const [loading, setLoading] = useState(false);
   const listParams = useParams();
 
   useEffect(() => {
@@ -19,6 +19,7 @@ const ReadingListPage = () => {
   }, []);
 
   const loadReadingListBlogById = async () => {
+    setLoading(true);
     const data = await getMyListById(listParams.listId);
     setListedBlog(data || []);
     setListBlog(data?.blogs);
@@ -27,14 +28,20 @@ const ReadingListPage = () => {
   return (
     <div className="reading-list-page">
       <div className="profile-info flex flex-center">
-        <img
-          src={listedBlog?.user?.profileImage}
-          className="avatar"
-          style={{ width: 48, height: 48 }}
-          alt="avatar"
-        />
+        {setLoading ? (
+          <Skeleton />
+        ) : (
+          <img
+            src={listedBlog?.user?.profileImage}
+            className="avatar"
+            style={{ width: 48, height: 48 }}
+            alt="avatar"
+          />
+        )}
         <div>
-          <div className="user-name primary-text">{listedBlog?.user?.username}</div>
+          <div className="user-name primary-text">
+            {listedBlog?.user?.username}
+          </div>
           <div className="profile-info-bottom flex flex-center">
             <div className="date light-text fs-14">
               {dayjs(listedBlog?.created_at).format("MMM DD, YYYY")}

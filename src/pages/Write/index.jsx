@@ -3,23 +3,35 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { generateSlug } from "../../utils/generateSlug";
 import Button from "../../components/common/Button";
-import BlogViewModal from "../../components/Blog/BlogViewModal";
+import BlogViewModal from "./BlogViewModal";
 import { useCreateBlog } from "../../contexts/CreateBlogContext";
 import { useAuth } from "../../contexts/AuthContext";
+import { getBlogByTopicId } from "../../service";
+import { useParams } from "react-router-dom";
 
 const WritePage = ({ openBlogViewModal }) => {
+  const [blog, setBlog] = useState("");
   const [url, setUrl] = useState("");
   const { token } = useAuth();
+  const params = useParams();
+  const topicID = params?.id?.slice(1, 2);
+  const quill = useRef();
+  const inputRef = useRef(null);
 
   const { title, setTitle, slug, setSlug, text, setText, setFiles } =
     useCreateBlog();
 
   useEffect(() => {
     token && inputRef.current.focus();
+    params && loadBlogByID();
   }, []);
 
-  const quill = useRef();
-  const inputRef = useRef(null);
+  const loadBlogByID = async () => {
+    // setLoading(true);
+    const data = await getBlogByTopicId(topicID);
+    setBlog(data);
+    // setLoading(false);
+  };
 
   const handleTitle = (e) => {
     const newTitle = e.target.value;
@@ -63,6 +75,12 @@ const WritePage = ({ openBlogViewModal }) => {
     };
   }, []);
 
+  function getImg(e) {
+    const file = e.target.files[0];
+    setFiles(file);
+    setUrl(window.URL.createObjectURL(file));
+  }
+
   const toolbarOptions = [
     ["bold", "italic", "underline", "strike"],
     ["link", "image"],
@@ -82,11 +100,6 @@ const WritePage = ({ openBlogViewModal }) => {
       },
     },
   };
-  function getImg(e) {
-    const file = e.target.files[0];
-    setFiles(file);
-    setUrl(window.URL.createObjectURL(file));
-  }
 
   return (
     <div className="editor container flex flex-center-center">
@@ -102,7 +115,7 @@ const WritePage = ({ openBlogViewModal }) => {
                 className="blog-title-input"
                 onChange={handleTitle}
                 type="text"
-                value={title}
+                value={params?.id ? blog?.title : title}
                 name="title"
                 id="title"
                 ref={inputRef}
@@ -118,7 +131,7 @@ const WritePage = ({ openBlogViewModal }) => {
               <input
                 onChange={(e) => setSlug(e.target.value)}
                 type="text"
-                value={slug}
+                value={params?.id ? blog?.slug : slug}
                 name="slug"
                 id="slug"
               />
@@ -147,8 +160,12 @@ const WritePage = ({ openBlogViewModal }) => {
                 backgroundColor: "#fafafa",
               }}
             >
-              {url ? (
-                <img src={url} alt="blog-cover-photo" className="img-cover" />
+              {url || params?.id ? (
+                <img
+                  src={params?.id ? blog?.image : url}
+                  alt="blog-cover-photo"
+                  className="img-cover"
+                />
               ) : (
                 <div className="fs-14 blog-cover-photo">
                   Hikayenizi okuyuculara daha çekici kılmak için yüksek kaliteli
@@ -167,7 +184,7 @@ const WritePage = ({ openBlogViewModal }) => {
               className="quill-editor"
               modules={modules}
               theme="snow"
-              value={text}
+              value={params?.id ? blog?.text : text}
               onChange={setText}
               placeholder="Bloğunu Yazmaya Başla..."
               ref={(el) => (quill.current = el)}
@@ -175,6 +192,7 @@ const WritePage = ({ openBlogViewModal }) => {
           </div>
         </div>
         <BlogViewModal
+          blogId={blog?.id}
           newBlog={{ title, text, url }}
           clickItem={
             <Button
@@ -182,7 +200,7 @@ const WritePage = ({ openBlogViewModal }) => {
               className={"success md"}
               handleClick={openBlogViewModal}
               // disabled={!title && !text && !url}
-              disabled={title && text && url ? false : true}
+              disabled={!params?.id && (title && text && url ? false : true)}
             />
           }
         />

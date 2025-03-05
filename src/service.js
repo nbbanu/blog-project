@@ -147,6 +147,12 @@ export const getAllTopics = async (token) => {
   return data?.data;
 };
 
+export const getTopicsById = async (topicId) => {
+  const url = `topics/${topicId}`;
+  const data = await get(url, topicId);
+  return data?.data;
+}
+
 export const getUserDetailById = async (userId) => {
   const url = `user/detail/${userId}`;
   const data = await get(url, userId);

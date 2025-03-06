@@ -3,24 +3,31 @@ import SaveButton from "../../../pages/BlogDetail/SaveButton";
 import BloggerTooltip from "../BloggerTooltip";
 import dayjs from "dayjs";
 import { useState } from "react";
+import { deleteBlog } from "../../../service";
+import { useAuth } from "../../../contexts/AuthContext";
 
 const BlogCard = ({ blog }) => {
-
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const openBlogDetail = () => {
     navigate(`/detail/${blog?.id}`);
   };
-  const openBloggerProfile = (email,userId) => {
+  const openBloggerProfile = (email, userId) => {
     const userEmail = "@" + email?.split("@")[0];
     navigate(`/${userEmail}/${userId}/main`);
+  };
+
+  const deleteMyBlog = async () => {
+    await deleteBlog(blog?.id);
+    window.location.reload();
   };
   return (
     <div>
       <div className="blog-card flex flex-center">
         <div className="blog-card-left">
           <div className="blog-card-left-header flex flex-center">
-            <div className="blogger-profile flex flex-center" >
+            <div className="blogger-profile flex flex-center">
               <BloggerTooltip user={blog?.user} />
               <img
                 className="avatar img-cover"
@@ -31,7 +38,9 @@ const BlogCard = ({ blog }) => {
 
               <span
                 className="blogger-name fs-14 primary-text"
-                onClick={() => openBloggerProfile(blog?.user?.email, blog?.user?.id)}
+                onClick={() =>
+                  openBloggerProfile(blog?.user?.email, blog?.user?.id)
+                }
               >
                 {blog?.user?.name}
               </span>
@@ -61,7 +70,12 @@ const BlogCard = ({ blog }) => {
             </div>
             <div className="blog-card-bottom-right flex flex-center">
               <SaveButton blog={blog} isAdded={blog?.lists?.length > 0} />
-              {/* <i className="fa-solid fa-minus minus light-text flex flex-center-center"></i> */}
+              {blog?.user?.id == user?.id && (
+                <i
+                  className="fa-solid fa-minus minus light-text flex flex-center-center"
+                  onClick={deleteMyBlog}
+                ></i>
+              )}
               {/* <i className="fa-solid fa-ellipsis light-text fs-20"></i> */}
             </div>
           </div>

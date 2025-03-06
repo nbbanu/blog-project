@@ -93,7 +93,7 @@ const CommentCard = ({ blog, comment }) => {
             blog={blog}
             user={user}
             comment={comment}
-            placeholder={`${comment?.user?.username} kullanıcısına yanıttt veriyorsun`}
+            placeholder={`${comment?.user?.username} kullanıcısına yanıt veriyorsun`}
             cancelType={"closeAndClear"}
           />
         </div>

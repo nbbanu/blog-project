@@ -3,7 +3,6 @@ import Home from "./pages/Home";
 import Header from "./components/common/Header";
 import { Route, Routes, useLocation } from "react-router-dom";
 import AuthProvider from "./contexts/AuthContext";
-import LangProvider from "./contexts/LangContext";
 import WritePage from "./pages/Write";
 import CreateBlogProvider from "./contexts/CreateBlogContext";
 import ProfilePageAbout from "./pages/Profile/tabs/ProfilePageAbout";

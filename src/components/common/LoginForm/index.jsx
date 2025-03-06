@@ -7,7 +7,7 @@ import { signIn } from "../../../service";
 import Loader from "../Loader";
 
 const LoginForm = ({ setShowModal }) => {
-  const {onLoginSuccess} = useAuth();
+  const { onLoginSuccess } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
@@ -18,7 +18,7 @@ const LoginForm = ({ setShowModal }) => {
   });
 
   useEffect(() => {
-    if (formData.email || formData.password) {
+    if (formData?.email || formData?.password) {
       validateForm();
     }
   }, [formData]);
@@ -65,6 +65,10 @@ const LoginForm = ({ setShowModal }) => {
 
     signIn(formData)
       .then((res) => {
+        if (!res.status) {
+          setError(res.message);
+          return;
+        }
         Swal.fire({
           title: "Giriş Başarılı",
           color: "#242424",
@@ -94,7 +98,7 @@ const LoginForm = ({ setShowModal }) => {
     // }
 
     setFormData((values) => ({ ...values, [name]: value.trim() }));
-    
+
     // validateForm({ ...formData, [name]: value }); // useEffect yerine ikinci bir kullanım
   };
 
@@ -134,7 +138,10 @@ const LoginForm = ({ setShowModal }) => {
 
       <div className="form-login-buttons flex flex-center-center flex-column">
         {loading ? <Loader /> : ""}
-        <AuthenticationButton className={"authentication-button fs-16 success"} title={"Giriş Yap"} />
+        <AuthenticationButton
+          className={"authentication-button fs-16 success"}
+          title={"Giriş Yap"}
+        />
         {/* <AuthenticationButton
           icon={"fa-brands fa-google"}
           title={"Sign in with Google"}

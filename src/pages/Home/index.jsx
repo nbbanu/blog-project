@@ -193,9 +193,9 @@ const Home = () => {
                   </Link>
                 </div>
                 <div className="recently-saved">
-                  <h2 className="loggedin-home-right-title primary-text fs-16">
+                  {/* <h2 className="loggedin-home-right-title primary-text fs-16">
                     Son Kaydedilenler
-                  </h2>
+                  </h2> */}
                   <div className="staff-picks-cards flex flex-column">
                     {/* {myList?.slice(0,3).map((list) => (
                       <StaffPicksCard key={list.id} blog={list} />

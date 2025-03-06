@@ -50,27 +50,27 @@ const UserPopup = ({ clickItem }) => {
                   <i className="fa-regular fa-user fs-20 "></i>
                   <span className=" fs-14">Profil</span>
                 </Link>
-                <Link to={`/${userEmail}/lists`} className="link flex flex-center  light-text">
+                <Link to={`/${userEmail}/${user?.id}/lists`} className="link flex flex-center  light-text">
                   <i className="fa-regular fa-bookmark fs-20"></i>
                   <span className="fs-14">Kütüphane</span>
                 </Link>
-                <Link className="link flex flex-center light-text">
+                {/* <Link className="link flex flex-center light-text">
                   <i className="fa-solid fa-align-left fs-20 "></i>
                   <span className=" fs-14">Hikayeler</span>
-                </Link>
-                <Link className="link flex flex-center light-text">
+                </Link> */}
+                {/* <Link className="link flex flex-center light-text">
                   <i className="fa-solid fa-signal fs-18 "></i>
                   <span className=" fs-14">Stats</span>
-                </Link>
+                </Link> */}
               </div>
               <div className="light-line"></div>
-              <div className="links flex flex-column">
+              {/* <div className="links flex flex-column">
                 <Link className="link fs-14 light-text">Settings</Link>
                 <Link className="link fs-14 light-text">Settings</Link>
                 <Link className="link fs-14 light-text">Settings</Link>
                 <Link className="link fs-14 light-text">Help</Link>
-              </div>
-              <div className="light-line"></div>
+              </div> */}
+              {/* <div className="light-line"></div>
               <div className="links flex flex-column">
                 <Link className="link fs-14 light-text flex flex-center-between">
                   <p>Become a Medium Member</p>
@@ -91,7 +91,7 @@ const UserPopup = ({ clickItem }) => {
                 <Link className="link fs-14 light-text">
                   Become a Medium Member
                 </Link>
-              </div>
+              </div> */}
               <div className="light-line"></div>
               <div className="sign-out-box" onClick={logOut}>
                 <Link
